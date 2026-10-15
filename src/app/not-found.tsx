@@ -3,11 +3,11 @@ import Link from "next/link";
 import { Home, Camera } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Page Not Found (404)",
-  description:
-    "The page you are looking for does not exist or has been moved. Create a compliant passport photo online with PixPassport.",
+  description: `The page you are looking for does not exist or has been moved. Create a compliant passport or visa photo online with ${SITE_NAME}.`,
   alternates: {
     canonical: undefined,
     languages: undefined,

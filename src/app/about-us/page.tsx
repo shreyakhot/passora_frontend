@@ -11,47 +11,50 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import {
+  SITE_URL,
+  SITE_NAME,
+  SUPPORT_EMAIL,
+  LOGO_URL,
+  SITE_DISCLAIMER,
+} from "@/lib/site";
+import { getPlanPricing } from "@/lib/config/pricing";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://pixpassport.uk";
+const PAGE_DESCRIPTION = `Learn about ${SITE_NAME} — our mission, privacy-first technology, official photo-size standards for 50+ countries, and commitment to accessible passport and visa photo creation.`;
 
 export const metadata: Metadata = {
-  title: "About Us — UK Passport Photo Maker & Biometric Sizing",
-  description:
-    "Learn about PixPassport.uk — our mission, privacy-first technology, UK HMPO compliance standards, and commitment to accessible passport photo creation.",
+  title: "About Us — Passport & Visa Photo Maker for 50+ Countries",
+  description: PAGE_DESCRIPTION,
   alternates: {
     canonical: `${SITE_URL}/about-us`,
-    languages: {
-      "en-GB": `${SITE_URL}/about-us`,
-    },
   },
   openGraph: {
-    title: "About Us — PixPassport",
-    description:
-      "Learn about PixPassport.uk — our mission, privacy-first technology, UK HMPO compliance standards, and commitment to accessible passport photo creation.",
+    title: `About Us — ${SITE_NAME}`,
+    description: PAGE_DESCRIPTION,
     url: `${SITE_URL}/about-us`,
-    siteName: "PixPassport",
-    locale: "en_GB",
+    siteName: SITE_NAME,
+    locale: "en_US",
     type: "website",
     images: [
       {
-        url: `${SITE_URL}/pixpassport.jpg`,
+        url: LOGO_URL,
         width: 640,
         height: 640,
-        alt: "About PixPassport — UK Passport Photo Maker",
+        alt: `About ${SITE_NAME} — Passport & Visa Photo Maker`,
       },
     ],
   },
   twitter: {
     card: "summary",
-    title: "About Us — PixPassport",
-    description:
-      "Learn about PixPassport.uk — our mission, privacy-first technology, UK HMPO compliance standards, and commitment to accessible passport photo creation.",
-    images: [`${SITE_URL}/pixpassport.jpg`],
+    title: `About Us — ${SITE_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: [LOGO_URL],
   },
 };
 
 export default function AboutUsPage() {
+  const standardPlan = getPlanPricing("standard");
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -74,17 +77,16 @@ export default function AboutUsPage() {
   const aboutPageSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    name: "About PixPassport",
-    description:
-      "PixPassport is an independent, privacy-focused online passport and biometric photo formatting tool.",
+    name: `About ${SITE_NAME}`,
+    description: `${SITE_NAME} is an independent, privacy-focused online passport, visa and ID photo formatting tool for 50+ countries.`,
     publisher: {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
-      name: "PixPassport",
+      name: SITE_NAME,
       url: SITE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/pixpassport.jpg`,
+        url: LOGO_URL,
         width: 512,
         height: 512,
       },
@@ -106,7 +108,7 @@ export default function AboutUsPage() {
 
       <main className="flex-1 bg-white text-slate-900" id="main-content">
         {/* Header & Hero */}
-        <section className="bg-slate-50/80 py-10 sm:py-16 border-b border-slate-200/80" aria-label="About PixPassport header">
+        <section className="bg-slate-50/80 py-10 sm:py-16 border-b border-slate-200/80" aria-label={`About ${SITE_NAME} header`}>
           <div className="container-narrow max-w-4xl">
             {/* Breadcrumb */}
             <nav className="text-xs text-slate-600 mb-4" aria-label="Breadcrumb">
@@ -124,14 +126,17 @@ export default function AboutUsPage() {
             </nav>
 
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lime-100 border border-lime-300 text-[#365314] text-xs font-bold mb-4">
-              <span>🇬🇧 UK DOCUMENT SPECIALISTS</span>
+              <span>🌍 PASSPORT &amp; VISA PHOTO SPECIALISTS</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] tracking-tight leading-tight mb-4">
-              About PixPassport
+              About {SITE_NAME}
             </h1>
             <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal">
-              PixPassport is an independent, privacy-focused online photo formatting and compliance tool built specifically for UK passport applicants and international travellers.
+              {SITE_NAME} is an independent, privacy-focused online photo formatting and compliance tool for passport, visa and ID applicants in 50+ countries worldwide.
+            </p>
+            <p className="text-sm text-slate-600 leading-relaxed font-medium mt-3">
+              {SITE_DISCLAIMER}
             </p>
           </div>
         </section>
@@ -152,7 +157,7 @@ export default function AboutUsPage() {
               Applying for or renewing a passport should not require searching for a coin-operated photo booth, paying extortionate studio fees, or risking application delays due to minor formatting errors.
             </p>
             <p className="text-slate-700 leading-relaxed text-base">
-              Our mission is to give every UK citizen and international applicant the tools to transform a clear photo taken at home on a modern smartphone into a fully compliant biometric passport picture in under 10 seconds — with zero data harvesting, transparent pricing, and guaranteed adherence to official specifications.
+              Our mission is to give applicants everywhere the tools to transform a clear photo taken at home on a modern smartphone into a compliant biometric passport or visa picture in under 10 seconds — with zero data harvesting, transparent pricing, and sizing built around each country&rsquo;s official specifications.
             </p>
           </section>
 
@@ -168,7 +173,7 @@ export default function AboutUsPage() {
                   <span>Preventing Photo Rejections</span>
                 </h3>
                 <p className="text-sm text-slate-700 leading-relaxed">
-                  Over 15% of online passport rejections happen because head size (must be 29–34 mm), eye level, or crown clearance violates HMPO standards. PixPassport calculates biometric ratios automatically.
+                  Many passport and visa photos are rejected because head size, eye level, or crown clearance falls outside the issuing authority&rsquo;s specifications. {SITE_NAME} calculates biometric ratios automatically for the country you select.
                 </p>
               </div>
 
@@ -178,7 +183,7 @@ export default function AboutUsPage() {
                   <span>Eliminating Booth Costs</span>
                 </h3>
                 <p className="text-sm text-slate-700 leading-relaxed">
-                  High-street booths frequently charge £12 to £15 for printed strips that cannot be uploaded digitally, offering no retakes or lighting adjustments. We provide both digital and printable files for a flat £7.99.
+                  Photo booths and studios often charge more for printed photos that cannot be uploaded digitally, offering no retakes or lighting adjustments. We provide both digital and printable files for a flat {standardPlan.amountFormatted}.
                 </p>
               </div>
 
@@ -214,29 +219,29 @@ export default function AboutUsPage() {
                 <li className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
-                    <strong className="text-slate-900 block">HMPO &amp; ICAO Dimension Compliance:</strong>
-                    <span className="text-slate-700 text-sm">Official UK 35 mm × 45 mm (600×750 px at 600 DPI) sizing with 70–80% vertical head ratio alignment.</span>
+                    <strong className="text-slate-900 block">ICAO-Based Biometric Sizing:</strong>
+                    <span className="text-slate-700 text-sm">Country-specific photo dimensions (such as 35 × 45 mm or 2 × 2 in) with head size, eye line and top clearance aligned to each country&rsquo;s published rules.</span>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
                     <strong className="text-slate-900 block">50+ Global Country Document Standards:</strong>
-                    <span className="text-slate-700 text-sm">Preset dimensions and rules for the United States (2×2″), Schengen Area (35×45 mm), Australia, Canada, India, and more.</span>
+                    <span className="text-slate-700 text-sm">Preset dimensions and rules for the United States (2×2″), the Schengen Area (35×45 mm), Australia, Canada, India, and many more — see the full <Link href="/tool" className="text-[#365314] font-semibold underline">country list</Link>.</span>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
                     <strong className="text-slate-900 block">Standard 6×4″ (10×15 cm) Printable Grid:</strong>
-                    <span className="text-slate-700 text-sm">Generates a 4-up or 6-up printable sheet ready for standard photo kiosks (Boots, Tesco, Asda) or home photo printing.</span>
+                    <span className="text-slate-700 text-sm">Generates a 4-up or 6-up printable sheet ready for standard photo kiosks, print shops, or home photo printing.</span>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
                     <strong className="text-slate-900 block">Smart In-Browser Compression:</strong>
-                    <span className="text-slate-700 text-sm">Ensures file sizes remain strictly within the required 50 KB to 10 MB range without sacrificing biometric facial clarity.</span>
+                    <span className="text-slate-700 text-sm">Large uploads are compressed in your browser to 3 MB or less before processing, without sacrificing biometric facial clarity.</span>
                   </div>
                 </li>
               </ul>
@@ -255,7 +260,7 @@ export default function AboutUsPage() {
                 </div>
                 <h3 className="font-bold text-slate-900 text-lg mb-2">WCAG 2.2 AA Accessibility</h3>
                 <p className="text-sm text-slate-700 leading-relaxed">
-                  We believe essential government services must be accessible to everyone. PixPassport is engineered to meet WCAG 2.2 Level AA accessibility standards, featuring complete keyboard navigation, high-contrast visual elements, screen-reader landmarks, and reduced-motion preferences.
+                  We believe preparing photos for official applications should be accessible to everyone. {SITE_NAME} is engineered to meet WCAG 2.2 Level AA accessibility standards, featuring complete keyboard navigation, high-contrast visual elements, screen-reader landmarks, and reduced-motion preferences.
                 </p>
               </div>
 
@@ -263,9 +268,10 @@ export default function AboutUsPage() {
                 <div className="w-10 h-10 rounded-xl bg-lime-50 border border-lime-200 text-[#4D7C0F] flex items-center justify-center mb-4" aria-hidden="true">
                   <Lock className="w-5 h-5" />
                 </div>
-                <h3 className="font-bold text-slate-900 text-lg mb-2">UK GDPR &amp; Privacy First</h3>
+                <h3 className="font-bold text-slate-900 text-lg mb-2">Data Protection &amp; Privacy First</h3>
                 <p className="text-sm text-slate-700 leading-relaxed">
-                  We adhere strictly to the UK Data Protection Act 2018 and UK GDPR. We do not require account creation, do not sell user data, and employ ephemeral session handling so your images are never stored long term.
+                  We handle personal data in line with applicable data-protection laws, including the GDPR where it applies. We do not require account creation, do not sell user data, and keep your photos only as long as needed to deliver and support your order — see our{" "}
+                  <Link href="/privacy-policy" className="text-[#365314] font-semibold underline">Privacy Policy</Link>.
                 </p>
               </div>
             </div>
@@ -277,15 +283,15 @@ export default function AboutUsPage() {
               Questions or Feedback?
             </h2>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
-              Our support team is based in the UK and is available to assist with any questions regarding photo requirements, orders, or technical queries.
+              Our support team is available to assist with any questions regarding passport and visa photo requirements, orders, or technical queries.
             </p>
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <a
-                href="mailto:support@pixpassport.com"
+                href={`mailto:${SUPPORT_EMAIL}`}
                 className="inline-flex items-center gap-2 bg-[#4D7C0F] hover:bg-[#3F650C] text-white font-bold text-sm px-5 py-3 rounded-xl transition-colors focus-ring"
               >
                 <Mail className="w-4 h-4" aria-hidden="true" />
-                <span>support@pixpassport.com</span>
+                <span>{SUPPORT_EMAIL}</span>
               </a>
               <Link
                 href="/contact-us"

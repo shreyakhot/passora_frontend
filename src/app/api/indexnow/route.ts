@@ -16,7 +16,7 @@ export const dynamic = "force-dynamic";
  * Returns the IndexNow status, key configuration, and list of site URLs ready for submission.
  */
 export async function GET() {
-  const allUrls = getAllSiteUrls();
+  const allUrls = await getAllSiteUrls();
 
   return NextResponse.json({
     status: "ready",
@@ -34,7 +34,7 @@ export async function GET() {
  *
  * Body options:
  * - { "all": true } -> Submits all site URLs
- * - { "urls": ["https://pixpassport.uk/tool/uk-passport-photo"] } -> Submits specific URLs
+ * - { "urls": ["https://photo-govt.com/passport-size-photo-maker"] } -> Submits specific URLs
  */
 export async function POST(req: NextRequest) {
   try {

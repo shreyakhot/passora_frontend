@@ -4,7 +4,9 @@
  * Never accept payment amounts directly from client-side input — always derive from here.
  */
 
-const currency = (process.env.NEXT_PUBLIC_PAYMENT_CURRENCY || "GBP").toUpperCase();
+import { SITE_NAME, SITE_URL, SUPPORT_EMAIL } from "@/lib/site";
+
+const currency = (process.env.NEXT_PUBLIC_PAYMENT_CURRENCY || "USD").toUpperCase();
 
 const currencySymbols: Record<string, string> = {
   GBP: "£",
@@ -31,31 +33,32 @@ const defaultExpertAmounts: Record<string, number> = {
 
 const parsedAmount = process.env.NEXT_PUBLIC_PAYMENT_AMOUNT
   ? parseFloat(process.env.NEXT_PUBLIC_PAYMENT_AMOUNT)
-  : (defaultAmounts[currency] ?? 7.99);
+  : (defaultAmounts[currency] ?? defaultAmounts.USD);
 
-const amount = isNaN(parsedAmount) || parsedAmount <= 0 ? (defaultAmounts[currency] ?? 7.99) : parsedAmount;
+const amount =
+  isNaN(parsedAmount) || parsedAmount <= 0 ? (defaultAmounts[currency] ?? defaultAmounts.USD) : parsedAmount;
 const amountInSubunits = Math.round(amount * 100);
 
-// Expert Edit pricing (£13.99 for GBP, or ₹2 for test mode)
+// Expert Edit pricing ($16.99 for USD, or ₹2 for test mode)
 const parsedExpertAmount = process.env.NEXT_PUBLIC_EXPERT_EDIT_AMOUNT
   ? parseFloat(process.env.NEXT_PUBLIC_EXPERT_EDIT_AMOUNT)
-  : (defaultExpertAmounts[currency] ?? (currency === "INR" ? 2.00 : 13.99));
+  : (defaultExpertAmounts[currency] ?? defaultExpertAmounts.USD);
 
 const expertEditAmount =
   isNaN(parsedExpertAmount) || parsedExpertAmount <= 0
-    ? (defaultExpertAmounts[currency] ?? (currency === "INR" ? 2.00 : 13.99))
+    ? (defaultExpertAmounts[currency] ?? defaultExpertAmounts.USD)
     : parsedExpertAmount;
 
 const expertEditAmountInSubunits = Math.round(expertEditAmount * 100);
 
 export const PRICING = {
-  /** Standard Pack amount in standard currency units (e.g. 7.99 GBP or 1.00 INR) */
+  /** Standard Pack amount in standard currency units (e.g. 9.99 USD or 1.00 INR) */
   amount,
   /** Amount in smallest currency unit (pence/paise/cents) for Razorpay */
   amountInPence: amountInSubunits,
   amountInSubunits,
 
-  /** Expert Edit amount in standard currency units (e.g. 13.99 GBP or 2.00 INR) */
+  /** Expert Edit amount in standard currency units (e.g. 16.99 USD or 2.00 INR) */
   expertEditAmount,
   expertEditAmountInPence: expertEditAmountInSubunits,
   expertEditAmountInSubunits,
@@ -63,7 +66,7 @@ export const PRICING = {
   /** ISO 4217 currency code */
   currency,
   /** Human-readable currency symbol */
-  currencySymbol: currencySymbols[currency] || (currency === "INR" ? "₹" : "£"),
+  currencySymbol: currencySymbols[currency] || `${currency} `,
   /** Product identifier */
   productType: "digital_passport_photo",
   /** Product display name */
@@ -72,12 +75,11 @@ export const PRICING = {
   productDescription:
     "AI-processed, government-compliant biometric passport photo with background removal, auto-crop, and print-ready 6×4″ sheet.",
   /** Business display name */
-  businessName: "PixPassport",
+  businessName: SITE_NAME,
   /** Support email */
-  supportEmail:
-    process.env.NEXT_PUBLIC_CONTACT_EMAIL || "support@pixpassport.com",
+  supportEmail: SUPPORT_EMAIL,
   /** Website URL */
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://pixpassport.uk",
+  siteUrl: SITE_URL,
 } as const;
 
 export type PlanType = "standard" | "expert_edit";

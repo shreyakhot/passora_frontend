@@ -57,7 +57,7 @@ export interface PaymentDocument {
   razorpayOrderId: string;
   razorpayPaymentId?: string;
 
-  /** Amount in smallest currency unit (pence) */
+  /** Amount in smallest currency unit (e.g. cents) */
   amount: number;
   currency: string;
 

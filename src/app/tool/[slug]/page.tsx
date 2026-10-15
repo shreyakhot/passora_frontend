@@ -7,9 +7,12 @@ import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import PhotoMakerStudio from "@/components/PhotoMakerStudio";
 import FaqAccordion from "@/components/FaqAccordion";
-import GovUkPhotoNotice from "@/components/GovUkPhotoNotice";
+import OfficialPhotoNotice from "@/components/OfficialPhotoNotice";
 import { getAllToolSlugs, getToolBySlug } from "@/lib/tools";
-import { TOOL_DIRECTORY } from "@/lib/tool-directory";
+import { POPULAR_TOOLS } from "@/lib/tool-directory";
+import { getCountryByCode } from "@/config/countries";
+import { PRICING } from "@/lib/config/pricing";
+import { LOGO_URL, SITE_NAME, SITE_URL } from "@/lib/site";
 import {
   Sparkles,
   ArrowRight,
@@ -32,36 +35,33 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const tool = await getToolBySlug(slug);
   if (!tool) return {};
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://pixpassport.uk";
+  const pageUrl = `${SITE_URL}/tool/${slug}`;
 
   return {
     title: tool.meta_title || tool.title,
     description: tool.meta_description,
     alternates: {
-      canonical: `${siteUrl}/tool/${slug}`,
-      languages: {
-        "en-GB": `${siteUrl}/tool/${slug}`,
-      },
+      canonical: pageUrl,
     },
     openGraph: {
-      title: `${tool.title} — PixPassport`,
+      title: `${tool.title} — ${SITE_NAME}`,
       description: tool.meta_description,
-      url: `${siteUrl}/tool/${slug}`,
-      siteName: "PixPassport",
-      locale: "en_GB",
+      url: pageUrl,
+      siteName: SITE_NAME,
+      locale: "en_US",
       type: "website",
       images: [
         {
-          url: tool.feature_image || `${siteUrl}/pixpassport.jpg`,
-          alt: tool.feature_image_alt || `${tool.title} — PixPassport`,
+          url: tool.feature_image || LOGO_URL,
+          alt: tool.feature_image_alt || `${tool.title} — ${SITE_NAME}`,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${tool.title} — PixPassport`,
+      title: `${tool.title} — ${SITE_NAME}`,
       description: tool.meta_description,
-      images: [tool.feature_image || `${siteUrl}/pixpassport.jpg`],
+      images: [tool.feature_image || LOGO_URL],
     },
   };
 }
@@ -75,19 +75,21 @@ export default async function DynamicToolPage({ params }: PageProps) {
     notFound();
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://pixpassport.uk";
+  const siteUrl = SITE_URL;
+  const countryName = getCountryByCode(tool.country_code)?.country_name;
+  const relatedTools = POPULAR_TOOLS.filter((t) => t.slug !== slug);
 
   return (
     <>
       <JsonLd
         siteUrl={siteUrl}
-        siteName="PixPassport"
-        appName={`PixPassport ${tool.hero_title || tool.title}`}
+        siteName={SITE_NAME}
+        appName={`${SITE_NAME} ${tool.hero_title || tool.title}`}
         appUrl={`${siteUrl}/tool/${slug}`}
         appId={`${siteUrl}/tool/${slug}#webapp`}
         description={tool.meta_description}
-        price={tool.price || "7.99"}
-        priceCurrency="GBP"
+        price={tool.price || PRICING.amount.toFixed(2)}
+        priceCurrency={PRICING.currency}
         pageUrl={`${siteUrl}/tool/${slug}`}
         pageName={tool.meta_title || tool.title}
         pageDescription={tool.meta_description}
@@ -206,7 +208,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
                       ) : (
                         <Image
                           src="https://res.cloudinary.com/dipzpwbbk/image/upload/v1790507890/uk_passport_size_photo_i5uujz.jpg"
-                          alt="Official UK Passport Size Photo Sample"
+                          alt="Sample passport photo with a plain light background"
                           fill
                           priority
                           sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 420px"
@@ -241,9 +243,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
               defaultCountryCode={tool.country_code}
               defaultDocumentType={tool.document_type || "passport"}
             />
-            {tool.country_code === "GB" && tool.document_type === "passport" && (
-              <GovUkPhotoNotice className="mt-5" />
-            )}
+            <OfficialPhotoNotice countryName={countryName} className="mt-5" />
           </div>
         </section>
 
@@ -279,7 +279,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
                     1. Select Your Country
                   </h3>
                   <p className="text-slate-600 text-sm leading-relaxed">
-                    Pick from the UK, US, Schengen Area, India, or 50+ countries. We load the official biometric size automatically.
+                    Choose from 50+ countries, including the US, Canada, India and the Schengen Area. The tool loads that country&apos;s photo size automatically.
                   </p>
                 </div>
               </div>
@@ -351,7 +351,7 @@ export default async function DynamicToolPage({ params }: PageProps) {
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 mb-5 max-w-md mx-auto">
                   {tool.cta_description ||
-                    "Prepare your photo using UK passport photo requirements and review it before submitting your application."}
+                    "Prepare your photo using your country's photo requirements and review it before submitting your application."}
                 </p>
                 <a
                   href="#studio"
@@ -378,12 +378,12 @@ export default async function DynamicToolPage({ params }: PageProps) {
                 Explore Other Passport &amp; Visa Tools
               </h2>
               <p className="text-slate-600 text-sm mt-2">
-                Official sizing rules, conversion tools, and DIY guides for all major document types.
+                Photo sizes and photo makers for popular passport and visa applications.
               </p>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {TOOL_DIRECTORY.filter((t) => t.slug !== slug).map((t) => (
+              {relatedTools.map((t) => (
                 <Link
                   key={t.slug}
                   href={`/tool/${t.slug}`}
@@ -408,6 +408,16 @@ export default async function DynamicToolPage({ params }: PageProps) {
                   <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-[#4D7C0F] group-hover:translate-x-1 transition-all shrink-0 ml-2" />
                 </Link>
               ))}
+            </div>
+
+            <div className="text-center mt-8">
+              <Link
+                href="/tool"
+                className="inline-flex items-center gap-1.5 text-sm font-bold text-[#365314] hover:text-[#4D7C0F] underline"
+              >
+                View all countries
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
             </div>
           </div>
         </section>

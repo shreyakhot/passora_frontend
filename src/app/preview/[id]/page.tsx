@@ -26,6 +26,14 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import type { PassportProcessResult } from "@/lib/passport-api";
 import { PRICING, getPlanPricing, type PlanType } from "@/lib/config/pricing";
+import { resultImageUrl } from "@/lib/storage/result-urls";
+import { LOGO_URL, SUPPORT_EMAIL } from "@/lib/site";
+import {
+  DEFAULT_COUNTRY,
+  countryFlag,
+  getCountryByCode,
+  getCountryByName,
+} from "@/config/countries";
 
 interface StoredPassportResult extends PassportProcessResult {
   country_code?: string;
@@ -51,14 +59,24 @@ function subscribeToStorage(callback: () => void) {
   return () => window.removeEventListener("storage", callback);
 }
 
+/** The "latest" entry only stands in for this result if it is the same photo. */
+function latestIfSameResult(raw: string | null, resultId: string): string | null {
+  if (!raw) return null;
+  try {
+    return (JSON.parse(raw) as { result_id?: string }).result_id === resultId ? raw : null;
+  } catch {
+    return null;
+  }
+}
+
 function getRawStoredResult(resultId: string): string {
   if (typeof window === "undefined") return "";
   try {
     return (
-      sessionStorage.getItem(`pixpassport_${resultId}`) ||
-      localStorage.getItem(`pixpassport_${resultId}`) ||
-      sessionStorage.getItem("pixpassport_latest") ||
-      localStorage.getItem("pixpassport_latest") ||
+      sessionStorage.getItem(`photogovt_${resultId}`) ||
+      localStorage.getItem(`photogovt_${resultId}`) ||
+      latestIfSameResult(sessionStorage.getItem("photogovt_latest"), resultId) ||
+      latestIfSameResult(localStorage.getItem("photogovt_latest"), resultId) ||
       ""
     );
   } catch {
@@ -70,8 +88,8 @@ function getStoredPayment(resultId: string): StoredPaymentInfo | null {
   if (typeof window === "undefined") return null;
   try {
     const raw =
-      sessionStorage.getItem(`pixpassport_paid_${resultId}`) ||
-      localStorage.getItem(`pixpassport_paid_${resultId}`);
+      sessionStorage.getItem(`photogovt_paid_${resultId}`) ||
+      localStorage.getItem(`photogovt_paid_${resultId}`);
     return raw ? (JSON.parse(raw) as StoredPaymentInfo) : null;
   } catch {
     return null;
@@ -82,8 +100,8 @@ function saveStoredPayment(resultId: string, info: StoredPaymentInfo) {
   if (typeof window === "undefined") return;
   try {
     const json = JSON.stringify(info);
-    sessionStorage.setItem(`pixpassport_paid_${resultId}`, json);
-    localStorage.setItem(`pixpassport_paid_${resultId}`, json);
+    sessionStorage.setItem(`photogovt_paid_${resultId}`, json);
+    localStorage.setItem(`photogovt_paid_${resultId}`, json);
   } catch (e) {
     console.error("Failed to save payment info locally:", e);
   }
@@ -108,22 +126,8 @@ function loadRazorpayScript(): Promise<boolean> {
 }
 
 function getCountryFlag(countryCode?: string, countryName?: string): string {
-  const code = (countryCode || "").toUpperCase();
-  const name = (countryName || "").toLowerCase();
-  if (code === "GB" || name.includes("united kingdom") || name.includes("britain") || name.includes("uk")) return "🇬🇧";
-  if (code === "US" || name.includes("united states") || name.includes("usa") || name.includes("america")) return "🇺🇸";
-  if (code === "CA" || name.includes("canada")) return "🇨🇦";
-  if (code === "AU" || name.includes("australia")) return "🇦🇺";
-  if (code === "IN" || name.includes("india")) return "🇮🇳";
-  if (code === "DE" || name.includes("germany")) return "🇩🇪";
-  if (code === "FR" || name.includes("france")) return "🇫🇷";
-  if (code === "IT" || name.includes("italy")) return "🇮🇹";
-  if (code === "ES" || name.includes("spain")) return "🇪🇸";
-  if (code === "IE" || name.includes("ireland")) return "🇮🇪";
-  if (code === "NZ" || name.includes("new zealand")) return "🇳🇿";
-  if (code === "SG" || name.includes("singapore")) return "🇸🇬";
-  if (code === "JP" || name.includes("japan")) return "🇯🇵";
-  return "📄";
+  const code = countryCode || getCountryByName(countryName || "")?.country_code || "";
+  return code ? countryFlag(code) : "📄";
 }
 
 const METRIC_FIXES = [
@@ -288,32 +292,26 @@ export default function PassportPhotoPreviewPage() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const isUuid =
-    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
-      resultId
-    );
-
-  const countryName = data?.country_name || "United Kingdom";
-  const countryCode = data?.country_code || "GB";
-  const dimensions = data?.dimensions || data?.target_dimensions || "600x750";
+  const countryName = data?.country_name || DEFAULT_COUNTRY.country_name;
+  const countryCode = data?.country_code || DEFAULT_COUNTRY.country_code;
+  const dimensions =
+    data?.dimensions ||
+    data?.target_dimensions ||
+    getCountryByCode(countryCode)?.dimensions ||
+    DEFAULT_COUNTRY.dimensions;
   const originalPreview = data?.original_preview;
   const flag = getCountryFlag(countryCode, countryName);
-  const isUK = countryCode.toUpperCase() === "GB" || countryName.toLowerCase().includes("kingdom");
 
   // Full-res clean image (unlocked only after payment)
   const fullImageUrl =
     data?.image_url ||
-    (isUuid
-      ? `https://res.cloudinary.com/ddxu2wqfm/image/upload/passport/results/${resultId}_photo.jpg`
-      : undefined);
+    resultImageUrl(resultId, "photo");
 
   // Preview image
   const previewUrl =
     data?.preview_url ||
     data?.image_url ||
-    (isUuid
-      ? `https://res.cloudinary.com/ddxu2wqfm/image/upload/passport/results/${resultId}_preview.jpg`
-      : undefined);
+    resultImageUrl(resultId, "preview");
 
   const isPaid = paymentState?.status === "paid";
   const standardPricing = getPlanPricing("standard");
@@ -419,7 +417,7 @@ export default function PassportPhotoPreviewPage() {
           activePlan === "expert_edit"
             ? `${countryName} Passport Photo + Expert Manual Edit & Review`
             : `${countryName} Biometric Passport Photo & Print Sheet`,
-        image: "https://res.cloudinary.com/dipzpwbbk/image/upload/v1790589684/pixpassport_eq8aay.jpg",
+        image: LOGO_URL,
         order_id: razorpayOrderId,
         prefill: {
           email: targetEmail,
@@ -643,22 +641,20 @@ export default function PassportPhotoPreviewPage() {
                 <div className="flex items-center justify-center lg:justify-start gap-2 mt-2 flex-wrap text-center lg:text-left">
                   {/* 24*7 Mail Support Badge */}
                   <a
-                    href={`mailto:support@pixpassport.com?subject=Support%20Request%20-%20Photo%20Session%20${encodeURIComponent(resultId)}`}
+                    href={`mailto:${SUPPORT_EMAIL}?subject=Support%20Request%20-%20Photo%20Session%20${encodeURIComponent(resultId)}`}
                     className="inline-flex items-center gap-1.5 bg-lime-50 hover:bg-lime-100 text-lime-900 border border-lime-300 px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-bold transition-colors shadow-2xs group"
                   >
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
                     <Mail className="w-3.5 h-3.5 text-lime-700 group-hover:scale-110 transition-transform" aria-hidden="true" />
-                    <span>24/7 Email Support: <span className="underline font-extrabold text-lime-950">support@pixpassport.com</span></span>
+                    <span>24/7 Email Support: <span className="underline font-extrabold text-lime-950">{SUPPORT_EMAIL}</span></span>
                   </a>
 
                   <p className="text-[11px] sm:text-[12px] text-slate-500 font-semibold flex items-center gap-1 flex-wrap justify-center lg:justify-start">
                     <Shield className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                     <span>Acceptance Guarantee &bull; Refund if Rejected</span>
-                    {isUK && (
-                      <span className="ml-1 font-bold text-slate-700 inline-flex items-center gap-1">
-                        <span>🇬🇧</span> UK Gov Compliant
-                      </span>
-                    )}
+                    <span className="ml-1 font-bold text-slate-700 inline-flex items-center gap-1">
+                      <span>{flag}</span> {countryName} Compliant
+                    </span>
                   </p>
                 </div>
               </div>
@@ -815,11 +811,11 @@ export default function PassportPhotoPreviewPage() {
                         </p>
                         <div className="flex items-center gap-3 flex-wrap">
                           <a
-                            href={`mailto:support@pixpassport.com?subject=Passport%20Photo%20Support%20-%20Session%20${encodeURIComponent(resultId)}`}
+                            href={`mailto:${SUPPORT_EMAIL}?subject=Passport%20Photo%20Support%20-%20Session%20${encodeURIComponent(resultId)}`}
                             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-lime-500 hover:bg-lime-400 text-slate-950 font-bold text-xs transition-colors shadow-xs cursor-pointer"
                           >
                             <Mail className="w-3.5 h-3.5" />
-                            <span>Email support@pixpassport.com</span>
+                            <span>Email {SUPPORT_EMAIL}</span>
                           </a>
                           <span className="text-[11px] text-slate-400 font-medium flex items-center gap-1.5">
                             <Clock className="w-3.5 h-3.5 text-lime-400" />
@@ -1068,14 +1064,12 @@ export default function PassportPhotoPreviewPage() {
 
                               {/* Desktop Trust Badges */}
                               <div className="flex items-center justify-center gap-x-5 gap-y-1.5 py-3 flex-wrap border-t border-slate-100 mt-3">
-                                {isUK && (
-                                  <div className="flex items-center gap-1.5 text-slate-500">
-                                    <span className="text-[14px]">🇬🇧</span>
-                                    <span className="text-[11px] font-semibold text-slate-700">
-                                      UK Gov Compliant
-                                    </span>
-                                  </div>
-                                )}
+                                <div className="flex items-center gap-1.5 text-slate-500">
+                                  <span className="text-[14px]">{flag}</span>
+                                  <span className="text-[11px] font-semibold text-slate-700">
+                                    {countryName} Compliant
+                                  </span>
+                                </div>
                                 <div className="flex items-center gap-1.5 text-slate-500">
                                   <Shield className="w-3.5 h-3.5 text-emerald-600" />
                                   <span className="text-[11px] font-semibold">Secure Checkout</span>
@@ -1093,7 +1087,7 @@ export default function PassportPhotoPreviewPage() {
                                 {/* 24/7 Mail Support in Order Summary */}
                                 <div className="mt-3 pt-3 border-t border-slate-100">
                                   <a
-                                    href={`mailto:support@pixpassport.com?subject=Passport%20Photo%20Support%20-%20Session%20${encodeURIComponent(resultId)}`}
+                                    href={`mailto:${SUPPORT_EMAIL}?subject=Passport%20Photo%20Support%20-%20Session%20${encodeURIComponent(resultId)}`}
                                     className="group flex items-center gap-2.5 p-2.5 rounded-xl bg-slate-50 hover:bg-lime-50/80 border border-slate-200/90 hover:border-lime-300 transition-colors"
                                   >
                                     <div className="w-8 h-8 rounded-lg bg-lime-100 text-lime-800 flex items-center justify-center shrink-0">
@@ -1109,7 +1103,7 @@ export default function PassportPhotoPreviewPage() {
                                         </span>
                                       </div>
                                       <p className="text-[11px] font-semibold text-slate-500 group-hover:text-lime-700 truncate">
-                                        support@pixpassport.com
+                                        {SUPPORT_EMAIL}
                                       </p>
                                     </div>
                                     <ExternalLink className="w-3 h-3 text-slate-400 group-hover:text-lime-700 shrink-0" />
@@ -1138,11 +1132,11 @@ export default function PassportPhotoPreviewPage() {
                             <div className="block lg:hidden pt-2 border-t border-slate-100">
                               <div className="flex items-center justify-center gap-3 py-2 flex-wrap text-slate-500">
                                 <a
-                                  href={`mailto:support@pixpassport.com?subject=Passport%20Photo%20Support%20-%20Session%20${encodeURIComponent(resultId)}`}
+                                  href={`mailto:${SUPPORT_EMAIL}?subject=Passport%20Photo%20Support%20-%20Session%20${encodeURIComponent(resultId)}`}
                                   className="flex items-center gap-1 text-lime-800 font-bold hover:underline"
                                 >
                                   <Mail className="w-3 h-3 text-lime-700" />
-                                  <span className="text-[10.5px]">24/7 Mail Support: support@pixpassport.com</span>
+                                  <span className="text-[10.5px]">24/7 Mail Support: {SUPPORT_EMAIL}</span>
                                 </a>
                                 <div className="flex items-center gap-1">
                                   <Shield className="w-3 h-3 text-emerald-600" />
@@ -1182,7 +1176,7 @@ export default function PassportPhotoPreviewPage() {
 
                             <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-center gap-2 text-center text-xs text-slate-600">
                               <Mail className="w-3.5 h-3.5 text-lime-700 shrink-0" />
-                              <span>Need assistance? 24/7 Support: <a href="mailto:support@pixpassport.com" className="font-bold text-slate-900 underline hover:text-lime-700">support@pixpassport.com</a></span>
+                              <span>Need assistance? 24/7 Support: <a href={`mailto:${SUPPORT_EMAIL}`} className="font-bold text-slate-900 underline hover:text-lime-700">{SUPPORT_EMAIL}</a></span>
                             </div>
                           </div>
                         )}

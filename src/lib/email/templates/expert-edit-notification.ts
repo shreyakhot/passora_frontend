@@ -3,6 +3,8 @@
  */
 
 import { baseEmailTemplate, escapeHtml } from "./base";
+import { DEFAULT_COUNTRY } from "@/config/countries";
+import { SITE_NAME } from "@/lib/site";
 
 export interface ExpertEditNotificationParams {
   email: string;
@@ -35,8 +37,8 @@ export function expertEditNotificationEmail(
     ? `${symbol}${(params.amount / 100).toFixed(2)}`
     : `${(params.amount / 100).toFixed(2)} ${params.currency}`;
 
-  const country = params.countryName || "United Kingdom";
-  const code = params.countryCode || "GB";
+  const country = params.countryName || DEFAULT_COUNTRY.country_name;
+  const code = params.countryCode || DEFAULT_COUNTRY.country_code;
   const dimensions = params.dimensions || "600x750 px";
   const originalUrl = params.originalImageUrl || params.previewUrl || "";
   const processedUrl = params.processedImageUrl || params.previewUrl || "";
@@ -47,7 +49,7 @@ export function expertEditNotificationEmail(
     <!-- Top Alert Banner -->
     <div style="background-color:#fef3c7;border:1px solid #f59e0b;border-radius:10px;padding:16px 20px;margin-bottom:24px;">
       <div style="font-size:16px;font-weight:800;color:#92400e;margin-bottom:4px;">
-        ⚠️ Expert Manual Edit &amp; Review Required (£13.99 Order)
+        ⚠️ Expert Manual Edit &amp; Review Required (${escapeHtml(amountFormatted)} Order)
       </div>
       <div style="font-size:13px;color:#78350f;line-height:1.5;">
         A customer has paid for human expert manual photo touchup and government compliance review for <strong>${escapeHtml(country)}</strong>.
@@ -148,7 +150,7 @@ export function expertEditNotificationEmail(
     </div>
 
     <div style="font-size:11px;color:#94a3b8;text-align:center;">
-      PixPassport Expert Order Dispatch Service &bull; Internal Notification
+      ${escapeHtml(SITE_NAME)} Expert Order Dispatch Service &bull; Internal Notification
     </div>
   `;
 

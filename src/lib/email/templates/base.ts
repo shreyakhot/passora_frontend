@@ -4,6 +4,7 @@
  */
 
 import { PRICING } from "@/lib/config/pricing";
+import { LOGO_URL, SITE_DOMAIN, SITE_NAME } from "@/lib/site";
 
 function escapeHtml(str: string): string {
   return str
@@ -63,11 +64,11 @@ export function baseEmailTemplate(params: {
             <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
               <tr>
                 <td style="vertical-align:middle;padding-right:10px;">
-                  <img src="https://res.cloudinary.com/dipzpwbbk/image/upload/v1790589684/pixpassport_eq8aay.jpg" alt="PixPassport Logo" width="34" height="34" style="display:block;border-radius:8px;border:1px solid rgba(255,255,255,0.2);" />
+                  <img src="${escapeHtml(LOGO_URL)}" alt="${escapeHtml(SITE_NAME)} Logo" width="34" height="34" style="display:block;border-radius:8px;border:1px solid rgba(255,255,255,0.2);" />
                 </td>
                 <td style="vertical-align:middle;">
                   <h1 style="color:#ffffff;font-size:22px;margin:0;font-weight:700;letter-spacing:-0.5px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;">
-                    Pix<span class="brand-accent" style="color:#84cc16;">Passport</span>
+                    ${escapeHtml(SITE_NAME)}
                   </h1>
                 </td>
               </tr>
@@ -85,7 +86,7 @@ export function baseEmailTemplate(params: {
               &copy; ${year} ${escapeHtml(PRICING.businessName)}. All rights reserved.
             </p>
             <p style="margin:0 0 8px;">
-              <a href="${escapeHtml(PRICING.siteUrl)}" style="color:#4d7c0f;text-decoration:none;">pixpassport.uk</a>
+              <a href="${escapeHtml(PRICING.siteUrl)}" style="color:#4d7c0f;text-decoration:none;">${escapeHtml(SITE_DOMAIN)}</a>
               &nbsp;·&nbsp;
               <a href="${escapeHtml(PRICING.siteUrl)}/privacy-policy" style="color:#4d7c0f;text-decoration:none;">Privacy</a>
               &nbsp;·&nbsp;

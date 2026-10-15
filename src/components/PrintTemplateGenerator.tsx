@@ -22,6 +22,7 @@ import {
   RefreshCw,
   ArrowRight,
 } from "lucide-react";
+import { SITE_DOMAIN, SITE_NAME } from "@/lib/site";
 
 export interface PaperSizeOption {
   id: string;
@@ -48,7 +49,7 @@ export const PAPER_SIZES: PaperSizeOption[] = [
     name: "4 × 6 inches (10 × 15 cm)",
     widthMm: 152.4,
     heightMm: 101.6,
-    description: "Standard postcard print paper. Supported at all photo kiosks (Boots, Tesco, Asda).",
+    description: "Standard photo print size. Available at most photo kiosks and print shops.",
     popular: true,
   },
   {
@@ -84,9 +85,9 @@ export const PAPER_SIZES: PaperSizeOption[] = [
 export const PHOTO_STANDARDS: PhotoStandardOption[] = [
   {
     id: "35x45",
-    name: "UK / EU / Schengen / India",
-    country: "United Kingdom & 50+ Countries",
-    flag: "🇬🇧",
+    name: "International Standard (35 × 45 mm)",
+    country: "Schengen Area, UK, India, Australia & many more",
+    flag: "🌍",
     widthMm: 35,
     heightMm: 45,
     spec: "35 × 45 mm",
@@ -341,7 +342,7 @@ export default function PrintTemplateGenerator({
     ctx.fillStyle = "#94A3B8";
     ctx.font = `${Math.round(mmToPx(2.2))}px system-ui, -apple-system, sans-serif`;
     ctx.textAlign = "center";
-    const labelText = `PixPassport.uk · ${currentPaper.name} (300 DPI) · ${photoWidthMm}×${photoHeightMm} mm (${activePhotoCount} Photos) · Print at 100% Scale`;
+    const labelText = `${SITE_DOMAIN} · ${currentPaper.name} (300 DPI) · ${photoWidthMm}×${photoHeightMm} mm (${activePhotoCount} Photos) · Print at 100% Scale`;
     ctx.fillText(labelText, paperWidthPx / 2, paperHeightPx - Math.round(mmToPx(2)));
     ctx.restore();
   }, [
@@ -457,7 +458,7 @@ export default function PrintTemplateGenerator({
       <!DOCTYPE html>
       <html>
         <head>
-          <title>Print Passport Photo Sheet - PixPassport</title>
+          <title>Print Passport Photo Sheet - ${SITE_NAME}</title>
           <style>
             @page {
               size: ${paperWidthMm}mm ${paperHeightMm}mm;
@@ -584,7 +585,7 @@ export default function PrintTemplateGenerator({
             <div>
               <h4 className="text-xs font-bold text-slate-900">True 300 DPI Sizing</h4>
               <p className="text-[11px] text-slate-600 mt-0.5 leading-snug">
-                Millimeter-perfect UK (35×45mm), US (2×2″) &amp; global specs.
+                Millimeter-perfect 35×45 mm, US 2×2″ &amp; other common photo sizes.
               </p>
             </div>
           </div>
@@ -606,9 +607,9 @@ export default function PrintTemplateGenerator({
               <Sparkles className="w-4 h-4" />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-slate-900">Print for 15p at Boots</h4>
+              <h4 className="text-xs font-bold text-slate-900">Print Cheaply Anywhere</h4>
               <p className="text-[11px] text-slate-600 mt-0.5 leading-snug">
-                Save £10–£15 by printing as a standard 4×6″ photo at kiosks.
+                Order a standard 4×6″ photo print instead of a pricier passport photo service.
               </p>
             </div>
           </div>
@@ -781,7 +782,7 @@ export default function PrintTemplateGenerator({
                         </span>
                         {paper.popular && (
                           <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-lime-200 text-[#365314]">
-                            15p
+                            Popular
                           </span>
                         )}
                       </div>

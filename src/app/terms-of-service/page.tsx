@@ -3,47 +3,51 @@ import Link from "next/link";
 import { Mail } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import {
+  SITE_URL,
+  SITE_NAME,
+  SUPPORT_EMAIL,
+  LOGO_URL,
+  SITE_DISCLAIMER,
+} from "@/lib/site";
+import { getPlanPricing } from "@/lib/config/pricing";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://pixpassport.uk";
+const PAGE_DESCRIPTION = `Review the ${SITE_NAME} Terms of Service governing the use of our passport and visa photo maker, digital formatting tools, and download services.`;
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description:
-    "Review the PixPassport Terms of Service governing the use of our UK passport photo maker, digital formatting tools, and download services.",
+  description: PAGE_DESCRIPTION,
   alternates: {
     canonical: `${SITE_URL}/terms-of-service`,
-    languages: {
-      "en-GB": `${SITE_URL}/terms-of-service`,
-    },
   },
   openGraph: {
-    title: "Terms of Service — PixPassport",
-    description:
-      "Review the PixPassport Terms of Service governing the use of our UK passport photo maker, digital formatting tools, and download services.",
+    title: `Terms of Service — ${SITE_NAME}`,
+    description: PAGE_DESCRIPTION,
     url: `${SITE_URL}/terms-of-service`,
-    siteName: "PixPassport",
-    locale: "en_GB",
+    siteName: SITE_NAME,
+    locale: "en_US",
     type: "website",
     images: [
       {
-        url: `${SITE_URL}/pixpassport.jpg`,
+        url: LOGO_URL,
         width: 640,
         height: 640,
-        alt: "PixPassport Terms of Service",
+        alt: `${SITE_NAME} Terms of Service`,
       },
     ],
   },
   twitter: {
     card: "summary",
-    title: "Terms of Service — PixPassport",
-    description:
-      "Review the PixPassport Terms of Service governing the use of our UK passport photo maker, digital formatting tools, and download services.",
-    images: [`${SITE_URL}/pixpassport.jpg`],
+    title: `Terms of Service — ${SITE_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: [LOGO_URL],
   },
 };
 
 export default function TermsOfServicePage() {
+  const standardPlan = getPlanPricing("standard");
+  const expertPlan = getPlanPricing("expert_edit");
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -99,7 +103,7 @@ export default function TermsOfServicePage() {
               Terms of Service
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 font-medium">
-              Last Updated: 27 September 2026 · Governed by the Laws of England and Wales
+              Last Updated: 14 October 2026 · Please read these Terms carefully before using our service
             </p>
           </div>
         </section>
@@ -112,7 +116,7 @@ export default function TermsOfServicePage() {
               1. Acceptance of Terms
             </h2>
             <p>
-              These Terms of Service (&ldquo;Terms&rdquo;) constitute a legally binding agreement between you (&ldquo;User&rdquo;, &ldquo;you&rdquo;) and PixPassport (&ldquo;PixPassport&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;), governing your access to and use of the website located at <Link href="/" className="text-[#365314] font-semibold underline">https://pixpassport.uk</Link> and associated photo formatting services.
+              These Terms of Service (&ldquo;Terms&rdquo;) constitute a legally binding agreement between you (&ldquo;User&rdquo;, &ldquo;you&rdquo;) and the operator of {SITE_NAME} (&ldquo;{SITE_NAME}&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;), governing your access to and use of the website located at <Link href="/" className="text-[#365314] font-semibold underline">{SITE_URL}</Link> and associated photo formatting services.
             </p>
             <p>
               By accessing the website, uploading photos, or using any of our services, you confirm that you have read, understood, and agreed to be bound by these Terms. If you do not agree, you must cease using our website immediately.
@@ -125,7 +129,7 @@ export default function TermsOfServicePage() {
               2. Description of Service
             </h2>
             <p>
-              PixPassport provides a web-based digital passport photo creation tool. Our software assists users in cropping, aligning, sizing, checking dimensional parameters, and preparing high-resolution digital passport photos and 6×4″ printable sheets compliant with HM Passport Office (HMPO) and international passport specifications.
+              {SITE_NAME} provides a web-based digital passport, visa and ID photo creation tool for 50+ countries. Our software assists users in cropping, aligning, sizing, checking dimensional parameters, and preparing high-resolution digital photos and 6×4″ printable sheets to the published photo specifications of the country and document selected by the user.
             </p>
           </section>
 
@@ -135,7 +139,7 @@ export default function TermsOfServicePage() {
               3. User Responsibilities &amp; Content Rights
             </h2>
             <p>
-              When using PixPassport, you represent, warrant, and agree that:
+              When using {SITE_NAME}, you represent, warrant, and agree that:
             </p>
             <ul className="list-disc pl-5 space-y-2">
               <li>
@@ -159,7 +163,7 @@ export default function TermsOfServicePage() {
               4. Permitted and Prohibited Uses
             </h2>
             <p>
-              You agree not to use PixPassport for any unlawful purpose or in any way that could impair the operation of the service. You may not:
+              You agree not to use {SITE_NAME} for any unlawful purpose or in any way that could impair the operation of the service. You may not:
             </p>
             <ul className="list-disc pl-5 space-y-2">
               <li>Upload fraudulent, defamatory, obscene, harassing, or unlawful imagery.</li>
@@ -175,7 +179,7 @@ export default function TermsOfServicePage() {
               5. Fees and Payment
             </h2>
             <p>
-              Digital passport photo packages are offered for a flat fee of £7.99 per completed photo result. Payment is processed securely via accredited third-party payment gateways. All prices are in British Pounds (GBP) inclusive of applicable taxes.
+              Digital photo packages are offered at the prices shown on the website at the time of purchase — currently {standardPlan.amountFormatted} for the {standardPlan.title} and {expertPlan.amountFormatted} for {expertPlan.title} per completed photo result. Payment is processed securely by our third-party payment processor, Razorpay. Prices are charged in {standardPlan.currency} and are inclusive of applicable taxes. Your bank or card issuer may apply its own currency-conversion or foreign-transaction fees.
             </p>
             <p>
               Upon successful payment processing, the user is provided with immediate access to download the full high-resolution digital passport photo and printable 6×4″ sheet.
@@ -188,11 +192,11 @@ export default function TermsOfServicePage() {
               6. Service Functionality &amp; Government Acceptance Disclaimer
             </h2>
             <p>
-              PixPassport is an independent technical compliance formatting utility and is not affiliated with, endorsed by, or part of HM Passport Office (HMPO), the UK Home Office, or any foreign government agency.
+              {SITE_DISCLAIMER} {SITE_NAME} is a technical photo formatting utility and does not process, submit, or decide any passport, visa, or ID application.
             </p>
             <div className="bg-amber-50/80 border border-amber-300 rounded-xl p-4 text-sm text-slate-800 font-medium">
               <p>
-                <strong>Important Notice:</strong> While PixPassport algorithms adjust your photo to official dimensional specifications (35×45 mm, head size, eye level, top clearance), final acceptance of any passport or visa application remains solely at the discretion of the issuing passport authority or consular examiner.
+                <strong>Important Notice:</strong> While {SITE_NAME} algorithms adjust your photo to official dimensional specifications (photo size, head size, eye level, top clearance), final acceptance of any passport or visa application remains solely at the discretion of the issuing passport authority or consular examiner.
               </p>
             </div>
           </section>
@@ -213,7 +217,7 @@ export default function TermsOfServicePage() {
               8. Intellectual Property Rights
             </h2>
             <p>
-              All website content, interfaces, logos, code, software, algorithms, and design assets on PixPassport are the exclusive property of PixPassport and are protected by UK and international copyright, trademark, and database laws.
+              All website content, interfaces, logos, code, software, algorithms, and design assets on {SITE_NAME} are the exclusive property of the operator of {SITE_NAME} and are protected by applicable copyright, trademark, and database laws.
             </p>
             <p>
               You retain full copyright and ownership of any photograph you upload to our platform.
@@ -226,10 +230,10 @@ export default function TermsOfServicePage() {
               9. Limitation of Liability
             </h2>
             <p>
-              To the maximum extent permitted by applicable UK law, PixPassport shall not be liable for any indirect, incidental, consequential, special, or punitive damages, including missed travel, application rescheduling fees, or lost profits arising from the use of or inability to use the service.
+              To the maximum extent permitted by applicable law, {SITE_NAME} shall not be liable for any indirect, incidental, consequential, special, or punitive damages, including missed travel, application rescheduling fees, or lost profits arising from the use of or inability to use the service.
             </p>
             <p>
-              Nothing in these Terms limits or excludes liability for death or personal injury caused by negligence, fraud, or any liability that cannot be excluded under English law.
+              Nothing in these Terms limits or excludes liability for death or personal injury caused by negligence, fraud, or any liability that cannot be excluded under applicable law, including any mandatory consumer rights you have in your country of residence.
             </p>
           </section>
 
@@ -239,7 +243,7 @@ export default function TermsOfServicePage() {
               10. Governing Law and Jurisdiction
             </h2>
             <p>
-              These Terms and any dispute or claim arising out of or in connection with them shall be governed by and construed in accordance with the laws of England and Wales. The courts of England and Wales shall have exclusive jurisdiction.
+              These Terms and any dispute or claim arising out of or in connection with them shall be governed by and construed in accordance with the laws of the jurisdiction in which the operator of {SITE_NAME} is established, and the courts of that jurisdiction shall have jurisdiction. This does not affect any mandatory consumer-protection rights you may have under the laws of your country of residence.
             </p>
           </section>
 
@@ -253,11 +257,11 @@ export default function TermsOfServicePage() {
             </p>
             <div className="pt-2">
               <a
-                href="mailto:support@pixpassport.com"
+                href={`mailto:${SUPPORT_EMAIL}`}
                 className="inline-flex items-center gap-2 bg-[#4D7C0F] hover:bg-[#3F650C] text-white font-bold text-sm px-5 py-3 rounded-xl transition-colors focus-ring"
               >
                 <Mail className="w-4 h-4" aria-hidden="true" />
-                <span>support@pixpassport.com</span>
+                <span>{SUPPORT_EMAIL}</span>
               </a>
             </div>
           </section>

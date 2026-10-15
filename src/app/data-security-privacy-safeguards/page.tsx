@@ -13,43 +13,37 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SITE_URL, SITE_NAME, SUPPORT_EMAIL, LOGO_URL } from "@/lib/site";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://pixpassport.uk";
+const PAGE_DESCRIPTION = `How ${SITE_NAME} protects your photos and payments: TLS encryption, in-browser compression, server-side API keys and limited data collection.`;
 
 export const metadata: Metadata = {
   title: "Data Security & Privacy Safeguards",
-  description:
-    "How PixPassport protects your photos and payments: TLS encryption, in-browser compression, server-side API keys and limited data collection.",
+  description: PAGE_DESCRIPTION,
   alternates: {
     canonical: `${SITE_URL}/data-security-privacy-safeguards`,
-    languages: {
-      "en-GB": `${SITE_URL}/data-security-privacy-safeguards`,
-    },
   },
   openGraph: {
-    title: "Data Security & Privacy Safeguards — PixPassport",
-    description:
-      "How PixPassport protects your photos and payments: TLS encryption, in-browser compression, server-side API keys and limited data collection.",
+    title: `Data Security & Privacy Safeguards — ${SITE_NAME}`,
+    description: PAGE_DESCRIPTION,
     url: `${SITE_URL}/data-security-privacy-safeguards`,
-    siteName: "PixPassport",
-    locale: "en_GB",
+    siteName: SITE_NAME,
+    locale: "en_US",
     type: "website",
     images: [
       {
-        url: `${SITE_URL}/pixpassport.jpg`,
+        url: LOGO_URL,
         width: 640,
         height: 640,
-        alt: "PixPassport Data Security & Privacy Safeguards",
+        alt: `${SITE_NAME} Data Security & Privacy Safeguards`,
       },
     ],
   },
   twitter: {
     card: "summary",
-    title: "Data Security & Privacy Safeguards — PixPassport",
-    description:
-      "How PixPassport protects your photos and payments: TLS encryption, in-browser compression, server-side API keys and limited data collection.",
-    images: [`${SITE_URL}/pixpassport.jpg`],
+    title: `Data Security & Privacy Safeguards — ${SITE_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: [LOGO_URL],
   },
 };
 
@@ -109,7 +103,7 @@ export default function DataSecurityPrivacySafeguardsPage() {
               Data Security &amp; Privacy Safeguards
             </h1>
             <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal">
-              PixPassport is built from the ground up to protect your personal photographs and privacy. This document outlines our actual technical safeguards, transmission security, and data handling practices.
+              {SITE_NAME} is built from the ground up to protect your personal photographs and privacy. This document outlines our actual technical safeguards, transmission security, and data handling practices.
             </p>
           </div>
         </section>
@@ -125,7 +119,7 @@ export default function DataSecurityPrivacySafeguardsPage() {
             <div className="grid sm:grid-cols-2 gap-4 text-sm text-slate-800 font-medium">
               <div className="flex items-start gap-2.5">
                 <CheckCircle className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                <span>Zero long-term biometric or facial photo storage</span>
+                <span>No facial-recognition database or biometric profiling</span>
               </div>
               <div className="flex items-start gap-2.5">
                 <CheckCircle className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
@@ -137,7 +131,7 @@ export default function DataSecurityPrivacySafeguardsPage() {
               </div>
               <div className="flex items-start gap-2.5">
                 <CheckCircle className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                <span>No user account creation or tracking profiles</span>
+                <span>No user account creation required</span>
               </div>
             </div>
           </div>
@@ -153,7 +147,7 @@ export default function DataSecurityPrivacySafeguardsPage() {
               </h2>
             </div>
             <p className="text-slate-700 leading-relaxed text-base">
-              Whenever you upload a photograph to PixPassport, initial image inspection, local previews, and size pre-compression (down to &le; 3 MB) occur directly inside your browser via standard HTML5 Canvas and Web APIs.
+              Whenever you upload a photograph to {SITE_NAME}, initial image inspection, local previews, and size pre-compression (down to &le; 3 MB) occur directly inside your browser via standard HTML5 Canvas and Web APIs.
             </p>
             <p className="text-slate-700 leading-relaxed text-base">
               This ensures your uncompressed high-resolution original file never leaves your computer or phone unnecessarily, minimizing bandwidth and exposure.
@@ -185,14 +179,16 @@ export default function DataSecurityPrivacySafeguardsPage() {
                 <Trash2 className="w-5 h-5" />
               </div>
               <h2 id="retention-heading" className="text-2xl font-bold text-[#0F172A] tracking-tight">
-                3. Zero Permanent Storage &amp; Automatic Deletion
+                3. Limited Storage &amp; Expiring Download Links
               </h2>
             </div>
             <p className="text-slate-700 leading-relaxed text-base">
-              PixPassport does not maintain a permanent facial database, biometric repository, or photo gallery of uploaded images.
+              {SITE_NAME} does not maintain a facial-recognition database, biometric repository, or public photo gallery of uploaded images.
             </p>
             <p className="text-slate-700 leading-relaxed text-base">
-              Images sent for processing exist in ephemeral memory only for the brief duration required to detect face boundaries, crop, and generate the final print output. Once the session is concluded, server-side processing artifacts are automatically deleted.
+              Your processed photo, and the original photo you uploaded when you place an order, are stored with our secure cloud image-hosting provider only so we can deliver your files, carry out Expert Edit reviews, and handle support and refund requests. Download links are private and expire 72 hours after they are issued. See our{" "}
+              <Link href="/privacy-policy" className="text-[#365314] font-semibold underline">Privacy Policy</Link>{" "}
+              for full retention details.
             </p>
           </section>
 
@@ -225,10 +221,10 @@ export default function DataSecurityPrivacySafeguardsPage() {
               </h2>
             </div>
             <p className="text-slate-700 leading-relaxed text-base">
-              Payment transactions are conducted through accredited, PCI-DSS Level 1 compliant payment service providers.
+              Payment transactions are processed by Razorpay, a PCI-DSS compliant payment gateway.
             </p>
             <p className="text-slate-700 leading-relaxed text-base">
-              PixPassport never handles, processes, or stores your raw credit or debit card numbers, CVVs, or banking credentials on our web servers.
+              {SITE_NAME} never handles, processes, or stores your raw credit or debit card numbers, CVVs, or banking credentials on our web servers.
             </p>
           </section>
 
@@ -246,7 +242,7 @@ export default function DataSecurityPrivacySafeguardsPage() {
               Result previews and session references are kept in your browser&rsquo;s temporary <code className="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono text-slate-800">sessionStorage</code> and <code className="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono text-slate-800">localStorage</code>.
             </p>
             <p className="text-slate-700 leading-relaxed text-base">
-              You can instantly purge all locally stored references at any time simply by closing your browser tab or clearing your browser site data. Under the UK GDPR, you have the right to request confirmation of any data processed or request technical support assistance.
+              You can instantly purge all locally stored references at any time simply by closing your browser tab or clearing your browser site data. Depending on applicable data-protection laws (including the GDPR where it applies), you may also have the right to request confirmation, a copy, or deletion of any data we hold about you.
             </p>
           </section>
 
@@ -260,11 +256,11 @@ export default function DataSecurityPrivacySafeguardsPage() {
             </p>
             <div className="pt-2">
               <a
-                href="mailto:support@pixpassport.com"
+                href={`mailto:${SUPPORT_EMAIL}`}
                 className="inline-flex items-center gap-2 bg-[#4D7C0F] hover:bg-[#3F650C] text-white font-bold text-sm px-5 py-3 rounded-xl transition-colors focus-ring"
               >
                 <Mail className="w-4 h-4" aria-hidden="true" />
-                <span>support@pixpassport.com</span>
+                <span>{SUPPORT_EMAIL}</span>
               </a>
             </div>
           </section>

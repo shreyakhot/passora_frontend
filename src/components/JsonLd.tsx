@@ -1,3 +1,6 @@
+import { LOGO_URL, SITE_NAME, SITE_URL, SUPPORT_EMAIL } from "@/lib/site";
+import { PRICING } from "@/lib/config/pricing";
+
 export interface JsonLdFaqEntry {
   question: string;
   answer: string;
@@ -27,8 +30,6 @@ export interface JsonLdProps {
   includeWebApp?: boolean;
 }
 
-const DEFAULT_SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://pixpassport.uk";
 
 /**
  * Returns JSON-LD structured data for Google Search & SEO rich results.
@@ -37,17 +38,17 @@ const DEFAULT_SITE_URL =
  * - Emits valid Organization, WebSite, and WebApplication schemas.
  */
 export default function JsonLd({
-  siteUrl = DEFAULT_SITE_URL,
-  siteName = "PixPassport",
-  description = "Make a UK passport photo online for GOV.UK applications and renewals, checked against HMPO guidance.",
-  logoUrl = `${DEFAULT_SITE_URL}/pixpassport.jpg`,
-  imageUrl = `${DEFAULT_SITE_URL}/pixpassport.jpg`,
+  siteUrl = SITE_URL,
+  siteName = SITE_NAME,
+  description = "Make a passport, visa or ID photo online for 50+ countries, sized and checked against each country's photo rules.",
+  logoUrl = LOGO_URL,
+  imageUrl = LOGO_URL,
   appName,
   appUrl,
   appId,
   applicationCategory = "PhotographyApplication",
-  price = "7.99",
-  priceCurrency = "GBP",
+  price = PRICING.amount.toFixed(2),
+  priceCurrency = PRICING.currency,
   faqItems,
   pageUrl,
   pageName,
@@ -75,8 +76,7 @@ export default function JsonLd({
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer support",
-        email: "support@pixpassport.com",
-        areaServed: "GB",
+        email: SUPPORT_EMAIL,
         availableLanguage: ["English"],
       },
     });
@@ -90,7 +90,7 @@ export default function JsonLd({
       name: siteName,
       description: description,
       publisher: { "@id": `${siteUrl}/#organization` },
-      inLanguage: "en-GB",
+      inLanguage: "en",
     });
   }
 
@@ -117,7 +117,7 @@ export default function JsonLd({
         availability: "https://schema.org/InStock",
       },
       provider: { "@id": `${siteUrl}/#organization` },
-      inLanguage: "en-GB",
+      inLanguage: "en",
     });
   }
 
@@ -131,7 +131,7 @@ export default function JsonLd({
       url: pageUrl,
       name: pageName,
       ...(pageDescription ? { description: pageDescription } : {}),
-      inLanguage: "en-GB",
+      inLanguage: "en",
       isPartOf: { "@id": `${siteUrl}/#website` },
       publisher: { "@id": `${siteUrl}/#organization` },
       ...(hasBreadcrumbs ? { breadcrumb: { "@id": `${pageId}#breadcrumb` } } : {}),

@@ -9,6 +9,7 @@ import {
   type PaymentStatus,
 } from "@/lib/models/Payment";
 import { PRICING, getPlanPricing, type PlanType } from "@/lib/config/pricing";
+import { DEFAULT_COUNTRY } from "@/config/countries";
 import { createRazorpayOrder } from "@/lib/payments/razorpay";
 import { uploadOriginalPhotoToCloudinary } from "@/lib/storage/cloudinary";
 import { logActivity } from "@/lib/logging/activity-logger";
@@ -75,7 +76,7 @@ export async function createPaymentOrder(params: {
       resultId: params.resultId,
       planType: plan,
       productType: plan === "expert_edit" ? "expert_edit_passport_photo" : PRICING.productType,
-      country: params.countryName || "GB",
+      country: params.countryName || DEFAULT_COUNTRY.country_name,
     },
   });
 

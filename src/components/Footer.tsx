@@ -1,6 +1,9 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { LOGO_PATH, SITE_NAME } from "@/lib/site";
+import { POPULAR_TOOLS } from "@/lib/tool-directory";
+import { getPlanPricing } from "@/lib/config/pricing";
 
 export interface FooterLinkItem {
   label: string;
@@ -19,29 +22,16 @@ export const DEFAULT_FOOTER_LINKS: Record<string, FooterLinkItem[]> = {
     { label: "FAQ", href: "/#faq" },
     { label: "XML Sitemap", href: "/sitemap.xml" },
   ],
-  "Country Guides": [
-    { label: "UK Passport Photo (35×45mm)", href: "/tool/uk-passport-photo" },
-    { label: "British Passport Picture Maker", href: "/tool/british-passport-picture-maker" },
-    { label: "UK Passport Renewal Photo", href: "/tool/passport-renewal-photo-online" },
-    { label: "UK Baby Passport Photo", href: "/tool/uk-baby-passport-photo" },
-    { label: "UK Driving Licence Photo", href: "/tool/uk-driving-licence-photo" },
-    { label: "UK Visa Photo", href: "/tool/uk-visa-photo" },
-    { label: "US Visa & Passport (2×2″)", href: "/tool/us-visa-photo-tool" },
-    { label: "Schengen Visa Photo", href: "/tool/schengen-visa-photo" },
-    { label: "Indian Passport & OCI", href: "/tool/indian-passport-photo-maker" },
-    { label: "All Photo Guides", href: "/tool" },
-  ],
-  "Photo Tools": [
-    { label: "UK Passport Photo Checker", href: "/tool/passport-photo-checker-uk" },
-    { label: "Print Template Generator", href: "/passport-photo-print-template-generator" },
-    { label: "Digital Passport Photo", href: "/tool/digital-passport-photo" },
-    { label: "35×45 mm Photo Size", href: "/tool/photo-size-35x45mm" },
-    { label: "Image to Passport Converter", href: "/tool/image-to-passport-size-converter" },
-    { label: "Passport Photo at Home", href: "/tool/passport-photo-at-home" },
-    { label: "iPhone Passport Photo", href: "/tool/take-a-passport-photo-on-iphone" },
-    { label: "Online Passport Photo Tool", href: "/tool/passport-photo-tool" },
-    { label: "Online ID Photo Maker", href: "/tool/online-id-photo-maker" },
-    { label: "Order Passport Photos", href: "/tool/order-passport-photos-online" },
+  "Popular Countries": POPULAR_TOOLS.slice(0, 6).map((tool) => ({
+    label: tool.title,
+    href: `/tool/${tool.slug}`,
+  })),
+  "More Countries": [
+    ...POPULAR_TOOLS.slice(6).map((tool) => ({
+      label: tool.title,
+      href: `/tool/${tool.slug}`,
+    })),
+    { label: "All Countries", href: "/tool" },
   ],
   "Company & Legal": [
     { label: "About Us", href: "/about-us" },
@@ -66,10 +56,10 @@ export interface FooterProps {
 }
 
 export default function Footer({
-  brandName = "PixPassport",
-  brandLogo = "/pixpassport.jpg",
-  brandLogoAlt = "PixPassport Logo",
-  brandDescription = "Independent UK passport photo service. Create digital photos and 6×4″ print sheets checked against HMPO guidance, plus visa photos for 50+ countries, for £7.99. Not affiliated with HM Passport Office or GOV.UK.",
+  brandName = SITE_NAME,
+  brandLogo = LOGO_PATH,
+  brandLogoAlt = `${SITE_NAME} Logo`,
+  brandDescription = `Independent passport and visa photo service for 50+ countries. Create digital photos and 6×4″ print sheets sized to your country's rules for ${getPlanPricing("standard").amountFormatted}. Not affiliated with any government, passport office, embassy or consulate.`,
   linkGroups = DEFAULT_FOOTER_LINKS,
   copyrightText,
   regionNotice,
@@ -91,7 +81,7 @@ export default function Footer({
             <Link
               href="/"
               className="inline-flex items-center gap-2.5 text-xl font-bold mb-4 text-white hover:text-lime-400 transition-colors focus-ring rounded-lg"
-              aria-label="PixPassport homepage"
+              aria-label={`${brandName} homepage`}
             >
               {brandLogo && (
                 <Image
@@ -146,9 +136,9 @@ export default function Footer({
           <p className="flex items-center gap-1.5 text-slate-300">
             {regionNotice ?? (
               <>
-                <span>Made in the United Kingdom</span>
-                <span className="inline-block text-base" aria-label="United Kingdom flag">
-                  🇬🇧
+                <span>Passport &amp; visa photos for 50+ countries</span>
+                <span className="inline-block text-base" aria-hidden="true">
+                  🌍
                 </span>
               </>
             )}

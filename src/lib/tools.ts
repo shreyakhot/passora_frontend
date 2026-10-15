@@ -4,6 +4,9 @@ import matter from "gray-matter";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
 import html from "remark-html";
+import { getPlanPricing } from "@/lib/config/pricing";
+import { DEFAULT_COUNTRY_CODE } from "@/config/countries";
+import { getAllCountryPageSlugs, getCountryPageSource } from "@/lib/country-pages";
 
 const TOOLS_DIRECTORY = path.join(process.cwd(), "src/content/tools");
 
@@ -39,12 +42,17 @@ export interface ToolPageData {
   faqs?: FaqItem[];
 }
 
-export function getAllToolSlugs(): string[] {
+function getMarkdownToolSlugs(): string[] {
   if (!fs.existsSync(TOOLS_DIRECTORY)) return [];
   const fileNames = fs.readdirSync(TOOLS_DIRECTORY);
   return fileNames
     .filter((file) => file.endsWith(".md"))
     .map((file) => file.replace(/\.md$/, ""));
+}
+
+/** Markdown guides plus one generated page per country. */
+export function getAllToolSlugs(): string[] {
+  return Array.from(new Set([...getMarkdownToolSlugs(), ...getAllCountryPageSlugs()]));
 }
 
 async function parseFaqsFromMarkdown(
@@ -126,10 +134,16 @@ async function parseFaqsFromMarkdown(
 export async function getToolBySlug(slug: string): Promise<ToolPageData | null> {
   try {
     const fullPath = path.join(TOOLS_DIRECTORY, `${slug}.md`);
-    if (!fs.existsSync(fullPath)) return null;
+    let data: matter.GrayMatterFile<string>["data"];
+    let rawContent: string;
 
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const { data, content: rawContent } = matter(fileContents);
+    if (fs.existsSync(fullPath)) {
+      ({ data, content: rawContent } = matter(fs.readFileSync(fullPath, "utf8")));
+    } else {
+      const generated = getCountryPageSource(slug);
+      if (!generated) return null;
+      ({ data, content: rawContent } = generated);
+    }
     // Editorial HTML comments (TODOs, notes) must not ship in the page source.
     const content = rawContent.replace(/<!--[\s\S]*?-->/g, "");
 
@@ -170,7 +184,7 @@ export async function getToolBySlug(slug: string): Promise<ToolPageData | null> 
       meta_description:
         data.meta_description ||
         "Create passport and visa photos online, sized and checked against official photo guidance.",
-      country_code: data.country_code || "GB",
+      country_code: data.country_code || DEFAULT_COUNTRY_CODE,
       document_type: data.document_type || "passport",
       badge: data.badge || "Verified Biometric Standard",
       hero_title: data.hero_title || data.title || "Passport Photo Maker Online",
@@ -188,7 +202,7 @@ export async function getToolBySlug(slug: string): Promise<ToolPageData | null> 
         data.feature_image ||
         "https://res.cloudinary.com/dipzpwbbk/image/upload/v1790507890/uk_passport_size_photo_i5uujz.jpg",
       feature_image_alt: data.feature_image_alt,
-      price: data.price || "7.99",
+      price: data.price || getPlanPricing("standard").amount.toFixed(2),
       contentHtml,
       faqs: finalFaqs.length > 0 ? finalFaqs : undefined,
     };

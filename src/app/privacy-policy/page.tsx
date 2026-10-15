@@ -3,43 +3,43 @@ import Link from "next/link";
 import { Mail } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import {
+  SITE_URL,
+  SITE_NAME,
+  SUPPORT_EMAIL,
+  LOGO_URL,
+  SITE_DISCLAIMER,
+} from "@/lib/site";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://pixpassport.uk";
+const PAGE_DESCRIPTION = `Read the ${SITE_NAME} Privacy Policy. Understand what data we collect, how we use and protect it, our cookie practices, and your data-protection rights.`;
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description:
-    "Read the PixPassport Privacy Policy. Understand what data we collect, our UK GDPR compliance, cookie practices, and how your privacy is protected.",
+  description: PAGE_DESCRIPTION,
   alternates: {
     canonical: `${SITE_URL}/privacy-policy`,
-    languages: {
-      "en-GB": `${SITE_URL}/privacy-policy`,
-    },
   },
   openGraph: {
-    title: "Privacy Policy — PixPassport",
-    description:
-      "Read the PixPassport Privacy Policy. Understand what data we collect, our UK GDPR compliance, cookie practices, and how your privacy is protected.",
+    title: `Privacy Policy — ${SITE_NAME}`,
+    description: PAGE_DESCRIPTION,
     url: `${SITE_URL}/privacy-policy`,
-    siteName: "PixPassport",
-    locale: "en_GB",
+    siteName: SITE_NAME,
+    locale: "en_US",
     type: "website",
     images: [
       {
-        url: `${SITE_URL}/pixpassport.jpg`,
+        url: LOGO_URL,
         width: 640,
         height: 640,
-        alt: "PixPassport Privacy Policy",
+        alt: `${SITE_NAME} Privacy Policy`,
       },
     ],
   },
   twitter: {
     card: "summary",
-    title: "Privacy Policy — PixPassport",
-    description:
-      "Read the PixPassport Privacy Policy. Understand what data we collect, our UK GDPR compliance, cookie practices, and how your privacy is protected.",
-    images: [`${SITE_URL}/pixpassport.jpg`],
+    title: `Privacy Policy — ${SITE_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: [LOGO_URL],
   },
 };
 
@@ -99,7 +99,7 @@ export default function PrivacyPolicyPage() {
               Privacy Policy
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 font-medium">
-              Last Updated: 27 September 2026 · Governed by the UK Data Protection Act 2018 &amp; UK GDPR
+              Last Updated: 14 October 2026 · Applicable data-protection laws, including the GDPR where it applies
             </p>
           </div>
         </section>
@@ -112,10 +112,13 @@ export default function PrivacyPolicyPage() {
               1. Introduction &amp; Scope
             </h2>
             <p>
-              PixPassport (&ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;), accessible at <Link href="/" className="text-[#365314] font-semibold underline">https://pixpassport.uk</Link>, provides an online passport and biometric photo formatting platform.
+              {SITE_NAME} (&ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;), accessible at <Link href="/" className="text-[#365314] font-semibold underline">{SITE_URL}</Link>, provides an online passport, visa and ID photo formatting platform for customers worldwide. {SITE_DISCLAIMER}
             </p>
             <p>
-              We are committed to safeguarding the privacy and personal data of our website visitors and service users. This Privacy Policy explains what personal information we collect, how we process it, the legal bases for processing under the UK General Data Protection Regulation (UK GDPR) and Data Protection Act 2018, and your statutory rights.
+              We are committed to safeguarding the privacy and personal data of our website visitors and service users. This Privacy Policy explains what personal information we collect, how we process it, the legal bases we rely on where the EU General Data Protection Regulation (GDPR) or similar laws apply, and the rights you may have under applicable data-protection laws.
+            </p>
+            <p>
+              The operator of {SITE_NAME} is responsible for your personal data as data controller and can be contacted at <a href={`mailto:${SUPPORT_EMAIL}`} className="text-[#365314] font-semibold underline">{SUPPORT_EMAIL}</a>.
             </p>
           </section>
 
@@ -125,17 +128,20 @@ export default function PrivacyPolicyPage() {
               2. Information We Collect
             </h2>
             <p>
-              We adhere strictly to the principle of data minimisation. We only collect or process data strictly required to deliver our photo creation and customer support services:
+              We adhere strictly to the principle of data minimisation. We only collect or process data required to deliver our photo creation and customer support services:
             </p>
             <ul className="list-disc pl-5 space-y-2">
               <li>
-                <strong>User-Uploaded Photographs:</strong> Image files (JPEG, PNG, WebP) uploaded to format, crop, and verify passport dimensions.
+                <strong>User-Uploaded Photographs:</strong> Image files (JPEG, PNG, WebP) uploaded to format, crop, and verify passport dimensions, and the processed passport or visa photo we generate from them.
+              </li>
+              <li>
+                <strong>Order Information:</strong> The email address you enter at checkout (used to deliver your photo, download link and invoice), the country and document type you selected, the plan purchased, the amount and currency, and payment status and transaction references returned by our payment processor.
               </li>
               <li>
                 <strong>Customer Support Data:</strong> Information provided voluntarily when contacting us (your name, email address, subject, result ID, and message content).
               </li>
               <li>
-                <strong>Technical &amp; Log Data:</strong> Standard server logs containing anonymised IP addresses, browser types, device categories, operating systems, and timestamp data for system security and anti-fraud monitoring.
+                <strong>Technical &amp; Usage Data:</strong> Your browser user-agent and a one-way hashed (never raw) IP address recorded with your order, order-related activity events (such as checkout started, payment completed, or file downloaded), and standard server logs used for system security, troubleshooting and anti-fraud monitoring.
               </li>
             </ul>
           </section>
@@ -146,20 +152,20 @@ export default function PrivacyPolicyPage() {
               3. Purpose and Legal Basis for Processing
             </h2>
             <p>
-              Under UK GDPR Article 6, we process your personal data under the following legal bases:
+              Where the GDPR applies, we process your personal data under the following legal bases set out in Article 6:
             </p>
             <div className="space-y-3">
               <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
                 <strong className="text-slate-900 block font-bold mb-1">Performance of a Contract (Article 6(1)(b)):</strong>
-                <span className="text-sm">Processing uploaded images to generate compliant digital passport photos and 6×4″ printable sheets requested by you.</span>
+                <span className="text-sm">Processing uploaded images to generate compliant digital passport photos and 6×4″ printable sheets requested by you, taking payment, and emailing your files and invoice.</span>
               </div>
               <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
                 <strong className="text-slate-900 block font-bold mb-1">Legitimate Interests (Article 6(1)(f)):</strong>
-                <span className="text-sm">Responding to customer inquiries, preventing abuse, ensuring server security, and maintaining website stability.</span>
+                <span className="text-sm">Responding to customer inquiries, preventing abuse and fraud, ensuring server security, understanding how the website is used, and maintaining website stability.</span>
               </div>
               <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
                 <strong className="text-slate-900 block font-bold mb-1">Legal Obligation (Article 6(1)(c)):</strong>
-                <span className="text-sm">Retaining financial transaction records for statutory accounting and tax compliance where applicable.</span>
+                <span className="text-sm">Retaining financial transaction records and invoices for statutory accounting and tax compliance where applicable.</span>
               </div>
             </div>
           </section>
@@ -167,17 +173,20 @@ export default function PrivacyPolicyPage() {
           {/* 4. Cookies and Client Storage */}
           <section aria-labelledby="section-cookies" className="space-y-3">
             <h2 id="section-cookies" className="text-xl sm:text-2xl font-bold text-[#0F172A] tracking-tight">
-              4. Cookies and Local Storage
+              4. Cookies, Local Storage and Analytics
             </h2>
             <p>
-              PixPassport does not use invasive advertising cookies or cross-site tracking networks. We utilize standard, strictly necessary browser storage mechanisms:
+              {SITE_NAME} does not use advertising cookies or sell data to advertising networks. We use the following browser storage and analytics tools:
             </p>
             <ul className="list-disc pl-5 space-y-2 text-sm sm:text-base">
               <li>
-                <strong>Session &amp; Local Storage (<code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">sessionStorage</code> / <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">localStorage</code>):</strong> Used solely to preserve your active photo processing result ID across browser navigation so you can view and download your generated photo.
+                <strong>Session &amp; Local Storage (<code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">sessionStorage</code> / <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">localStorage</code>):</strong> Used to preserve your active photo processing result across browser navigation so you can view, purchase and download your generated photo.
               </li>
               <li>
-                You can clear locally stored session artifacts at any time by clearing your browser cache or closing your browser window.
+                <strong>Website Analytics:</strong> Where enabled, we use Google Analytics and Microsoft Clarity to understand how visitors use the website (for example pages visited, device type, and on-page interactions such as clicks and scrolling). These services may set their own cookies and process data under their own privacy policies.
+              </li>
+              <li>
+                You can clear locally stored session data at any time by clearing your browser site data, and you can block or delete cookies through your browser settings.
               </li>
             </ul>
           </section>
@@ -188,17 +197,20 @@ export default function PrivacyPolicyPage() {
               5. Payment Processing
             </h2>
             <p>
-              When purchasing a digital passport photo package (£7.99), payment transactions are handled through certified third-party payment processors. We never collect, store, or view full payment card numbers or banking secrets.
+              When you purchase a digital passport photo package, payment is handled by Razorpay, our third-party payment processor. We never collect, store, or view full payment card numbers or banking credentials; we receive only the payment status and transaction references needed to fulfil and support your order.
             </p>
           </section>
 
           {/* 6. Data Retention & Deletion */}
           <section aria-labelledby="section-retention" className="space-y-3">
             <h2 id="section-retention" className="text-xl sm:text-2xl font-bold text-[#0F172A] tracking-tight">
-              6. Data Retention and Automated Deletion
+              6. Data Retention and Deletion
             </h2>
             <p>
-              Uploaded photographs and generated passport images are retained only for the ephemeral duration needed to generate your output files and complete your download.
+              Processed passport photos, and the original photo you uploaded when you place an order, are stored with our cloud image-hosting provider so we can deliver your files, provide Expert Edit review where purchased, and handle support and refund requests. They are kept only for as long as needed for those purposes, and you can ask us to delete them at any time.
+            </p>
+            <p>
+              Download links sent by email expire 72 hours after they are issued. Order activity logs are automatically deleted after 90 days. Order, payment and invoice records are retained for as long as required for accounting and tax purposes.
             </p>
             <p>
               Customer support correspondence is retained for up to 12 months solely for auditing, resolving refund requests, and customer service continuity, after which it is securely deleted.
@@ -211,10 +223,10 @@ export default function PrivacyPolicyPage() {
               7. Third-Party Service Providers &amp; Data Transfers
             </h2>
             <p>
-              We do not sell, rent, or trade your personal information. We may engage vetted technical infrastructure service providers (cloud hosting, DNS routing, secure CDN delivery) to host and serve our platform.
+              We do not sell, rent, or trade your personal information. We share data only with service providers that help us run the platform: Razorpay (payment processing), Cloudinary (photo and invoice storage), Resend (transactional email), our hosted MongoDB database, our photo-processing service, cloud hosting and content-delivery providers, and the analytics providers described above.
             </p>
             <p>
-              Where technical providers operate outside the United Kingdom or European Economic Area (EEA), transfers are governed by UK International Data Transfer Agreements (IDTAs) or European Commission Standard Contractual Clauses (SCCs) to guarantee equivalent data protection.
+              Because we serve customers worldwide, these providers may process your data in countries other than your own. Where applicable law requires it (for example the GDPR), such transfers are protected by appropriate safeguards such as the European Commission&rsquo;s Standard Contractual Clauses (SCCs).
             </p>
           </section>
 
@@ -224,17 +236,17 @@ export default function PrivacyPolicyPage() {
               8. Children&rsquo;s Privacy
             </h2>
             <p>
-              PixPassport allows parents and legal guardians to format passport photos for infants, toddlers, and children under 16 for official travel documents. We do not knowingly create user accounts or profile children. Any child photograph is processed strictly at the direction and consent of the parent or legal guardian.
+              {SITE_NAME} allows parents and legal guardians to format passport photos for infants, toddlers, and children under 16 for official travel documents. We do not knowingly create user accounts or profile children. Any child photograph is processed strictly at the direction and consent of the parent or legal guardian.
             </p>
           </section>
 
-          {/* 9. Your Rights Under UK GDPR */}
+          {/* 9. Your Privacy Rights */}
           <section aria-labelledby="section-rights" className="space-y-3">
             <h2 id="section-rights" className="text-xl sm:text-2xl font-bold text-[#0F172A] tracking-tight">
-              9. Your Statutory Privacy Rights
+              9. Your Privacy Rights
             </h2>
             <p>
-              Under UK data protection law, you have specific rights regarding your personal information:
+              Depending on where you live, applicable data-protection laws (including the GDPR where it applies) may give you the following rights regarding your personal information:
             </p>
             <ul className="list-disc pl-5 space-y-2 text-sm sm:text-base">
               <li><strong>Right of Access:</strong> Request a copy of the personal data we hold about you.</li>
@@ -243,7 +255,7 @@ export default function PrivacyPolicyPage() {
               <li><strong>Right to Restrict Processing:</strong> Request suspension of processing under certain circumstances.</li>
               <li><strong>Right to Data Portability:</strong> Request transfer of your data in a structured, commonly used format.</li>
               <li><strong>Right to Object:</strong> Object to processing based on legitimate interests.</li>
-              <li><strong>Right to Complain:</strong> You have the right to lodge a complaint with the UK Information Commissioner&rsquo;s Office (ICO) at <a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer" className="text-[#365314] font-semibold underline">ico.org.uk</a>.</li>
+              <li><strong>Right to Complain:</strong> You may lodge a complaint with the data-protection supervisory authority in the country where you live or work.</li>
             </ul>
           </section>
 
@@ -253,15 +265,15 @@ export default function PrivacyPolicyPage() {
               10. Contact &amp; Privacy Requests
             </h2>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
-              To exercise any of your statutory privacy rights, request data deletion, or ask questions about this policy, please contact our privacy team:
+              To exercise any of your privacy rights, request data deletion, or ask questions about this policy, please contact our privacy team:
             </p>
             <div className="pt-2">
               <a
-                href="mailto:support@pixpassport.com"
+                href={`mailto:${SUPPORT_EMAIL}`}
                 className="inline-flex items-center gap-2 bg-[#4D7C0F] hover:bg-[#3F650C] text-white font-bold text-sm px-5 py-3 rounded-xl transition-colors focus-ring"
               >
                 <Mail className="w-4 h-4" aria-hidden="true" />
-                <span>support@pixpassport.com</span>
+                <span>{SUPPORT_EMAIL}</span>
               </a>
             </div>
           </section>

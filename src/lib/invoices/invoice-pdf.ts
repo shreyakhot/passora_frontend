@@ -1,19 +1,20 @@
 /**
  * Invoice PDF Generator using pdf-lib
- * Creates clean, lightweight, vector A4 Tax Invoice PDFs matching PixPassport compliance standards.
+ * Creates clean, lightweight, vector A4 Tax Invoice PDFs with the site brand from @/lib/site.
  */
 
 import fs from "fs";
 import path from "path";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import { PRICING } from "@/lib/config/pricing";
+import { LOGO_PATH, SITE_DOMAIN, SITE_NAME, SUPPORT_EMAIL } from "@/lib/site";
 import { extractCustomerName } from "@/lib/payments/razorpay";
 
 export interface InvoicePdfParams {
   invoiceNumber: string;
   email: string;
   customerName?: string;
-  amount: number; // in smallest unit (pence/paise/cents)
+  amount: number; // in smallest currency unit (e.g. cents/paise)
   currency: string;
   razorpayPaymentId: string;
   razorpayOrderId?: string;
@@ -44,7 +45,7 @@ export async function generateInvoicePdfBuffer(params: InvoicePdfParams): Promis
   const borderGreen = rgb(187 / 255, 247 / 255, 208 / 255); // #BBF7D0
   const emeraldGreen = rgb(22 / 255, 163 / 255, 74 / 255); // #16A34A
 
-  const currencyUpper = (params.currency || "GBP").toUpperCase();
+  const currencyUpper = (params.currency || PRICING.currency).toUpperCase();
   const unitPrice = (params.amount / 100).toFixed(2);
   const currencyFormatted = `${currencyUpper} ${unitPrice}`;
 
@@ -88,7 +89,7 @@ export async function generateInvoicePdfBuffer(params: InvoicePdfParams): Promis
   // Left: Brand Logo & Details
   let logoEmbedded = false;
   try {
-    const logoPath = path.join(process.cwd(), "public", "pixpassport.jpg");
+    const logoPath = path.join(process.cwd(), "public", LOGO_PATH.replace(/^\/+/, ""));
     if (fs.existsSync(logoPath)) {
       const logoBytes = fs.readFileSync(logoPath);
       const logoImage = await pdfDoc.embedJpg(logoBytes);
@@ -112,7 +113,7 @@ export async function generateInvoicePdfBuffer(params: InvoicePdfParams): Promis
       height: 34,
       color: primaryColor,
     });
-    page.drawText("P", {
+    page.drawText(SITE_NAME.charAt(0).toUpperCase(), {
       x: margin + 10,
       y: y - 24,
       size: 20,
@@ -121,7 +122,7 @@ export async function generateInvoicePdfBuffer(params: InvoicePdfParams): Promis
     });
   }
 
-  page.drawText("PixPassport", {
+  page.drawText(SITE_NAME, {
     x: margin + 44,
     y: y - 10,
     size: 18,
@@ -137,7 +138,7 @@ export async function generateInvoicePdfBuffer(params: InvoicePdfParams): Promis
     color: slate600,
   });
 
-  page.drawText(`support@pixpassport.com  |  ${PRICING.siteUrl.replace(/^https?:\/\//, "")}`, {
+  page.drawText(`${SUPPORT_EMAIL}  |  ${SITE_DOMAIN}`, {
     x: margin + 44,
     y: y - 32,
     size: 8.5,
@@ -446,7 +447,7 @@ export async function generateInvoicePdfBuffer(params: InvoicePdfParams): Promis
     color: darkNavy,
   });
 
-  page.drawText("Tax / GST / VAT (0%):", {
+  page.drawText("Tax (0%):", {
     x: totalsBoxX,
     y: y - 24,
     size: 9,
@@ -531,7 +532,7 @@ export async function generateInvoicePdfBuffer(params: InvoicePdfParams): Promis
   page.drawText(`- Status: Completed & Active`, { x: col3X, y: y - 54, size: 7.5, font: fontRegular, color: slate600 });
 
   // Compliance Footer Note
-  page.drawText("[OK] Digitally authenticated & verified by PixPassport Automated Billing Engine.", {
+  page.drawText(`[OK] Digitally authenticated & verified by ${SITE_NAME} Automated Billing Engine.`, {
     x: margin + 12,
     y: y - 68,
     size: 7.5,

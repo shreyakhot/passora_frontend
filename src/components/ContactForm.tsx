@@ -2,6 +2,7 @@
 
 import { useState, useRef, type FormEvent } from "react";
 import { CheckCircle, AlertCircle, Send } from "lucide-react";
+import { SUPPORT_EMAIL } from "@/lib/site";
 
 interface FormErrors {
   name?: string;
@@ -40,7 +41,7 @@ export default function ContactForm() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email.trim() || !emailRegex.test(email.trim())) {
       newErrors.email =
-        "Please enter a valid email address (e.g. name@example.co.uk).";
+        "Please enter a valid email address (e.g. name@example.com).";
     }
 
     if (!subject.trim()) {
@@ -117,7 +118,7 @@ export default function ContactForm() {
       const msg =
         err instanceof Error
           ? err.message
-          : "An unexpected error occurred. Please try again or email us directly at support@pixpassport.com.";
+          : `An unexpected error occurred. Please try again or email us directly at ${SUPPORT_EMAIL}.`;
       setStatusMessage(msg);
     } finally {
       setIsSubmitting(false);
@@ -234,7 +235,7 @@ export default function ContactForm() {
             className={`w-full px-4 py-3 text-sm text-slate-900 bg-white border rounded-xl focus-ring transition-colors ${
               errors.email ? "border-red-600 ring-1 ring-red-600" : "border-slate-300"
             }`}
-            placeholder="e.g. name@example.co.uk"
+            placeholder="e.g. name@example.com"
           />
           {errors.email && (
             <p id="contact-email-error" className="text-xs text-red-700 mt-1.5 font-medium flex items-center gap-1">
@@ -302,7 +303,7 @@ export default function ContactForm() {
             value={resultId}
             onChange={(e) => setResultId(e.target.value)}
             className="w-full px-4 py-3 text-sm text-slate-900 bg-white border border-slate-300 rounded-xl focus-ring font-mono"
-            placeholder="e.g. res_gb_1727456789 or UUID"
+            placeholder="e.g. res_1727456789 or UUID"
           />
           <p className="text-xs text-slate-600 mt-1 font-medium">
             Found on your photo preview page or confirmation.

@@ -4,43 +4,43 @@ import { Mail, Clock, Shield } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
+import {
+  SITE_URL,
+  SITE_NAME,
+  SUPPORT_EMAIL,
+  LOGO_URL,
+  SITE_DISCLAIMER,
+} from "@/lib/site";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://pixpassport.uk";
+const PAGE_DESCRIPTION = `Contact ${SITE_NAME} customer support for help with passport and visa photos, biometric compliance queries, refund requests, or order inquiries.`;
 
 export const metadata: Metadata = {
   title: "Contact Us — Customer Support & Inquiries",
-  description:
-    "Contact PixPassport customer support for assistance with UK passport photos, biometric compliance queries, refund requests, or order inquiries.",
+  description: PAGE_DESCRIPTION,
   alternates: {
     canonical: `${SITE_URL}/contact-us`,
-    languages: {
-      "en-GB": `${SITE_URL}/contact-us`,
-    },
   },
   openGraph: {
-    title: "Contact PixPassport Support",
-    description:
-      "Contact PixPassport customer support for assistance with UK passport photos, biometric compliance queries, refund requests, or order inquiries.",
+    title: `Contact ${SITE_NAME} Support`,
+    description: PAGE_DESCRIPTION,
     url: `${SITE_URL}/contact-us`,
-    siteName: "PixPassport",
-    locale: "en_GB",
+    siteName: SITE_NAME,
+    locale: "en_US",
     type: "website",
     images: [
       {
-        url: `${SITE_URL}/pixpassport.jpg`,
+        url: LOGO_URL,
         width: 640,
         height: 640,
-        alt: "PixPassport Customer Support",
+        alt: `${SITE_NAME} Customer Support`,
       },
     ],
   },
   twitter: {
     card: "summary",
-    title: "Contact PixPassport Support",
-    description:
-      "Contact PixPassport customer support for assistance with UK passport photos, biometric compliance queries, refund requests, or order inquiries.",
-    images: [`${SITE_URL}/pixpassport.jpg`],
+    title: `Contact ${SITE_NAME} Support`,
+    description: PAGE_DESCRIPTION,
+    images: [LOGO_URL],
   },
 };
 
@@ -67,26 +67,25 @@ export default function ContactUsPage() {
   const contactPageSchema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    name: "Contact PixPassport",
-    description:
-      "Contact PixPassport customer support for help with UK passport photo requirements, downloads, or technical assistance.",
+    name: `Contact ${SITE_NAME}`,
+    description: `Contact ${SITE_NAME} customer support for help with passport and visa photo requirements, downloads, or technical assistance.`,
     url: `${SITE_URL}/contact-us`,
     mainEntity: {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
-      name: "PixPassport",
+      name: SITE_NAME,
       url: SITE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/pixpassport.jpg`,
+        url: LOGO_URL,
         width: 512,
         height: 512,
       },
       contactPoint: {
         "@type": "ContactPoint",
-        email: "support@pixpassport.com",
+        email: SUPPORT_EMAIL,
         contactType: "customer support",
-        areaServed: "GB",
+        areaServed: "Worldwide",
         availableLanguage: ["English"],
       },
     },
@@ -134,10 +133,10 @@ export default function ContactUsPage() {
               <span>SUPPORT &amp; INQUIRIES</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight leading-tight">
-              Contact PixPassport Support
+              Contact {SITE_NAME} Support
             </h1>
             <p className="text-slate-700 text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">
-              Have questions about UK passport photo requirements, an existing
+              Have questions about passport or visa photo requirements, an existing
               download session, or need assistance? Fill out the form below or
               email us directly.
             </p>
@@ -163,10 +162,10 @@ export default function ContactUsPage() {
                       Email Address
                     </span>
                     <a
-                      href="mailto:support@pixpassport.com"
+                      href={`mailto:${SUPPORT_EMAIL}`}
                       className="text-base font-bold text-[#365314] hover:underline"
                     >
-                      support@pixpassport.com
+                      {SUPPORT_EMAIL}
                     </a>
                   </div>
 
@@ -175,7 +174,7 @@ export default function ContactUsPage() {
                       Operating Hours
                     </span>
                     <p className="text-slate-800 font-medium">
-                      Monday – Friday: 9:00 AM – 5:00 PM GMT
+                      Monday – Friday: 9:00 AM – 5:00 PM UTC
                     </p>
                   </div>
 
@@ -204,9 +203,8 @@ export default function ContactUsPage() {
                   <span>Acceptance Guarantee</span>
                 </h3>
                 <p className="leading-relaxed font-medium">
-                  If your passport photo created on PixPassport is rejected by HM
-                  Passport Office or your destination visa authority for
-                  dimensional reasons, we will gladly re-process your photo or
+                  If your passport or visa photo created on {SITE_NAME} is
+                  rejected by the issuing authority for dimensional reasons, we will gladly re-process your photo or
                   issue a full refund in accordance with our{" "}
                   <Link
                     href="/refund-policy"
@@ -215,6 +213,9 @@ export default function ContactUsPage() {
                     Refund Policy
                   </Link>
                   .
+                </p>
+                <p className="leading-relaxed text-slate-600">
+                  {SITE_DISCLAIMER}
                 </p>
               </div>
 
@@ -234,10 +235,10 @@ export default function ContactUsPage() {
                   </li>
                   <li>
                     <Link
-                      href="/#photo-rules"
+                      href="/tool"
                       className="hover:text-lime-800 hover:underline font-medium"
                     >
-                      • Official UK Photo Sizing Rules
+                      • Photo Size Requirements by Country
                     </Link>
                   </li>
                   <li>

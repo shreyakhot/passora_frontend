@@ -16,7 +16,6 @@ import {
   Users,
   ChevronRight,
   AlertCircle,
-  ExternalLink,
   Baby,
   FileText,
   Check,
@@ -25,25 +24,74 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import PhotoMakerStudio from "@/components/PhotoMakerStudio";
-import GovUkPhotoNotice from "@/components/GovUkPhotoNotice";
+import OfficialPhotoNotice from "@/components/OfficialPhotoNotice";
+import { LOGO_URL, SITE_DISCLAIMER, SITE_NAME, SITE_URL } from "@/lib/site";
+import { PRICING, getPlanPricing } from "@/lib/config/pricing";
+import {
+  COUNTRIES,
+  DEFAULT_COUNTRY,
+  DEFAULT_COUNTRY_CODE,
+  countryPagePath,
+  documentLabel,
+  getCountryByCode,
+} from "@/config/countries";
+import { POPULAR_TOOLS, type ToolDirectoryEntry } from "@/lib/tool-directory";
+
+const standardPlan = getPlanPricing("standard");
+
+const PAGE_TITLE = "Passport & Visa Photo Online for 50+ Countries";
+const PAGE_DESCRIPTION = `Make passport and visa photos online for the US, UK, Canada, India, the Schengen Area and 50+ countries. Upload a phone photo, get it sized and checked, and download for ${standardPlan.amountFormatted}.`;
+const OG_DESCRIPTION =
+  "Turn a phone photo into a passport or visa photo for 50+ countries. Sized and checked against published photo rules, ready to upload or print.";
+
+/** Pixel size for a country from config, e.g. "600×600", so copy never drifts from the spec. */
+function pixelSize(code: string): string {
+  return getCountryByCode(code)?.dimensions.replace("x", "×") ?? "";
+}
+
+/** Featured country cards, then the remaining popular countries as quick-link pills. */
+const FEATURED_TOOLS = POPULAR_TOOLS.slice(0, 6);
+const MORE_TOOLS = POPULAR_TOOLS.slice(6);
+
+/** Card copy for a featured country, built from config so it stays accurate for every country. */
+function featuredDescription(tool: ToolDirectoryEntry): string {
+  const countryName = getCountryByCode(tool.countryCode)?.country_name ?? tool.title;
+  const use =
+    tool.group === "Visa Photos" ? "visa applications" : "passport applications and renewals";
+  return `Auto-cropped to the published photo size for ${countryName} ${use}, with a digital file and a 6×4″ print sheet.`;
+}
+
+const defaultCountryDoc = documentLabel(DEFAULT_COUNTRY);
 
 export const metadata: Metadata = {
   title: {
-    absolute: "UK Passport Photo Online — Digital & Printed | PixPassport",
+    absolute: `${PAGE_TITLE} | ${SITE_NAME}`,
   },
-  description:
-    "Make a UK passport photo online for GOV.UK applications and renewals. Upload a phone photo, check it against HMPO guidance and download for £7.99.",
+  description: PAGE_DESCRIPTION,
   alternates: {
-    canonical: "/",
-    languages: {
-      "en-GB": "/",
-    },
+    canonical: `${SITE_URL}/`,
   },
   openGraph: {
-    title: "UK Passport Photo Online — PixPassport",
-    description:
-      "Turn a phone photo into a UK passport photo. Checked against HMPO guidance, ready for GOV.UK or printing.",
-    url: "/",
+    title: `${PAGE_TITLE} — ${SITE_NAME}`,
+    description: OG_DESCRIPTION,
+    url: `${SITE_URL}/`,
+    siteName: SITE_NAME,
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: LOGO_URL,
+        width: 640,
+        height: 640,
+        alt: `${SITE_NAME} — passport and visa photo maker`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: `${PAGE_TITLE} — ${SITE_NAME}`,
+    description: OG_DESCRIPTION,
+    images: [LOGO_URL],
   },
 };
 
@@ -53,7 +101,7 @@ const steps = [
     step: 1,
     title: "Select Your Country",
     description:
-      "Pick the UK, US, Australia, Canada, Schengen Area, India, or one of 50+ countries. We load the official biometric size for that passport, visa, or ID photo automatically.",
+      "Pick the US, UK, Canada, Australia, India, the Schengen Area, or one of 50+ countries. We load the photo size for that passport or visa automatically.",
   },
   {
     icon: Crop,
@@ -67,7 +115,7 @@ const steps = [
     step: 3,
     title: "Preview and Download",
     description:
-      "In under 10 seconds you get a compliant digital photo plus a print-ready 6×4″ sheet, ready to upload or take to a photo shop for professional printing.",
+      "In under 10 seconds you get a digital photo plus a print-ready 6×4″ sheet, ready to upload or take to a photo shop for professional printing.",
   },
 ];
 
@@ -75,8 +123,7 @@ const features = [
   {
     icon: Globe,
     title: "50+ Global Passport Formats",
-    description:
-      "Create a passport picture online for the UK (600×750), US (600×600), Australia (413×531), Schengen Area (630×810), and dozens more official formats.",
+    description: `Create a passport picture online for the US (${pixelSize("US")}), UK (${pixelSize("GB")}), Australia (${pixelSize("AU")}), Schengen Area (${pixelSize("EU")}), and dozens more country formats.`,
   },
   {
     icon: Crop,
@@ -100,7 +147,7 @@ const features = [
     icon: Printer,
     title: "Print Passport Photo Online",
     description:
-      "Download a high-resolution file, then take the ready-made 6×4″ sheet to a pharmacy or photo shop. UK passport photos must be printed to a professional standard on plain white photographic paper.",
+      "Download a high-resolution file, then take the ready-made 6×4″ sheet to a pharmacy or photo shop. Many passport offices require prints on professional-quality photo paper, so check your country's rules before printing.",
   },
   {
     icon: Lock,
@@ -111,7 +158,7 @@ const features = [
 ];
 
 const pricingBenefits = [
-  "Official biometric dimensions for 50+ countries",
+  "Official photo dimensions for 50+ countries",
   "Automatic passport picture cropping and resizing",
   "Smart in-browser compression to ≤ 3 MB",
   "High-resolution single digital passport photo",
@@ -122,15 +169,15 @@ const pricingBenefits = [
 const trustPoints = [
   {
     icon: Users,
-    title: "Built From Real Applications",
+    title: "Built Around Real Applications",
     description:
-      "We tested PixPassport against thousands of real UK passport, US visa, and Schengen applications to fine-tune head size, spacing, and background checks that actually get accepted.",
+      "Head size, spacing, and background checks are tuned to the published photo specifications for US, UK, Canadian, Indian, Schengen and other passport and visa applications.",
   },
   {
     icon: BookOpenCheck,
     title: "Rules Sourced From Official Guidance",
     description:
-      "Every country profile is built directly from government passport office and visa authority specifications, and we review these standards each time an issuing authority updates its rules.",
+      "Every country profile is based on published government passport office and visa authority specifications, and we review them when an issuing authority updates its rules.",
   },
   {
     icon: Shield,
@@ -148,24 +195,24 @@ const trustPoints = [
 
 const faqs = [
   {
-    question: "How do I make a UK passport photo online?",
+    question: "How do I make a passport photo online?",
     answer:
-      "Ask someone to take a photo of you facing a window, in front of a plain light-coloured wall. Upload it, and the tool sizes it and checks it against HM Passport Office guidance in about 10 seconds. You get a digital photo plus a 6×4″ print sheet for paper forms.",
+      "Ask someone to take a photo of you facing a window, in front of a plain light-coloured wall. Choose your country, upload the photo, and the tool sizes it and checks it against that country's published photo rules in about 10 seconds. You get a digital photo plus a 6×4″ print sheet for paper forms.",
   },
   {
-    question: "Can I take my UK passport photo on my phone?",
+    question: "Can I take my passport photo on my phone?",
     answer:
-      "Yes. GOV.UK lets you take a digital photo on your own device, but you need someone to help you take it. Include your head, shoulders and upper body, because GOV.UK crops the photo for you. GOV.UK also notes that photos from a booth or shop are more likely to be approved.",
+      "Yes, for most countries. Ask someone to take the photo for you rather than taking a selfie, and include your head, shoulders and upper body so the tool has room to crop. Some passport offices and online application services have their own upload rules, so check with your issuing authority before you apply.",
   },
   {
-    question: "What are the official UK passport photo size requirements?",
+    question: "What size is a passport photo?",
     answer:
-      "A UK digital passport photo must be at least 600 pixels wide and 750 pixels tall, with a file size between 50KB and 10MB. Printed photos must be 45 mm high by 35 mm wide, with the face measuring 29 mm to 34 mm from chin to crown.",
+      "It depends on the country. For example, US passport photos are 2×2 inches (51×51 mm), the UK and Schengen Area use 35×45 mm, and Canada uses 50×70 mm. When you choose a country, the tool loads the pixel dimensions for that document automatically.",
   },
   {
     question: "Can I use this for a passport renewal photo?",
     answer:
-      "Yes. HM Passport Office requires a new photo, taken in the last month, for every renewal, even if your appearance has not changed. Our tool creates a fresh digital photo for passport renewal that meets the same rules as a first-time application.",
+      "Yes. Most passport offices require a new, recent photo for every renewal, even if your appearance has not changed. Our tool creates a fresh digital photo for passport renewal that meets the same rules as a first-time application. Check how recent your country requires the photo to be.",
   },
   {
     question: "How does the passport picture cropping tool work?",
@@ -175,12 +222,15 @@ const faqs = [
   {
     question: "How do I get my passport photo printed?",
     answer:
-      "Download the print-ready 6×4″ sheet and take it to a pharmacy or photo shop, or upload it to an online print service. For a UK paper passport form, GOV.UK says photos must be printed to a professional standard, in colour, on plain white photographic paper with no border.",
+      "Download the print-ready 6×4″ sheet and take it to a pharmacy or photo shop, or upload it to an online print service. Many countries require printed photos to be in colour, on professional-quality photo paper, with no border, so confirm the print rules with your issuing authority.",
   },
   {
-    question: "Do you make visa photos for other countries?",
-    answer:
-      "Yes. As well as UK passport photos, PixPassport supports 53 countries, including the US, Canada, Australia, India and the Schengen Area, for passport, visa and ID photos.",
+    question: "Which countries do you support?",
+    answer: `${SITE_NAME} supports ${COUNTRIES.length} countries and regions, including the US, UK, Canada, Australia, India and the Schengen Area, for passport and visa photos.`,
+  },
+  {
+    question: `Is ${SITE_NAME} an official government service?`,
+    answer: `No. ${SITE_DISCLAIMER} We size and check your photo against published rules, but your issuing authority makes the final decision on whether a photo is accepted.`,
   },
   {
     question: "What file formats can I upload?",
@@ -198,12 +248,14 @@ export default function HomePage() {
   return (
     <>
       <JsonLd
-        price="7.99"
-        priceCurrency="GBP"
+        siteUrl={SITE_URL}
+        siteName={SITE_NAME}
+        price={standardPlan.amount.toFixed(2)}
+        priceCurrency={PRICING.currency}
         faqItems={faqs}
-        pageUrl="https://pixpassport.uk/"
-        pageName="UK Passport Photo Online — Digital & Printed"
-        pageDescription="Make a UK passport photo online for GOV.UK applications and renewals. Upload a phone photo, check it against HMPO guidance and download for £7.99."
+        pageUrl={`${SITE_URL}/`}
+        pageName={PAGE_TITLE}
+        pageDescription={PAGE_DESCRIPTION}
       />
 
       <Navbar ctaText="Upload Photo" ctaHref="#studio" />
@@ -220,26 +272,27 @@ export default function HomePage() {
                 {/* Official Biometric Badge */}
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lime-50 border border-lime-300 text-xs font-bold text-[#365314] tracking-wide mb-5">
                   <span className="w-2 h-2 rounded-full bg-[#4D7C0F]" aria-hidden="true" />
-                  <span>UK PASSPORT PHOTO · BASED ON GOV.UK GUIDANCE</span>
+                  <span>PASSPORT &amp; VISA PHOTOS · 50+ COUNTRIES</span>
                 </div>
 
                 {/* Main Heading */}
                 <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-[#0F172A] tracking-tight leading-[1.18] mb-3">
-                  UK Passport Photo Online
+                  Passport &amp; Visa Photos Online
                 </h1>
 
                 {/* Sub-heading */}
                 <p className="text-lg sm:text-xl text-[#334155] font-semibold mb-4 leading-snug">
-                  Digital and printed passport photos for new applications and renewals
+                  Digital and printed photos for new applications and renewals in 50+ countries
                 </p>
 
                 {/* Body description */}
                 <p className="text-sm sm:text-base text-slate-700 leading-relaxed mb-7 max-w-xl">
-                  Take a photo on your phone, upload it, and get a UK passport
-                  photo sized and checked against HM Passport Office guidance in
-                  under 10 seconds. Use it for a GOV.UK online application, or
-                  print it for a paper form. Visa photos for the US, Schengen
-                  Area and 50+ other countries are also supported.
+                  Take a photo on your phone, upload it, and get a passport or
+                  visa photo sized and checked against your country&apos;s
+                  published photo rules in under 10 seconds. Use it for an
+                  online application, or print it for a paper form. Supports
+                  the US, UK, Canada, Australia, India, the Schengen Area and
+                  50+ other countries.
                 </p>
 
                 {/* CTA Buttons */}
@@ -248,7 +301,7 @@ export default function HomePage() {
                     href="#studio"
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#4D7C0F] hover:bg-[#3F650C] active:bg-[#365314] !text-white text-white font-bold text-base px-7 py-3.5 sm:py-4 rounded-xl transition-colors text-center shadow-xs focus-ring"
                   >
-                    <span>Create My UK Passport Photo</span>
+                    <span>Create My Passport Photo</span>
                     <ArrowRight className="w-4 h-4 ml-0.5" aria-hidden="true" />
                   </a>
                   <a
@@ -282,7 +335,7 @@ export default function HomePage() {
                   <div className="relative overflow-hidden aspect-[4/5]">
                     <Image
                       src="/images/digital-passport-photo_example.webp"
-                      alt="Example UK passport photo, 35×45 mm, plain light grey background"
+                      alt="Example passport photo with a plain light grey background"
                       fill
                       priority
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
@@ -296,21 +349,21 @@ export default function HomePage() {
         </section>
 
         {/* =========================================================================
-            1b. PHOTO MAKER STUDIO (UK passport by default)
+            1b. PHOTO MAKER STUDIO (country auto-detected from the visitor's locale)
            ========================================================================= */}
         <section className="bg-slate-50 py-10 sm:py-16 border-b border-slate-200/80" id="studio" aria-labelledby="studio-heading">
           <div className="container-narrow max-w-2xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-5 sm:mb-7">
               <h2 id="studio-heading" className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                Create Your UK Passport Photo
+                Create Your Passport or Visa Photo
               </h2>
               <p className="text-slate-700 text-xs sm:text-sm mt-1.5 max-w-md mx-auto leading-relaxed">
-                Upload a recent photo and we will size it and check it against HM Passport Office guidance.
-                Applying for a visa or another country? Change the country below.
+                Upload a recent photo and we will size it and check it against the photo rules for your country.
+                Check the country below matches the passport or visa you are applying for.
               </p>
             </div>
-            <PhotoMakerStudio defaultCountryCode="GB" defaultDocumentType="passport" />
-            <GovUkPhotoNotice className="mt-5" />
+            <PhotoMakerStudio defaultDocumentType="passport" />
+            <OfficialPhotoNotice className="mt-5" />
           </div>
         </section>
 
@@ -324,11 +377,11 @@ export default function HomePage() {
                 Simple 3-Step Process
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
-                How to Make a UK Passport Photo Online
+                How to Make a Passport Photo Online
               </h2>
               <p className="text-slate-700 text-sm sm:text-base">
                 Three steps take you from a regular phone photo to a correctly
-                sized, checked passport photo for the UK and 50+ countries.
+                sized, checked passport or visa photo for 50+ countries.
               </p>
             </div>
 
@@ -383,7 +436,7 @@ export default function HomePage() {
                 Engineered for Acceptance
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
-                Everything You Need From a UK Passport Photo Maker
+                Everything You Need From a Passport Photo Maker
               </h2>
               <p className="text-slate-700 text-sm sm:text-base">
                 Create, crop, verify, and print official biometric passport
@@ -421,14 +474,15 @@ export default function HomePage() {
           <div className="container-narrow">
             <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
               <span className="inline-block px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold mb-3">
-                Why Trust PixPassport
+                Why Trust {SITE_NAME}
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
                 Photo Rules You Can Verify, Not Just Trust
               </h2>
               <p className="text-slate-700 text-sm sm:text-base">
-                We built PixPassport with applicants and immigration document
-                specialists, and we keep every country profile current.
+                {SITE_NAME} is built around published passport and visa photo
+                specifications, and we keep every country profile under review.
+                We are independent and not affiliated with any government.
               </p>
             </div>
 
@@ -458,19 +512,21 @@ export default function HomePage() {
         </section>
 
         {/* =========================================================================
-            5. OFFICIAL UK DIGITAL PASSPORT PHOTO RULES & GUIDANCE
+            5. COMMON DIGITAL PASSPORT PHOTO RULES & GUIDANCE
            ========================================================================= */}
-        <section className="bg-white py-14 sm:py-20 border-b border-slate-200/80" id="photo-rules" aria-label="Official UK photo rules and guidelines">
+        <section className="bg-white py-14 sm:py-20 border-b border-slate-200/80" id="photo-rules" aria-label="Common passport photo rules and guidelines">
           <div className="container-narrow">
             <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
               <span className="inline-block px-3 py-1 rounded-full bg-lime-100 border border-lime-300 text-[#365314] text-xs font-bold mb-3">
-                Official UK Guidance
+                Common Photo Rules
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
                 Rules &amp; Guidance for Digital Passport Photos
               </h2>
               <p className="text-slate-700 text-sm sm:text-base">
-                Official government standards for online passport applications, device photography, and child photos.
+                Most countries follow similar biometric photo standards. These are the common rules for
+                online applications, phone photos, and child photos. Always confirm the exact requirements
+                with your country&apos;s issuing authority.
               </p>
             </div>
 
@@ -482,35 +538,25 @@ export default function HomePage() {
                   Digital photos
                 </h3>
                 <p className="text-slate-800 text-sm sm:text-base font-medium mb-4">
-                  You need a digital photo to apply for a passport online.
+                  Many countries accept or require a digital photo when you apply for a passport or visa online.
                 </p>
                 <ul className="space-y-2.5 text-slate-700 text-sm sm:text-base mb-5">
                   <li className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-1" aria-hidden="true" />
-                    <span>You must get a new photo when you get a new passport, even if your appearance has not changed.</span>
+                    <span>Most passport offices ask for a new photo when you get a new passport, even if your appearance has not changed.</span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-1" aria-hidden="true" />
-                    <span>Your photo must have been taken in the last month.</span>
+                    <span>Your photo must be recent. Check how recently your country requires it to have been taken.</span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-1" aria-hidden="true" />
-                    <span className="text-amber-950 font-semibold">Your application will be delayed if your photos do not meet the rules.</span>
+                    <span className="text-amber-950 font-semibold">Your application may be delayed or refused if your photos do not meet the rules.</span>
                   </li>
                 </ul>
-                <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center gap-1.5 text-xs sm:text-sm text-slate-800">
-                  <span>You can get</span>
-                  <a
-                    href="https://www.gov.uk/passport-services-disabled"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 font-bold text-[#365314] hover:underline"
-                  >
-                    <span>help with your passport photos</span>
-                    <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
-                    <span className="sr-only">(opens in new window)</span>
-                  </a>
-                  <span>if you’re disabled.</span>
+                <div className="pt-4 border-t border-slate-100 text-xs sm:text-sm text-slate-800">
+                  If a disability or medical condition makes these rules hard to meet, contact the authority that
+                  issues your document. Many offer help or exceptions.
                 </div>
               </div>
 
@@ -539,15 +585,15 @@ export default function HomePage() {
                       </li>
                       <li className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-lg">
                         <Check className="w-4 h-4 text-[#4D7C0F] shrink-0" aria-hidden="true" />
-                        <span>unaltered by computer software</span>
+                        <span>not retouched or filtered to change your appearance</span>
                       </li>
                       <li className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-lg">
                         <Check className="w-4 h-4 text-[#4D7C0F] shrink-0" aria-hidden="true" />
-                        <span>at least 600 pixels wide and 750 pixels tall</span>
+                        <span>the pixel size your country requires</span>
                       </li>
                       <li className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-lg sm:col-span-2">
                         <Check className="w-4 h-4 text-[#4D7C0F] shrink-0" aria-hidden="true" />
-                        <span>at least 50KB and no more than 10MB</span>
+                        <span>within the file-size limits of the service you are uploading to</span>
                       </li>
                     </ul>
                   </div>
@@ -565,7 +611,7 @@ export default function HomePage() {
                       </li>
                       <li className="flex items-start gap-2.5">
                         <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                        <span>be taken against a plain light-coloured background</span>
+                        <span>be taken against a plain background in the colour your country requires (usually white or light-coloured)</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
@@ -578,26 +624,26 @@ export default function HomePage() {
                     </ul>
 
                     <p className="text-sm bg-lime-50/80 border border-lime-200 text-[#365314] font-medium rounded-xl p-3.5 mb-5">
-                      If you’re using a photo taken on your own device, include your head, shoulders and upper body. Do not crop your photo - it will be done for you. Test your picture with our{" "}
+                      If you’re using a photo taken on your own device, include your head, shoulders and upper body. Do not crop your photo - it will be done for you. Find the size and rules for your country in our{" "}
                       <Link
-                        href="/tool/passport-photo-checker-uk"
+                        href="/tool"
                         className="font-bold underline text-[#365314] hover:text-[#4D7C0F] transition-colors"
                       >
-                        UK passport photo checker
+                        photo guides for 50+ countries
                       </Link>
-                      , read the full{" "}
+                      , read the{" "}
                       <Link
-                        href="/tool/uk-passport-photo"
+                        href={countryPagePath(DEFAULT_COUNTRY_CODE)}
                         className="font-bold underline text-[#365314] hover:text-[#4D7C0F] transition-colors"
                       >
-                        UK passport photo requirements
+                        {DEFAULT_COUNTRY.country_name} {defaultCountryDoc} photo requirements
                       </Link>
-                      , or learn{" "}
+                      , or use the{" "}
                       <Link
-                        href="/tool/take-a-passport-photo-on-iphone"
+                        href="/passport-size-photo-maker"
                         className="font-bold underline text-[#365314] hover:text-[#4D7C0F] transition-colors"
                       >
-                        how to take a passport photo on iPhone
+                        passport size photo maker
                       </Link>
                       .
                     </p>
@@ -635,7 +681,7 @@ export default function HomePage() {
                     </ul>
 
                     <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs sm:text-sm text-slate-800">
-                      <strong>Glasses:</strong> Do not wear glasses in your photo unless you have to do so. If you must wear glasses, they cannot be sunglasses or tinted glasses, and you must make sure your eyes are not covered by the frames or any glare, reflection or shadow.
+                      <strong>Glasses:</strong> Many countries do not allow glasses in passport photos, so remove them unless your country permits them. Where glasses are allowed, they cannot be sunglasses or tinted glasses, and you must make sure your eyes are not covered by the frames or any glare, reflection or shadow.
                     </div>
                   </div>
                 </div>
@@ -650,19 +696,19 @@ export default function HomePage() {
                 <ul className="space-y-3 text-sm sm:text-base text-slate-800">
                   <li className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-1" aria-hidden="true" />
-                    <span>Children must be on their own in the picture. Babies must not be holding toys or using dummies.</span>
+                    <span>Children must be on their own in the picture. Babies must not be holding toys or using pacifiers (dummies).</span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-1" aria-hidden="true" />
-                    <span>Children under 6 do not have to be looking directly at the camera or have a plain expression.</span>
+                    <span>Many countries relax the expression and eye-line rules for young children. Check the age limits that apply in your country.</span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-1" aria-hidden="true" />
-                    <span>Children under one do not have to have their eyes open. You can support their head with your hand, but your hand must not be visible in the photo.</span>
+                    <span>Some countries allow babies to have their eyes closed. If you support their head with your hand, your hand must not be visible in the photo.</span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-1" aria-hidden="true" />
-                    <span>Children under one should lie on a plain light-coloured sheet. Take the photo from above.</span>
+                    <span>For a baby, an easy option is to lay them on a plain white or light-coloured sheet and take the photo from above.</span>
                   </li>
                 </ul>
               </div>
@@ -671,7 +717,7 @@ export default function HomePage() {
         </section>
 
         {/* =========================================================================
-            6. PRICING SECTION (£7.99 Flat Fee, No Shadows)
+            6. PRICING SECTION (Flat Fee from pricing config, No Shadows)
            ========================================================================= */}
         <section className="bg-white py-14 sm:py-20 border-b border-slate-200/80" id="pricing" aria-label="Transparent pricing details">
           <div className="container-narrow">
@@ -695,7 +741,7 @@ export default function HomePage() {
                   </div>
                   <div className="flex items-baseline justify-center gap-1">
                     <span className="text-5xl font-extrabold text-[#0F172A] tracking-tight">
-                      £7.99
+                      {standardPlan.amountFormatted}
                     </span>
                     <span className="text-slate-700 text-base font-medium">
                       /photo
@@ -747,50 +793,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
-              {[
-                {
-                  slug: "uk-passport-photo",
-                  title: "UK Passport Photo",
-                  spec: "35×45 mm (600×750 px)",
-                  flag: "🇬🇧",
-                  desc: "Official HMPO biometric specification for British passport renewal and first applications.",
-                },
-                {
-                  slug: "us-visa-photo-tool",
-                  title: "US Visa & Passport",
-                  spec: "2×2 inches (51×51 mm)",
-                  flag: "🇺🇸",
-                  desc: "Department of State compliant square photo for DS-160 visa applications and US passports.",
-                },
-                {
-                  slug: "schengen-visa-photo",
-                  title: "Schengen Visa Photo",
-                  spec: "35×45 mm (630×810 px)",
-                  flag: "🇪🇺",
-                  desc: "Biometric standard for France, Germany, Italy, Spain, and all 29 European member states.",
-                },
-                {
-                  slug: "uk-baby-passport-photo",
-                  title: "Baby Passport Photo",
-                  spec: "UK HMPO Infant Size",
-                  flag: "👶",
-                  desc: "Specialized infant & toddler guidance with relaxed head positioning and automatic background cleanup.",
-                },
-                {
-                  slug: "indian-passport-photo-maker",
-                  title: "Indian Passport & OCI",
-                  spec: "35×45 mm (630×810 px)",
-                  flag: "🇮🇳",
-                  desc: "VFS Global & High Commission compliant dimensions for Indian passport renewal and OCI cards.",
-                },
-                {
-                  slug: "uk-driving-licence-photo",
-                  title: "UK Driving Licence",
-                  spec: "DVLA 35×45 mm",
-                  flag: "🚗",
-                  desc: "Driver and Vehicle Licensing Agency compliant photo for provisional and photocard renewal.",
-                },
-              ].map((tool) => (
+              {FEATURED_TOOLS.map((tool) => (
                 <Link
                   key={tool.slug}
                   href={`/tool/${tool.slug}`}
@@ -807,7 +810,7 @@ export default function HomePage() {
                       {tool.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-700 leading-relaxed mb-4">
-                      {tool.desc}
+                      {featuredDescription(tool)}
                     </p>
                   </div>
                   <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#4D7C0F] group-hover:text-[#365314]">
@@ -833,22 +836,13 @@ export default function HomePage() {
                   <ArrowRight className="w-3 h-3 text-lime-800" />
                 </Link>
                 {[
-                  { slug: "british-passport-picture-maker", label: "British Passport Picture" },
-                  { slug: "passport-photo-checker-uk", label: "UK Photo Checker" },
-                  { slug: "uk-visa-photo", label: "UK Visa Photo" },
-                  { slug: "passport-renewal-photo-online", label: "UK Passport Renewal" },
-                  { slug: "take-a-passport-photo-on-iphone", label: "iPhone Passport Photo" },
-                  { slug: "digital-passport-photo", label: "Digital Photo for Passport" },
-                  { slug: "photo-size-35x45mm", label: "35×45 mm Photo Size" },
-                  { slug: "image-to-passport-size-converter", label: "Image to Passport Converter" },
-                  { slug: "passport-photo-at-home", label: "Passport Photo at Home" },
-                  { slug: "passport-photo-tool", label: "Online Passport Photo Tool" },
-                  { slug: "online-id-photo-maker", label: "Online ID Photo Maker" },
-                  { slug: "order-passport-photos-online", label: "Order Passport Photos" },
+                  { href: "/passport-size-photo-maker", label: "Passport Size Photo Maker" },
+                  ...MORE_TOOLS.map((tool) => ({ href: `/tool/${tool.slug}`, label: tool.title })),
+                  { href: "/tool", label: "All 50+ Countries" },
                 ].map((item) => (
                   <Link
-                    key={item.slug}
-                    href={`/tool/${item.slug}`}
+                    key={item.href}
+                    href={item.href}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-lime-50 border border-slate-200 hover:border-lime-300 text-xs font-semibold text-slate-800 hover:text-lime-900 transition-colors"
                   >
                     <span>{item.label}</span>

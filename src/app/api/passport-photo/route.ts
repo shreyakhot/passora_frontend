@@ -1,11 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { processPassportPhoto } from "@/lib/passport-api";
+import { DEFAULT_COUNTRY } from "@/config/countries";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
- * Next.js API Route Proxy for https://api.pixpassport.com/process
+ * Next.js API Route Proxy for the photo processing API (`${PHOTO_API_URL}/process`)
  *
  * Endpoint: POST /api/passport-photo
  * Accepts: multipart/form-data with "image", "country_code", "document_type"
@@ -28,7 +29,7 @@ export async function POST(req: NextRequest) {
     const countryCode =
       (formData.get("country_code") as string) ||
       (formData.get("country") as string) ||
-      "GB";
+      DEFAULT_COUNTRY.country_code;
     const documentType =
       (formData.get("document_type") as string) || "passport";
 

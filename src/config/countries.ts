@@ -326,9 +326,79 @@ export const COUNTRIES: CountryPassportConfig[] = [
   },
 ];
 
-/** Default country configuration for UK passport photo application */
+/** Country preselected when neither the page nor the visitor's locale picks one. */
+export const DEFAULT_COUNTRY_CODE = "US";
+
 export const DEFAULT_COUNTRY: CountryPassportConfig =
-  COUNTRIES.find((c) => c.country_code === "GB") || COUNTRIES[0];
+  COUNTRIES.find((c) => c.country_code === DEFAULT_COUNTRY_CODE) || COUNTRIES[0];
+
+/** Countries featured in navigation, footers and related-tool grids. */
+export const POPULAR_COUNTRY_CODES = [
+  "US",
+  "GB",
+  "CA",
+  "AU",
+  "IN",
+  "EU",
+  "DE",
+  "FR",
+  "CN",
+  "JP",
+  "AE",
+  "NZ",
+];
+
+/** Emoji flag for a 2-letter code ("EU" renders the EU flag). */
+export function countryFlag(code: string): string {
+  if (!code || code.length !== 2) return "🌍";
+  return code
+    .toUpperCase()
+    .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt(0)));
+}
+
+/**
+ * Document wording for a country. Schengen photos are for visas, even though
+ * the processing API treats them as the passport format.
+ */
+export function documentLabel(country: CountryPassportConfig): string {
+  return country.country_code === "EU" ? "visa" : country.document_type;
+}
+
+/** URL slug of a country's photo page, e.g. "united-states-passport-photo". */
+export function countryPageSlug(country: CountryPassportConfig): string {
+  const name = country.country_name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return `${name}-${documentLabel(country)}-photo`;
+}
+
+export function getCountryByPageSlug(
+  slug: string
+): CountryPassportConfig | undefined {
+  return COUNTRIES.find((c) => countryPageSlug(c) === slug);
+}
+
+/** Path of a country's photo page by country code, falling back to the hub. */
+export function countryPagePath(code: string): string {
+  const country = getCountryByCode(code);
+  return country ? `/tool/${countryPageSlug(country)}` : "/tool";
+}
+
+/**
+ * Best-effort country guess from browser locales such as "en-GB" or "fr-CA".
+ * Returns undefined when no locale carries a supported region.
+ */
+export function detectCountryFromLocales(
+  locales: readonly string[]
+): CountryPassportConfig | undefined {
+  for (const locale of locales) {
+    const region = locale.split(/[-_]/)[1];
+    const match = region ? getCountryByCode(region) : undefined;
+    if (match) return match;
+  }
+  return undefined;
+}
 
 /**
  * Finds a country configuration by its 2-letter or 3-letter country code (case-insensitive).

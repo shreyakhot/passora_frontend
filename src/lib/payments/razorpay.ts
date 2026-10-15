@@ -29,7 +29,7 @@ export function getRazorpayInstance(): Razorpay {
  * Create a Razorpay order.
  */
 export async function createRazorpayOrder(params: {
-  amount: number; // in pence/smallest unit
+  amount: number; // in smallest currency unit
   currency: string;
   receipt: string;
   notes?: Record<string, string>;

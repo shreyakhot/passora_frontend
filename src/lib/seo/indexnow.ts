@@ -1,14 +1,15 @@
 /**
  * IndexNow SEO Integration Service
  * Automatically notifies Bing, Yandex, Seznam, and other IndexNow-compliant search engines
- * whenever pages, tools, or articles are updated on PixPassport.
+ * whenever pages, tools, or articles are updated on the site.
  */
 
-import { getAllToolSlugs } from "@/lib/tools";
+import sitemap from "@/app/sitemap";
+import { SITE_DOMAIN, SITE_URL } from "@/lib/site";
 
 export const INDEXNOW_KEY = "0c3dc5e8833b46beb209705aa05e5683";
-export const INDEXNOW_HOST = "pixpassport.uk";
-export const INDEXNOW_KEY_LOCATION = `https://${INDEXNOW_HOST}/${INDEXNOW_KEY}.txt`;
+export const INDEXNOW_HOST = SITE_DOMAIN;
+export const INDEXNOW_KEY_LOCATION = `${SITE_URL}/${INDEXNOW_KEY}.txt`;
 
 // IndexNow endpoint list (IndexNow protocol shares submissions across all participating search engines)
 const INDEXNOW_ENDPOINTS = [
@@ -32,25 +33,11 @@ export interface IndexNowSubmissionResult {
 }
 
 /**
- * Get all public indexable URLs for PixPassport.
+ * Get all public indexable URLs. Reads the sitemap so the two lists never drift.
  */
-export function getAllSiteUrls(): string[] {
-  const baseUrl = `https://${INDEXNOW_HOST}`;
-  const staticPages = [
-    baseUrl,
-    `${baseUrl}/passport-size-photo-maker`,
-    `${baseUrl}/passport-photo-print-template-generator`,
-    `${baseUrl}/about-us`,
-    `${baseUrl}/contact-us`,
-    `${baseUrl}/data-security-privacy-safeguards`,
-    `${baseUrl}/privacy-policy`,
-    `${baseUrl}/terms-of-service`,
-    `${baseUrl}/refund-policy`,
-  ];
-
-  const toolPages = getAllToolSlugs().map((slug) => `${baseUrl}/tool/${slug}`);
-
-  return Array.from(new Set([...staticPages, ...toolPages]));
+export async function getAllSiteUrls(): Promise<string[]> {
+  const entries = await Promise.resolve(sitemap());
+  return Array.from(new Set(entries.map((entry) => entry.url)));
 }
 
 /**
@@ -130,7 +117,7 @@ export async function submitAllPagesToIndexNow(): Promise<{
   totalUrls: number;
   results: IndexNowSubmissionResult[];
 }> {
-  const allUrls = getAllSiteUrls();
+  const allUrls = await getAllSiteUrls();
   const results: IndexNowSubmissionResult[] = [];
 
   // Submit to primary endpoint (IndexNow automatically shares with Bing, Yandex, etc.)

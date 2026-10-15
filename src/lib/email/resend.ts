@@ -3,6 +3,7 @@
  */
 
 import { Resend } from "resend";
+import { SITE_DOMAIN, SITE_NAME, SUPPORT_EMAIL } from "@/lib/site";
 
 let _instance: Resend | null = null;
 
@@ -17,10 +18,10 @@ export function getResendClient(): Resend {
 }
 
 export const FROM_EMAIL =
-  process.env.RESEND_FROM_EMAIL || "PixPassport <photo@pixpassport.uk>";
+  process.env.RESEND_FROM_EMAIL || `${SITE_NAME} <noreply@${SITE_DOMAIN}>`;
 
 export const REPLY_TO_EMAIL =
-  process.env.NEXT_PUBLIC_CONTACT_EMAIL || "support@pixpassport.com";
+  SUPPORT_EMAIL;
 
 export const BCC_EMAILS: string[] = process.env.RESEND_BCC_EMAIL
   ? process.env.RESEND_BCC_EMAIL.split(",").map((s) => s.trim()).filter(Boolean)

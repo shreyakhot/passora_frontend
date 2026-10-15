@@ -1,14 +1,16 @@
 /**
- * PixPassport API Client Helper
- * Official Endpoint: https://api.pixpassport.com/process
+ * Photo processing API client helper.
+ * Endpoint: `${PHOTO_API_URL}/process`
  *
  * Designed for server-side Next.js route handlers and server actions
  * to ensure the API key is never exposed to the client browser.
  */
 
+import { DEFAULT_COUNTRY } from "@/config/countries";
+
 const API_BASE_URL =
-  process.env.PIX_PASSPORT_API_URL || "https://api.pixpassport.com";
-const API_KEY = process.env.PIX_PASSPORT_API_KEY || "";
+  process.env.PHOTO_API_URL || "https://photo-govt.com/api";
+const API_KEY = process.env.PHOTO_API_KEY || "";
 
 export interface PassportMetrics {
   head_height_pct?: number;
@@ -32,12 +34,12 @@ export interface PassportProcessResult {
 }
 
 export interface PassportProcessOptions {
-  country_code: string; // e.g. "GB", "AU", "US"
+  country_code: string; // ISO 3166-1 alpha-2, e.g. "US", "AU", "IN"
   document_type?: string; // default: "passport"
 }
 
 /**
- * Creates headers for authenticated requests to https://api.pixpassport.com/process
+ * Creates headers for authenticated requests to the photo processing API.
  */
 export function getPassportApiHeaders(): HeadersInit {
   const headers: Record<string, string> = {
@@ -52,7 +54,7 @@ export function getPassportApiHeaders(): HeadersInit {
 }
 
 /**
- * Uploads an image to the PixPassport API (/process) for compliance formatting.
+ * Uploads an image to the photo processing API (/process) for compliance formatting.
  *
  * @param fileBuffer The raw image Buffer or Blob
  * @param fileName Original file name
@@ -63,7 +65,7 @@ export async function processPassportPhoto(
   fileBuffer: Blob | Buffer,
   fileName: string = "passport-photo.jpg",
   options: PassportProcessOptions = {
-    country_code: "GB",
+    country_code: DEFAULT_COUNTRY.country_code,
     document_type: "passport",
   },
   mimeType: string = "image/jpeg"
@@ -81,7 +83,7 @@ export async function processPassportPhoto(
     }
 
     formData.append("image", blob, fileName);
-    formData.append("country_code", options.country_code || "GB");
+    formData.append("country_code", options.country_code || DEFAULT_COUNTRY.country_code);
     formData.append("document_type", options.document_type || "passport");
 
     const endpoint = `${API_BASE_URL.replace(/\/+$/, "")}/process`;
@@ -120,7 +122,7 @@ export async function processPassportPhoto(
     const message = err instanceof Error ? err.message : "Unknown error";
     return {
       status: "error",
-      error: `Failed to connect to PixPassport API: ${message}`,
+      error: `Failed to connect to the photo processing API: ${message}`,
     };
   }
 }

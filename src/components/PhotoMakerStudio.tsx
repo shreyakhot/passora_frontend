@@ -7,6 +7,7 @@ import {
   type DragEvent,
   useCallback,
   useEffect,
+  useSyncExternalStore,
 } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -26,6 +27,9 @@ import {
 import {
   COUNTRIES,
   DEFAULT_COUNTRY,
+  DEFAULT_COUNTRY_CODE,
+  countryFlag,
+  detectCountryFromLocales,
   getCountryByCode,
   type CountryPassportConfig,
 } from "@/config/countries";
@@ -53,34 +57,54 @@ const PROCESSING_STEPS = [
   { text: "Finalizing digital photo & 6×4″ print sheet…", progress: 95 },
 ];
 
-function countryFlag(code: string): string {
-  if (!code || code.length !== 2) return "🌍";
-  return code
-    .toUpperCase()
-    .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt(0)));
+// Browser-locale country guess. Read through useSyncExternalStore so the server
+// render (and hydration) uses no guess and the client switches after mount.
+function subscribeToLocaleChanges(onChange: () => void) {
+  window.addEventListener("languagechange", onChange);
+  return () => window.removeEventListener("languagechange", onChange);
+}
+
+function getLocaleCountryCode(): string | null {
+  const locales =
+    navigator.languages && navigator.languages.length > 0
+      ? navigator.languages
+      : [navigator.language];
+  return detectCountryFromLocales(locales)?.country_code ?? null;
+}
+
+function getServerLocaleCountryCode(): string | null {
+  return null;
 }
 
 export default function PhotoMakerStudio({
-  defaultCountryCode = "GB",
+  defaultCountryCode,
   defaultDocumentType = "passport",
   autoProcess = true,
   className = "",
 }: PhotoMakerStudioProps) {
   const router = useRouter();
 
-  // Country selection state with prop synchronization
-  const [selectedCountryCode, setSelectedCountryCode] = useState<string>(defaultCountryCode);
+  // Country selection: the user's pick wins, then the page's default, then the
+  // visitor's browser locale, then DEFAULT_COUNTRY_CODE.
+  const localeCountryCode = useSyncExternalStore(
+    subscribeToLocaleChanges,
+    getLocaleCountryCode,
+    getServerLocaleCountryCode
+  );
+  const [pickedCountryCode, setPickedCountryCode] = useState<string | null>(null);
   const [prevDefaultCode, setPrevDefaultCode] = useState(defaultCountryCode);
 
+  // Prop synchronization: a new page default replaces any earlier pick.
   if (defaultCountryCode !== prevDefaultCode) {
     setPrevDefaultCode(defaultCountryCode);
-    setSelectedCountryCode(defaultCountryCode);
+    setPickedCountryCode(null);
   }
 
+  const selectedCountryCode =
+    pickedCountryCode ?? defaultCountryCode ?? localeCountryCode ?? DEFAULT_COUNTRY_CODE;
+
   const selectedCountry: CountryPassportConfig =
-    getCountryByCode(selectedCountryCode) ||
-    COUNTRIES.find((c) => c.country_code === "GB") ||
-    DEFAULT_COUNTRY;
+    getCountryByCode(selectedCountryCode) || DEFAULT_COUNTRY;
 
   // Searchable country dropdown state
   const [isCountryOpen, setIsCountryOpen] = useState(false);
@@ -128,7 +152,7 @@ export default function PhotoMakerStudio({
   }
 
   function selectCountry(code: string) {
-    setSelectedCountryCode(code);
+    setPickedCountryCode(code);
     setIsCountryOpen(false);
     setCountryQuery("");
   }
@@ -265,18 +289,18 @@ export default function PhotoMakerStudio({
         if (typeof window !== "undefined") {
           try {
             sessionStorage.setItem(
-              `pixpassport_${resultId}`,
+              `photogovt_${resultId}`,
               JSON.stringify(payload)
             );
             sessionStorage.setItem(
-              "pixpassport_latest",
+              "photogovt_latest",
               JSON.stringify(payload)
             );
             localStorage.setItem(
-              `pixpassport_${resultId}`,
+              `photogovt_${resultId}`,
               JSON.stringify(payload)
             );
-            localStorage.setItem("pixpassport_latest", JSON.stringify(payload));
+            localStorage.setItem("photogovt_latest", JSON.stringify(payload));
           } catch {
             // fallback
           }
@@ -289,11 +313,23 @@ export default function PhotoMakerStudio({
         const msg =
           err instanceof Error
             ? err.message
-            : "An error occurred while communicating with the PixPassport API.";
+            : "An error occurred while communicating with the photo processing service.";
         setError(msg);
       }
     },
-    [file, preview, selectedCountry, defaultDocumentType, router]
+    // State setters are stable; they are listed so the React Compiler can keep this memoization.
+    [
+      file,
+      preview,
+      selectedCountry,
+      defaultDocumentType,
+      router,
+      setIsProcessing,
+      setError,
+      setProcessingProgress,
+      setProcessingStepIndex,
+      setCountdown,
+    ]
   );
 
   async function handleFile(f: File) {
@@ -472,7 +508,7 @@ export default function PhotoMakerStudio({
                   </li>
                 )}
                 {filteredCountries.map((c) => {
-                  const active = c.country_code === selectedCountryCode;
+                  const active = c.country_code === selectedCountry.country_code;
                   return (
                     <li key={c.country_code} role="presentation">
                       <button

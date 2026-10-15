@@ -19,6 +19,13 @@ import Footer from "@/components/Footer";
 import PrintTemplateGenerator from "@/components/PrintTemplateGenerator";
 import type { PassportProcessResult } from "@/lib/passport-api";
 import { getPlanPricing } from "@/lib/config/pricing";
+import { resultImageUrl } from "@/lib/storage/result-urls";
+import {
+  DEFAULT_COUNTRY,
+  countryFlag,
+  getCountryByCode,
+  getCountryByName,
+} from "@/config/countries";
 
 interface StoredPassportResult extends PassportProcessResult {
   country_code?: string;
@@ -45,14 +52,24 @@ function subscribeToStorage(callback: () => void) {
   return () => window.removeEventListener("storage", callback);
 }
 
+/** The "latest" entry only stands in for this result if it is the same photo. */
+function latestIfSameResult(raw: string | null, resultId: string): string | null {
+  if (!raw) return null;
+  try {
+    return (JSON.parse(raw) as { result_id?: string }).result_id === resultId ? raw : null;
+  } catch {
+    return null;
+  }
+}
+
 function getRawStoredResult(resultId: string): string {
   if (typeof window === "undefined") return "";
   try {
     return (
-      sessionStorage.getItem(`pixpassport_${resultId}`) ||
-      localStorage.getItem(`pixpassport_${resultId}`) ||
-      sessionStorage.getItem("pixpassport_latest") ||
-      localStorage.getItem("pixpassport_latest") ||
+      sessionStorage.getItem(`photogovt_${resultId}`) ||
+      localStorage.getItem(`photogovt_${resultId}`) ||
+      latestIfSameResult(sessionStorage.getItem("photogovt_latest"), resultId) ||
+      latestIfSameResult(localStorage.getItem("photogovt_latest"), resultId) ||
       ""
     );
   } catch {
@@ -64,8 +81,8 @@ function getStoredPayment(resultId: string): StoredPaymentInfo | null {
   if (typeof window === "undefined") return null;
   try {
     const raw =
-      sessionStorage.getItem(`pixpassport_paid_${resultId}`) ||
-      localStorage.getItem(`pixpassport_paid_${resultId}`);
+      sessionStorage.getItem(`photogovt_paid_${resultId}`) ||
+      localStorage.getItem(`photogovt_paid_${resultId}`);
     return raw ? (JSON.parse(raw) as StoredPaymentInfo) : null;
   } catch {
     return null;
@@ -73,22 +90,8 @@ function getStoredPayment(resultId: string): StoredPaymentInfo | null {
 }
 
 function getCountryFlag(countryCode?: string, countryName?: string): string {
-  const code = (countryCode || "").toUpperCase();
-  const name = (countryName || "").toLowerCase();
-  if (code === "GB" || name.includes("united kingdom") || name.includes("britain") || name.includes("uk")) return "🇬🇧";
-  if (code === "US" || name.includes("united states") || name.includes("usa") || name.includes("america")) return "🇺🇸";
-  if (code === "CA" || name.includes("canada")) return "🇨🇦";
-  if (code === "AU" || name.includes("australia")) return "🇦🇺";
-  if (code === "IN" || name.includes("india")) return "🇮🇳";
-  if (code === "DE" || name.includes("germany")) return "🇩🇪";
-  if (code === "FR" || name.includes("france")) return "🇫🇷";
-  if (code === "IT" || name.includes("italy")) return "🇮🇹";
-  if (code === "ES" || name.includes("spain")) return "🇪🇸";
-  if (code === "IE" || name.includes("ireland")) return "🇮🇪";
-  if (code === "NZ" || name.includes("new zealand")) return "🇳🇿";
-  if (code === "SG" || name.includes("singapore")) return "🇸🇬";
-  if (code === "JP" || name.includes("japan")) return "🇯🇵";
-  return "📄";
+  const code = countryCode || getCountryByName(countryName || "")?.country_code || "";
+  return code ? countryFlag(code) : "📄";
 }
 
 export default function ThankYouDownloadPage() {
@@ -118,25 +121,23 @@ export default function ThankYouDownloadPage() {
   const [paymentState, setPaymentState] = useState<StoredPaymentInfo | null>(() => getStoredPayment(resultId));
   const [, setIsLoadingStatus] = useState(false);
 
-  const countryName = data?.country_name || "United Kingdom";
-  const countryCode = data?.country_code || "GB";
-  const dimensions = data?.dimensions || data?.target_dimensions || "600x750";
+  const countryName = data?.country_name || DEFAULT_COUNTRY.country_name;
+  const countryCode = data?.country_code || DEFAULT_COUNTRY.country_code;
+  const dimensions =
+    data?.dimensions ||
+    data?.target_dimensions ||
+    getCountryByCode(countryCode)?.dimensions ||
+    DEFAULT_COUNTRY.dimensions;
   const flag = getCountryFlag(countryCode, countryName);
-
-  const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(resultId);
 
   const fullImageUrl =
     data?.image_url ||
-    (isUuid
-      ? `https://res.cloudinary.com/ddxu2wqfm/image/upload/passport/results/${resultId}_photo.jpg`
-      : undefined);
+    resultImageUrl(resultId, "photo");
 
   const previewUrl =
     data?.preview_url ||
     data?.image_url ||
-    (isUuid
-      ? `https://res.cloudinary.com/ddxu2wqfm/image/upload/passport/results/${resultId}_preview.jpg`
-      : undefined);
+    resultImageUrl(resultId, "preview");
 
   // Active high-resolution image to download/tile
   const activeImageSource = fullImageUrl || previewUrl;
@@ -159,14 +160,14 @@ export default function ThankYouDownloadPage() {
             paymentId: resData.paymentId,
             downloadToken: resData.downloadToken,
             status: resData.status,
-            email: paymentState?.email || "customer@pixpassport.uk",
+            email: paymentState?.email || resData.email || "",
             paidAt: resData.paidAt || new Date().toISOString(),
             planType: resData.planType || paymentState?.planType || "standard",
           };
           setPaymentState(updated);
           try {
-            sessionStorage.setItem(`pixpassport_paid_${resultId}`, JSON.stringify(updated));
-            localStorage.setItem(`pixpassport_paid_${resultId}`, JSON.stringify(updated));
+            sessionStorage.setItem(`photogovt_paid_${resultId}`, JSON.stringify(updated));
+            localStorage.setItem(`photogovt_paid_${resultId}`, JSON.stringify(updated));
           } catch {}
         }
       } catch (err) {

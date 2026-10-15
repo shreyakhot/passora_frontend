@@ -1,40 +1,44 @@
-# PixPassport — Design System & UI Specification (`DESIGN.md`)
+# Photo-Govt — Design System & UI Specification (`DESIGN.md`)
 
 ## 1. Brand Identity & Design Philosophy
 
-**PixPassport** is engineered around three visual and UX pillars:
-1. **Trust & Authority:** A crisp, modern, and British-appropriate visual language that gives users confidence when creating official passport photos.
-2. **Speed & Clarity:** Minimal cognitive load. Clear step-by-step guidance from image upload to final print download.
-3. **Accessibility & Usability:** High contrast, legible typography, generous tap targets, and comprehensive keyboard/screen-reader navigation.
+**Photo-Govt** (display name from `SITE_NAME` in `src/lib/site.ts`) is a passport, visa and ID photo maker for 50+ countries. Its design rests on three visual and UX pillars:
+1. **Trust & Clarity:** A clean, neutral, international visual language that gives users confidence when they prepare photos for official documents. It never implies a government affiliation: the site is independent, and `SITE_DISCLAIMER` says so.
+2. **Speed & Clarity:** Minimal cognitive load. Clear step-by-step guidance from choosing a country and uploading, through preview, to download and printing.
+3. **Accessibility & Usability:** High contrast, legible typography, generous tap targets and full keyboard and screen-reader navigation.
+
+Brand assets: `public/logo.jpg` (`LOGO_PATH`) for the logo and default social image; `src/app/icon.jpg` and `src/app/apple-icon.jpg` for App Router icons.
 
 ---
 
 ## 2. Color Palette & Semantic Tokens
 
-All color tokens are managed via CSS-first DaisyUI theme configuration in `src/app/globals.css`.
+All colour tokens are managed via the CSS-first DaisyUI theme `brand` in `src/app/globals.css` (applied with `data-theme="brand"`).
 
 ### Core Palette
 
 | Token | Hex Value | Purpose & Application |
 | :--- | :--- | :--- |
-| `--color-primary` | `#65A30D` | Primary brand color (`lime-600`), primary CTA buttons, active state indicators, key links |
-| `--color-primary-hover` | `#4D7C0F` | Primary button hover state (`lime-700`) |
+| `--color-primary` | `#65A30D` | Primary brand colour (`lime-600`), active state indicators, key links |
+| `.btn-primary` | `#4D7C0F` → `#3F650C` hover → `#365314` active | Primary CTA buttons (`lime-700` base for AA contrast with white text) |
 | `--color-primary-content` | `#FFFFFF` | Text/icons on primary backgrounds |
-| `--color-secondary` | `#172033` | Dark navy for high-contrast headers, footer background, bold typography |
+| `--color-secondary` | `#0F172A` | Deep navy (`slate-900`) for high-contrast headers, footer background, bold typography |
 | `--color-secondary-content`| `#FFFFFF` | Text/icons on secondary/dark backgrounds |
-| `--color-accent` | `#0F766E` | Deep teal for badges, trust indicators, secondary highlights |
+| `--color-accent` | `#0F766E` | Deep teal (`teal-700`) for badges, trust indicators, secondary highlights |
 | `--color-accent-content` | `#FFFFFF` | Text on accent backgrounds |
-| `--color-neutral` | `#172033` | Neutral dark accents and dark mode components |
+| `--color-neutral` | `#0F172A` | Neutral dark accents |
 | `--color-neutral-content` | `#FFFFFF` | Text on neutral backgrounds |
+
+`themeColor` in the root layout metadata is `#4D7C0F`.
 
 ### Surface & Base Colors
 
 | Token | Hex Value | Application |
 | :--- | :--- | :--- |
 | `--color-base-100` | `#FFFFFF` | Main page background, modal surfaces, primary card backgrounds |
-| `--color-base-200` | `#F8FAFC` | Light slate surface for alternating sections (e.g. Upload area, Features) |
+| `--color-base-200` | `#F8FAFC` | Light slate surface for alternating sections (e.g. photo studio, How It Works) |
 | `--color-base-300` | `#E2E8F0` | Subtle borders, dividers, disabled states |
-| `--color-base-content` | `#172033` | Primary body text color (optimized for maximum contrast on base-100) |
+| `--color-base-content` | `#0F172A` | Primary body text colour (maximum contrast on base-100) |
 
 ### Feedback & Status Tokens
 
@@ -43,7 +47,11 @@ All color tokens are managed via CSS-first DaisyUI theme configuration in `src/a
 | `--color-info` | `#0284C7` | Information alerts, helpful hints, tooltips |
 | `--color-success` | `#15803D` | Validated photo indicator, success alerts, checkmarks |
 | `--color-warning` | `#D97706` | Lighting warnings, dimension caution alerts |
-| `--color-error` | `#DC2626` | File format errors, invalid dimension errors |
+| `--color-error` | `#DC2626` | File format errors, processing errors |
+
+### Radii
+
+`--radius-btn: 0.75rem`, `--radius-box: 1rem`, `--radius-field: 0.75rem`.
 
 ---
 
@@ -67,91 +75,70 @@ We use **Geist Sans** for clean geometric clarity and **Geist Mono** for technic
 ## 4. Spacing, Elevation & Layout Grid
 
 ### Layout Dimensions
-* **Max Container Width:** `72rem` (1152px) via `.container-narrow`
-* **Horizontal Padding:** `1.5rem` (24px) on mobile/desktop
-* **Section Gap:** `5rem` (80px) via `.section-padding`
+* **Max Container Width:** `80rem` (1280px) via `.container-narrow`
+* **Horizontal Padding:** `--container-padding`: `1rem` mobile, `1.5rem` ≥640px, `2rem` ≥1024px
+* **Section Gap:** `--section-gap` via `.section-padding`: `3.5rem` mobile, `4.5rem` ≥640px, `5.5rem` ≥1024px
 * **Grid Baseline:** 8px rhythm for consistent spacing (`gap-2`, `gap-4`, `gap-6`, `gap-8`, `gap-12`)
 
 ### Elevation & Shadows
-* **Flat Card Default:** `box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06)` (`.card-shadow`)
-* **Hover State:** `box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08)` (subtle lift with 250ms smooth transition)
-* **Button States:** `.btn-primary` uses `#65A30D` with `:hover` state transition to `#4D7C0F`.
-* **Interactive Focus:** Keyboard focus ring with `outline: 2px solid #65A30D; outline-offset: 2px;`
+* **Flat Card Default:** `--shadow-card` via `.card-shadow`
+* **Hover State:** `--shadow-card-hover` (subtle lift with a 250ms `--transition-base` transition)
+* **Button States:** `.btn-primary` uses `#4D7C0F`, hover `#3F650C`, active `#365314`.
+* **Interactive Focus:** `:focus-visible` ring `outline: 2px solid #4D7C0F; outline-offset: 2px;` (`#84CC16` on dark/`bg-secondary` surfaces).
 
 ---
 
 ## 5. UI Component Hierarchy & Standards
 
 ### 1. Navigation Header (`Navbar.tsx`)
-* Sticky top navigation bar (`sticky top-0 z-50`) with white surface and subtle border (`border-base-300`).
-* Displays brand logo icon (`/pixpassport.jpg`) with crisp rounded corners and dual-tone wordmark (`PixPassport`).
+* Sticky top navigation bar with a white surface and subtle border (`border-base-300`).
+* Shows the brand logo (`LOGO_PATH`) with rounded corners and the `SITE_NAME` wordmark.
 * Desktop links with subtle hover feedback (`btn btn-ghost btn-sm`).
-* Accessible mobile toggle button with clear ARIA attributes and expanded dropdown drawer.
+* Accessible mobile toggle button with clear ARIA attributes and a dropdown drawer.
 
-### 2. Hero Section (`Hero.tsx`)
-* High-impact headline targeting primary UK search queries.
-* Trust indicator badges (e.g. "Free Online UK Photo Maker", "100% In-Browser Privacy").
-* Clear primary call-to-action leading directly to the upload tool.
+### 2. Homepage Sections (`src/app/page.tsx`)
+Sections in order: `#hero`, `#studio`, `#how-it-works`, `#features`, `#trust`, `#photo-rules`, `#pricing`, `#popular-tools`, `#faq`.
+* **Hero:** International headline (passport, visa and ID photos for many countries) with trust badges and a primary CTA to the studio.
+* **How It Works:** Linear steps: choose your country and upload → automatic background replacement, centring and cropping to that country's size → preview, pay, download and print.
+* **Features / Trust:** Card grids using Lucide icons (e.g. `Globe`, `Shield`, `Lock`, `Printer`, `Crop`, `Zap`).
+* **Photo Rules:** General guidance (background, expression, lighting, accessories). Pair it with `OfficialPhotoNotice` and avoid single-country claims.
+* **Pricing:** Standard and Expert Edit cards. Read prices from `getPlanPricing()`; never hardcode amounts or currency symbols.
+* **Popular Tools:** Links to `POPULAR_TOOLS` country pages from `src/lib/tool-directory.ts`.
+* **FAQ:** `FaqAccordion.tsx`. Answers must match the Schema.org `FAQPage` JSON-LD.
 
-### 3. Upload & Cropping Card (`UploadCard.tsx`)
-* Drag-and-drop target zone with dashed border, animated on drag hover (`border-primary bg-primary/5`).
-* File validation badge supporting JPEG, PNG, and WebP formats up to 10 MB.
-* Live photo preview with dismiss button and instant client-side processing status.
-* Embedded guidelines checklist helping users avoid rejected photos.
+### 3. Photo Studio (`PhotoMakerStudio.tsx`)
+* Country picker (defaults to the page's country, or a guess from browser locales) showing the target pixel size.
+* Upload zone for JPEG, PNG and WebP (up to 20 MB). Large images are compressed client-side (`image-compress.ts`) before upload.
+* Staged processing progress while `/api/passport-photo` runs, then a redirect to `/preview/[id]`.
 
-### 4. Step-by-Step Flow (`HowItWorks.tsx`)
-* 3-step linear progression:
-  1. **Upload Photo:** Take a clear snapshot against a plain background.
-  2. **Auto-Format & Crop:** Adjust to official 35 mm × 45 mm UK proportions.
-  3. **Download & Print:** Export digital photo or 6×4″ printable sheet.
+### 4. Official Photo Notice (`OfficialPhotoNotice.tsx`)
+* Info callout (Lucide `Info`) that reminds users to confirm the current photo rules with the issuing authority for the selected country. It reinforces that the site is independent.
 
-### 5. Feature Grid (`Features.tsx`)
-* 6-column responsive card layout featuring Lucide React icons (`Ruler`, `Shield`, `Printer`, `Zap`, `Lock`, `Smartphone`).
-* Card-level subtle border, comfortable padding, and crisp typography.
+### 5. Country Pages & Directory (`/tool`, `/tool/[slug]`)
+* One generated landing page per country (`src/lib/country-pages.ts`) with a size table, steps, tips and the official-rules reminder. A Markdown file in `src/content/tools/<slug>.md` overrides the generated page.
+* The `/tool` hub lists every country from `TOOL_DIRECTORY`, grouped into Passport Photos and Visa Photos, with flag emoji and pixel size.
 
-### 6. Pricing Section (`Pricing.tsx`)
-* Simple, transparent pricing card highlighting the 100% free forever promise.
-* List of inclusions (unlimited downloads, UK 35×45mm compliance, private in-browser engine, 6×4″ print grid).
+### 6. Print Template Generator (`PrintTemplateGenerator.tsx`)
+* Lays out photos on a 6×4″ (10×15 cm) sheet for home or kiosk printing.
 
-### 7. FAQ Accordion (`FAQ.tsx`)
-* Native DaisyUI / accessible accordion format for effortless browsing.
-* Clear, informative answers directly matching the Schema.org JSON-LD structured data.
-
-### 8. Footer (`Footer.tsx`)
-* Dark navy background (`bg-secondary text-secondary-content`) providing a visual anchor.
-* Brand overview, structured link groups (Product, Legal, Resources), copyright notice, and United Kingdom indicator (`🇬🇧`).
+### 7. Footer (`Footer.tsx`)
+* Dark navy background (`bg-secondary text-secondary-content`) as a visual anchor.
+* Brand overview (with the "not affiliated with any government" statement), link groups (Product, Popular Countries, More Countries, Company & Legal) and a copyright notice. No single-country flag or indicator.
 
 ---
 
-## 6. Passport Photo Visual Overlay Specifications
+## 6. Photo Size Specifications
 
-```
-+------------------------------------------+
-|  <- - - - - 35 mm (Width) - - - - - - >  |
-|                                          |
-|   +----------------------------------+   |
-|   |   Top Clearance: 3 - 5 mm        |   |
-|   |  ..............................  |   |
-|   |  :        [ Crown Line ]      :  |   |
-|   |  :                            :  |   | ^
-|   |  :                            :  |   | |
-|   |  :                            :  |   | |
-|   |  :        [ Eye Level ]       :  |   | 45 mm (Height)
-|   |  :                            :  |   | |
-|   |  :                            :  |   | |
-|   |  :        [ Chin Line ]       :  |   | v
-|   |  ..............................  |   |
-|   |   Head Height: 29 - 34 mm        |   |
-|   +----------------------------------+   |
-|                                          |
-+------------------------------------------+
-```
+There is no single global photo size. Each country's output size is stored in pixels (`dimensions: "widthxheight"`) in `src/config/countries.ts`. The UI shows it as `width × height px` alongside the aspect ratio. Overlays, previews and copy must use the selected country's dimensions and must not hardcode one country's millimetre spec.
+
+Always tell users to confirm the current rules with their issuing authority, and never imply that the site is affiliated with or approved by a government.
 
 ---
 
 ## 7. Accessibility (a11y) & Motion Standards
 
-* **WCAG 2.1 AA Compliance:** Minimum color contrast ratio of 4.5:1 for normal text and 3:1 for large headings.
+* **WCAG 2.1 AA Compliance:** Minimum colour contrast ratio of 4.5:1 for normal text and 3:1 for large headings.
 * **Touch Targets:** Minimum tap target size of `44px` (`2.75rem`) for all buttons and interactive controls.
-* **Keyboard Navigation:** Clear `:focus-visible` ring (`#65A30D`) across all interactive controls.
-* **Reduced Motion:** Automatic suppression of animations for users with `prefers-reduced-motion: reduce`.
+* **Keyboard Navigation:** Clear `:focus-visible` ring (`#4D7C0F`; `#84CC16` on dark surfaces) across all interactive controls.
+* **Reduced Motion:** Animations are suppressed automatically for users with `prefers-reduced-motion: reduce`.
+* **Language:** The document language is `lang="en"`. Copy uses neutral international English and must not assume the user's country.

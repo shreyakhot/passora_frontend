@@ -43,7 +43,8 @@ export function getClientPromise(): Promise<MongoClient> {
   return g._mongoClientPromise;
 }
 
-const DB_NAME = process.env.MONGODB_DB_NAME || "pixpassport";
+// Existing deployments must set MONGODB_DB_NAME to keep reading their current database.
+const DB_NAME = process.env.MONGODB_DB_NAME || "photo_govt";
 
 /**
  * Returns a connected Db instance.

@@ -5,155 +5,65 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import PhotoMakerStudio from "@/components/PhotoMakerStudio";
+import OfficialPhotoNotice from "@/components/OfficialPhotoNotice";
+import { LOGO_URL, SITE_NAME, SITE_URL } from "@/lib/site";
+import { PRICING, getPlanPricing } from "@/lib/config/pricing";
+import { POPULAR_TOOLS, TOOL_DIRECTORY } from "@/lib/tool-directory";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://pixpassport.uk";
+const standardPlan = getPlanPricing("standard");
+
+const PAGE_URL = `${SITE_URL}/passport-size-photo-maker`;
+const SOCIAL_TITLE = `Passport Size Photo Maker Online — ${SITE_NAME}`;
+const SOCIAL_DESCRIPTION =
+  "Create biometric passport and visa photos online for the US, UK, Canada, India, the Schengen Area and 50+ countries. Automatic cropping, AI verification, and instant download.";
 
 export const metadata: Metadata = {
-  title: "Passport Size Photo Maker Online: UK, US, Schengen & 50+ Countries",
+  title: "Passport Size Photo Maker Online: US, UK, Schengen & 50+ Countries",
   description:
-    "Make passport and visa photos online for the UK (35×45 mm), US (2×2″), Schengen Area, India and 50+ countries. Automatic cropping and sizing, then download or print.",
+    "Make passport and visa photos online for the US (2×2″), UK and Schengen Area (35×45 mm), Canada, India and 50+ countries. Automatic cropping and sizing, then download or print.",
   alternates: {
-    canonical: `${SITE_URL}/passport-size-photo-maker`,
-    languages: {
-      "en-GB": `${SITE_URL}/passport-size-photo-maker`,
-    },
+    canonical: PAGE_URL,
   },
   openGraph: {
-    title: "Passport Size Photo Maker Online — PixPassport",
-    description:
-      "Create official biometric passport photos online for the UK (35×45mm), US, Schengen Area, and 50+ countries. Automatic cropping, AI verification, and instant download.",
-    url: `${SITE_URL}/passport-size-photo-maker`,
-    siteName: "PixPassport",
-    locale: "en_GB",
+    title: SOCIAL_TITLE,
+    description: SOCIAL_DESCRIPTION,
+    url: PAGE_URL,
+    siteName: SITE_NAME,
+    locale: "en_US",
     type: "website",
     images: [
       {
-        url: `${SITE_URL}/pixpassport.jpg`,
+        url: LOGO_URL,
         width: 640,
         height: 640,
-        alt: "Passport Size Photo Maker Online — PixPassport",
+        alt: SOCIAL_TITLE,
       },
     ],
   },
   twitter: {
     card: "summary",
-    title: "Passport Size Photo Maker Online — PixPassport",
-    description:
-      "Create official biometric passport photos online for the UK (35×45mm), US, Schengen Area, and 50+ countries. Automatic cropping, AI verification, and instant download.",
-    images: [`${SITE_URL}/pixpassport.jpg`],
+    title: SOCIAL_TITLE,
+    description: SOCIAL_DESCRIPTION,
+    images: [LOGO_URL],
   },
 };
-
-const POPULAR_TOOL_LINKS = [
-  {
-    slug: "uk-passport-photo",
-    title: "UK Passport Photo",
-    spec: "35×45 mm",
-    flag: "🇬🇧",
-  },
-  {
-    slug: "passport-renewal-photo-online",
-    title: "UK Passport Renewal",
-    spec: "35×45 mm",
-    flag: "🔄",
-  },
-  {
-    slug: "uk-baby-passport-photo",
-    title: "UK Baby Passport Photo",
-    spec: "HMPO Infant",
-    flag: "👶",
-  },
-  {
-    slug: "uk-driving-licence-photo",
-    title: "UK Driving Licence",
-    spec: "DVLA 35×45 mm",
-    flag: "🚗",
-  },
-  {
-    slug: "us-visa-photo-tool",
-    title: "US Visa & Passport",
-    spec: "2×2 inches",
-    flag: "🇺🇸",
-  },
-  {
-    slug: "schengen-visa-photo",
-    title: "Schengen Visa Photo",
-    spec: "35×45 mm",
-    flag: "🇪🇺",
-  },
-  {
-    slug: "indian-passport-photo-maker",
-    title: "Indian Passport & OCI",
-    spec: "35×45 / 2×2″",
-    flag: "🇮🇳",
-  },
-  {
-    slug: "digital-passport-photo",
-    title: "Digital Passport Photo",
-    spec: "Online Upload",
-    flag: "💻",
-  },
-  {
-    slug: "photo-size-35x45mm",
-    title: "35×45 mm Photo Size",
-    spec: "Standard Ratio",
-    flag: "📐",
-  },
-  {
-    slug: "image-to-passport-size-converter",
-    title: "Image to Passport Converter",
-    spec: "Auto-Crop",
-    flag: "🔄",
-  },
-  {
-    slug: "passport-photo-at-home",
-    title: "Passport Photo at Home",
-    spec: "DIY & Print",
-    flag: "🏠",
-  },
-  {
-    slug: "take-a-passport-photo-on-iphone",
-    title: "iPhone Passport Photo",
-    spec: "iOS Shoot Guide",
-    flag: "📱",
-  },
-  {
-    slug: "passport-photo-tool",
-    title: "Passport Photo Tool",
-    spec: "50+ Countries",
-    flag: "✂️",
-  },
-  {
-    slug: "online-id-photo-maker",
-    title: "Online ID Photo Maker",
-    spec: "All ID Types",
-    flag: "🪪",
-  },
-  {
-    slug: "order-passport-photos-online",
-    title: "Order Passport Photos",
-    spec: "Digital & Prints",
-    flag: "📦",
-  },
-];
 
 export default function PassportSizePhotoMakerPage() {
   return (
     <>
       <JsonLd
         siteUrl={SITE_URL}
-        siteName="PixPassport"
-        price="7.99"
-        priceCurrency="GBP"
-        appUrl={`${SITE_URL}/passport-size-photo-maker`}
+        siteName={SITE_NAME}
+        price={standardPlan.amount.toFixed(2)}
+        priceCurrency={PRICING.currency}
+        appUrl={PAGE_URL}
         appId={`${SITE_URL}/#webapp`}
         description="Create official biometric passport size photos online with instant verification and printable 6x4 inch sheet."
         breadcrumbs={[
           { name: "Home", url: SITE_URL },
           {
             name: "Passport Size Photo Maker",
-            url: `${SITE_URL}/passport-size-photo-maker`,
+            url: PAGE_URL,
           },
         ]}
         includeOrganization={false}
@@ -202,10 +112,8 @@ export default function PassportSizePhotoMakerPage() {
           </div>
 
           {/* Unified Photo Maker Studio Component */}
-          <PhotoMakerStudio
-            defaultCountryCode="GB"
-            defaultDocumentType="passport"
-          />
+          <PhotoMakerStudio defaultDocumentType="passport" />
+          <OfficialPhotoNotice className="mt-5" />
 
           {/* Print Template Generator Feature Card */}
           <div className="mt-8 bg-gradient-to-br from-lime-900 via-slate-900 to-slate-900 border border-lime-600/40 rounded-2xl p-5 sm:p-6 text-white shadow-md relative overflow-hidden">
@@ -218,7 +126,7 @@ export default function PassportSizePhotoMakerPage() {
                   Need to print on 4×6″ (10×15 cm) paper?
                 </h3>
                 <p className="text-slate-300 text-xs sm:text-sm mt-1 max-w-lg leading-relaxed">
-                  Tile multiple passport photos onto standard 4×6″ or A4 sheets with cutting guides. Save money at Boots, Tesco, or home printers.
+                  Tile multiple passport photos onto standard 4×6″ or A4 sheets with cutting guides. Print them at a local pharmacy, photo shop, or on your home printer.
                 </p>
               </div>
               <Link
@@ -237,7 +145,7 @@ export default function PassportSizePhotoMakerPage() {
               Explore Popular Country &amp; Document Guides
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {POPULAR_TOOL_LINKS.map((tool) => (
+              {POPULAR_TOOLS.map((tool) => (
                 <Link
                   key={tool.slug}
                   href={`/tool/${tool.slug}`}
@@ -259,6 +167,15 @@ export default function PassportSizePhotoMakerPage() {
                   <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#4D7C0F] shrink-0" />
                 </Link>
               ))}
+            </div>
+            <div className="text-center mt-4">
+              <Link
+                href="/tool"
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#4D7C0F] hover:text-[#365314] transition-colors"
+              >
+                <span>View all {TOOL_DIRECTORY.length} country photo guides</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
           </div>
         </div>

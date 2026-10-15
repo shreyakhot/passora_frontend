@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { sendContactNotificationEmailAction } from "@/lib/email";
+import { SITE_NAME } from "@/lib/site";
 
 export const runtime = "nodejs";
 
@@ -76,7 +77,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 3. Send notification email via Resend (BCC to usvisaphotoai@gmail.com)
+    // 3. Send notification email via Resend (to the support inbox, BCC to configured team inboxes)
     try {
       await sendContactNotificationEmailAction({
         name: name.trim(),
@@ -92,8 +93,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        message:
-          "Thank you for contacting PixPassport! Your message has been received. Our support team will review your inquiry and respond within 24 business hours.",
+        message: `Thank you for contacting ${SITE_NAME}! Your message has been received. Our support team will review your inquiry and respond within 24 business hours.`,
       },
       { status: 200 }
     );

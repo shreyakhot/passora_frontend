@@ -3,7 +3,7 @@
  * Razorpay webhook endpoint for independent payment confirmation.
  *
  * IMPORTANT: Configure this URL in Razorpay Dashboard → Settings → Webhooks:
- *   https://pixpassport.uk/api/webhooks/razorpay
+ *   https://photo-govt.com/api/webhooks/razorpay
  *   Events: payment.captured, payment.failed
  */
 

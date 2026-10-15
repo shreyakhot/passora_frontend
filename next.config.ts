@@ -19,104 +19,54 @@ const nextConfig: NextConfig = {
     ],
   },
   async redirects() {
-    return [
-      {
-        source: "/uk-passport-photo",
-        destination: "/tool/uk-passport-photo",
-        permanent: true,
-      },
-      {
-        source: "/passport-renewal-photo-online",
-        destination: "/tool/passport-renewal-photo-online",
-        permanent: true,
-      },
-      {
-        source: "/uk-baby-passport-photo",
-        destination: "/tool/uk-baby-passport-photo",
-        permanent: true,
-      },
-      {
-        source: "/uk-driving-licence-photo",
-        destination: "/tool/uk-driving-licence-photo",
-        permanent: true,
-      },
-      {
-        source: "/driving-licence-photo",
-        destination: "/tool/uk-driving-licence-photo",
-        permanent: true,
-      },
-      {
-        source: "/us-visa-photo",
-        destination: "/tool/us-visa-photo-tool",
-        permanent: true,
-      },
-      {
-        source: "/us-visa-photo-tool",
-        destination: "/tool/us-visa-photo-tool",
-        permanent: true,
-      },
-      {
-        source: "/schengen-visa-photo",
-        destination: "/tool/schengen-visa-photo",
-        permanent: true,
-      },
-      {
-        source: "/indian-passport-photo",
-        destination: "/tool/indian-passport-photo-maker",
-        permanent: true,
-      },
-      {
-        source: "/indian-passport-photo-maker",
-        destination: "/tool/indian-passport-photo-maker",
-        permanent: true,
-      },
-      {
-        source: "/digital-passport-photo",
-        destination: "/tool/digital-passport-photo",
-        permanent: true,
-      },
-      {
-        source: "/photo-size-35x45mm",
-        destination: "/tool/photo-size-35x45mm",
-        permanent: true,
-      },
-      {
-        source: "/image-to-passport-size-converter",
-        destination: "/tool/image-to-passport-size-converter",
-        permanent: true,
-      },
-      {
-        source: "/passport-photo-at-home",
-        destination: "/tool/passport-photo-at-home",
-        permanent: true,
-      },
-      {
-        source: "/passport-photo-tool",
-        destination: "/tool/passport-photo-tool",
-        permanent: true,
-      },
-      {
-        source: "/online-id-photo-maker",
-        destination: "/tool/online-id-photo-maker",
-        permanent: true,
-      },
-      {
-        source: "/order-passport-photos-online",
-        destination: "/tool/order-passport-photos-online",
-        permanent: true,
-      },
-      {
-        // Merged into the checker: the wizard page described a questionnaire UI that never existed.
-        source: "/tool/uk-passport-photo-guidance-wizard",
-        destination: "/tool/passport-photo-checker-uk",
-        permanent: true,
-      },
-      {
-        source: "/passport-size-photo-online",
-        destination: "/passport-size-photo-maker",
-        permanent: true,
-      },
+    const uk = "/tool/united-kingdom-passport-photo";
+    const us = "/tool/united-states-passport-photo";
+    const schengen = "/tool/schengen-area-visa-photo";
+    const india = "/tool/india-passport-photo";
+
+    // Retired single-country (UK) pages and guides, mapped to the generated
+    // per-country pages or the country hub.
+    const retired: [string, string][] = [
+      ["/uk-passport-photo", uk],
+      ["/passport-renewal-photo-online", uk],
+      ["/uk-baby-passport-photo", uk],
+      ["/uk-driving-licence-photo", uk],
+      ["/driving-licence-photo", uk],
+      ["/us-visa-photo", us],
+      ["/us-visa-photo-tool", us],
+      ["/schengen-visa-photo", schengen],
+      ["/indian-passport-photo", india],
+      ["/indian-passport-photo-maker", india],
+      ["/digital-passport-photo", "/passport-size-photo-maker"],
+      ["/photo-size-35x45mm", "/passport-size-photo-maker"],
+      ["/image-to-passport-size-converter", "/passport-size-photo-maker"],
+      ["/passport-photo-at-home", "/passport-size-photo-maker"],
+      ["/passport-photo-tool", "/passport-size-photo-maker"],
+      ["/online-id-photo-maker", "/passport-size-photo-maker"],
+      ["/order-passport-photos-online", "/passport-size-photo-maker"],
+      ["/passport-size-photo-online", "/passport-size-photo-maker"],
+      ["/tool/uk-passport-photo", uk],
+      ["/tool/british-passport-picture-maker", uk],
+      ["/tool/passport-photo-checker-uk", uk],
+      ["/tool/uk-passport-photo-guidance-wizard", uk],
+      ["/tool/digital-passport-photo", uk],
+      ["/tool/passport-renewal-photo-online", uk],
+      ["/tool/uk-baby-passport-photo", uk],
+      ["/tool/uk-driving-licence-photo", uk],
+      ["/tool/uk-visa-photo", uk],
+      ["/tool/us-visa-photo-tool", us],
+      ["/tool/schengen-visa-photo", schengen],
+      ["/tool/indian-passport-photo-maker", india],
+      ["/tool/take-a-passport-photo-on-iphone", "/passport-size-photo-maker"],
+      ["/tool/passport-photo-at-home", "/passport-size-photo-maker"],
+      ["/tool/photo-size-35x45mm", "/passport-size-photo-maker"],
+      ["/tool/image-to-passport-size-converter", "/passport-size-photo-maker"],
+      ["/tool/passport-photo-tool", "/passport-size-photo-maker"],
+      ["/tool/online-id-photo-maker", "/passport-size-photo-maker"],
+      ["/tool/order-passport-photos-online", "/passport-size-photo-maker"],
     ];
+
+    return retired.map(([source, destination]) => ({ source, destination, permanent: true }));
   },
   async headers() {
     return [
@@ -155,7 +105,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/pixpassport.jpg",
+        source: "/logo.jpg",
         headers: [
           {
             key: "Cache-Control",

@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, ArrowRight, Sparkles } from "lucide-react";
+import { LOGO_PATH, SITE_NAME } from "@/lib/site";
+import { POPULAR_TOOLS } from "@/lib/tool-directory";
 
 export interface NavLinkItem {
   label: string;
@@ -30,99 +32,31 @@ export const PHOTO_TOOLS_MENU = {
       badge: "New",
     },
     {
-      title: "Digital Passport Photo Maker",
-      description: "Online photo ready for government portal submission",
-      href: "/tool/digital-passport-photo",
-      icon: "💻",
-    },
-    {
-      title: "Image to Passport Converter",
-      description: "Convert & auto-crop any portrait to official size",
-      href: "/tool/image-to-passport-size-converter",
-      icon: "🔄",
-    },
-    {
-      title: "Online ID Photo Maker",
-      description: "Create photos for student IDs, badges & driver cards",
-      href: "/tool/online-id-photo-maker",
-      icon: "🪪",
-    },
-    {
-      title: "UK Passport Photo Checker",
-      description: "Test your photo against official UK biometric rules",
-      href: "/tool/passport-photo-checker-uk",
-      icon: "✅",
-    },
-    {
-      title: "Take Photo at Home Guide",
-      description: "Set up and take your own photo on a phone",
-      href: "/tool/passport-photo-at-home",
-      icon: "🏠",
-    },
-    {
-      title: "iPhone Passport Photo Guide",
-      description: "Step-by-step tips to shoot & crop compliant photos on iOS",
-      href: "/tool/take-a-passport-photo-on-iphone",
-      icon: "📱",
+      title: "Photo Sizes by Country",
+      description: "Passport & visa photo sizes for 50+ countries",
+      href: "/tool",
+      icon: "🌍",
     },
   ],
-  countries: [
-    {
-      title: "UK Passport Photo",
-      spec: "35 × 45 mm (HMPO)",
-      href: "/tool/uk-passport-photo",
-      flag: "🇬🇧",
-    },
-    {
-      title: "British Passport Picture",
-      spec: "35 × 45 mm (HMPO)",
-      href: "/tool/british-passport-picture-maker",
-      flag: "🇬🇧",
-    },
-    {
-      title: "UK Driving Licence Photo",
-      spec: "35 × 45 mm (DVLA)",
-      href: "/tool/uk-driving-licence-photo",
-      flag: "🚗",
-    },
-    {
-      title: "UK Baby Passport Photo",
-      spec: "Infant & Newborn",
-      href: "/tool/uk-baby-passport-photo",
-      flag: "👶",
-    },
-    {
-      title: "US Visa & Passport Photo",
-      spec: "2 × 2 inches (51×51 mm)",
-      href: "/tool/us-visa-photo-tool",
-      flag: "🇺🇸",
-    },
-    {
-      title: "Schengen Visa Photo",
-      spec: "35 × 45 mm (EU)",
-      href: "/tool/schengen-visa-photo",
-      flag: "🇪🇺",
-    },
-    {
-      title: "Indian Passport & OCI",
-      spec: "35 × 45 mm / 2×2″",
-      href: "/tool/indian-passport-photo-maker",
-      flag: "🇮🇳",
-    },
-    {
-      title: "UK Passport Renewal",
-      spec: "Online renewal photo",
-      href: "/tool/passport-renewal-photo-online",
-      flag: "🔄",
-    },
-    {
-      title: "35×45 mm Photo Sizer",
-      spec: "Standard biometric size",
-      href: "/tool/photo-size-35x45mm",
-      flag: "📐",
-    },
-  ],
+  countries: POPULAR_TOOLS.map((tool) => ({
+    title: tool.title,
+    spec: tool.spec,
+    href: `/tool/${tool.slug}`,
+    flag: tool.flag,
+  })),
 };
+
+/** Brand name with the part after the first "-" or space in the accent colour. */
+export function BrandWordmark({ name = SITE_NAME }: { name?: string }) {
+  const match = name.match(/^(.+?)([- ].+)$/);
+  if (!match) return <span>{name}</span>;
+  return (
+    <span>
+      {match[1]}
+      <span className="text-lime-600 font-extrabold">{match[2]}</span>
+    </span>
+  );
+}
 
 export const DEFAULT_NAV_LINKS: NavLinkItem[] = [
   { label: "How It Works", href: "/#how-it-works" },
@@ -149,14 +83,10 @@ export interface NavbarProps {
 }
 
 export default function Navbar({
-  brandName = (
-    <span>
-      Pix<span className="text-lime-600 font-extrabold">Passport</span>
-    </span>
-  ),
+  brandName = <BrandWordmark />,
   brandHref = "/",
-  logoSrc = "/pixpassport.jpg",
-  logoAlt = "PixPassport Logo",
+  logoSrc = LOGO_PATH,
+  logoAlt = `${SITE_NAME} Logo`,
   logoWidth = 32,
   logoHeight = 32,
   navLinks = DEFAULT_NAV_LINKS,
@@ -210,7 +140,7 @@ export default function Navbar({
         <Link
           href={brandHref}
           className="flex items-center gap-2.5 text-lg sm:text-xl font-bold text-slate-900 focus-ring rounded-lg py-1 px-1.5 -ml-1.5 transition-opacity hover:opacity-90"
-          aria-label="PixPassport homepage"
+          aria-label={`${SITE_NAME} homepage`}
         >
           {logoSrc && (
             <Image

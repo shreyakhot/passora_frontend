@@ -10,6 +10,7 @@ import {
   type ExpertEditNotificationParams,
 } from "./templates/expert-edit-notification";
 import { PRICING, type PlanType } from "@/lib/config/pricing";
+import { SITE_NAME } from "@/lib/site";
 
 export interface SendPaymentSuccessEmailParams {
   email: string;
@@ -150,7 +151,7 @@ export async function sendContactNotificationEmailAction(
   }
 
   const resend = getResendClient();
-  const adminSubject = `[PixPassport Inquiry] ${params.subject} — from ${params.name}`;
+  const adminSubject = `[${SITE_NAME} Inquiry] ${params.subject} — from ${params.name}`;
 
   const html = `
     <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:24px;color:#0F172A;max-width:600px;margin:0 auto;background:#fff;border:1px solid #E2E8F0;border-radius:12px;">
@@ -163,7 +164,7 @@ export async function sendContactNotificationEmailAction(
       </div>
       <div style="font-size:13px;font-weight:700;color:#64748B;text-transform:uppercase;margin-bottom:8px;">Message:</div>
       <div style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:8px;padding:16px;font-size:14px;line-height:1.6;white-space:pre-wrap;color:#334155;">${params.message}</div>
-      <div style="margin-top:24px;font-size:12px;color:#94A3B8;text-align:center;">Sent via PixPassport Customer Contact Gateway</div>
+      <div style="margin-top:24px;font-size:12px;color:#94A3B8;text-align:center;">Sent via ${SITE_NAME} Customer Contact Gateway</div>
     </div>
   `;
 

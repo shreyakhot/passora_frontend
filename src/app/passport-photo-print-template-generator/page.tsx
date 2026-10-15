@@ -11,43 +11,42 @@ import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import PrintTemplateGenerator from "@/components/PrintTemplateGenerator";
 import FaqAccordion, { type FaqItem } from "@/components/FaqAccordion";
+import { POPULAR_TOOLS } from "@/lib/tool-directory";
+import { PRICING } from "@/lib/config/pricing";
+import { LOGO_URL, SITE_DISCLAIMER, SITE_NAME, SITE_URL } from "@/lib/site";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://pixpassport.uk";
+const PAGE_URL = `${SITE_URL}/passport-photo-print-template-generator`;
 
 export const metadata: Metadata = {
-  title: "Passport Photo Sheet Maker: Free 4×6″ & A4 Print Template (UK)",
+  title: "Passport Photo Sheet Maker: Free 4×6″ & A4 Print Template",
   description:
-    "Free passport photo sheet maker for the UK. Convert your passport photo to 4x6 or A4, make 8 passport size photos online at 300 DPI and print for pence.",
+    "Free passport photo sheet maker. Tile your passport or visa photo onto a 4x6, A4 or US Letter sheet at 300 DPI with cutting guides, then print it at home or at any photo shop.",
   alternates: {
-    canonical: `${SITE_URL}/passport-photo-print-template-generator`,
-    languages: {
-      "en-GB": `${SITE_URL}/passport-photo-print-template-generator`,
-    },
+    canonical: PAGE_URL,
   },
   openGraph: {
-    title: "Free Passport Photo Sheet Maker (4×6″ & A4) — PixPassport",
+    title: `Free Passport Photo Sheet Maker (4×6″ & A4) — ${SITE_NAME}`,
     description:
-      "Make 8 passport size photos online on one 4×6″ or A4 sheet. Calibrated 300 DPI with cutting guides. Print at Boots, Tesco, Asda or home for pence.",
-    url: `${SITE_URL}/passport-photo-print-template-generator`,
-    siteName: "PixPassport",
-    locale: "en_GB",
+      "Make up to 8 passport size photos on one 4×6″ sheet, or more on A4 and US Letter. Calibrated 300 DPI with cutting guides. Print at home or at any photo kiosk.",
+    url: PAGE_URL,
+    siteName: SITE_NAME,
+    locale: "en_US",
     type: "website",
     images: [
       {
-        url: `${SITE_URL}/pixpassport.jpg`,
+        url: LOGO_URL,
         width: 640,
         height: 640,
-        alt: "Free passport photo sheet maker for 4×6 and A4 — PixPassport",
+        alt: `Free passport photo sheet maker for 4×6 and A4 — ${SITE_NAME}`,
       },
     ],
   },
   twitter: {
     card: "summary",
-    title: "Free Passport Photo Sheet Maker (4×6″ & A4) — PixPassport",
+    title: `Free Passport Photo Sheet Maker (4×6″ & A4) — ${SITE_NAME}`,
     description:
-      "Convert your passport photo to 4x6 free. Print-ready 300 DPI sheets for Boots, Tesco, Snappy Snaps and home printers.",
-    images: [`${SITE_URL}/pixpassport.jpg`],
+      "Convert your passport photo to a 4x6 sheet for free. Print-ready 300 DPI sheets for photo kiosks and home printers.",
+    images: [LOGO_URL],
   },
 };
 
@@ -60,88 +59,83 @@ const PRINT_FAQS: FaqItem[] = [
   {
     question: "How many passport photos fit on a 4×6 inch sheet?",
     answer:
-      "A 4×6″ (10×15 cm) sheet holds up to 8 UK, EU and India photos (35×45 mm) with safe cutting margins. It also fits up to 4 US visa photos (2×2″) or 2 Canadian photos (50×70 mm).",
+      "A 4×6″ (10×15 cm) sheet holds up to 8 photos in the common 35×45 mm size, which is used for many passports and visas, including the Schengen Area, the UK and India. It also fits up to 4 US photos (2×2″) or 2 Canadian photos (50×70 mm).",
   },
   {
     question: "Can I make a passport size photo A4 sheet online?",
     answer:
-      "Yes. Choose A4 in the generator to fill a full page with copies of your photo. This suits home printers and anyone who needs spare sets for a family application, a visa or a driving licence.",
+      "Yes. Choose A4 (or US Letter) in the generator to fill a full page with copies of your photo. This suits home printers and anyone who needs spare sets for a family application, a visa or another ID document.",
   },
   {
     question: "Why should I avoid the 'Passport Photos' option at kiosks?",
     answer:
-      "High-street booths and kiosks often charge £10 to £15 for their passport option. If you choose 'Standard 4×6″ Photo Print' and upload your PixPassport sheet, you get the same glossy 300 DPI print for around 10p to 25p.",
+      "Photo kiosks and print shops often charge much more for their passport photo service than for a standard print. If you choose a standard 4×6″ photo print and upload your sheet, you usually pay only the price of a regular print.",
   },
   {
     question: "How do I make sure the printed photos are the right size?",
     answer:
-      "Turn off 'Fit to Page' and 'Shrink to Fit', then print at 100% (Actual Size). Any scaling changes the photo dimensions and can cause a rejection. Measure one photo with a ruler before you cut the rest: it should read exactly 35×45 mm.",
+      "Turn off 'Fit to Page' and 'Shrink to Fit', then print at 100% (Actual Size). Any scaling changes the photo dimensions and can cause a rejection. Measure one photo with a ruler before you cut the rest: it should match the size you selected, for example 35×45 mm or 2×2″.",
   },
   {
-    question: "What paper do UK passport photos need?",
+    question: "What paper do passport photos need?",
     answer:
-      "Print on photo-quality paper (gloss or matte) with no borders, creases or heavy texture. His Majesty's Passport Office rejects photos on plain office paper. The same rule applies to most visa authorities.",
+      "Most issuing authorities ask for photos printed on photo-quality paper (gloss or matte) with no borders, creases or heavy texture, and many reject photos printed on plain office paper. Check the exact requirements with the authority that issues your document.",
   },
   {
     question: "Can I cut the photos myself?",
     answer:
-      "Yes. Each sheet includes corner crop marks. Use sharp scissors, or a rotary trimmer and a metal ruler, and cut just outside each mark for clean 35×45 mm edges.",
+      "Yes. Each sheet includes corner crop marks. Use sharp scissors, or a rotary trimmer and a metal ruler, and cut just outside each mark for clean, accurate edges.",
   },
   {
-    question: "Do I need printed photos for an online UK passport application?",
+    question: "Do I need printed photos for an online application?",
     answer:
-      "No. Online applications ask you to upload one digital photo, so use our UK passport photo tool for that. Use the printed sheet for paper applications, visas, driving licences and other ID that needs physical copies.",
+      "Often not. Many online passport and visa applications ask you to upload a digital photo instead, so use our passport size photo maker for that. Use the printed sheet for paper applications and other ID that needs physical copies, and check what your application asks for.",
   },
 ];
 
 const PAPER_SIZES = [
   {
     paper: "4×6″ (10×15 cm)",
-    photos: "Up to 8 UK/EU (35×45 mm)",
+    photos: "Up to 8 at 35×45 mm",
     bestFor: "Kiosk and home printing",
   },
   {
     paper: "4×6″ (10×15 cm)",
     photos: "Up to 4 US (2×2″)",
-    bestFor: "US visas and passports",
+    bestFor: "US passports and visas",
   },
   {
     paper: "A4 (210×297 mm)",
     photos: "Multiple full sets",
     bestFor: "Home printers and families",
   },
+  {
+    paper: "US Letter (8.5×11″)",
+    photos: "Multiple full sets",
+    bestFor: "Home printers in North America",
+  },
 ];
 
-const RELATED_TOOLS = [
-  { slug: "uk-passport-photo", title: "UK Passport Photo", spec: "35×45 mm", flag: "🇬🇧" },
-  { slug: "passport-renewal-photo-online", title: "UK Passport Renewal", spec: "35×45 mm", flag: "🔄" },
-  { slug: "us-visa-photo-tool", title: "US Visa & Passport", spec: "2×2 inches", flag: "🇺🇸" },
-  { slug: "schengen-visa-photo", title: "Schengen Visa Photo", spec: "35×45 mm", flag: "🇪🇺" },
-  { slug: "uk-baby-passport-photo", title: "UK Baby Passport Photo", spec: "HMPO Infant", flag: "👶" },
-  { slug: "indian-passport-photo-maker", title: "Indian Passport & OCI", spec: "35×45 / 2×2″", flag: "🇮🇳" },
-  { slug: "uk-driving-licence-photo", title: "UK Driving Licence", spec: "DVLA 35×45 mm", flag: "🚗" },
-  { slug: "passport-photo-at-home", title: "Passport Photo at Home", spec: "DIY & Print", flag: "🏠" },
-  { slug: "image-to-passport-size-converter", title: "Image to Passport Converter", spec: "Auto-Crop", flag: "🔄" },
-];
+const RELATED_TOOLS = POPULAR_TOOLS;
 
 export default function PrintTemplateGeneratorPage() {
   return (
     <>
       <JsonLd
         siteUrl={SITE_URL}
-        siteName="PixPassport"
-        appName="PixPassport Passport Photo Print Template Generator"
-        appUrl={`${SITE_URL}/passport-photo-print-template-generator`}
-        appId={`${SITE_URL}/passport-photo-print-template-generator#webapp`}
+        siteName={SITE_NAME}
+        appName={`${SITE_NAME} Passport Photo Print Template Generator`}
+        appUrl={PAGE_URL}
+        appId={`${PAGE_URL}#webapp`}
         description="Free passport photo sheet maker. Make 8 passport size photos online on a 4x6 inch or A4 sheet with cutting guides at 300 DPI."
         price="0"
-        priceCurrency="GBP"
+        priceCurrency={PRICING.currency}
         breadcrumbs={[
           { name: "Home", url: SITE_URL },
           { name: "Photo Guides", url: `${SITE_URL}/tool` },
           {
             name: "Print Template Generator",
-            url: `${SITE_URL}/passport-photo-print-template-generator`,
+            url: PAGE_URL,
           },
         ]}
         includeOrganization={false}
@@ -216,11 +210,11 @@ export default function PrintTemplateGeneratorPage() {
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
               Whether you need a passport size photo A4 sheet for your home printer or a passport size 4×6 photo for your local kiosk, the generator sizes everything for you.
             </p>
-            <h3 className="text-lg font-bold text-slate-900 mb-3">Why UK applicants use it</h3>
+            <h3 className="text-lg font-bold text-slate-900 mb-3">Why applicants use it</h3>
             <ul className="space-y-2 text-slate-600 text-sm sm:text-base leading-relaxed list-none p-0">
-              <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 mt-1 shrink-0 text-[#4D7C0F]" /><span><strong>You save money.</strong> Pay pence, not £10 or more.</span></li>
-              <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 mt-1 shrink-0 text-[#4D7C0F]" /><span><strong>You get 8 photos.</strong> That covers a passport, a driving licence, a visa and spares.</span></li>
-              <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 mt-1 shrink-0 text-[#4D7C0F]" /><span><strong>You print anywhere.</strong> Use Boots, Tesco, Asda, Superdrug, Snappy Snaps or your own printer.</span></li>
+              <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 mt-1 shrink-0 text-[#4D7C0F]" /><span><strong>You save money.</strong> Pay for a standard print, not a passport photo service.</span></li>
+              <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 mt-1 shrink-0 text-[#4D7C0F]" /><span><strong>You get up to 8 photos.</strong> That covers a passport, a visa, other ID and spares.</span></li>
+              <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 mt-1 shrink-0 text-[#4D7C0F]" /><span><strong>You print anywhere.</strong> Use a photo kiosk, a print shop, a pharmacy photo counter or your own printer.</span></li>
               <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 mt-1 shrink-0 text-[#4D7C0F]" /><span><strong>You keep control.</strong> Retake as often as you like, in good light, at home.</span></li>
             </ul>
           </div>
@@ -231,13 +225,13 @@ export default function PrintTemplateGeneratorPage() {
           <div className="container-narrow max-w-5xl">
             <div className="text-center max-w-2xl mx-auto mb-12">
               <span className="inline-block px-3 py-1 rounded-full bg-lime-100 border border-lime-300 text-[#4D7C0F] text-xs font-bold mb-3">
-                High-Street Printing Secret
+                Photo Kiosk Tip
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
-                How to Print Passport Photos for 10p–25p
+                How to Print Passport Photos for the Price of a Standard Print
               </h2>
               <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                Follow three steps to skip the £10–£15 booth fee and still get compliant prints.
+                Follow three steps to skip the booth fee and still get correctly sized prints.
               </p>
             </div>
 
@@ -257,7 +251,7 @@ export default function PrintTemplateGeneratorPage() {
                   title: "Order a standard 4×6″ print",
                   body: (
                     <>
-                      At Boots, Tesco, Asda or Snappy Snaps, choose <strong>&quot;Standard Photo Prints (4×6″)&quot;</strong>. Do not press the pricier &quot;Passport Photo&quot; button.
+                      At any photo kiosk or print shop, choose <strong>&quot;Standard Photo Prints (4×6″)&quot;</strong>. Do not press the pricier &quot;Passport Photo&quot; button.
                     </>
                   ),
                 },
@@ -266,7 +260,7 @@ export default function PrintTemplateGeneratorPage() {
                   title: "Cut along the crop marks",
                   body: (
                     <>
-                      Collect your glossy print for about 15p. Cut along the corner marks to get up to 8 exact 35×45 mm photos.
+                      Collect your glossy print. Cut along the corner marks to get up to 8 photos at the exact size you chose.
                     </>
                   ),
                 },
@@ -283,7 +277,7 @@ export default function PrintTemplateGeneratorPage() {
           </div>
         </section>
 
-        {/* 5. PAPER SIZES + UK RULES */}
+        {/* 5. PAPER SIZES + PHOTO RULES */}
         <section className="py-14 sm:py-20 bg-white border-b border-slate-200/80">
           <div className="container-narrow max-w-4xl">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight mb-3">
@@ -316,14 +310,18 @@ export default function PrintTemplateGeneratorPage() {
               </div>
             </div>
 
-            <h3 className="text-xl font-bold text-slate-900 mb-3">UK photo rules to check before you print</h3>
+            <h3 className="text-xl font-bold text-slate-900 mb-3">Photo rules to check before you print</h3>
             <ul className="space-y-2 text-slate-600 text-sm sm:text-base leading-relaxed list-disc pl-5">
-              <li>Print each photo at <strong>35×45 mm</strong>.</li>
-              <li>Keep the head between <strong>29 mm and 34 mm</strong> from chin to crown.</li>
+              <li>Print each photo at the <strong>exact size</strong> your document needs, such as 35×45 mm or 2×2″.</li>
+              <li>Check the <strong>head size</strong> rule for your document. It differs between countries.</li>
               <li>Use a plain, light background with no shadows.</li>
               <li>Print on photo paper, with no borders or creases.</li>
               <li>Print at <strong>100% scale</strong>, never &quot;Fit to Page&quot;.</li>
             </ul>
+            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mt-4">
+              Photo rules change and differ between countries and application types. Always confirm the
+              current requirements with the authority that issues your document. {SITE_DISCLAIMER}
+            </p>
           </div>
         </section>
 
@@ -335,7 +333,7 @@ export default function PrintTemplateGeneratorPage() {
                 Photo Booth vs. 4×6″ Print Template
               </h2>
               <p className="text-slate-600 text-sm">
-                See why over 17,000 applicants use our printable sheets.
+                Compare a printable sheet with a photo booth or passport photo service.
               </p>
             </div>
 
@@ -345,15 +343,15 @@ export default function PrintTemplateGeneratorPage() {
                   <thead>
                     <tr className="bg-slate-100 border-b border-slate-200">
                       <th className="p-4 sm:p-5 font-bold text-slate-900">Feature</th>
-                      <th className="p-4 sm:p-5 font-bold text-lime-800 bg-lime-50/50">PixPassport 4×6″ Sheet</th>
-                      <th className="p-4 sm:p-5 font-bold text-slate-700">High-Street Booth</th>
+                      <th className="p-4 sm:p-5 font-bold text-lime-800 bg-lime-50/50">{SITE_NAME} 4×6″ Sheet</th>
+                      <th className="p-4 sm:p-5 font-bold text-slate-700">Photo Booth</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     <tr>
                       <td className="p-4 sm:p-5 font-semibold text-slate-900">Cost</td>
-                      <td className="p-4 sm:p-5 text-[#365314] font-bold bg-lime-50/30">Free tool + 10p–25p print</td>
-                      <td className="p-4 sm:p-5 text-slate-600">£10.00 – £15.00</td>
+                      <td className="p-4 sm:p-5 text-[#365314] font-bold bg-lime-50/30">Free tool + one standard print</td>
+                      <td className="p-4 sm:p-5 text-slate-600">Passport photo service price</td>
                     </tr>
                     <tr>
                       <td className="p-4 sm:p-5 font-semibold text-slate-900">Photos per sheet</td>
@@ -423,6 +421,16 @@ export default function PrintTemplateGeneratorPage() {
                   <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-[#4D7C0F] group-hover:translate-x-1 transition-all" />
                 </Link>
               ))}
+            </div>
+
+            <div className="text-center mt-8">
+              <Link
+                href="/tool"
+                className="inline-flex items-center gap-1.5 text-sm font-bold text-[#365314] hover:text-[#4D7C0F] underline"
+              >
+                View all countries
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
             </div>
           </div>
         </section>

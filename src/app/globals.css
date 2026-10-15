@@ -10,10 +10,10 @@
 @plugin "@tailwindcss/typography";
 
 /* ========================================
-   3. Custom DaisyUI Theme — pixpassport
+   3. Custom DaisyUI Theme — brand
    ======================================== */
 @plugin "daisyui/theme" {
-  name: "pixpassport";
+  name: "brand";
   default: true;
 
   /* Brand colours */
