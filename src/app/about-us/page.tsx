@@ -115,7 +115,7 @@ export default function AboutUsPage() {
               <ol className="flex items-center gap-1.5 list-none p-0 m-0">
                 <li>
                   <Link href="/" className="text-slate-600 hover:text-lime-800 transition-colors font-medium">
-                    Home 1234
+                    Home
                   </Link>
                 </li>
                 <li aria-hidden="true">/</li>
