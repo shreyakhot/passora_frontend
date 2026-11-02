@@ -27,8 +27,6 @@ export default function NotFound() {
         className="relative flex flex-1 items-center overflow-hidden bg-white text-ink-950 min-h-[65vh]"
         id="main-content"
       >
-        <div className="pointer-events-none absolute inset-0 bg-dots [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" aria-hidden="true" />
-        <div className="pointer-events-none absolute left-1/2 top-1/3 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
 
         <div className="container-narrow relative py-16 sm:py-24">
           <div className="mx-auto max-w-xl text-center">

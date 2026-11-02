@@ -125,8 +125,6 @@ export default function PrivacyPolicyPage() {
       <main className="flex-1 bg-white text-ink-950" id="main-content">
         {/* Header */}
         <section className="relative overflow-hidden border-b border-ink-100" aria-label="Privacy Policy header">
-          <div className="pointer-events-none absolute inset-0 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" aria-hidden="true" />
-          <div className="pointer-events-none absolute -right-40 -top-40 h-[440px] w-[440px] rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
 
           <div className="container-narrow relative pb-14 pt-8 sm:pb-20 sm:pt-12">
             {/* Breadcrumb */}
@@ -347,8 +345,6 @@ export default function PrivacyPolicyPage() {
 
               {/* 10. Contact Us & Exercising Rights */}
               <section aria-labelledby="section-contact" className="relative mt-6 overflow-hidden rounded-3xl bg-ink-950 p-7 text-white sm:p-10">
-                <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
-                <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-brand-600/30 blur-3xl" aria-hidden="true" />
                 <div className="relative space-y-4">
                   <h2 id="section-contact" className="scroll-mt-24 text-xl font-extrabold text-white sm:text-2xl">
                     10. Contact &amp; Privacy Requests

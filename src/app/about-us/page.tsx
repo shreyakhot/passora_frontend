@@ -114,9 +114,6 @@ export default function AboutUsPage() {
       <main className="flex-1 bg-white text-ink-950" id="main-content">
         {/* Header & Hero */}
         <section className="relative overflow-hidden border-b border-ink-100" aria-label={`About ${SITE_NAME} header`}>
-          <div className="pointer-events-none absolute inset-0 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" aria-hidden="true" />
-          <div className="pointer-events-none absolute -right-40 -top-40 h-[480px] w-[480px] rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
-          <div className="pointer-events-none absolute -left-32 top-1/2 h-[340px] w-[340px] rounded-full bg-violet-200/40 blur-3xl" aria-hidden="true" />
 
           <div className="container-narrow relative pb-16 pt-8 sm:pb-20 sm:pt-12 lg:pb-24">
             {/* Breadcrumb */}
@@ -148,7 +145,7 @@ export default function AboutUsPage() {
               <p className="lead mt-6 max-w-2xl">
                 {SITE_NAME} is an independent, privacy-focused online photo formatting and compliance tool for passport, visa and ID applicants in 50+ countries worldwide.
               </p>
-              <p className="mt-6 flex max-w-2xl items-start gap-2.5 rounded-2xl border border-ink-200 bg-white/80 p-4 text-sm font-medium leading-relaxed text-ink-600 shadow-soft backdrop-blur">
+              <p className="mt-6 flex max-w-2xl items-start gap-2.5 rounded-2xl border border-ink-200 bg-white p-4 text-sm font-medium leading-relaxed text-ink-600 shadow-soft">
                 <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
                 <span>{SITE_DISCLAIMER}</span>
               </p>
@@ -163,7 +160,7 @@ export default function AboutUsPage() {
             <div className="container-narrow">
               <div className="grid gap-8 lg:grid-cols-12 lg:gap-14">
                 <div className="lg:col-span-5">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600 text-white shadow-brand" aria-hidden="true">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600 text-white" aria-hidden="true">
                     <Award className="h-6 w-6" />
                   </span>
                   <h2 id="mission-heading" className="display-2 mt-6 text-ink-950">
@@ -330,8 +327,6 @@ export default function AboutUsPage() {
 
           {/* 5. Contact & Support Information */}
           <section aria-labelledby="contact-summary-heading" className="relative overflow-hidden bg-ink-950 section-padding">
-            <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
-            <div className="pointer-events-none absolute -top-48 left-1/2 h-[480px] w-[720px] -translate-x-1/2 rounded-full bg-brand-600/25 blur-3xl" aria-hidden="true" />
             <div className="container-narrow relative">
               <div className="mx-auto max-w-2xl text-center">
                 <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-500/15 text-brand-300 ring-1 ring-brand-400/30" aria-hidden="true">

@@ -342,9 +342,6 @@ export default function HomePage() {
           id="hero"
           aria-label="Introduction and photo maker overview"
         >
-          <div className="pointer-events-none absolute inset-0 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" aria-hidden="true" />
-          <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
-          <div className="pointer-events-none absolute -left-32 top-1/2 h-[380px] w-[380px] rounded-full bg-violet-200/40 blur-3xl" aria-hidden="true" />
 
           <div className="container-narrow relative pb-16 pt-12 sm:pb-20 sm:pt-16 lg:pb-28 lg:pt-20">
             <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
@@ -352,7 +349,7 @@ export default function HomePage() {
               <div className="lg:col-span-7">
                 <Link
                   href="#studio"
-                  className="group inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white/80 py-1 pl-1 pr-3 text-xs font-semibold text-ink-700 shadow-soft backdrop-blur transition-colors hover:border-brand-300 sm:text-sm"
+                  className="group inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white py-1 pl-1 pr-3 text-xs font-semibold text-ink-700 shadow-soft transition-colors hover:border-brand-300 sm:text-sm"
                 >
                   <span className="rounded-full bg-brand-600 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">
                     Global
@@ -417,10 +414,6 @@ export default function HomePage() {
                       sizes="(max-width: 1024px) 384px, 460px"
                       className="object-cover"
                     />
-                    {/* Crop guides */}
-                    <div className="pointer-events-none absolute inset-[9%] rounded-[1rem] border-2 border-dashed border-white/80" aria-hidden="true" />
-                    <div className="pointer-events-none absolute left-[30%] right-[30%] top-[16%] h-[48%] rounded-[50%] border-2 border-brand-400/90" aria-hidden="true" />
-                    <span className="pointer-events-none absolute left-0 right-0 h-0.5 bg-brand-400 shadow-[0_0_14px_3px] shadow-brand-400/70 animate-scan" aria-hidden="true" />
                   </div>
                 </div>
 
@@ -452,7 +445,7 @@ export default function HomePage() {
           </div>
 
           {/* Country strip */}
-          <div className="relative border-t border-ink-100 bg-white/70 backdrop-blur">
+          <div className="relative border-t border-ink-100 bg-white">
             <div className="container-narrow flex flex-col items-center gap-4 py-6 lg:flex-row lg:gap-8">
               <p className="shrink-0 text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Sized for</p>
               <ul className="m-0 flex list-none flex-wrap items-center justify-center gap-2 p-0 lg:justify-start">
@@ -521,7 +514,7 @@ export default function HomePage() {
               {steps.map(({ icon: Icon, step, title, description }) => (
                 <li key={step} className="surface surface-hover relative p-7 sm:p-8">
                   <div className="flex items-center justify-between">
-                    <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600 text-white shadow-brand" aria-hidden="true">
+                    <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600 text-white" aria-hidden="true">
                       <Icon className="h-6 w-6" />
                     </span>
                     <span className="font-display text-5xl font-extrabold tracking-tighter text-ink-100" aria-hidden="true">
@@ -565,8 +558,8 @@ export default function HomePage() {
                 <div
                   key={title}
                   className={`surface surface-hover flex flex-col p-7 ${
-                    i === 0 ? "border-ink-950 bg-ink-950 text-white hover:border-ink-950 lg:row-span-2" : ""
-                  }`}
+                    i === 0 ? "border-ink-950 bg-ink-950 text-white hover:border-ink-950 lg:row-span-3" : ""
+                  } ${i === features.length - 1 ? "lg:col-span-2" : ""}`}
                 >
                   <span
                     className={
@@ -610,8 +603,6 @@ export default function HomePage() {
             5. TRUST (dark band)
            ================================================================ */}
         <section className="relative overflow-hidden bg-ink-950 section-padding" id="trust" aria-labelledby="trust-heading">
-          <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
-          <div className="pointer-events-none absolute -top-48 left-1/2 h-[480px] w-[720px] -translate-x-1/2 rounded-full bg-brand-600/25 blur-3xl" aria-hidden="true" />
           <div className="container-narrow relative">
             <SectionHeader
               id="trust-heading"
@@ -769,7 +760,7 @@ export default function HomePage() {
             <div className="mx-auto mt-14 grid max-w-4xl gap-6 md:grid-cols-2">
               {/* Standard */}
               <div className="relative flex flex-col rounded-[1.5rem] bg-ink-950 p-8 text-white shadow-lift ring-1 ring-ink-950">
-                <span className="absolute -top-3 left-8 rounded-full bg-brand-600 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white shadow-brand">
+                <span className="absolute -top-3 left-8 rounded-full bg-brand-600 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
                   Most popular
                 </span>
                 <h3 className="text-lg font-extrabold text-white">{standardPlan.title}</h3>

@@ -604,7 +604,7 @@ export default function PhotoMakerStudio({
                 aria-label="Upload photo area. Drag and drop a photo or press enter to browse files."
               >
                 <div
-                  className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600 text-white shadow-brand transition-transform group-hover:-translate-y-0.5 sm:h-16 sm:w-16"
+                  className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600 text-white transition-transform group-hover:-translate-y-0.5 sm:h-16 sm:w-16"
                   aria-hidden="true"
                 >
                   <ImagePlus className="h-7 w-7" />
@@ -711,7 +711,7 @@ export default function PhotoMakerStudio({
           aria-modal="true"
           aria-labelledby="processing-modal-title"
           aria-describedby="processing-modal-desc"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink-950/75 p-4 backdrop-blur-sm animate-fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink-950/75 p-4 animate-fade-in"
         >
           <div className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-3xl border border-ink-200 bg-white p-6 text-center shadow-2xl sm:p-8">
             {/* Screen reader live status announcement */}
@@ -723,7 +723,7 @@ export default function PhotoMakerStudio({
             {/* Scanning visual */}
             <div className="relative mx-auto mb-5 h-24 w-20 overflow-hidden rounded-2xl border border-brand-200 bg-brand-50" aria-hidden="true">
               <Camera className="absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 text-brand-600" />
-              <span className="absolute left-0 right-0 h-0.5 bg-brand-500 shadow-[0_0_12px_2px] shadow-brand-400 animate-scan" />
+              <span className="absolute left-0 right-0 h-0.5 bg-brand-500 animate-scan" />
               <span className="absolute -bottom-0 right-0 rounded-tl-lg bg-brand-600 px-1.5 py-0.5 font-mono text-[11px] font-bold text-white">
                 {countdown}s
               </span>

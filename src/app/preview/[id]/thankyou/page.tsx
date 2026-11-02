@@ -234,17 +234,6 @@ export default function ThankYouDownloadPage() {
       <Navbar ctaText="Create Another Photo" ctaHref="/passport-size-photo-maker" />
 
       <main className="relative flex-1 overflow-hidden" id="main-content">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent)]" aria-hidden="true" />
-        <div
-          className={`pointer-events-none absolute -top-40 left-1/2 h-[420px] w-[640px] -translate-x-1/2 rounded-full blur-3xl ${
-            paymentState?.status === "failed"
-              ? "bg-red-200/40"
-              : paymentState?.status === "pending"
-                ? "bg-amber-200/40"
-                : "bg-emerald-200/40"
-          }`}
-          aria-hidden="true"
-        />
 
         <div className="container-narrow relative max-w-4xl space-y-5 py-8 sm:space-y-6 sm:py-12">
           {/* ========================================================================= */}
@@ -404,7 +393,6 @@ export default function ThankYouDownloadPage() {
             {activeTab === "single" && (
               <div className="grid items-center gap-6 md:grid-cols-2 md:gap-8 animate-fade-in">
                 <div className="relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-ink-200 bg-ink-50 p-5 text-center sm:p-8">
-                  <div className="pointer-events-none absolute inset-0 bg-dots" aria-hidden="true" />
                   <div className="relative inline-block overflow-hidden rounded-xl border-4 border-white bg-white shadow-lift">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -412,7 +400,7 @@ export default function ThankYouDownloadPage() {
                       alt={`${countryName} Verified Master Photo`}
                       className="max-h-64 w-auto rounded-lg object-contain sm:max-h-80"
                     />
-                    <div className="absolute right-2 top-2 rounded-full bg-ink-950/85 px-2.5 py-0.5 text-[10px] font-bold text-white backdrop-blur">
+                    <div className="absolute right-2 top-2 rounded-full bg-ink-950 px-2.5 py-0.5 text-[10px] font-bold text-white">
                       300 DPI
                     </div>
                   </div>

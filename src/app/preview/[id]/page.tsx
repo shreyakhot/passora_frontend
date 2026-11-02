@@ -589,8 +589,6 @@ export default function PassportPhotoPreviewPage() {
 
       {/* Main container with bottom padding on mobile for sticky payment bar */}
       <main className="relative flex-1 overflow-hidden flex items-start justify-center px-4 sm:px-6 pt-8 sm:pt-12 pb-48 lg:pb-16 text-ink-950" id="main-content">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent)]" aria-hidden="true" />
-        <div className="pointer-events-none absolute -right-40 -top-48 h-[460px] w-[460px] rounded-full bg-brand-200/40 blur-3xl" aria-hidden="true" />
 
         <div className="relative w-full max-w-6xl">
           {!fullImageUrl && !previewUrl ? (
@@ -675,7 +673,7 @@ export default function PassportPhotoPreviewPage() {
 
                     {/* Photo Container */}
                     <div
-                      className="group relative mx-4 my-4 flex cursor-zoom-in select-none items-center justify-center overflow-hidden rounded-2xl border border-ink-200 bg-ink-50 bg-dots p-4 focus-ring sm:mx-6 sm:my-6 sm:p-6"
+                      className="group relative mx-4 my-4 flex cursor-zoom-in select-none items-center justify-center overflow-hidden rounded-2xl border border-ink-200 bg-ink-50 p-4 focus-ring sm:mx-6 sm:my-6 sm:p-6"
                       onClick={() => setIsZoomOpen(true)}
                       role="button"
                       tabIndex={0}
@@ -699,14 +697,14 @@ export default function PassportPhotoPreviewPage() {
                       />
 
                       {/* Subtle Glass Tag (Non-obstructive) */}
-                      <div className="pointer-events-none absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full bg-ink-950/85 px-2.5 py-1 text-[11px] font-semibold text-white shadow-soft backdrop-blur-xs">
+                      <div className="pointer-events-none absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full bg-ink-950 px-2.5 py-1 text-[11px] font-semibold text-white shadow-soft">
                         <Eye className="h-3 w-3 text-brand-300" aria-hidden="true" />
                         <span>Preview</span>
                       </div>
 
                       {/* Hover Zoom Hint */}
                       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-ink-950/0 transition-colors group-hover:bg-ink-950/5">
-                        <div className="flex scale-95 items-center gap-1.5 rounded-full border border-ink-200 bg-white/95 px-3.5 py-2 text-xs font-bold text-ink-950 opacity-0 shadow-lift backdrop-blur-xs transition-all group-hover:scale-100 group-hover:opacity-100">
+                        <div className="flex scale-95 items-center gap-1.5 rounded-full border border-ink-200 bg-white px-3.5 py-2 text-xs font-bold text-ink-950 opacity-0 shadow-lift transition-all group-hover:scale-100 group-hover:opacity-100">
                           <ZoomIn className="h-3.5 w-3.5 text-brand-600" aria-hidden="true" />
                           <span>Click to Zoom</span>
                         </div>
@@ -785,8 +783,6 @@ export default function PassportPhotoPreviewPage() {
 
                   {/* Dedicated 24/7 Mail Support Card */}
                   <div className="relative overflow-hidden rounded-3xl bg-ink-950 p-6 text-white sm:p-7">
-                    <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
-                    <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-brand-600/30 blur-3xl" aria-hidden="true" />
                     <div className="relative z-10 flex items-start gap-4">
                       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-white/10 text-brand-300" aria-hidden="true">
                         <Mail className="h-5 w-5" />
@@ -905,7 +901,7 @@ export default function PassportPhotoPreviewPage() {
                               }`}
                             >
                               {/* Floating MOST POPULAR Badge */}
-                              <div className="absolute -top-3 right-5 z-10 inline-flex items-center gap-1 rounded-full bg-brand-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-brand">
+                              <div className="absolute -top-3 right-5 z-10 inline-flex items-center gap-1 rounded-full bg-brand-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
                                 <Star className="h-3 w-3 fill-white" aria-hidden="true" />
                                 Most popular
                               </div>
@@ -1205,7 +1201,7 @@ export default function PassportPhotoPreviewPage() {
           {/* MOBILE STICKY BOTTOM PAYMENT BAR (With inline email input & action button) */}
           {/* ========================================================================= */}
           {!isPaid && (fullImageUrl || previewUrl) && (
-            <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-ink-200 bg-white/95 px-4 pb-4 pt-3 shadow-[0_-12px_32px_-12px_rgb(11_16_32/0.25)] backdrop-blur-md lg:hidden">
+            <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-ink-200 bg-white px-4 pb-4 pt-3 shadow-[0_-12px_32px_-12px_rgb(11_16_32/0.25)] lg:hidden">
               <div className="mx-auto max-w-md space-y-2.5">
                 {/* Mobile Sticky Email Input */}
                 <div className="relative">
@@ -1283,7 +1279,7 @@ export default function PassportPhotoPreviewPage() {
           {/* ========================================================================= */}
           {isEmailModalOpen && (
             <div
-              className="fixed inset-0 z-[300] flex items-end justify-center bg-ink-950/75 p-0 backdrop-blur-sm animate-fade-in sm:items-center sm:p-4"
+              className="fixed inset-0 z-[300] flex items-end justify-center bg-ink-950/75 p-0 animate-fade-in sm:items-center sm:p-4"
               onClick={() => setIsEmailModalOpen(false)}
               role="dialog"
               aria-modal="true"
@@ -1403,7 +1399,7 @@ export default function PassportPhotoPreviewPage() {
           {/* ========================================================================= */}
           {isZoomOpen && (
             <div
-              className="fixed inset-0 z-[200] flex items-center justify-center bg-ink-950/80 p-3 backdrop-blur-sm animate-fade-in sm:p-4"
+              className="fixed inset-0 z-[200] flex items-center justify-center bg-ink-950/80 p-3 animate-fade-in sm:p-4"
               onClick={() => setIsZoomOpen(false)}
               role="dialog"
               aria-modal="true"
@@ -1427,7 +1423,7 @@ export default function PassportPhotoPreviewPage() {
                   </h3>
                 </div>
 
-                <div className="flex items-center justify-center overflow-hidden rounded-2xl border border-ink-200 bg-ink-50 bg-dots p-3 sm:p-6">
+                <div className="flex items-center justify-center overflow-hidden rounded-2xl border border-ink-200 bg-ink-50 p-3 sm:p-6">
                   {/* Clean preview image with no dark overlays */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -1466,7 +1462,7 @@ export default function PassportPhotoPreviewPage() {
           {/* ========================================================================= */}
           {isFixModalOpen && (
             <div
-              className="fixed inset-0 z-[250] flex items-end justify-center bg-ink-950/75 p-0 backdrop-blur-md animate-fade-in sm:items-center sm:p-4 md:p-6"
+              className="fixed inset-0 z-[250] flex items-end justify-center bg-ink-950/75 p-0 animate-fade-in sm:items-center sm:p-4 md:p-6"
               onClick={() => setIsFixModalOpen(false)}
               role="dialog"
               aria-modal="true"

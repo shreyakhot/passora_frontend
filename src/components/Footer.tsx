@@ -66,7 +66,6 @@ export default function Footer({
 
   return (
     <footer className={`relative overflow-hidden bg-ink-950 text-ink-200 ${className}`.trim()} role="contentinfo">
-      <div className="pointer-events-none absolute inset-0 bg-dots-dark opacity-60" aria-hidden="true" />
 
       <div className="container-narrow relative">
         {showCta && (

@@ -77,9 +77,6 @@ export default function PassportSizePhotoMakerPage() {
           className="relative overflow-hidden border-b border-ink-100 bg-ink-50"
           aria-labelledby="maker-heading"
         >
-          <div className="pointer-events-none absolute inset-0 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent_70%)]" aria-hidden="true" />
-          <div className="pointer-events-none absolute -right-40 -top-40 h-[480px] w-[480px] rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
-          <div className="pointer-events-none absolute -left-32 top-1/2 h-[360px] w-[360px] rounded-full bg-violet-200/40 blur-3xl" aria-hidden="true" />
 
           <div className="container-narrow relative pb-14 pt-8 sm:pb-20 sm:pt-12 lg:pb-24">
             {/* Breadcrumb */}
@@ -144,8 +141,6 @@ export default function PassportSizePhotoMakerPage() {
         <section className="section-padding" aria-labelledby="print-heading">
           <div className="container-narrow">
             <div className="relative overflow-hidden rounded-[1.5rem] bg-ink-950 p-7 text-white shadow-lift sm:p-10">
-              <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
-              <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand-600/30 blur-3xl" aria-hidden="true" />
               <div className="relative flex flex-col justify-between gap-6 md:flex-row md:items-center">
                 <div className="flex items-start gap-5">
                   <span

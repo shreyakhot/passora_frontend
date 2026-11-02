@@ -168,9 +168,6 @@ export default async function ToolGuidePage({ params }: PageProps) {
 
       <main className="flex-1 bg-white text-ink-950" id="main-content">
         <section className="relative overflow-hidden border-b border-ink-100" aria-label="Guide overview">
-          <div className="pointer-events-none absolute inset-0 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" aria-hidden="true" />
-          <div className="pointer-events-none absolute -right-40 -top-40 h-[480px] w-[480px] rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
-          <div className="pointer-events-none absolute -left-32 top-1/2 h-[340px] w-[340px] rounded-full bg-violet-200/40 blur-3xl" aria-hidden="true" />
 
           <div className="container-narrow relative pb-12 pt-8 sm:pb-16 sm:pt-12">
             <nav className="text-xs text-ink-500 sm:text-sm" aria-label="Breadcrumb">
@@ -204,7 +201,7 @@ export default async function ToolGuidePage({ params }: PageProps) {
               {(tool.lastVerified || countryName || tool.sources.length > 0) && (
                 <ul className="m-0 mt-7 flex list-none flex-wrap gap-2 p-0 text-xs text-ink-700 sm:text-sm">
                   {tool.lastVerified && (
-                    <li className="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white/80 px-3.5 py-1.5 backdrop-blur">
+                    <li className="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white px-3.5 py-1.5">
                       <CalendarCheck className="h-4 w-4 text-brand-600" aria-hidden="true" />
                       <span>
                         Last checked against official sources on{" "}
@@ -215,13 +212,13 @@ export default async function ToolGuidePage({ params }: PageProps) {
                     </li>
                   )}
                   {countryName && (
-                    <li className="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white/80 px-3.5 py-1.5 font-semibold text-ink-950 backdrop-blur">
+                    <li className="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white px-3.5 py-1.5 font-semibold text-ink-950">
                       <Globe className="h-4 w-4 text-brand-600" aria-hidden="true" />
                       {countryName}
                     </li>
                   )}
                   {tool.sources.length > 0 && (
-                    <li className="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white/80 px-3.5 py-1.5 backdrop-blur">
+                    <li className="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white px-3.5 py-1.5">
                       <ShieldCheck className="h-4 w-4 text-brand-600" aria-hidden="true" />
                       {tool.sources.length} {tool.sources.length === 1 ? "source" : "sources"} cited
                     </li>
@@ -289,9 +286,8 @@ export default async function ToolGuidePage({ params }: PageProps) {
                     className="relative mt-14 overflow-hidden rounded-[1.5rem] border border-brand-100 bg-brand-50 p-7 sm:p-9"
                     aria-label="Make your photo online"
                   >
-                    <div className="pointer-events-none absolute inset-0 bg-dots [mask-image:linear-gradient(to_left,black,transparent_70%)]" aria-hidden="true" />
                     <div className="relative">
-                      <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-600 text-white shadow-brand" aria-hidden="true">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-600 text-white" aria-hidden="true">
                         <Camera className="h-5 w-5" />
                       </span>
                       <h2 className="mt-5 text-2xl font-extrabold text-ink-950 sm:text-3xl">Make your photo online</h2>
@@ -345,8 +341,6 @@ export default async function ToolGuidePage({ params }: PageProps) {
               <aside className="hidden lg:block" aria-label="Guide shortcuts">
                 <div className="sticky top-28 space-y-5">
                   <div className="relative overflow-hidden rounded-[1.5rem] bg-ink-950 p-7 text-white shadow-lift">
-                    <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
-                    <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-brand-600/30 blur-3xl" aria-hidden="true" />
                     <div className="relative">
                       <span
                         className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-500/15 text-brand-300 ring-1 ring-brand-400/30"

@@ -145,8 +145,8 @@ export default function Navbar({
     <header
       className={`sticky top-0 z-50 w-full border-b transition-colors duration-200 ${
         scrolled || mobileOpen
-          ? "bg-white/90 border-ink-200 backdrop-blur-md"
-          : "bg-white/70 border-transparent backdrop-blur-sm"
+          ? "bg-white border-ink-200"
+          : "bg-white border-transparent"
       } ${className}`.trim()}
       role="banner"
     >
@@ -284,7 +284,7 @@ export default function Navbar({
       {mobileOpen && (
         <>
           <div
-            className="fixed inset-0 top-16 z-40 bg-ink-950/40 backdrop-blur-xs animate-fade-in lg:hidden"
+            className="fixed inset-0 top-16 z-40 bg-ink-950/40 animate-fade-in lg:hidden"
             onClick={() => setMobileOpen(false)}
             aria-hidden="true"
           />

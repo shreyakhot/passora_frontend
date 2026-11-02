@@ -110,8 +110,6 @@ export default function ContactUsPage() {
           className="relative overflow-hidden border-b border-ink-100"
           aria-labelledby="contact-page-heading"
         >
-          <div className="pointer-events-none absolute inset-0 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" aria-hidden="true" />
-          <div className="pointer-events-none absolute -right-40 -top-40 h-[440px] w-[440px] rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
 
           <div className="container-narrow relative pb-14 pt-8 sm:pb-20 sm:pt-12">
             {/* Breadcrumb */}

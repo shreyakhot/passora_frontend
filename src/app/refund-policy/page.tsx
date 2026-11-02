@@ -137,8 +137,6 @@ export default function RefundPolicyPage() {
       <main className="flex-1 bg-white text-ink-950" id="main-content">
         {/* Header */}
         <section className="relative overflow-hidden border-b border-ink-100" aria-label="Refund Policy header">
-          <div className="pointer-events-none absolute inset-0 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" aria-hidden="true" />
-          <div className="pointer-events-none absolute -right-40 -top-40 h-[440px] w-[440px] rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
 
           <div className="container-narrow relative pb-14 pt-8 sm:pb-20 sm:pt-12">
             {/* Breadcrumb */}
@@ -199,10 +197,9 @@ export default function RefundPolicyPage() {
             <article className="min-w-0 max-w-[72ch] text-base leading-relaxed text-ink-600 sm:text-[1.0625rem]">
               {/* Guarantee Summary Box */}
               <div className="relative overflow-hidden rounded-3xl border border-brand-200 bg-brand-50 p-6 sm:p-8">
-                <div className="pointer-events-none absolute inset-0 bg-dots opacity-60 [mask-image:linear-gradient(to_left,black,transparent_70%)]" aria-hidden="true" />
                 <div className="relative">
                   <h2 className="flex items-center gap-3 text-xl font-extrabold text-ink-950 sm:text-2xl">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-white shadow-brand" aria-hidden="true">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-white" aria-hidden="true">
                       <ShieldCheck className="h-5 w-5" />
                     </span>
                     <span>Our Dimensional Acceptance Promise</span>
@@ -322,8 +319,6 @@ export default function RefundPolicyPage() {
 
               {/* 5. Contact Section */}
               <section aria-labelledby="refund-contact" className="relative mt-6 overflow-hidden rounded-3xl bg-ink-950 p-7 text-white sm:p-10">
-                <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
-                <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-brand-600/30 blur-3xl" aria-hidden="true" />
                 <div className="relative space-y-4">
                   <h2 id="refund-contact" className="scroll-mt-24 text-xl font-extrabold text-white sm:text-2xl">
                     5. Contact Support for Assistance

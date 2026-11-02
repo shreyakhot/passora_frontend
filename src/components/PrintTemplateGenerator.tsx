@@ -568,7 +568,7 @@ export default function PrintTemplateGenerator({
               }`}
             >
               {/* Central Upload Graphic */}
-              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600 text-white shadow-brand transition-transform group-hover:-translate-y-0.5 sm:h-16 sm:w-16">
+              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600 text-white transition-transform group-hover:-translate-y-0.5 sm:h-16 sm:w-16">
                 <Upload className="h-7 w-7" />
               </div>
 
@@ -642,7 +642,7 @@ export default function PrintTemplateGenerator({
   // Shared option-card styles (selected = brand-50 + brand-600 ring)
   const optionSelected = "border-brand-600 bg-brand-50 ring-1 ring-brand-600";
   const optionIdle = "border-ink-200 bg-white hover:border-brand-300";
-  const tabSelected = "bg-brand-600 text-white shadow-brand";
+  const tabSelected = "bg-brand-600 text-white";
   const tabIdle = "text-ink-600 hover:bg-white hover:text-ink-950";
 
   // =========================================================================
@@ -679,7 +679,6 @@ export default function PrintTemplateGenerator({
               STAGE 1: LIVE CANVAS PREVIEW (Sticky, compact, responsive)
              ========================================================================= */}
           <div className="relative flex flex-col justify-between overflow-hidden bg-ink-950 p-3 sm:p-5 lg:col-span-7">
-            <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
 
             {/* Canvas Top Status Bar */}
             <div className="relative mb-3 flex flex-col justify-between gap-2.5 border-b border-white/10 pb-3 text-xs text-ink-300 sm:flex-row sm:items-center">
@@ -939,7 +938,7 @@ export default function PrintTemplateGenerator({
                         onClick={() => setPhotoCountOverride(count === maxCapacity ? null : count)}
                         className={`min-h-11 flex-1 cursor-pointer rounded-xl border text-xs font-bold transition-all ${
                           activePhotoCount === count
-                            ? "border-brand-600 bg-brand-600 text-white shadow-brand"
+                            ? "border-brand-600 bg-brand-600 text-white"
                             : "border-ink-200 bg-white text-ink-700 hover:border-brand-300"
                         }`}
                       >

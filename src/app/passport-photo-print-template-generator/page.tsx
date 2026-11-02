@@ -194,14 +194,11 @@ export default function PrintTemplateGeneratorPage() {
       <main className="flex-1 bg-white text-ink-950" id="main-content">
         {/* 1. HERO + 2. GENERATOR */}
         <section className="relative overflow-hidden border-b border-ink-100 bg-white" aria-labelledby="print-hero-heading">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[560px] bg-dots [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" aria-hidden="true" />
-          <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
-          <div className="pointer-events-none absolute -left-32 top-24 h-[380px] w-[380px] rounded-full bg-violet-200/40 blur-3xl" aria-hidden="true" />
 
           <div className="container-narrow relative pt-8 pb-10 sm:pt-12 sm:pb-14 lg:pt-16">
             <div className="mx-auto max-w-4xl text-center">
               <nav className="mb-6 flex justify-center text-xs sm:text-sm" aria-label="Breadcrumb">
-                <ol className="m-0 flex list-none items-center gap-1.5 rounded-full border border-ink-200 bg-white/80 px-3 py-1.5 shadow-soft backdrop-blur">
+                <ol className="m-0 flex list-none items-center gap-1.5 rounded-full border border-ink-200 bg-white px-3 py-1.5 shadow-soft">
                   <li>
                     <Link href="/" className="font-medium text-ink-500 transition-colors hover:text-brand-700">
                       Home
@@ -335,7 +332,7 @@ export default function PrintTemplateGeneratorPage() {
                 ].map(({ n, icon: Icon, title, body }) => (
                   <li key={n} className="surface surface-hover relative p-7 sm:p-8">
                     <div className="flex items-center justify-between">
-                      <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600 text-white shadow-brand" aria-hidden="true">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600 text-white" aria-hidden="true">
                         <Icon className="h-6 w-6" />
                       </span>
                       <span className="font-display text-5xl font-extrabold tracking-tighter text-ink-100" aria-hidden="true">
@@ -423,8 +420,6 @@ export default function PrintTemplateGeneratorPage() {
 
         {/* 6. COMPARISON TABLE */}
         <section className="relative overflow-hidden bg-ink-950 section-padding" aria-labelledby="compare-heading">
-          <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
-          <div className="pointer-events-none absolute -top-48 left-1/2 h-[480px] w-[720px] -translate-x-1/2 rounded-full bg-brand-600/25 blur-3xl" aria-hidden="true" />
           <div className="container-narrow relative">
             <SectionHeader
               id="compare-heading"

@@ -68,9 +68,9 @@ Base heading styles are in `@layer base`, so Tailwind size utilities on a headin
 * **Section rhythm:** `.section-padding`, 4rem / 5rem / 6.5rem
 * **Section header pattern:** `.eyebrow` pill → `h2.display-2` → `p.lead`, centred (left-aligned in two-column layouts)
 * **Cards:** `.surface` (white, 1px `ink-200`, 1.25rem radius); add `.surface-hover` for lift on hover. Tool surfaces use `rounded-3xl` + `shadow-lift`.
-* **Dark bands:** `bg-ink-950` with `.bg-dots-dark` and a blurred `brand-600/25` glow (trust section, footer).
-* **Backdrops:** `.bg-dots` (masked) and blurred `brand-200` / `violet-200` blobs in heroes. Do not put gradients on buttons or cards.
-* **Shadows:** `shadow-soft` (resting), `shadow-lift` (elevated / hover / popovers), `shadow-brand` (primary button glow)
+* **Plain colours only:** every surface is a single flat colour. No gradients, glows, blurred blobs, backdrop blur, dotted or patterned backdrops, or gradient masks anywhere on the public site.
+* **Dark bands:** flat `bg-ink-950` (trust section, footer). Heroes are flat white or `ink-50`.
+* **Shadows:** neutral only — `shadow-soft` (resting), `shadow-lift` (elevated / hover / popovers). Never coloured shadows.
 * **Icon tile:** `.icon-tile`, a 44px indigo-tinted square for Lucide icons
 
 ---
@@ -81,7 +81,7 @@ Base heading styles are in `@layer base`, so Tailwind size utilities on a headin
 
 | Class | Use |
 | :--- | :--- |
-| `.btn-brand` | Primary CTA (indigo, white text, glow) |
+| `.btn-brand` | Primary CTA (flat indigo, white text) |
 | `.btn-outline-brand` | Secondary on light surfaces |
 | `.btn-dark` | Strong secondary (ink) |
 | `.btn-light` | Primary on dark surfaces |
@@ -95,7 +95,7 @@ All buttons are ≥44px tall, rounded 0.875rem and bold.
 
 ### Navigation (`Navbar.tsx`)
 
-Sticky, translucent white with backdrop blur that turns solid on scroll. Pill-shaped nav links (`brand-50` active state), a "Tools" dropdown (Lucide icon tiles), a compact `.btn-brand` CTA and a full-width mobile drawer below `lg`.
+Sticky, solid white; a bottom border appears on scroll. Pill-shaped nav links (`brand-50` active state), a "Tools" dropdown (Lucide icon tiles), a compact `.btn-brand` CTA and a full-width mobile drawer below `lg`.
 
 ### Footer (`Footer.tsx`)
 

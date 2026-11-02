@@ -82,9 +82,6 @@ export default function ToolHubPage() {
           className="relative overflow-hidden border-b border-ink-100"
           aria-label="Photo guides header"
         >
-          <div className="pointer-events-none absolute inset-0 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" aria-hidden="true" />
-          <div className="pointer-events-none absolute -right-40 -top-40 h-[480px] w-[480px] rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
-          <div className="pointer-events-none absolute -left-32 top-1/2 h-[340px] w-[340px] rounded-full bg-violet-200/40 blur-3xl" aria-hidden="true" />
 
           <div className="container-narrow relative pb-14 pt-8 sm:pb-20 sm:pt-12">
             <nav className="text-xs text-ink-500 sm:text-sm" aria-label="Breadcrumb">
@@ -125,7 +122,7 @@ export default function ToolHubPage() {
                       <li key={cluster.id}>
                         <a
                           href={`#cluster-${cluster.id}`}
-                          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink-200 bg-white/80 px-4 text-sm font-semibold text-ink-700 shadow-soft backdrop-blur transition-colors hover:border-brand-300 hover:text-brand-700 focus-ring"
+                          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink-200 bg-white px-4 text-sm font-semibold text-ink-700 shadow-soft transition-colors hover:border-brand-300 hover:text-brand-700 focus-ring"
                         >
                           <Icon className="h-4 w-4 text-brand-600" aria-hidden="true" />
                           {cluster.name}
@@ -203,8 +200,6 @@ export default function ToolHubPage() {
         <section className="pb-16 sm:pb-24" aria-labelledby="hub-cta-heading">
           <div className="container-narrow">
             <div className="relative overflow-hidden rounded-[1.5rem] bg-ink-950 p-8 text-white shadow-lift sm:p-12">
-              <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
-              <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand-600/30 blur-3xl" aria-hidden="true" />
               <div className="relative flex flex-col justify-between gap-6 md:flex-row md:items-center">
                 <div>
                   <h2 id="hub-cta-heading" className="text-2xl font-extrabold text-white sm:text-3xl">
