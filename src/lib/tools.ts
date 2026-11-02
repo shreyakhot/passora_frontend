@@ -4,11 +4,51 @@ import matter from "gray-matter";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
 import html from "remark-html";
-import { getPlanPricing } from "@/lib/config/pricing";
-import { DEFAULT_COUNTRY_CODE } from "@/config/countries";
-import { getAllCountryPageSlugs, getCountryPageSource } from "@/lib/country-pages";
+import { SITE_NAME } from "@/lib/site";
 
+/** One Markdown file per guide page; see seo/README.md for the frontmatter. */
 const TOOLS_DIRECTORY = path.join(process.cwd(), "src/content/tools");
+
+export type ToolCluster =
+  | "core-local"
+  | "retailer-brands"
+  | "diy-tools"
+  | "size-requirements"
+  | "visa-countries";
+
+/** Cluster names and their hub slugs, in the order the strategy lists them. */
+export const TOOL_CLUSTERS: { id: ToolCluster; name: string; hub: string; intro: string }[] = [
+  {
+    id: "core-local",
+    name: "Passport Photo Basics",
+    hub: "passport-photo",
+    intro: "What a passport photo is, where to get one, what it costs and how fast you can have it.",
+  },
+  {
+    id: "retailer-brands",
+    name: "Where to Get Passport Photos",
+    hub: "passport-photos-near-me",
+    intro: "Pharmacies, post offices and print shops that take passport photos, and what to expect at each.",
+  },
+  {
+    id: "diy-tools",
+    name: "Online & DIY Passport Photos",
+    hub: "online-passport-photo-maker",
+    intro: "Make, check and print a passport photo yourself with a phone, a computer or an online tool.",
+  },
+  {
+    id: "size-requirements",
+    name: "Photo Size & Requirements",
+    hub: "passport-photo-requirements",
+    intro: "Sizes, formats and the rules a photo must meet before an authority accepts it.",
+  },
+  {
+    id: "visa-countries",
+    name: "Visa, Immigration & Countries",
+    hub: "visa-photo",
+    intro: "Photo rules for visas, immigration forms and specific countries.",
+  },
+];
 
 export interface FaqItem {
   question: string;
@@ -16,198 +56,200 @@ export interface FaqItem {
   answerHtml?: string;
 }
 
-export interface ToolPageData {
-  slug: string;
-  title: string;
-  /** Optional <title> override; falls back to `title`. */
-  meta_title?: string;
-  meta_description: string;
-  country_code: string;
-  document_type: string;
-  badge?: string;
-  hero_title: string;
-  hero_subtitle: string;
-  studio_title?: string;
-  studio_description?: string;
-  cta_description?: string;
-  how_it_works_title?: string;
-  /** Hero button label; defaults to "Create My Passport Photo". */
-  cta_button_text?: string;
-  dimensions_mm: string;
-  dimensions_px?: string;
-  feature_image?: string;
-  feature_image_alt?: string;
-  price?: string;
-  contentHtml: string;
-  faqs?: FaqItem[];
+export interface ToolSource {
+  name: string;
+  url: string;
 }
 
-function getMarkdownToolSlugs(): string[] {
+export interface ToolSummary {
+  slug: string;
+  title: string;
+  description: string;
+  cluster: ToolCluster;
+  hub: boolean;
+  pageNumber: number;
+}
+
+export interface ToolPageData extends ToolSummary {
+  metaTitle: string;
+  intro: string;
+  primaryKeyword: string;
+  pageType: string;
+  countryCode?: string;
+  studio: boolean;
+  published?: string;
+  lastVerified?: string;
+  sources: ToolSource[];
+  related: ToolSummary[];
+  contentHtml: string;
+  faqs: FaqItem[];
+  howToSteps: string[];
+}
+
+const CLUSTER_IDS = new Set(TOOL_CLUSTERS.map((c) => c.id));
+
+function toCluster(value: unknown): ToolCluster {
+  return CLUSTER_IDS.has(value as ToolCluster) ? (value as ToolCluster) : "core-local";
+}
+
+/** gray-matter parses YAML dates into Date objects; keep them as YYYY-MM-DD. */
+function toDateString(value: unknown): string | undefined {
+  if (value instanceof Date) return value.toISOString().slice(0, 10);
+  return typeof value === "string" && value ? value : undefined;
+}
+
+export function getAllToolSlugs(): string[] {
   if (!fs.existsSync(TOOLS_DIRECTORY)) return [];
-  const fileNames = fs.readdirSync(TOOLS_DIRECTORY);
-  return fileNames
+  return fs
+    .readdirSync(TOOLS_DIRECTORY)
     .filter((file) => file.endsWith(".md"))
     .map((file) => file.replace(/\.md$/, ""));
 }
 
-/** Markdown guides plus one generated page per country. */
-export function getAllToolSlugs(): string[] {
-  return Array.from(new Set([...getMarkdownToolSlugs(), ...getAllCountryPageSlugs()]));
+function readToolFile(slug: string): matter.GrayMatterFile<string> | null {
+  if (!/^[a-z0-9-]+$/.test(slug)) return null;
+  const fullPath = path.join(TOOLS_DIRECTORY, `${slug}.md`);
+  if (!fs.existsSync(fullPath)) return null;
+  const file = matter(fs.readFileSync(fullPath, "utf8"));
+  // Editorial HTML comments (TODOs, notes) must not ship in the page source.
+  file.content = file.content
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/\{\{SITE_NAME\}\}/g, SITE_NAME);
+  return file;
 }
 
-async function parseFaqsFromMarkdown(
-  rawContent: string
-): Promise<{ cleanedContent: string; faqs: FaqItem[] }> {
-  // Look for ## Frequently Asked Questions (or FAQ / FAQs / X. FAQs) section
-  const faqHeaderRegex = /(?:^|\n)##\s+(?:(?:\d+\.\s*)?[^\n]*\b(?:Frequently Asked Questions|FAQs?)\b[^\n]*)/i;
-  const match = rawContent.match(faqHeaderRegex);
+function toSummary(slug: string, data: Record<string, unknown>): ToolSummary {
+  return {
+    slug,
+    title: String(data.title || slug),
+    description: String(data.meta_description || ""),
+    cluster: toCluster(data.cluster),
+    hub: data.hub === true,
+    pageNumber: Number(data.page_number) || 0,
+  };
+}
 
-  if (!match || match.index === undefined) {
-    return { cleanedContent: rawContent, faqs: [] };
-  }
+/** Every published guide, ordered by cluster and then by strategy page number. */
+export function getAllToolSummaries(): ToolSummary[] {
+  const clusterOrder = TOOL_CLUSTERS.map((c) => c.id);
+  return getAllToolSlugs()
+    .map((slug) => {
+      const file = readToolFile(slug);
+      return file ? toSummary(slug, file.data) : null;
+    })
+    .filter((t): t is ToolSummary => Boolean(t))
+    .sort(
+      (a, b) =>
+        clusterOrder.indexOf(a.cluster) - clusterOrder.indexOf(b.cluster) ||
+        Number(b.hub) - Number(a.hub) ||
+        a.pageNumber - b.pageNumber
+    );
+}
+
+async function markdownToHtml(markdown: string): Promise<string> {
+  const processed = await remark().use(remarkGfm).use(html, { sanitize: false }).process(markdown);
+  return processed.toString();
+}
+
+/**
+ * Links to guides that are not published yet render as plain text, so writers
+ * can link ahead and the links go live when the target page ships.
+ */
+function unlinkUnpublishedGuides(htmlContent: string, published: Set<string>): string {
+  return htmlContent.replace(
+    /<a href="\/tool\/([a-z0-9-]+)\/?(?:#[^"]*)?">([\s\S]*?)<\/a>/g,
+    (link, slug: string, text: string) => (published.has(slug) ? link : text)
+  );
+}
+
+/** Splits the "## Frequently Asked Questions" section into FAQ items. */
+async function extractFaqs(
+  rawContent: string,
+  published: Set<string>
+): Promise<{ cleanedContent: string; faqs: FaqItem[] }> {
+  const match = rawContent.match(/(?:^|\n)##\s+[^\n]*\b(?:Frequently Asked Questions|FAQs?)\b[^\n]*/i);
+  if (!match || match.index === undefined) return { cleanedContent: rawContent, faqs: [] };
 
   const startIndex = match.index;
-  const afterHeaderIndex = startIndex + match[0].length;
-  const restOfContent = rawContent.slice(afterHeaderIndex);
+  const rest = rawContent.slice(startIndex + match[0].length);
+  const nextH2 = rest.match(/\n##\s+[^\n]+/);
+  const faqBlock = nextH2?.index !== undefined ? rest.slice(0, nextH2.index) : rest;
+  const after = nextH2?.index !== undefined ? rest.slice(nextH2.index) : "";
+  const cleanedContent = `${rawContent.slice(0, startIndex).trimEnd()}\n\n${after.trimStart()}`;
 
-  // Find where the next top-level H2 section begins (## ), if any
-  const nextH2Match = restOfContent.match(/\n##\s+[^\n]+/);
-  let rawFaqBlock = "";
-  let cleanedContent = "";
-
-  if (nextH2Match && nextH2Match.index !== undefined) {
-    rawFaqBlock = restOfContent.slice(0, nextH2Match.index);
-    const postFaqContent = restOfContent.slice(nextH2Match.index);
-    cleanedContent =
-      rawContent.slice(0, startIndex).trimEnd() + "\n\n" + postFaqContent.trimStart();
-  } else {
-    rawFaqBlock = restOfContent;
-    cleanedContent = rawContent.slice(0, startIndex).trimEnd();
-  }
-
-  // Parse questions & answers from rawFaqBlock
-  // Questions start with ###
-  const chunks = rawFaqBlock.split(/(?:^|\n)###\s+/);
   const faqs: FaqItem[] = [];
-
-  for (const chunk of chunks) {
+  for (const chunk of faqBlock.split(/(?:^|\n)###\s+/)) {
     const trimmed = chunk.trim();
-    if (!trimmed) continue;
-
     const firstNewline = trimmed.indexOf("\n");
-    let question = "";
-    let rawAnswer = "";
-
-    if (firstNewline === -1) {
-      question = trimmed;
-    } else {
-      question = trimmed.slice(0, firstNewline).trim();
-      rawAnswer = trimmed.slice(firstNewline).trim();
-    }
-
-    if (question) {
-      // Strip leading section numbers (e.g., "4.1 ", "1. ")
-      question = question.replace(/^\d+(?:\.\d+)*\s*[-–.:]?\s*/, "").trim();
-
-      // Strip HTML comments from answer
-      const cleanedAnswer = rawAnswer.replace(/<!--[\s\S]*?-->/g, "").trim();
-
-      if (cleanedAnswer) {
-        // Convert answer markdown to HTML for rich formatting / links
-        const processed = await remark()
-          .use(remarkGfm)
-          .use(html, { sanitize: false })
-          .process(cleanedAnswer);
-
-        faqs.push({
-          question,
-          answer: cleanedAnswer.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1"),
-          answerHtml: processed.toString().trim(),
-        });
-      }
-    }
+    if (!trimmed || firstNewline === -1) continue;
+    const question = trimmed.slice(0, firstNewline).trim();
+    const answer = trimmed.slice(firstNewline).trim();
+    if (!question || !answer) continue;
+    faqs.push({
+      question,
+      // Plain text for FAQPage schema: drop link markup and emphasis.
+      answer: answer.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/\*\*([^*]+)\*\*/g, "$1"),
+      answerHtml: unlinkUnpublishedGuides((await markdownToHtml(answer)).trim(), published),
+    });
   }
-
   return { cleanedContent, faqs };
 }
 
+/** Steps of the first ordered list under a "## How to ..." heading, for HowTo schema. */
+function extractHowToSteps(content: string): string[] {
+  const section = content.match(/(?:^|\n)##\s+How to[^\n]*\n([\s\S]*?)(?=\n##\s|$)/i);
+  if (!section) return [];
+  return section[1]
+    .split("\n")
+    .filter((line) => /^\d+\.\s+/.test(line))
+    .map((line) =>
+      line
+        .replace(/^\d+\.\s+/, "")
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+        .replace(/\*\*([^*]+)\*\*/g, "$1")
+        .trim()
+    );
+}
+
 export async function getToolBySlug(slug: string): Promise<ToolPageData | null> {
-  try {
-    const fullPath = path.join(TOOLS_DIRECTORY, `${slug}.md`);
-    let data: matter.GrayMatterFile<string>["data"];
-    let rawContent: string;
+  const file = readToolFile(slug);
+  if (!file) return null;
+  const { data, content } = file;
+  const published = new Set(getAllToolSlugs());
 
-    if (fs.existsSync(fullPath)) {
-      ({ data, content: rawContent } = matter(fs.readFileSync(fullPath, "utf8")));
-    } else {
-      const generated = getCountryPageSource(slug);
-      if (!generated) return null;
-      ({ data, content: rawContent } = generated);
-    }
-    // Editorial HTML comments (TODOs, notes) must not ship in the page source.
-    const content = rawContent.replace(/<!--[\s\S]*?-->/g, "");
+  const { cleanedContent, faqs } = await extractFaqs(content, published);
+  const contentHtml = unlinkUnpublishedGuides(await markdownToHtml(cleanedContent), published);
 
-    // Extract FAQs from markdown if present
-    const { cleanedContent, faqs: parsedFaqs } = await parseFaqsFromMarkdown(content);
+  const relatedSlugs: string[] = Array.isArray(data.related) ? data.related.map(String) : [];
+  const related = relatedSlugs
+    .filter((s) => s !== slug && published.has(s))
+    .map((s) => {
+      const relatedFile = readToolFile(s);
+      return relatedFile ? toSummary(s, relatedFile.data) : null;
+    })
+    .filter((t): t is ToolSummary => Boolean(t));
 
-    let finalFaqs: FaqItem[] = parsedFaqs;
+  const sources: ToolSource[] = Array.isArray(data.sources)
+    ? data.sources
+        .filter((s: unknown): s is ToolSource => Boolean((s as ToolSource)?.name && (s as ToolSource)?.url))
+        .map((s: ToolSource) => ({ name: String(s.name), url: String(s.url) }))
+    : [];
 
-    // Fallback or merge with frontmatter FAQs if present
-    if ((!finalFaqs || finalFaqs.length === 0) && Array.isArray(data.faqs)) {
-      finalFaqs = [];
-      for (const item of data.faqs) {
-        if (item?.question && item?.answer) {
-          const processed = await remark()
-            .use(remarkGfm)
-            .use(html, { sanitize: false })
-            .process(item.answer);
-          finalFaqs.push({
-            question: item.question,
-            answer: item.answer,
-            answerHtml: processed.toString().trim(),
-          });
-        }
-      }
-    }
-
-    // Process markdown with GFM (GitHub Flavored Markdown for tables, checklists, links)
-    const processedContent = await remark()
-      .use(remarkGfm)
-      .use(html, { sanitize: false })
-      .process(cleanedContent);
-    const contentHtml = processedContent.toString();
-
-    return {
-      slug,
-      title: data.title || "Passport Photo Maker",
-      meta_title: data.meta_title,
-      meta_description:
-        data.meta_description ||
-        "Create passport and visa photos online, sized and checked against official photo guidance.",
-      country_code: data.country_code || DEFAULT_COUNTRY_CODE,
-      document_type: data.document_type || "passport",
-      badge: data.badge || "Verified Biometric Standard",
-      hero_title: data.hero_title || data.title || "Passport Photo Maker Online",
-      hero_subtitle:
-        data.hero_subtitle ||
-        "Upload a photo from your phone or desktop. Our AI crops, centers, and cleans the background to meet official government standards.",
-      studio_title: data.studio_title,
-      studio_description: data.studio_description,
-      cta_description: data.cta_description,
-      how_it_works_title: data.how_it_works_title,
-      cta_button_text: data.cta_button_text,
-      dimensions_mm: data.dimensions_mm || "35 × 45 mm",
-      dimensions_px: data.dimensions_px,
-      feature_image:
-        data.feature_image ||
-        "https://res.cloudinary.com/dipzpwbbk/image/upload/v1790507890/uk_passport_size_photo_i5uujz.jpg",
-      feature_image_alt: data.feature_image_alt,
-      price: data.price || getPlanPricing("standard").amount.toFixed(2),
-      contentHtml,
-      faqs: finalFaqs.length > 0 ? finalFaqs : undefined,
-    };
-  } catch (error) {
-    console.error(`Error loading tool markdown for slug "${slug}":`, error);
-    return null;
-  }
+  const summary = toSummary(slug, data);
+  return {
+    ...summary,
+    metaTitle: String(data.meta_title || summary.title),
+    intro: String(data.intro || summary.description),
+    primaryKeyword: String(data.primary_keyword || ""),
+    pageType: String(data.page_type || ""),
+    countryCode: data.country_code ? String(data.country_code) : undefined,
+    studio: data.studio === true,
+    published: toDateString(data.published),
+    lastVerified: toDateString(data.last_verified),
+    sources,
+    related,
+    contentHtml,
+    faqs,
+    howToSteps: data.howto === true ? extractHowToSteps(cleanedContent) : [],
+  };
 }

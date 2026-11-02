@@ -9,6 +9,10 @@ import {
   expertEditNotificationEmail,
   type ExpertEditNotificationParams,
 } from "./templates/expert-edit-notification";
+import {
+  expertEditDeliveredEmail,
+  type ExpertEditDeliveredParams,
+} from "./templates/expert-edit-delivered";
 import { PRICING, type PlanType } from "@/lib/config/pricing";
 import { SITE_NAME } from "@/lib/site";
 
@@ -123,6 +127,45 @@ export async function sendExpertEditTeamNotificationAction(
     const errorMsg = result.error.message || JSON.stringify(result.error);
     console.error(`[email] Failed to send expert edit team alert for ${params.paymentId}:`, errorMsg);
     throw new Error(`Resend expert alert error: ${errorMsg}`);
+  }
+
+  return result.data?.id || "unknown";
+}
+
+/**
+ * Send the finished Expert Edit photo to the customer (triggered from the admin panel).
+ */
+export async function sendExpertEditDeliveredEmailAction(
+  params: ExpertEditDeliveredParams
+): Promise<string> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey || apiKey.startsWith("re_demo") || apiKey.startsWith("re_123")) {
+    console.info(
+      `[email] Dev mode: Skipping expert edit delivery email for payment ${params.paymentId}.`
+    );
+    return `dev_mock_expert_delivered_${Date.now()}`;
+  }
+
+  const resend = getResendClient();
+  const { subject, html } = expertEditDeliveredEmail(params);
+
+  const result = await resend.emails.send({
+    from: FROM_EMAIL,
+    to: params.email,
+    replyTo: REPLY_TO_EMAIL,
+    bcc: BCC_EMAILS,
+    subject,
+    html,
+    tags: [
+      { name: "type", value: "expert_edit_delivered" },
+      { name: "payment_id", value: params.paymentId },
+    ],
+  });
+
+  if (result.error) {
+    const errorMsg = result.error.message || JSON.stringify(result.error);
+    console.error(`[email] Failed to send expert edit delivery for ${params.paymentId}:`, errorMsg);
+    throw new Error(`Resend error: ${errorMsg}`);
   }
 
   return result.data?.id || "unknown";

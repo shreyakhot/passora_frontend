@@ -227,7 +227,7 @@ export default function AboutUsPage() {
                   <Check className="w-5 h-5 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
                     <strong className="text-slate-900 block">50+ Global Country Document Standards:</strong>
-                    <span className="text-slate-700 text-sm">Preset dimensions and rules for the United States (2×2″), the Schengen Area (35×45 mm), Australia, Canada, India, and many more — see the full <Link href="/tool" className="text-[#365314] font-semibold underline">country list</Link>.</span>
+                    <span className="text-slate-700 text-sm">Preset dimensions and rules for the United States (2×2″), the Schengen Area (35×45 mm), Australia, Canada, India, and many more — pick your country in the <Link href="/passport-size-photo-maker" className="text-[#365314] font-semibold underline">photo maker</Link>.</span>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">

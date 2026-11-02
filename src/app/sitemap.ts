@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { getAllToolSlugs } from "@/lib/tools";
 import { SITE_URL } from "@/lib/site";
+import { getAllToolSummaries } from "@/lib/tools";
 
 type ChangeFrequency = MetadataRoute.Sitemap[number]["changeFrequency"];
 
@@ -18,17 +18,15 @@ const STATIC_PAGES: { path: string; changeFrequency: ChangeFrequency; priority: 
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticEntries: MetadataRoute.Sitemap = STATIC_PAGES.map((page) => ({
+  const guidePages = getAllToolSummaries().map((guide) => ({
+    path: `/tool/${guide.slug}`,
+    changeFrequency: "monthly" as ChangeFrequency,
+    priority: guide.hub || guide.slug === "passport-photo" ? 0.8 : 0.7,
+  }));
+
+  return [...STATIC_PAGES, ...guidePages].map((page) => ({
     url: `${SITE_URL}${page.path}`,
     changeFrequency: page.changeFrequency,
     priority: page.priority,
   }));
-
-  const toolEntries: MetadataRoute.Sitemap = getAllToolSlugs().map((slug) => ({
-    url: `${SITE_URL}/tool/${slug}`,
-    changeFrequency: "weekly",
-    priority: 0.9,
-  }));
-
-  return [...staticEntries, ...toolEntries];
 }

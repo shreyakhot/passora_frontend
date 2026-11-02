@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   Scissors,
   CheckCircle2,
-  ArrowRight,
   ShieldCheck,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -11,7 +10,6 @@ import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import PrintTemplateGenerator from "@/components/PrintTemplateGenerator";
 import FaqAccordion, { type FaqItem } from "@/components/FaqAccordion";
-import { POPULAR_TOOLS } from "@/lib/tool-directory";
 import { PRICING } from "@/lib/config/pricing";
 import { LOGO_URL, SITE_DISCLAIMER, SITE_NAME, SITE_URL } from "@/lib/site";
 
@@ -116,8 +114,6 @@ const PAPER_SIZES = [
   },
 ];
 
-const RELATED_TOOLS = POPULAR_TOOLS;
-
 export default function PrintTemplateGeneratorPage() {
   return (
     <>
@@ -132,7 +128,6 @@ export default function PrintTemplateGeneratorPage() {
         priceCurrency={PRICING.currency}
         breadcrumbs={[
           { name: "Home", url: SITE_URL },
-          { name: "Photo Guides", url: `${SITE_URL}/tool` },
           {
             name: "Print Template Generator",
             url: PAGE_URL,
@@ -155,12 +150,6 @@ export default function PrintTemplateGeneratorPage() {
                 <li>
                   <Link href="/" className="text-slate-600 hover:text-lime-800 transition-colors font-medium">
                     Home
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li>
-                  <Link href="/tool" className="text-slate-600 hover:text-lime-800 transition-colors font-medium">
-                    Photo Guides
                   </Link>
                 </li>
                 <li aria-hidden="true">/</li>
@@ -387,51 +376,6 @@ export default function PrintTemplateGeneratorPage() {
               faqs={PRINT_FAQS}
               title="Passport Photo Sheet & 4×6 Printing FAQs"
             />
-          </div>
-        </section>
-
-        {/* 8. RELATED TOOLS */}
-        <section className="py-14 sm:py-20 bg-slate-50" aria-label="Explore other passport tools">
-          <div className="container-narrow max-w-5xl">
-            <div className="text-center max-w-2xl mx-auto mb-10">
-              <span className="inline-block px-3 py-1 rounded-full bg-lime-100 border border-lime-300 text-[#4D7C0F] text-xs font-bold mb-2">
-                Full Photo Suite
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                Explore Other Passport Photo Tools
-              </h2>
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {RELATED_TOOLS.map((t) => (
-                <Link
-                  key={t.slug}
-                  href={`/tool/${t.slug}`}
-                  className="bg-white border border-slate-200 hover:border-lime-600 p-4.5 sm:p-5 rounded-2xl flex items-center justify-between transition-all group shadow-2xs"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl shrink-0" role="img" aria-hidden="true">{t.flag}</span>
-                    <div>
-                      <span className="text-sm font-bold text-slate-900 group-hover:text-lime-900 transition-colors block">
-                        {t.title}
-                      </span>
-                      <span className="text-xs text-slate-500 font-mono">{t.spec}</span>
-                    </div>
-                  </div>
-                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-[#4D7C0F] group-hover:translate-x-1 transition-all" />
-                </Link>
-              ))}
-            </div>
-
-            <div className="text-center mt-8">
-              <Link
-                href="/tool"
-                className="inline-flex items-center gap-1.5 text-sm font-bold text-[#365314] hover:text-[#4D7C0F] underline"
-              >
-                View all countries
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </Link>
-            </div>
           </div>
         </section>
       </main>

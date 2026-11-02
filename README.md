@@ -17,7 +17,7 @@ The display name and URL are not hardcoded. They come from `src/lib/site.ts` (`S
 
 ## ✨ Features
 
-* 🌍 **50+ Countries:** Each country's pixel dimensions are defined in `src/config/countries.ts`. Every country gets its own landing page at `/tool/<country>-passport-photo` (for example `/tool/united-states-passport-photo`, or `/tool/<region>-visa-photo` for visa formats such as Schengen).
+* 🌍 **50+ Countries:** Each country's pixel dimensions are defined in `src/config/countries.ts`. Users pick their country in the photo maker, which applies that size automatically.
 * 🤖 **Automatic Formatting:** Uploaded photos go through a server-side proxy (`/api/passport-photo`) to the photo processing API. The API replaces the background, scales the head and crops to the selected country's size.
 * 👀 **Preview Before Paying:** The processed result is shown on `/preview/[id]` before checkout.
 * 💳 **Two Plans:** A Standard photo, or Expert Edit (the photo plus a manual review by a person). Payments go through Razorpay.
@@ -136,15 +136,14 @@ Never commit real values. `NEXT_PUBLIC_*` variables are exposed to the browser. 
 
 ## 📐 Photo Sizes & Official Rules
 
-Photo requirements differ by country and document. Each country's output size is stored as pixel dimensions (`"widthxheight"`) in `src/config/countries.ts`. Every generated country page shows that size, the aspect ratio and general guidance on background, expression and photo age.
+Photo requirements differ by country and document. Each country's output size is stored as pixel dimensions (`"widthxheight"`) in `src/config/countries.ts`. The photo maker shows the selected country's size before processing.
 
 Rules change and can differ between online and paper applications, embassies and visa categories. Users must confirm the current requirements with the authority that issues their passport, visa or ID. Photo-Govt is independent and is not affiliated with any government.
 
 ### Adding or editing a country
 
 1. Add or update an entry in `COUNTRIES` in `src/config/countries.ts` (`country_code`, `country_name`, `document_type`, `dimensions`).
-2. A landing page is generated automatically at `/tool/<country>-<document>-photo` by `src/lib/country-pages.ts` and `src/lib/tools.ts`. It is listed in the `/tool` directory (`src/lib/tool-directory.ts`) and in the sitemap.
-3. To hand-write a page, add `src/content/tools/<slug>.md` with front matter. A markdown file with the same slug as a generated page replaces that page.
+2. The country appears in the photo maker's country picker automatically.
 
 ---
 
@@ -153,7 +152,7 @@ Rules change and can differ between online and paper applications, embassies and
 * **Canonical base:** Comes from `NEXT_PUBLIC_SITE_URL` (`https://photo-govt.com`) through `SITE_URL` in `src/lib/site.ts`. Canonicals are set per page.
 * **International targeting:** The root layout uses `lang="en"`. The site does not use region-specific hreflang alternates (`en-<REGION>`) or country geo tags.
 * **Structured Data:** JSON-LD graph (`src/components/JsonLd.tsx`) with `Organization`, `WebSite`, `WebApplication` and `FAQPage` schema types.
-* **Sitemaps & Robots:** `src/app/sitemap.ts` (static pages plus every `/tool/<slug>` page) and `src/app/robots.ts` (disallows `/preview/` and `/api/`).
+* **Sitemaps & Robots:** `src/app/sitemap.ts` (static pages) and `src/app/robots.ts` (disallows `/preview/` and `/api/`).
 * **IndexNow:** `src/lib/seo/indexnow.ts`, `/api/indexnow` and `npm run indexnow`. The key file is served from `public/`.
 
 ---
@@ -179,7 +178,6 @@ frontend/
 │   │   │   ├── payments/          # create-order, verify, status/[paymentId]
 │   │   │   └── webhooks/razorpay/ # Razorpay webhook receiver
 │   │   ├── preview/[id]/          # Result preview, checkout, thank-you page
-│   │   ├── tool/                  # /tool directory hub and /tool/[slug] country pages
 │   │   ├── passport-size-photo-maker/
 │   │   ├── passport-photo-print-template-generator/
 │   │   ├── about-us/ contact-us/ data-security-privacy-safeguards/
@@ -203,11 +201,8 @@ frontend/
 │   ├── config/
 │   │   ├── countries.json         # JSON copy of the country dimension data
 │   │   └── countries.ts           # Typed country list, slugs and lookup helpers
-│   ├── content/
-│   │   └── tools/                 # Markdown pages that override generated /tool pages
 │   ├── lib/
 │   │   ├── config/pricing.ts      # Currency and plan prices (from env)
-│   │   ├── country-pages.ts       # Generated content for each country page
 │   │   ├── db/mongodb.ts          # MongoDB client
 │   │   ├── email/                 # Resend client and email templates
 │   │   ├── invoices/              # Invoice PDF generation
@@ -218,9 +213,7 @@ frontend/
 │   │   ├── storage/cloudinary.ts  # Cloudinary uploads
 │   │   ├── image-compress.ts      # Client-side image compression
 │   │   ├── passport-api.ts        # Photo processing API client (server-side)
-│   │   ├── site.ts                # SITE_URL, SITE_NAME, SUPPORT_EMAIL, LOGO_PATH, SITE_DISCLAIMER
-│   │   ├── tool-directory.ts      # /tool directory entries and popular tools
-│   │   └── tools.ts               # Loads markdown and generated tool pages
+│   │   └── site.ts                # SITE_URL, SITE_NAME, SUPPORT_EMAIL, LOGO_PATH, SITE_DISCLAIMER
 │   └── mdx-components.tsx         # MDX typography bindings
 ├── AGENTS.md                      # Next.js agent rules (auto-managed by next dev)
 ├── CLAUDE.md                      # Assistant & engineering guide

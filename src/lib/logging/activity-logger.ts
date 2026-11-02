@@ -6,6 +6,8 @@
 import { getActivityLogCollection } from "@/lib/models/UserActivityLog";
 
 export type ActivityEvent =
+  | "photo_processed"
+  | "photo_processing_failed"
   | "preview_viewed"
   | "email_entered"
   | "checkout_initiated"
@@ -17,7 +19,8 @@ export type ActivityEvent =
   | "email_sent"
   | "email_failed"
   | "image_downloaded"
-  | "download_link_expired";
+  | "download_link_expired"
+  | "expert_edit_delivered";
 
 export async function logActivity(params: {
   event: ActivityEvent;

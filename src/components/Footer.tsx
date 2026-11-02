@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { LOGO_PATH, SITE_NAME } from "@/lib/site";
-import { POPULAR_TOOLS } from "@/lib/tool-directory";
 import { getPlanPricing } from "@/lib/config/pricing";
 
 export interface FooterLinkItem {
@@ -16,22 +15,12 @@ export const DEFAULT_FOOTER_LINKS: Record<string, FooterLinkItem[]> = {
   Product: [
     { label: "Photo Maker Studio", href: "/passport-size-photo-maker" },
     { label: "Print Template Generator (4×6″)", href: "/passport-photo-print-template-generator" },
+    { label: "Photo Guides", href: "/tool" },
     { label: "How It Works", href: "/#how-it-works" },
     { label: "Features", href: "/#features" },
     { label: "Pricing", href: "/#pricing" },
     { label: "FAQ", href: "/#faq" },
     { label: "XML Sitemap", href: "/sitemap.xml" },
-  ],
-  "Popular Countries": POPULAR_TOOLS.slice(0, 6).map((tool) => ({
-    label: tool.title,
-    href: `/tool/${tool.slug}`,
-  })),
-  "More Countries": [
-    ...POPULAR_TOOLS.slice(6).map((tool) => ({
-      label: tool.title,
-      href: `/tool/${tool.slug}`,
-    })),
-    { label: "All Countries", href: "/tool" },
   ],
   "Company & Legal": [
     { label: "About Us", href: "/about-us" },
@@ -75,7 +64,7 @@ export default function Footer({
       role="contentinfo"
     >
       <div className="container-narrow section-padding">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-8">
           {/* Brand column */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Link

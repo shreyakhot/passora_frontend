@@ -46,6 +46,40 @@ export type FulfillmentStatus =
   | "completed"
   | "failed";
 
+/** Fields below are written by the admin panel (FastAPI backend). */
+export interface PaymentExpertEdit {
+  assignee?: { id: unknown; name: string; email: string };
+  claimedAt?: Date;
+  editedImageUrl?: string;
+  cloudinaryPublicId?: string;
+  /** The AI result the edited photo replaced in image.imageUrl */
+  aiImageUrl?: string;
+  dimensions?: string;
+  sizeKb?: number;
+  note?: string;
+  deliveredBy?: { id: unknown; name: string };
+  deliveredAt?: Date;
+  emailedAt?: Date;
+  resendEmailId?: string;
+}
+
+export interface PaymentRefund {
+  refundId?: string;
+  amount: number;
+  currency: string;
+  status?: string;
+  reason: string;
+  adminName?: string;
+  createdAt: Date;
+}
+
+export interface PaymentAdminNote {
+  id: string;
+  text: string;
+  adminName: string;
+  createdAt: Date;
+}
+
 export interface PaymentDocument {
   _id?: ObjectId;
 
@@ -88,6 +122,12 @@ export interface PaymentDocument {
     isExpertEdit?: boolean;
     originalPreviewUrl?: string;
   };
+
+  expertEdit?: PaymentExpertEdit;
+  refunds?: PaymentRefund[];
+  /** Total refunded, in the smallest currency unit */
+  refundedAmount?: number;
+  adminNotes?: PaymentAdminNote[];
 
   createdAt: Date;
   updatedAt: Date;

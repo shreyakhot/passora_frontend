@@ -26,8 +26,14 @@ export interface FulfillmentResult {
 
 /**
  * Full fulfillment pipeline. Idempotent — checks each step before executing.
+ * `notifyTeam: false` skips the Expert Edit team alert (used when the admin
+ * panel resends the customer email).
  */
-export async function fulfillPayment(paymentId: string): Promise<FulfillmentResult> {
+export async function fulfillPayment(
+  paymentId: string,
+  options: { notifyTeam?: boolean } = {}
+): Promise<FulfillmentResult> {
+  const notifyTeam = options.notifyTeam ?? true;
   const col = await getPaymentCollection();
   const payment = await getPaymentById(paymentId);
 
@@ -222,7 +228,7 @@ export async function fulfillPayment(paymentId: string): Promise<FulfillmentResu
         });
 
         // If Expert Edit was selected, dispatch the expert review notification to the editing specialists
-        if (payment.planType === "expert_edit" || payment.metadata?.isExpertEdit) {
+        if (notifyTeam && (payment.planType === "expert_edit" || payment.metadata?.isExpertEdit)) {
           try {
             await sendExpertEditTeamNotificationAction({
               email: payment.email,

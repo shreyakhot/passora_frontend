@@ -4,60 +4,29 @@ import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
-import { POPULAR_TOOLS, TOOL_DIRECTORY, TOOL_GROUPS, type ToolDirectoryEntry } from "@/lib/tool-directory";
-import { COUNTRIES, DEFAULT_COUNTRY, countryPagePath, documentLabel } from "@/config/countries";
+import { TOOL_CLUSTERS, getAllToolSummaries } from "@/lib/tools";
 import { LOGO_URL, SITE_NAME, SITE_URL } from "@/lib/site";
 
-const PAGE_TITLE = "Passport & Visa Photo Sizes by Country";
-const PAGE_DESCRIPTION = `Passport and visa photo makers for ${COUNTRIES.length} countries. Pick your country to see the photo size, then crop, size and check your photo online.`;
-
-const groupId = (group: string) =>
-  `group-${group.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
-
-const GROUP_INTROS: Record<string, string> = {
-  "Passport Photos":
-    "Passport photo sizes for every supported country, in alphabetical order.",
-  "Visa Photos":
-    "Photo sizes for visa applications. Check the embassy or consulate guidance for your visa type.",
-};
-
-function ToolCard({ tool }: { tool: ToolDirectoryEntry }) {
-  return (
-    <Link
-      href={`/tool/${tool.slug}`}
-      className="bg-white border border-slate-200 hover:border-lime-600 p-5 rounded-2xl flex items-center justify-between transition-all group h-full"
-    >
-      <span className="flex items-center gap-3 min-w-0">
-        <span className="text-2xl shrink-0" aria-hidden="true">{tool.flag}</span>
-        <span className="min-w-0">
-          <span className="text-sm font-bold text-slate-900 group-hover:text-lime-900 transition-colors block">
-            {tool.title}
-          </span>
-          <span className="text-xs text-slate-500 font-mono">{tool.spec}</span>
-        </span>
-      </span>
-      <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-[#4D7C0F] shrink-0 ml-2" aria-hidden="true" />
-    </Link>
-  );
-}
+const PAGE_URL = `${SITE_URL}/tool`;
+const PAGE_TITLE = "Passport Photo Guides";
+const PAGE_DESCRIPTION =
+  "Guides to passport, visa and ID photos: sizes, official requirements, where to get photos taken and how to make one yourself.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  alternates: {
-    canonical: `${SITE_URL}/tool`,
-  },
+  alternates: { canonical: PAGE_URL },
   openGraph: {
     title: `${PAGE_TITLE} — ${SITE_NAME}`,
     description: PAGE_DESCRIPTION,
-    url: `${SITE_URL}/tool`,
+    url: PAGE_URL,
     siteName: SITE_NAME,
     locale: "en_US",
     type: "website",
     images: [{ url: LOGO_URL, alt: SITE_NAME }],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: `${PAGE_TITLE} — ${SITE_NAME}`,
     description: PAGE_DESCRIPTION,
     images: [LOGO_URL],
@@ -65,17 +34,23 @@ export const metadata: Metadata = {
 };
 
 export default function ToolHubPage() {
+  const guides = getAllToolSummaries();
+  const clusters = TOOL_CLUSTERS.map((cluster) => ({
+    ...cluster,
+    guides: guides.filter((g) => g.cluster === cluster.id),
+  })).filter((cluster) => cluster.guides.length > 0);
+
   return (
     <>
       <JsonLd
         siteUrl={SITE_URL}
         siteName={SITE_NAME}
-        pageUrl={`${SITE_URL}/tool`}
+        pageUrl={PAGE_URL}
         pageName={PAGE_TITLE}
         pageDescription={PAGE_DESCRIPTION}
         breadcrumbs={[
           { name: "Home", url: SITE_URL },
-          { name: "Photo Guides", url: `${SITE_URL}/tool` },
+          { name: "Photo Guides", url: PAGE_URL },
         ]}
         includeOrganization={false}
         includeWebsite={false}
@@ -84,8 +59,8 @@ export default function ToolHubPage() {
 
       <Navbar ctaText="Create Photo" ctaHref="/passport-size-photo-maker" />
 
-      <main className="flex-1 bg-white text-slate-900" id="main-content">
-        <section className="bg-slate-50/80 py-10 sm:py-16 border-b border-slate-200/80" aria-label="Photo guides header">
+      <main className="flex-1 bg-base-100 text-base-content" id="main-content">
+        <section className="bg-base-200 py-10 sm:py-14 border-b border-base-300" aria-label="Photo guides header">
           <div className="container-narrow max-w-5xl">
             <nav className="text-xs text-slate-600 mb-4" aria-label="Breadcrumb">
               <ol className="flex items-center gap-1.5 list-none p-0 m-0">
@@ -95,83 +70,57 @@ export default function ToolHubPage() {
                   </Link>
                 </li>
                 <li aria-hidden="true">/</li>
-                <li className="text-slate-900 font-semibold" aria-current="page">
+                <li className="text-secondary font-semibold" aria-current="page">
                   Photo Guides
                 </li>
               </ol>
             </nav>
-
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] tracking-tight leading-tight mb-4">
+            <h1 className="text-3xl! sm:text-4xl! font-extrabold text-secondary tracking-tight leading-tight mb-4">
               {PAGE_TITLE}
             </h1>
             <p className="text-base sm:text-lg text-slate-700 leading-relaxed max-w-3xl">
-              Find the photo size for your application. Each page covers one country&apos;s
-              passport or visa photo, with a photo maker to size and check your picture. Photo
-              rules change, so always confirm the current requirements with your country&apos;s
-              issuing authority. Not sure where to start? Try the{" "}
-              <Link href={countryPagePath(DEFAULT_COUNTRY.country_code)} className="font-bold underline text-[#365314] hover:text-[#4D7C0F]">
-                {DEFAULT_COUNTRY.country_name} {documentLabel(DEFAULT_COUNTRY)} photo maker
-              </Link>{" "}
-              or the{" "}
-              <Link href="/passport-size-photo-maker" className="font-bold underline text-[#365314] hover:text-[#4D7C0F]">
-                passport size photo maker
-              </Link>
-              .
+              Plain answers about passport, visa and ID photos: what size you need, the rules your photo must
+              meet, where to get one taken and how to make one yourself. Photo rules change, so each guide links
+              to the official source and shows when it was last checked.
             </p>
           </div>
         </section>
 
         <div className="container-narrow max-w-5xl py-12 sm:py-16 space-y-12">
-          <section aria-labelledby="group-popular">
-            <h2
-              id="group-popular"
-              className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight mb-2"
-            >
-              Popular Countries
-            </h2>
-            <p className="text-slate-700 text-sm sm:text-base mb-6">
-              The passport and visa photos people make most often.
-            </p>
-            <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none p-0 m-0">
-              {POPULAR_TOOLS.map((t) => (
-                <li key={t.slug}>
-                  <ToolCard tool={t} />
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          {TOOL_GROUPS.map((group) => (
-            <section key={group} aria-labelledby={groupId(group)}>
+          {clusters.map((cluster) => (
+            <section key={cluster.id} aria-labelledby={`cluster-${cluster.id}`}>
               <h2
-                id={groupId(group)}
-                className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight mb-2"
+                id={`cluster-${cluster.id}`}
+                className="text-2xl! sm:text-3xl! font-extrabold text-secondary tracking-tight mb-2"
               >
-                {group}
+                {cluster.name}
               </h2>
-              <p className="text-slate-700 text-sm sm:text-base mb-6">{GROUP_INTROS[group]}</p>
+              <p className="text-slate-700 text-sm sm:text-base mb-6">{cluster.intro}</p>
               <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none p-0 m-0">
-                {TOOL_DIRECTORY.filter((t) => t.group === group).map((t) => (
-                  <li key={t.slug}>
-                    <ToolCard tool={t} />
+                {cluster.guides.map((guide) => (
+                  <li key={guide.slug}>
+                    <Link
+                      href={`/tool/${guide.slug}`}
+                      className="bg-base-100 border border-base-300 hover:border-primary p-5 rounded-2xl flex items-start justify-between gap-3 transition-colors group h-full"
+                    >
+                      <span className="min-w-0">
+                        <span className="block text-sm font-bold text-secondary group-hover:text-lime-800 transition-colors mb-1">
+                          {guide.title}
+                        </span>
+                        <span className="block text-xs text-slate-600 leading-relaxed line-clamp-3">
+                          {guide.description}
+                        </span>
+                      </span>
+                      <ArrowRight
+                        className="w-4 h-4 text-slate-400 group-hover:text-primary shrink-0 mt-0.5"
+                        aria-hidden="true"
+                      />
+                    </Link>
                   </li>
                 ))}
               </ul>
             </section>
           ))}
-
-          <section aria-label="Print sheets" className="border-t border-slate-200 pt-10">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight mb-2">
-              Printing Your Photos
-            </h2>
-            <p className="text-slate-700 text-sm sm:text-base">
-              Already have a passport photo? Use the{" "}
-              <Link href="/passport-photo-print-template-generator" className="font-bold underline text-[#365314] hover:text-[#4D7C0F]">
-                passport photo print template generator
-              </Link>{" "}
-              to lay out copies on a 6×4″ sheet for a photo shop.
-            </p>
-          </section>
         </div>
       </main>
 

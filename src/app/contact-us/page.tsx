@@ -235,10 +235,10 @@ export default function ContactUsPage() {
                   </li>
                   <li>
                     <Link
-                      href="/tool"
+                      href="/#photo-rules"
                       className="hover:text-lime-800 hover:underline font-medium"
                     >
-                      • Photo Size Requirements by Country
+                      • Common Passport Photo Rules
                     </Link>
                   </li>
                   <li>

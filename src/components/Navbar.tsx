@@ -6,7 +6,6 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, ArrowRight, Sparkles } from "lucide-react";
 import { LOGO_PATH, SITE_NAME } from "@/lib/site";
-import { POPULAR_TOOLS } from "@/lib/tool-directory";
 
 export interface NavLinkItem {
   label: string;
@@ -31,19 +30,7 @@ export const PHOTO_TOOLS_MENU = {
       icon: "🖨️",
       badge: "New",
     },
-    {
-      title: "Photo Sizes by Country",
-      description: "Passport & visa photo sizes for 50+ countries",
-      href: "/tool",
-      icon: "🌍",
-    },
   ],
-  countries: POPULAR_TOOLS.map((tool) => ({
-    title: tool.title,
-    spec: tool.spec,
-    href: `/tool/${tool.slug}`,
-    flag: tool.flag,
-  })),
 };
 
 /** Brand name with the part after the first "-" or space in the accent colour. */
@@ -61,6 +48,7 @@ export function BrandWordmark({ name = SITE_NAME }: { name?: string }) {
 export const DEFAULT_NAV_LINKS: NavLinkItem[] = [
   { label: "How It Works", href: "/#how-it-works" },
   { label: "Features", href: "/#features" },
+  { label: "Photo Guides", href: "/tool" },
 
   { label: "FAQ", href: "/#faq" },
   { label: "About Us", href: "/about-us" },
@@ -104,8 +92,7 @@ export default function Navbar({
 
   const isToolsActive =
     pathname === "/passport-size-photo-maker" ||
-    pathname === "/passport-photo-print-template-generator" ||
-    (pathname ? pathname.startsWith("/tool") : false);
+    pathname === "/passport-photo-print-template-generator";
 
   // Close menus on Escape key
   useEffect(() => {
@@ -197,13 +184,13 @@ export default function Navbar({
               {/* Mega Dropdown Panel */}
               {toolsDropdownOpen && (
                 <div
-                  className="absolute top-full left-0 lg:left-1/2 lg:-translate-x-1/3 mt-1.5 w-[640px] lg:w-[720px] bg-white rounded-2xl border border-slate-200 shadow-2xl p-4 sm:p-5 z-50 animate-fade-in text-left"
+                  className="absolute top-full left-0 lg:left-1/2 lg:-translate-x-1/3 mt-1.5 w-[380px] bg-white rounded-2xl border border-slate-200 shadow-2xl p-4 sm:p-5 z-50 animate-fade-in text-left"
                   role="menu"
                   aria-orientation="vertical"
                 >
                   <div className="grid grid-cols-12 gap-5">
-                    {/* Left Column: Core Tools */}
-                    <div className="col-span-6 space-y-1.5 border-r border-slate-100 pr-4">
+                    {/* Core Tools */}
+                    <div className="col-span-12 space-y-1.5">
                       <div className="px-2 pb-1 text-[11px] font-bold tracking-wider uppercase text-slate-600">
                         Photo Creation Tools
                       </div>
@@ -235,36 +222,6 @@ export default function Navbar({
                           </div>
                         </Link>
                       ))}
-                    </div>
-
-                    {/* Right Column: Country Standards */}
-                    <div className="col-span-6 space-y-1">
-                      <div className="px-2 pb-1 text-[11px] font-bold tracking-wider uppercase text-slate-600">
-                        Country &amp; Visa Standards
-                      </div>
-                      <div className="grid grid-cols-2 gap-1">
-                        {PHOTO_TOOLS_MENU.countries.map((tool) => (
-                          <Link
-                            key={tool.href}
-                            href={tool.href}
-                            onClick={() => setToolsDropdownOpen(false)}
-                            className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-50 transition-colors group/citem border border-transparent hover:border-slate-100"
-                            role="menuitem"
-                          >
-                            <span className="text-sm shrink-0" role="img" aria-hidden="true">
-                              {tool.flag}
-                            </span>
-                            <div className="min-w-0">
-                              <span className="text-[11px] font-semibold text-slate-800 group-hover/citem:text-lime-700 block truncate">
-                                {tool.title}
-                              </span>
-                              <span className="text-[9px] text-slate-600 font-mono block truncate">
-                                {tool.spec}
-                              </span>
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
                     </div>
                   </div>
 
@@ -407,30 +364,6 @@ export default function Navbar({
                                   {tool.badge}
                                 </span>
                               )}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div>
-                        <div className="px-2 text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">
-                          Country &amp; Visa Standards
-                        </div>
-                        <div className="grid grid-cols-1 gap-1">
-                          {PHOTO_TOOLS_MENU.countries.map((tool) => (
-                            <Link
-                              key={tool.href}
-                              href={tool.href}
-                              onClick={() => setMobileOpen(false)}
-                              className="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-700 hover:text-lime-700 hover:bg-white transition-colors"
-                            >
-                              <div className="flex items-center gap-2 truncate">
-                                <span className="shrink-0">{tool.flag}</span>
-                                <span className="truncate">{tool.title}</span>
-                              </div>
-                              <span className="text-[10px] text-slate-600 font-mono shrink-0 ml-2">
-                                {tool.spec}
-                              </span>
                             </Link>
                           ))}
                         </div>

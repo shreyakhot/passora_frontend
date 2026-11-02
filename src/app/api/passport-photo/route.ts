@@ -1,6 +1,7 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { after, NextResponse, type NextRequest } from "next/server";
 import { processPassportPhoto } from "@/lib/passport-api";
 import { DEFAULT_COUNTRY } from "@/config/countries";
+import { logActivity } from "@/lib/logging/activity-logger";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -12,6 +13,7 @@ export const dynamic = "force-dynamic";
  * Accepts: multipart/form-data with "image", "country_code", "document_type"
  */
 export async function POST(req: NextRequest) {
+  const startedAt = Date.now();
   try {
     const formData = await req.formData();
     const image = formData.get("image") || formData.get("file");
@@ -49,7 +51,39 @@ export async function POST(req: NextRequest) {
       document_type: documentType,
     }, mimeType);
 
-    if (result.status === "error" || result.error) {
+    // Record the upload for the admin user-journey view (after the response is sent).
+    // Only the outcome is stored: no image, file name or IP address.
+    const failed = result.status === "error" || !!result.error;
+    after(() =>
+      logActivity(
+        failed
+          ? {
+              event: "photo_processing_failed",
+              status: "error",
+              metadata: {
+                countryCode: countryCode.toUpperCase(),
+                documentType,
+                durationMs: Date.now() - startedAt,
+                error: String(result.error || result.message || "").slice(0, 300),
+              },
+            }
+          : {
+              event: "photo_processed",
+              status: "success",
+              metadata: {
+                resultId: result.result_id,
+                countryCode: countryCode.toUpperCase(),
+                documentType,
+                durationMs: Date.now() - startedAt,
+                sizeKb: result.size_kb,
+                dimensions: result.dimensions,
+                backgroundCorrected: result.metrics?.background_corrected,
+              },
+            }
+      )
+    );
+
+    if (failed) {
       return NextResponse.json(
         {
           status: "error",

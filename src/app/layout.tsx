@@ -64,6 +64,11 @@ export const metadata: Metadata = {
     images: [LOGO_PATH],
   },
 
+  // Google Search Console ownership check (renders <meta name="google-site-verification">)
+  verification: {
+    google: "uA3PgifpGZAgiqJ__7Hr7uHrEq3u8T17EA8WkpveJOY",
+  },
+
   robots: {
     index: true,
     follow: true,

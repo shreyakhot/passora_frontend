@@ -27,15 +27,7 @@ import PhotoMakerStudio from "@/components/PhotoMakerStudio";
 import OfficialPhotoNotice from "@/components/OfficialPhotoNotice";
 import { LOGO_URL, SITE_DISCLAIMER, SITE_NAME, SITE_URL } from "@/lib/site";
 import { PRICING, getPlanPricing } from "@/lib/config/pricing";
-import {
-  COUNTRIES,
-  DEFAULT_COUNTRY,
-  DEFAULT_COUNTRY_CODE,
-  countryPagePath,
-  documentLabel,
-  getCountryByCode,
-} from "@/config/countries";
-import { POPULAR_TOOLS, type ToolDirectoryEntry } from "@/lib/tool-directory";
+import { COUNTRIES, getCountryByCode } from "@/config/countries";
 
 const standardPlan = getPlanPricing("standard");
 
@@ -48,20 +40,6 @@ const OG_DESCRIPTION =
 function pixelSize(code: string): string {
   return getCountryByCode(code)?.dimensions.replace("x", "×") ?? "";
 }
-
-/** Featured country cards, then the remaining popular countries as quick-link pills. */
-const FEATURED_TOOLS = POPULAR_TOOLS.slice(0, 6);
-const MORE_TOOLS = POPULAR_TOOLS.slice(6);
-
-/** Card copy for a featured country, built from config so it stays accurate for every country. */
-function featuredDescription(tool: ToolDirectoryEntry): string {
-  const countryName = getCountryByCode(tool.countryCode)?.country_name ?? tool.title;
-  const use =
-    tool.group === "Visa Photos" ? "visa applications" : "passport applications and renewals";
-  return `Auto-cropped to the published photo size for ${countryName} ${use}, with a digital file and a 6×4″ print sheet.`;
-}
-
-const defaultCountryDoc = documentLabel(DEFAULT_COUNTRY);
 
 export const metadata: Metadata = {
   title: {
@@ -624,28 +602,14 @@ export default function HomePage() {
                     </ul>
 
                     <p className="text-sm bg-lime-50/80 border border-lime-200 text-[#365314] font-medium rounded-xl p-3.5 mb-5">
-                      If you’re using a photo taken on your own device, include your head, shoulders and upper body. Do not crop your photo - it will be done for you. Find the size and rules for your country in our{" "}
-                      <Link
-                        href="/tool"
-                        className="font-bold underline text-[#365314] hover:text-[#4D7C0F] transition-colors"
-                      >
-                        photo guides for 50+ countries
-                      </Link>
-                      , read the{" "}
-                      <Link
-                        href={countryPagePath(DEFAULT_COUNTRY_CODE)}
-                        className="font-bold underline text-[#365314] hover:text-[#4D7C0F] transition-colors"
-                      >
-                        {DEFAULT_COUNTRY.country_name} {defaultCountryDoc} photo requirements
-                      </Link>
-                      , or use the{" "}
+                      If you’re using a photo taken on your own device, include your head, shoulders and upper body. Do not crop your photo - it will be done for you. Choose your country in our{" "}
                       <Link
                         href="/passport-size-photo-maker"
                         className="font-bold underline text-[#365314] hover:text-[#4D7C0F] transition-colors"
                       >
                         passport size photo maker
                       </Link>
-                      .
+                      {" "}and it applies that country’s photo size automatically.
                     </p>
 
                     <p className="text-slate-800 text-sm mb-3 font-semibold">In your photo you must:</p>
@@ -776,86 +740,7 @@ export default function HomePage() {
         </section>
 
         {/* =========================================================================
-            7. POPULAR COUNTRY & DOCUMENT FORMATS (Internal Linking SEO Grid)
-           ========================================================================= */}
-        <section className="bg-white py-14 sm:py-20 border-b border-slate-200/80" id="popular-tools" aria-label="Popular country and document photo formats">
-          <div className="container-narrow">
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <span className="inline-block px-3 py-1 rounded-full bg-lime-100 border border-lime-300 text-[#365314] text-xs font-bold mb-3">
-                Global Standards
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
-                Popular Passport &amp; Visa Photo Formats
-              </h2>
-              <p className="text-slate-700 text-sm sm:text-base">
-                Explore dedicated specifications and automated photo makers for top destinations.
-              </p>
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
-              {FEATURED_TOOLS.map((tool) => (
-                <Link
-                  key={tool.slug}
-                  href={`/tool/${tool.slug}`}
-                  className="bg-slate-50 hover:bg-white border border-slate-200 hover:border-lime-600 rounded-2xl p-5 sm:p-6 flex flex-col justify-between transition-all group shadow-2xs"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-2xl" role="img" aria-hidden="true">{tool.flag}</span>
-                      <span className="font-mono text-xs font-semibold bg-white border border-slate-200 text-slate-700 px-2 py-0.5 rounded">
-                        {tool.spec}
-                      </span>
-                    </div>
-                    <h3 className="font-bold text-[#0F172A] text-base sm:text-lg mb-1.5 group-hover:text-[#365314] transition-colors">
-                      {tool.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed mb-4">
-                      {featuredDescription(tool)}
-                    </p>
-                  </div>
-                  <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#4D7C0F] group-hover:text-[#365314]">
-                    <span>View Specifications &amp; Create</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
-                  </span>
-                </Link>
-              ))}
-            </div>
-
-            {/* Quick Link Pills to Specialized Converters & Photo Tools */}
-            <div className="mt-8 pt-6 border-t border-slate-200/80 max-w-5xl mx-auto">
-              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-700 mr-1">
-                  More Tools:
-                </span>
-                <Link
-                  href="/passport-photo-print-template-generator"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-lime-100 hover:bg-lime-200 border border-lime-300 text-xs font-bold text-lime-950 transition-colors shadow-2xs"
-                >
-                  <span className="text-lime-700">🖨️</span>
-                  <span>Print Template Generator (4×6″)</span>
-                  <ArrowRight className="w-3 h-3 text-lime-800" />
-                </Link>
-                {[
-                  { href: "/passport-size-photo-maker", label: "Passport Size Photo Maker" },
-                  ...MORE_TOOLS.map((tool) => ({ href: `/tool/${tool.slug}`, label: tool.title })),
-                  { href: "/tool", label: "All 50+ Countries" },
-                ].map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-lime-50 border border-slate-200 hover:border-lime-300 text-xs font-semibold text-slate-800 hover:text-lime-900 transition-colors"
-                  >
-                    <span>{item.label}</span>
-                    <ArrowRight className="w-3 h-3 text-slate-600" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================================
-            8. FAQ SECTION (Clean accordion, no shadows)
+            7. FAQ SECTION (Clean accordion, no shadows)
            ========================================================================= */}
         <section className="bg-slate-50/70 py-14 sm:py-20 border-b border-slate-200/80" id="faq" aria-label="Frequently Asked Questions">
           <div className="container-narrow">

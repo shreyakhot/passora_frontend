@@ -332,57 +332,12 @@ export const DEFAULT_COUNTRY_CODE = "US";
 export const DEFAULT_COUNTRY: CountryPassportConfig =
   COUNTRIES.find((c) => c.country_code === DEFAULT_COUNTRY_CODE) || COUNTRIES[0];
 
-/** Countries featured in navigation, footers and related-tool grids. */
-export const POPULAR_COUNTRY_CODES = [
-  "US",
-  "GB",
-  "CA",
-  "AU",
-  "IN",
-  "EU",
-  "DE",
-  "FR",
-  "CN",
-  "JP",
-  "AE",
-  "NZ",
-];
-
 /** Emoji flag for a 2-letter code ("EU" renders the EU flag). */
 export function countryFlag(code: string): string {
   if (!code || code.length !== 2) return "🌍";
   return code
     .toUpperCase()
     .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt(0)));
-}
-
-/**
- * Document wording for a country. Schengen photos are for visas, even though
- * the processing API treats them as the passport format.
- */
-export function documentLabel(country: CountryPassportConfig): string {
-  return country.country_code === "EU" ? "visa" : country.document_type;
-}
-
-/** URL slug of a country's photo page, e.g. "united-states-passport-photo". */
-export function countryPageSlug(country: CountryPassportConfig): string {
-  const name = country.country_name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-  return `${name}-${documentLabel(country)}-photo`;
-}
-
-export function getCountryByPageSlug(
-  slug: string
-): CountryPassportConfig | undefined {
-  return COUNTRIES.find((c) => countryPageSlug(c) === slug);
-}
-
-/** Path of a country's photo page by country code, falling back to the hub. */
-export function countryPagePath(code: string): string {
-  const country = getCountryByCode(code);
-  return country ? `/tool/${countryPageSlug(country)}` : "/tool";
 }
 
 /**

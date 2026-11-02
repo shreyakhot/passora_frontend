@@ -8,7 +8,6 @@ import PhotoMakerStudio from "@/components/PhotoMakerStudio";
 import OfficialPhotoNotice from "@/components/OfficialPhotoNotice";
 import { LOGO_URL, SITE_NAME, SITE_URL } from "@/lib/site";
 import { PRICING, getPlanPricing } from "@/lib/config/pricing";
-import { POPULAR_TOOLS, TOOL_DIRECTORY } from "@/lib/tool-directory";
 
 const standardPlan = getPlanPricing("standard");
 
@@ -135,46 +134,6 @@ export default function PassportSizePhotoMakerPage() {
               >
                 <span>Open Print Generator</span>
                 <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Popular Country & Document Formats Quick Links */}
-          <div className="mt-10 pt-8 border-t border-slate-200">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 text-center mb-4">
-              Explore Popular Country &amp; Document Guides
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {POPULAR_TOOLS.map((tool) => (
-                <Link
-                  key={tool.slug}
-                  href={`/tool/${tool.slug}`}
-                  className="bg-white border border-slate-200 hover:border-lime-600 p-3.5 rounded-xl flex items-center justify-between text-xs transition-colors group shadow-2xs"
-                >
-                  <div className="flex items-center gap-2 min-w-0">
-                    <span className="text-lg shrink-0" aria-hidden="true">
-                      {tool.flag}
-                    </span>
-                    <div className="min-w-0">
-                      <span className="font-bold text-slate-900 block truncate group-hover:text-lime-900">
-                        {tool.title}
-                      </span>
-                      <span className="text-slate-500 font-mono text-[11px]">
-                        {tool.spec}
-                      </span>
-                    </div>
-                  </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#4D7C0F] shrink-0" />
-                </Link>
-              ))}
-            </div>
-            <div className="text-center mt-4">
-              <Link
-                href="/tool"
-                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#4D7C0F] hover:text-[#365314] transition-colors"
-              >
-                <span>View all {TOOL_DIRECTORY.length} country photo guides</span>
-                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>

@@ -16,7 +16,7 @@ The brand is never hardcoded. Read it from `src/lib/site.ts`:
 | `SITE_DISCLAIMER` | — | "…is an independent photo service and is not affiliated with… any government, passport office, embassy or consulate." |
 
 ### Core Value Propositions
-* **Many countries, one tool:** Country sizes live in `src/config/countries.ts`. Each country gets a generated landing page.
+* **Many countries, one tool:** Country sizes live in `src/config/countries.ts`. Users pick their country in the photo maker.
 * **Privacy-first:** The processing API key stays server-side. Processing artifacts are deleted after the session. Download links expire.
 * **Preview before paying:** Users see the processed photo on `/preview/[id]` before checkout.
 * **Independent:** The site is not affiliated with any government. Always pair size guidance with a reminder to check the issuing authority's current rules.
@@ -93,11 +93,6 @@ Photo sizes are per country. Each `COUNTRIES` entry in `src/config/countries.ts`
 
 Do not present any size as an official guarantee. Photo rules change and can differ between online and paper applications, embassies and visa categories. Copy must tell users to confirm the current rules with their issuing authority (`OfficialPhotoNotice.tsx` does this), and must state that the site is independent and not affiliated with any government (`SITE_DISCLAIMER`).
 
-### Country landing pages (`/tool/[slug]`)
-* `src/lib/country-pages.ts` generates one page per country at `/tool/<country>-<document>-photo` (e.g. `/tool/united-states-passport-photo`).
-* `src/lib/tools.ts` merges those pages with Markdown files in `src/content/tools/<slug>.md`. A Markdown file whose slug matches a generated page overrides it.
-* `src/lib/tool-directory.ts` builds the `/tool` hub (`TOOL_DIRECTORY`, grouped into Passport and Visa photos) and `POPULAR_TOOLS`.
-
 ---
 
 ## 6. SEO & International Search Strategy
@@ -106,7 +101,7 @@ Do not present any size as an official guarantee. Photo rules change and can dif
 1. `passport photo online`
 2. `digital passport photo`
 3. `visa photo maker`
-4. `<country> passport photo` (one landing page per country)
+4. `<country> passport photo`
 5. `passport photo print template`
 
 ### Mandatory Metadata & Crawling Rules
@@ -144,7 +139,6 @@ frontend/
 │   │   │   ├── payments/               # create-order, verify, status/[paymentId]
 │   │   │   └── webhooks/razorpay/      # Razorpay webhook
 │   │   ├── preview/[id]/      # Preview, checkout and thank-you pages
-│   │   ├── tool/              # /tool hub and /tool/[slug] country pages
 │   │   ├── passport-size-photo-maker/
 │   │   ├── passport-photo-print-template-generator/
 │   │   ├── about-us/, contact-us/, data-security-privacy-safeguards/,
@@ -169,11 +163,8 @@ frontend/
 │   ├── config/
 │   │   ├── countries.json     # JSON copy of the country dimension data
 │   │   └── countries.ts       # Typed country list, slugs and lookup utilities
-│   ├── content/
-│   │   └── tools/             # <slug>.md pages that override generated country pages
 │   ├── lib/
 │   │   ├── config/pricing.ts  # Currency and plan pricing (env-driven)
-│   │   ├── country-pages.ts   # Generated content for /tool/<country>-<document>-photo
 │   │   ├── db/mongodb.ts      # MongoDB client
 │   │   ├── email/             # Resend client and templates
 │   │   ├── invoices/          # Invoice PDF generation and service
@@ -184,9 +175,7 @@ frontend/
 │   │   ├── storage/cloudinary.ts # Cloudinary storage
 │   │   ├── image-compress.ts  # Client-side image compression before upload
 │   │   ├── passport-api.ts    # Photo processing API client (server-only)
-│   │   ├── site.ts            # SITE_URL, SITE_NAME, SUPPORT_EMAIL, LOGO_PATH, SITE_DISCLAIMER
-│   │   ├── tool-directory.ts  # /tool directory and popular tools
-│   │   └── tools.ts           # Loads Markdown + generated tool pages
+│   │   └── site.ts            # SITE_URL, SITE_NAME, SUPPORT_EMAIL, LOGO_PATH, SITE_DISCLAIMER
 │   └── mdx-components.tsx     # MDX typography styling bindings
 ├── .gitignore
 ├── .prettierignore            # Prettier ignore rules
@@ -201,3 +190,28 @@ frontend/
 ├── README.md                  # Project documentation
 └── tsconfig.json              # TypeScript strict configuration
 ```
+
+---
+
+## 8. Admin Panel (`/admin`)
+
+Everything is in this app; the Python photo API is not involved (the admin panel only calls its public `/health` and `/countries` endpoints).
+
+* **Pages:** `src/app/admin/` — `login/` plus the `(panel)/` route group, whose layout redirects to `/admin/login` without a session. Views live in `src/components/admin/views/`; shared pieces in `src/components/admin/ui.tsx`, `AdminShell.tsx` (nav filtered by role, `useAdmin()` for `can()` / `toast()`) and `charts.tsx`.
+* **API:** `src/app/api/admin/*`. Wrap every handler in `adminRoute(roles, handler)` from `src/lib/admin/server.ts`: it checks the session and role, requires `X-Admin-Request: 1` on mutations, and turns `fail(status, detail)` into `{ detail }` JSON. Record every mutating action with `audit()` from `src/lib/admin/query.ts`.
+* **Auth:** `admins` and `admin_sessions` collections (`src/lib/admin/db.ts`). Passwords use Node `crypto.scrypt` (`src/lib/admin/password.ts`); sessions are a random token in the HttpOnly `admin_session` cookie, stored as a SHA-256 hash with a TTL. Login is rate-limited (`admin_login_attempts`). Roles: `owner` (everything, incl. refunds and admin users), `support` (everything except refunds, admin users and the audit log), `editor` (Expert Edit queue only).
+* **First admin:** `npm run create-admin` (asks for email, name and password), or `npm run create-admin you@example.com "Your Name" [owner|support|editor]`. Do not use `--email` flags through npm in PowerShell: it strips the `--` separator.
+* **Order actions** (`src/lib/admin/orders.ts`) reuse the shop's pipelines: `fulfillPayment` (resend email with `notifyTeam: false`, retry fulfilment), the Razorpay SDK for refunds (per-order `refundLockAt` lock), and `sendExpertEditDeliveredEmailAction`.
+* **Expert Edit:** claim → upload edited JPEG (Cloudinary `passport/expert/{resultId}_expert`) → `image.imageUrl` is replaced (the AI result stays in `expertEdit.aiImageUrl`) and a new 72-hour download token is issued.
+* **User journeys:** `/api/passport-photo` logs `photo_processed` (with `metadata.resultId`) or `photo_processing_failed` via `after()` — outcome only, never the image, file name or IP. `src/lib/admin/journeys.ts` joins each upload to its order (`payments.image.resultId`) and `image_downloaded` events, for the Journeys page and the dashboard funnel. Activity logs expire after 90 days.
+* **Global CSS gotcha:** `globals.css` has unlayered `h1`–`h4` sizes and `a { color: inherit }`, which beat Tailwind utilities and DaisyUI classes. Admin headings use the important modifier (`text-sm!`).
+* `/admin/` is disallowed in `robots.ts` and every admin page is `noindex`. Optional env: `ADMIN_SESSION_HOURS` (default 12).
+
+---
+
+## 9. SEO Guide Pages (`/tool`)
+
+* **Content:** one Markdown file per guide in `src/content/tools/<slug>.md`, served at `/tool/<slug>`. `src/lib/tools.ts` loads them (FAQ section → `FaqAccordion` + FAQPage schema; links to unpublished `/tool/...` guides render as plain text). `src/app/tool/page.tsx` is the hub; `sitemap.ts` lists every guide.
+* **Plan and progress:** `seo/content-strategy.txt` (40-page plan), `seo/PROGRESS.md` (what is published, what is next, daily log), `seo/README.md` (frontmatter, writing and accuracy rules). Five pages are published per day with `/seo-daily-pages`.
+* **Redirects:** `next.config.ts` skips any retired `/tool/...` redirect whose slug has a guide file. Restart `next dev` after adding a guide whose slug was previously redirected.
+* **Accuracy:** the US State Department rejects photos changed with software, apps, filters or AI. Guides must not claim AI-edited photos are accepted.

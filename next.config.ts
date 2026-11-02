@@ -1,5 +1,17 @@
+import fs from "fs";
+import path from "path";
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
+
+/** Guide pages served at /tool/<slug>; they must never be redirected away. */
+const toolGuideSlugs = new Set(
+  fs.existsSync(path.join(process.cwd(), "src/content/tools"))
+    ? fs
+        .readdirSync(path.join(process.cwd(), "src/content/tools"))
+        .filter((file) => file.endsWith(".md"))
+        .map((file) => file.replace(/\.md$/, ""))
+    : []
+);
 
 const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "md", "mdx"],
@@ -19,54 +31,76 @@ const nextConfig: NextConfig = {
     ],
   },
   async redirects() {
-    const uk = "/tool/united-kingdom-passport-photo";
-    const us = "/tool/united-states-passport-photo";
-    const schengen = "/tool/schengen-area-visa-photo";
-    const india = "/tool/india-passport-photo";
+    const maker = "/passport-size-photo-maker";
 
-    // Retired single-country (UK) pages and guides, mapped to the generated
-    // per-country pages or the country hub.
-    const retired: [string, string][] = [
-      ["/uk-passport-photo", uk],
-      ["/passport-renewal-photo-online", uk],
-      ["/uk-baby-passport-photo", uk],
-      ["/uk-driving-licence-photo", uk],
-      ["/driving-licence-photo", uk],
-      ["/us-visa-photo", us],
-      ["/us-visa-photo-tool", us],
-      ["/schengen-visa-photo", schengen],
-      ["/indian-passport-photo", india],
-      ["/indian-passport-photo-maker", india],
-      ["/digital-passport-photo", "/passport-size-photo-maker"],
-      ["/photo-size-35x45mm", "/passport-size-photo-maker"],
-      ["/image-to-passport-size-converter", "/passport-size-photo-maker"],
-      ["/passport-photo-at-home", "/passport-size-photo-maker"],
-      ["/passport-photo-tool", "/passport-size-photo-maker"],
-      ["/online-id-photo-maker", "/passport-size-photo-maker"],
-      ["/order-passport-photos-online", "/passport-size-photo-maker"],
-      ["/passport-size-photo-online", "/passport-size-photo-maker"],
-      ["/tool/uk-passport-photo", uk],
-      ["/tool/british-passport-picture-maker", uk],
-      ["/tool/passport-photo-checker-uk", uk],
-      ["/tool/uk-passport-photo-guidance-wizard", uk],
-      ["/tool/digital-passport-photo", uk],
-      ["/tool/passport-renewal-photo-online", uk],
-      ["/tool/uk-baby-passport-photo", uk],
-      ["/tool/uk-driving-licence-photo", uk],
-      ["/tool/uk-visa-photo", uk],
-      ["/tool/us-visa-photo-tool", us],
-      ["/tool/schengen-visa-photo", schengen],
-      ["/tool/indian-passport-photo-maker", india],
-      ["/tool/take-a-passport-photo-on-iphone", "/passport-size-photo-maker"],
-      ["/tool/passport-photo-at-home", "/passport-size-photo-maker"],
-      ["/tool/photo-size-35x45mm", "/passport-size-photo-maker"],
-      ["/tool/image-to-passport-size-converter", "/passport-size-photo-maker"],
-      ["/tool/passport-photo-tool", "/passport-size-photo-maker"],
-      ["/tool/online-id-photo-maker", "/passport-size-photo-maker"],
-      ["/tool/order-passport-photos-online", "/passport-size-photo-maker"],
+    // Slugs of the removed per-country pages, e.g. /tool/china-passport-photo.
+    const countryPageSlugs = [
+      "algeria-passport-photo", "australia-passport-photo", "austria-passport-photo",
+      "belgium-passport-photo", "bhutan-passport-photo", "bulgaria-passport-photo",
+      "canada-passport-photo", "china-passport-photo", "croatia-passport-photo",
+      "czechia-passport-photo", "denmark-passport-photo", "estonia-passport-photo",
+      "finland-passport-photo", "france-passport-photo", "germany-passport-photo",
+      "greece-passport-photo", "hungary-passport-photo", "india-passport-photo",
+      "indonesia-passport-photo", "iran-passport-photo", "iraq-passport-photo",
+      "italy-passport-photo", "japan-passport-photo", "kazakhstan-passport-photo",
+      "latvia-passport-photo", "lithuania-passport-photo", "luxembourg-passport-photo",
+      "malawi-passport-photo", "malta-passport-photo", "mexico-passport-photo",
+      "nepal-passport-photo", "netherlands-passport-photo", "new-zealand-passport-photo",
+      "nigeria-passport-photo", "norway-passport-photo", "poland-passport-photo",
+      "portugal-passport-photo", "romania-passport-photo", "schengen-area-visa-photo",
+      "singapore-passport-photo", "slovakia-passport-photo", "slovenia-passport-photo",
+      "south-korea-passport-photo", "spain-passport-photo", "sri-lanka-passport-photo",
+      "sweden-passport-photo", "switzerland-passport-photo", "tajikistan-passport-photo",
+      "thailand-passport-photo", "turkey-passport-photo", "united-arab-emirates-passport-photo",
+      "united-kingdom-passport-photo", "united-states-passport-photo",
     ];
 
-    return retired.map(([source, destination]) => ({ source, destination, permanent: true }));
+    // Retired pages (old UK guides and the /tool country pages) that may still
+    // be indexed or bookmarked. All go to the photo maker.
+    const retired = [
+      "/uk-passport-photo",
+      "/passport-renewal-photo-online",
+      "/uk-baby-passport-photo",
+      "/uk-driving-licence-photo",
+      "/driving-licence-photo",
+      "/us-visa-photo",
+      "/us-visa-photo-tool",
+      "/schengen-visa-photo",
+      "/indian-passport-photo",
+      "/indian-passport-photo-maker",
+      "/digital-passport-photo",
+      "/photo-size-35x45mm",
+      "/image-to-passport-size-converter",
+      "/passport-photo-at-home",
+      "/passport-photo-tool",
+      "/online-id-photo-maker",
+      "/order-passport-photos-online",
+      "/passport-size-photo-online",
+      "/tool/uk-passport-photo",
+      "/tool/british-passport-picture-maker",
+      "/tool/passport-photo-checker-uk",
+      "/tool/uk-passport-photo-guidance-wizard",
+      "/tool/digital-passport-photo",
+      "/tool/passport-renewal-photo-online",
+      "/tool/uk-baby-passport-photo",
+      "/tool/uk-driving-licence-photo",
+      "/tool/uk-visa-photo",
+      "/tool/us-visa-photo-tool",
+      "/tool/schengen-visa-photo",
+      "/tool/indian-passport-photo-maker",
+      "/tool/take-a-passport-photo-on-iphone",
+      "/tool/passport-photo-at-home",
+      "/tool/photo-size-35x45mm",
+      "/tool/image-to-passport-size-converter",
+      "/tool/passport-photo-tool",
+      "/tool/online-id-photo-maker",
+      "/tool/order-passport-photos-online",
+      ...countryPageSlugs.map((slug) => `/tool/${slug}`),
+    ];
+
+    return retired
+      .filter((source) => !toolGuideSlugs.has(source.replace(/^\/tool\//, "")))
+      .map((source) => ({ source, destination: maker, permanent: true }));
   },
   async headers() {
     return [

@@ -1,0 +1,275 @@
+PASSPORT PHOTO SEO CONTENT STRATEGY
+As of Oct 16, 2026
+
+======================================================================
+1. EXECUTIVE SUMMARY
+======================================================================
+
+The plan builds 40 pages that together target all 528 keywords in the source export, with every keyword assigned to exactly one page. Combined bucketed volume is roughly 7.0M searches per month, though that figure is an order-of-magnitude ranking, not a traffic forecast.
+
+Pages are grouped into five topic clusters, each with a hub page. The pillar /passport-photo/ owns the head term, and /online-passport-photo-maker/ is the single money page that every DIY and tool page feeds.
+
+The central design choice is intent separation: one primary keyword per page, brand pages that own every query containing their brand, and size, near-me and "best" pages split by scope so no two URLs compete for the same search.
+
+| Metric                         | Value                         |
+| Pages                          | 40                            |
+| Clusters                       | 5                             |
+| Keywords mapped                | 528 (0 unmapped)              |
+| Est. searches / mo (bucketed)  | ~7,031,550                    |
+| Money page                     | /online-passport-photo-maker/ |
+| Pillar page                    | /passport-photo/              |
+
+======================================================================
+2. DATA SOURCE AND ASSUMPTIONS
+======================================================================
+
+All keywords come from a single Google Keyword Planner export dated 2026-09-30, containing 528 keywords.
+
+- Bucketed volumes. Planner reports volumes as ranges (50 / 500 / 5,000 / 50,000 / 500,000), typical of an account without active ad spend. Totals sum those buckets, so a page at 500,000 may really sit anywhere in a wide band. Validate priorities with Semrush, Ahrefs or Search Console before committing resources.
+- Site type. No business details were supplied, so the plan assumes a passport photo brand with an online photo tool. If the site is a studio, a retailer or an affiliate publisher, the CTAs and the money page change, but the page set largely holds.
+- Market. The plan is US-first (2x2 inch, State Department, USPS, US retailers), with dedicated pages for Canada, India and Schengen and a catch-all hub for other countries.
+- Language. English pages, with short Spanish sections to catch variants such as "foto pasaporte near me" and "foto visa schengen".
+
+======================================================================
+3. SITE ARCHITECTURE
+======================================================================
+
+The site is a hub-and-spoke model: one pillar, five topic clusters each with a hub, and a single money page that every cluster feeds.
+
+  PILLAR: /passport-photo/
+  Owns the head term "passport photo"; routes readers into every cluster
+   |
+   +--> A. Core & Local
+   |      Hub /passport-photo/ - 8 pages - ~5.41M searches/mo
+   |      Head terms, near-me, price and speed
+   |
+   +--> B. Retailer Brands
+   |      Hub /passport-photos-near-me/ - 9 pages - ~721K/mo
+   |      One page per retailer so brand queries never hit generic pages
+   |
+   +--> C. DIY, Online & Tools
+   |      Hub /online-passport-photo-maker/ - 7 pages - ~135K/mo
+   |      How-to and tool pages that feed the money page
+   |
+   +--> D. Size & Requirements
+   |      Hub /passport-photo-requirements/ - 9 pages - ~658K/mo
+   |      Size, format and compliance references
+   |
+   +--> E. Visa, Immigration & Countries
+          Hub /visa-photo/ - 7 pages - ~109K/mo
+          Destination rules and USCIS use cases
+
+  All five clusters ---CTA---> MONEY PAGE: /online-passport-photo-maker/
+                               (every page's CTA lands here)
+
+Core & Local carries about 77% of estimated volume, while DIY & Tools is small in volume but closest to conversion.
+
+======================================================================
+4. KEYWORD MAPPING METHODOLOGY
+======================================================================
+
+Each of the 528 keywords is assigned to exactly one page by applying ordered rules; the first rule that matches wins.
+
+1. Brand. Any query naming a retailer or service (CVS, Walmart, USPS, ePassportPhoto) goes to that brand's page.
+2. Country. Any query naming a country or region (Canadian, Indian, Schengen, British) goes to that country's page or the by-country hub.
+3. Format. Any query naming a specific format (2x2, 35x45 mm, biometric, digital) goes to that format's page.
+4. Intent. Remaining queries are grouped by what the searcher wants: locate, compare price, learn rules, do it themselves, or buy.
+
+Within each page, the highest-volume keyword that best states the page's intent is the primary keyword; all others are supporting. Spelling and notation variants ("2x2", "2 by 2", "2 * 2") are consolidated onto one page so Google sees a single URL per intent. The full keyword-to-page table lives in the spreadsheet's Keyword Mapping tab.
+
+======================================================================
+5. PAGE INVENTORY
+======================================================================
+
+Four pages carry about 75% of the plan's estimated volume: the near-me locator, the pillar, the photographer page and the passport-size near-me page. Full H1s, outlines and supporting keywords are in the spreadsheet.
+
+Columns: # | Slug | Page type | Primary keyword | Primary vol | Kws | Est. total / mo
+
+A. CORE & LOCAL (8 pages, ~5.41M/mo)
+| 1  | /passport-photo/ | Pillar / hub | passport photo | 500,000 | 19 | 1,569,200 |
+| 2  | /passport-photos-near-me/ | Local hub / locator | passport photos near me | 500,000 | 20 | 2,069,650 |
+| 3  | /passport-photographer-near-me/ | Local service guide | passport photographer near me | 500,000 | 14 | 1,115,800 |
+| 4  | /passport-photo-services/ | Comparison guide | passport photo services | 50,000 | 8 | 116,500 |
+| 5  | /same-day-instant-passport-photos/ | Landing / guide | same day passport photo | 500 | 5 | 2,500 |
+| 6  | /passport-photo-cost/ | Cost / price guide | passport photo cost | 5,000 | 6 | 21,000 |
+| 7  | /best-passport-photos/ | Roundup | best passport photos | 5,000 | 5 | 10,600 |
+| 8  | /passport-size-photo-near-me/ | Local / format guide | passport size photo near me | 500,000 | 11 | 503,200 |
+
+B. RETAILER BRANDS (9 pages, ~721K/mo)
+| 9  | /cvs-passport-photos/ | Brand page | cvs passport photo | 50,000 | 15 | 183,000 |
+| 10 | /walgreens-passport-photos/ | Brand page | walgreens passport photo | 50,000 | 7 | 107,000 |
+| 11 | /walmart-passport-photos/ | Brand page | walmart passport photo | 50,000 | 7 | 161,000 |
+| 12 | /costco-passport-photos/ | Brand page | costco passport photos | 5,000 | 5 | 15,550 |
+| 13 | /staples-passport-photos/ | Brand page | staples passport photo | 50,000 | 8 | 157,000 |
+| 14 | /fedex-office-passport-photos/ | Brand page | fedex passport photo | 5,000 | 12 | 37,500 |
+| 15 | /usps-post-office-passport-photos/ | Brand page | usps passport photo | 5,000 | 11 | 37,000 |
+| 16 | /rite-aid-passport-photos/ | Legacy-demand page | rite aid passport photo | 5,000 | 7 | 6,650 |
+| 17 | /other-stores-that-take-passport-photos/ | Long-tail brand roundup | target passport photos | 5,000 | 7 | 16,550 |
+
+C. DIY, ONLINE & TOOLS (7 pages, ~135K/mo)
+| 18 | /passport-photo-at-home/ | How-to guide | passport photo at home | 5,000 | 12 | 31,650 |
+| 19 | /take-passport-photo-with-phone/ | How-to guide | take passport photo with iphone | 5,000 | 14 | 17,800 |
+| 20 | /digital-passport-photo/ | Requirements + how-to | digital passport photo | 5,000 | 11 | 23,050 |
+| 21 | /online-passport-photo-maker/ | Money page / tool | ai passport photo | 500 | 11 | 3,250 |
+| 22 | /passport-photo-editing-photoshop-word/ | Technical how-to | photoshop passport photo | 500 | 10 | 950 |
+| 23 | /best-online-passport-photo-services/ | Brand comparison | epassportphoto | 5,000 | 11 | 6,850 |
+| 24 | /print-passport-photos/ | How-to / product | passport photo prints | 50,000 | 3 | 51,000 |
+
+D. SIZE & REQUIREMENTS (9 pages, ~658K/mo)
+| 25 | /passport-photo-size/ | Reference guide | passport size photo | 50,000 | 26 | 427,450 |
+| 26 | /2x2-passport-photo/ | Format guide | 2x2 passport photo | 5,000 | 39 | 21,750 |
+| 27 | /35x45mm-passport-photo/ | Format guide | 35mm x 45mm photo | 500 | 22 | 2,450 |
+| 28 | /biometric-passport-photo/ | Standards guide | biometric photo | 500 | 9 | 3,150 |
+| 29 | /passport-photo-requirements/ | Compliance checklist | photo required for passport | 50,000 | 17 | 63,400 |
+| 30 | /how-to-take-a-good-passport-photo/ | Tips guide | good passport photo | 5,000 | 9 | 8,550 |
+| 31 | /passport-application-photo/ | Process guide | passport renewal photo | 5,000 | 8 | 16,150 |
+| 32 | /infant-newborn-passport-photo/ | Specialty guide | infant passport photo | 50,000 | 5 | 101,500 |
+| 33 | /id-photo/ | Guide | id photos | 5,000 | 14 | 13,750 |
+
+E. VISA, IMMIGRATION & COUNTRIES (7 pages, ~109K/mo)
+| 34 | /visa-photo/ | Requirements guide | visa photo | 5,000 | 28 | 44,600 |
+| 35 | /visa-photo-near-me/ | Local guide | visa photo near me | 5,000 | 7 | 6,650 |
+| 36 | /schengen-eu-photo-size/ | Requirements guide | photo size for schengen visa | 5,000 | 18 | 9,000 |
+| 37 | /canadian-passport-photos/ | Country guide | canadian passport photo | 5,000 | 15 | 17,400 |
+| 38 | /indian-passport-photo-oci-photo/ | Country guide | indian passport size photo | 5,000 | 16 | 13,400 |
+| 39 | /passport-photo-size-by-country/ | Reference hub | international passport photo size | 50 | 44 | 13,450 |
+| 40 | /uscis-immigration-photos/ | Requirements guide | immigration photo | 500 | 12 | 4,650 |
+
+======================================================================
+6. CANNIBALIZATION RULES AND KEYWORD OWNERSHIP
+======================================================================
+
+No primary keyword repeats across the 40 pages, and five standing rules keep overlapping topics on separate URLs.
+
+1. One primary keyword per page. Supporting keywords may echo a theme but never another page's primary term.
+2. Brands own their queries. Every query containing "CVS", "Walmart", "FedEx" and so on lives only on that brand's page, including brand + cost, brand + near me and brand + digital.
+3. Size pages split by format. Concept (/passport-photo-size/), 2x2 inch, 35x45 mm and by-country are four distinct pages.
+4. "Best" roundups split by scope. /best-passport-photos/ compares all methods; /best-online-passport-photo-services/ compares online brands only.
+5. Cost head terms live in one place. Generic price and "cheap" queries belong to /passport-photo-cost/; brand price queries stay on brand pages.
+
+The four near-me pages are the highest-risk overlap and are separated deliberately:
+
+| Page                            | Owns                                                  | Sends elsewhere                         |
+| /passport-photos-near-me/       | Generic, brand-agnostic local intent                  | Brands, studios, "passport size", visa  |
+| /passport-photographer-near-me/ | Professional, studio, photographer                    | Generic near-me, chain stores           |
+| /passport-size-photo-near-me/   | "Passport size" wording, print packages (4/6/8 copies)| US locator, size specs                  |
+| /visa-photo-near-me/            | Visa + local intent                                   | Visa requirements, generic near-me      |
+
+When writers add new sections, check the spreadsheet's "Cannibalization guard" column first; it names, per page, which topics must be linked out rather than covered.
+
+======================================================================
+7. INTERNAL LINKING STRATEGY
+======================================================================
+
+Links flow up to each cluster hub, across only where the reader's need genuinely shifts, and always toward /online-passport-photo-maker/ as the conversion point.
+
+A. Core & Local (hub /passport-photo/)
+   Every page links up to the pillar. Near-me pages cross-link only via "Looking for X instead?" boxes, never using the other page's primary keyword as anchor.
+
+B. Retailer Brands (hub /passport-photos-near-me/)
+   Each brand page links up to the locator and /passport-photo-cost/, across to two alternative brands, and to the online maker as the no-trip option. Generic pages link down to brands from comparison tables.
+
+C. DIY, Online & Tools (hub /online-passport-photo-maker/)
+   Every DIY and tool page carries a contextual CTA to the maker. The online-services comparison links to it as the recommended option.
+
+D. Size & Requirements (hub /passport-photo-requirements/)
+   Size pages form a triangle: size concept, 2x2 and 35x45 mm all link to each other. Requirements and good-photo tips link once each with descriptive anchors.
+
+E. Visa, Immigration & Countries (hub /visa-photo/)
+   Each country page links up to /visa-photo/ or the by-country hub, and across to its matching format page (2x2 or 35x45 mm).
+
+Anchor text rules:
+- Use descriptive anchors that state the destination's topic ("photo size for a Schengen visa"), not "click here".
+- Never use another page's exact primary keyword as an anchor from a page that could rank for it.
+- Keep sitewide navigation to the five hubs plus the maker; let contextual links do the rest.
+
+======================================================================
+8. CONTENT STANDARDS AND ON-PAGE GUIDELINES
+======================================================================
+
+Every page ships with the H1 and H2/H3 outline from the spreadsheet, the primary keyword in the H1, title tag and first paragraph, and a closing FAQ.
+
+- Accuracy first. Requirements pages must match the issuing authority (US State Department, USCIS, IRCC, VFS and embassy sites). Retailer pages must match the retailer's own site on the day of publishing. Cite sources on-page.
+- Unique angle. Each page has a defined angle in the "Content idea" column; write to that angle rather than repeating the pillar.
+- Structured data. FAQPage schema on pages with FAQs, HowTo on the DIY guides, and LocalBusiness or Place schema only where real location data exists.
+- Near-me pages need real local content. A locator, crawlable city pages or genuine location lists; thin near-me copy will underperform.
+- Visuals. Size and requirements pages need a labelled diagram (head height, eye line, frame) and do/don't example photos.
+- CTAs. One primary CTA to the online maker per page, placed after the reader's question is answered, not before.
+- Honesty on comparisons. Brand and competitor pages state verifiable facts and avoid disparaging claims.
+
+======================================================================
+9. PUBLISHING PRIORITY AND ROADMAP
+======================================================================
+
+The recommended order is the money page and core references first, then the highest-volume local and brand pages, then cluster depth, then the long tail. The spreadsheet does not set an order; this sequence is a proposal based on its volumes and dependencies. Numbers in brackets are page numbers.
+
+PHASE 1 - FOUNDATION
+  Online maker (21), Pillar (1), Near-me locator (2), Size guide (25), Requirements (29)
+  Gate: maker converts; schema and CTAs tested
+
+PHASE 2 - VOLUME
+  Photographer (3), Passport size near me (8), CVS (9), Walmart (11), Staples (13), Walgreens (10), Infant photos (32), Print photos (24)
+  Gate: retailer facts verified on-site
+
+PHASE 3 - CLUSTER DEPTH
+  Services (4), Cost (6), Same-day (5), Best options (7), At home (18), Phone (19), Digital (20), 2x2 (26), 35x45 mm (27), Renewal photo (31), FedEx (14), USPS (15)
+  Gate: no two URLs rank for one query
+
+PHASE 4 - LONG TAIL
+  Visa photo (34), Visa near me (35), Schengen (36), Canada (37), India / OCI (38), By country hub (39), USCIS (40), Costco (12), Rite Aid (16), Other stores (17), Photoshop/Word (22), Online services (23), Biometric (28), Good photo tips (30), ID photo (33)
+  Then: promote hub sections that grow
+
+Phase 1 comes first because every other page's CTA points at the maker and every requirements claim leans on the size and requirements references.
+
+======================================================================
+10. RISKS, FLAGS AND OPEN ITEMS
+======================================================================
+
+The biggest risks are factual drift on retailer and requirements pages and over-reliance on bucketed volumes.
+
+- Bucketed volumes
+  Risk: Priorities could be wrong by an order of magnitude.
+  Action: Re-check top 15 pages in a second keyword tool before production.
+- Retailer facts
+  Risk: Prices, hours and participating locations change often.
+  Action: Verify on each retailer's site at publish and every quarter.
+- Official requirements
+  Risk: Size, pixel and file specs change by country.
+  Action: Validate against issuing authority; add a "last verified" date.
+- Rite Aid (page 16)
+  Risk: All stores closed (reported Oct 2025).
+  Action: Keep a short "closed, go here instead" page; no prices or hours; 301 to the locator if traffic decays.
+- Near-me pages
+  Risk: Thin pages fail to rank against map packs.
+  Action: Ship with a real locator or city pages, not generic copy.
+- Ambiguous keywords
+  Risk: "rimowa passport photos", "passport phone", "pp size", Singapore/NZ/Toronto place names.
+  Action: Review; drop any outside target markets.
+- Spanish variants
+  Risk: Short Spanish sections may underserve that audience.
+  Action: Build a dedicated /es/ page with hreflang if Spanish-speaking US traffic matters.
+- Site-type assumption
+  Risk: CTAs assume an online photo tool.
+  Action: Swap CTAs if the site is a studio, retailer or affiliate.
+- Competitor page (23)
+  Risk: Naming competitors invites accuracy and legal scrutiny.
+  Action: Use verifiable facts only; review before publish.
+
+======================================================================
+11. MEASUREMENT AND MAINTENANCE
+======================================================================
+
+Success is measured per page against its primary keyword and per cluster against conversions on the online maker.
+
+| Metric                                              | Source                                | Cadence   |
+| Rank for primary keyword                            | Rank tracker                          | Weekly    |
+| Impressions and clicks per page                     | Google Search Console                 | Monthly   |
+| Cannibalization check (two URLs, one query)         | Search Console query-to-page report   | Monthly   |
+| Assisted conversions to the online maker            | Analytics                             | Monthly   |
+| Fact check of retailer and requirements pages       | Manual review                         | Quarterly |
+
+Standing maintenance rules from the plan:
+- Promote any brand in the long-tail roundup (page 17) to its own page once it passes ~5,000 searches per month.
+- Promote any country section in the by-country hub (page 39) to its own page when its volume justifies it.
+- Re-evaluate the Rite Aid page and redirect if its traffic decays.
+- Extend /passport-photos-near-me/ into city and state landing pages once the template proves out.

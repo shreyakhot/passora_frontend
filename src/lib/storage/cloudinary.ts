@@ -129,3 +129,32 @@ export async function uploadOriginalPhotoToCloudinary(params: {
     return null;
   }
 }
+
+/**
+ * Upload an editor's finished Expert Edit photo (admin panel).
+ * Throws on failure so the admin sees the error.
+ */
+export async function uploadExpertEditPhoto(params: {
+  imageBuffer: Buffer;
+  resultId: string;
+}): Promise<{ secureUrl: string; publicId: string }> {
+  if (!cloudName || !apiKey || !apiSecret) {
+    throw new Error("Cloudinary is not configured.");
+  }
+  const uploadResult = await new Promise<UploadApiResponse>((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        folder: "passport/expert",
+        public_id: `${params.resultId}_expert`,
+        resource_type: "image",
+        overwrite: true,
+      },
+      (error, result) => {
+        if (error || !result) reject(error || new Error("Cloudinary upload returned empty response"));
+        else resolve(result);
+      }
+    );
+    stream.end(params.imageBuffer);
+  });
+  return { secureUrl: uploadResult.secure_url, publicId: uploadResult.public_id };
+}

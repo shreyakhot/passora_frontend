@@ -97,13 +97,12 @@ We use **Geist Sans** for clean geometric clarity and **Geist Mono** for technic
 * Accessible mobile toggle button with clear ARIA attributes and a dropdown drawer.
 
 ### 2. Homepage Sections (`src/app/page.tsx`)
-Sections in order: `#hero`, `#studio`, `#how-it-works`, `#features`, `#trust`, `#photo-rules`, `#pricing`, `#popular-tools`, `#faq`.
+Sections in order: `#hero`, `#studio`, `#how-it-works`, `#features`, `#trust`, `#photo-rules`, `#pricing`, `#faq`.
 * **Hero:** International headline (passport, visa and ID photos for many countries) with trust badges and a primary CTA to the studio.
 * **How It Works:** Linear steps: choose your country and upload → automatic background replacement, centring and cropping to that country's size → preview, pay, download and print.
 * **Features / Trust:** Card grids using Lucide icons (e.g. `Globe`, `Shield`, `Lock`, `Printer`, `Crop`, `Zap`).
 * **Photo Rules:** General guidance (background, expression, lighting, accessories). Pair it with `OfficialPhotoNotice` and avoid single-country claims.
 * **Pricing:** Standard and Expert Edit cards. Read prices from `getPlanPricing()`; never hardcode amounts or currency symbols.
-* **Popular Tools:** Links to `POPULAR_TOOLS` country pages from `src/lib/tool-directory.ts`.
 * **FAQ:** `FaqAccordion.tsx`. Answers must match the Schema.org `FAQPage` JSON-LD.
 
 ### 3. Photo Studio (`PhotoMakerStudio.tsx`)
@@ -114,14 +113,10 @@ Sections in order: `#hero`, `#studio`, `#how-it-works`, `#features`, `#trust`, `
 ### 4. Official Photo Notice (`OfficialPhotoNotice.tsx`)
 * Info callout (Lucide `Info`) that reminds users to confirm the current photo rules with the issuing authority for the selected country. It reinforces that the site is independent.
 
-### 5. Country Pages & Directory (`/tool`, `/tool/[slug]`)
-* One generated landing page per country (`src/lib/country-pages.ts`) with a size table, steps, tips and the official-rules reminder. A Markdown file in `src/content/tools/<slug>.md` overrides the generated page.
-* The `/tool` hub lists every country from `TOOL_DIRECTORY`, grouped into Passport Photos and Visa Photos, with flag emoji and pixel size.
-
-### 6. Print Template Generator (`PrintTemplateGenerator.tsx`)
+### 5. Print Template Generator (`PrintTemplateGenerator.tsx`)
 * Lays out photos on a 6×4″ (10×15 cm) sheet for home or kiosk printing.
 
-### 7. Footer (`Footer.tsx`)
+### 6. Footer (`Footer.tsx`)
 * Dark navy background (`bg-secondary text-secondary-content`) as a visual anchor.
 * Brand overview (with the "not affiliated with any government" statement), link groups (Product, Popular Countries, More Countries, Company & Legal) and a copyright notice. No single-country flag or indicator.
 

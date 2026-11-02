@@ -25,6 +25,11 @@ export interface JsonLdProps {
   pageName?: string;
   pageDescription?: string;
   breadcrumbs?: Array<{ name: string; url: string }>;
+  /** ISO dates for the WebPage node. */
+  datePublished?: string;
+  dateModified?: string;
+  /** Emits a HowTo node with these steps (DIY guides only). */
+  howTo?: { name: string; steps: string[] };
   includeOrganization?: boolean;
   includeWebsite?: boolean;
   includeWebApp?: boolean;
@@ -54,6 +59,9 @@ export default function JsonLd({
   pageName,
   pageDescription,
   breadcrumbs,
+  datePublished,
+  dateModified,
+  howTo,
   includeOrganization = true,
   includeWebsite = true,
   includeWebApp = true,
@@ -131,6 +139,8 @@ export default function JsonLd({
       url: pageUrl,
       name: pageName,
       ...(pageDescription ? { description: pageDescription } : {}),
+      ...(datePublished ? { datePublished } : {}),
+      ...(dateModified ? { dateModified } : {}),
       inLanguage: "en",
       isPartOf: { "@id": `${siteUrl}/#website` },
       publisher: { "@id": `${siteUrl}/#organization` },
@@ -150,6 +160,19 @@ export default function JsonLd({
           "@type": "Answer",
           text: entry.answer,
         },
+      })),
+    });
+  }
+
+  if (howTo && howTo.steps.length > 0) {
+    graph.push({
+      "@type": "HowTo",
+      "@id": `${pageId}#howto`,
+      name: howTo.name,
+      step: howTo.steps.map((text, idx) => ({
+        "@type": "HowToStep",
+        position: idx + 1,
+        text,
       })),
     });
   }
