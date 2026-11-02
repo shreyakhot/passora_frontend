@@ -21,28 +21,30 @@ export default function OfficialPhotoNotice({
 
   return (
     <aside
-      className={`bg-white border border-slate-200 rounded-xl p-4 text-xs sm:text-sm text-slate-800 leading-relaxed ${className}`}
+      className={`rounded-2xl border border-ink-200 bg-ink-50 p-4 text-xs leading-relaxed text-ink-700 sm:p-5 sm:text-sm ${className}`}
       aria-label="Official photo guidance"
     >
-      <p className="flex items-start gap-2 font-semibold text-slate-900 mb-2">
-        <Info className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
+      <p className="mb-2.5 flex items-center gap-2 font-bold text-ink-950">
+        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-100 text-brand-700" aria-hidden="true">
+          <Info className="h-3.5 w-3.5" />
+        </span>
         Before you apply
       </p>
-      <ul className="list-disc pl-5 space-y-1">
+      <ul className="list-disc space-y-1 pl-5 marker:text-brand-500">
         <li>
-          <strong>Online applications:</strong> some services ask for an uncropped photo of your
-          head, shoulders and upper body and crop it themselves. Follow the upload instructions on
-          the official application site.
+          <strong className="text-ink-900">Online applications:</strong> some services ask for an uncropped photo of
+          your head, shoulders and upper body and crop it themselves. Follow the upload instructions on the official
+          application site.
         </li>
         <li>
-          <strong>Paper forms:</strong> you usually need identical printed photos at the exact
+          <strong className="text-ink-900">Paper forms:</strong> you usually need identical printed photos at the exact
           size, printed to a professional standard on photographic paper.
         </li>
       </ul>
-      <p className="mt-2 text-slate-600">
-        Photo rules change and can differ between online, paper, embassy and visa applications.
-        Always check the current requirements with {authority}. {SITE_NAME} is independent and not
-        affiliated with any government, passport office, embassy or consulate.
+      <p className="mt-2.5 text-ink-500">
+        Photo rules change and can differ between online, paper, embassy and visa applications. Always check the current
+        requirements with {authority}. {SITE_NAME} is independent and not affiliated with any government, passport
+        office, embassy or consulate.
       </p>
     </aside>
   );

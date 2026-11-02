@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, ArrowRight, Sparkles } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowRight, Wand2, Printer, type LucideIcon } from "lucide-react";
 import { LOGO_PATH, SITE_NAME } from "@/lib/site";
 
 export interface NavLinkItem {
@@ -14,33 +14,41 @@ export interface NavLinkItem {
   rel?: string;
 }
 
-export const PHOTO_TOOLS_MENU = {
+export interface PhotoToolMenuItem {
+  title: string;
+  description: string;
+  href: string;
+  icon: LucideIcon;
+  badge?: string;
+}
+
+export const PHOTO_TOOLS_MENU: { creators: PhotoToolMenuItem[] } = {
   creators: [
     {
-      title: "Passport Photo Maker Studio",
-      description: "AI-powered biometric photo maker & background cleaner",
+      title: "Passport Photo Maker",
+      description: "Upload a photo, get it sized for your country",
       href: "/passport-size-photo-maker",
-      icon: "✨",
+      icon: Wand2,
       badge: "Popular",
     },
     {
       title: "Print Template Generator",
-      description: "4×6″, 5×7″ & A4 multi-photo printable tile sheet creator",
+      description: "4×6″, 5×7″ & A4 multi-photo print sheets",
       href: "/passport-photo-print-template-generator",
-      icon: "🖨️",
-      badge: "New",
+      icon: Printer,
+      badge: "Free",
     },
   ],
 };
 
-/** Brand name with the part after the first "-" or space in the accent colour. */
+/** Brand name with the part after the first "-" or space in the brand colour. */
 export function BrandWordmark({ name = SITE_NAME }: { name?: string }) {
   const match = name.match(/^(.+?)([- ].+)$/);
   if (!match) return <span>{name}</span>;
   return (
     <span>
       {match[1]}
-      <span className="text-lime-600 font-extrabold">{match[2]}</span>
+      <span className="text-brand-600">{match[2]}</span>
     </span>
   );
 }
@@ -48,10 +56,10 @@ export function BrandWordmark({ name = SITE_NAME }: { name?: string }) {
 export const DEFAULT_NAV_LINKS: NavLinkItem[] = [
   { label: "How It Works", href: "/#how-it-works" },
   { label: "Features", href: "/#features" },
-  { label: "Photo Guides", href: "/tool" },
-
+  { label: "Pricing", href: "/#pricing" },
+  { label: "Guides", href: "/tool" },
   { label: "FAQ", href: "/#faq" },
-  { label: "About Us", href: "/about-us" },
+  { label: "About", href: "/about-us" },
   { label: "Contact", href: "/contact-us" },
 ];
 
@@ -87,6 +95,7 @@ export default function Navbar({
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileToolsOpen, setMobileToolsOpen] = useState(false);
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const pathname = usePathname();
 
@@ -106,6 +115,16 @@ export default function Navbar({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // Stronger surface once the page has scrolled
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 8);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const handleMouseEnterTools = () => {
     if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
     setToolsDropdownOpen(true);
@@ -117,16 +136,25 @@ export default function Navbar({
     }, 150);
   };
 
+  const linkBase =
+    "relative inline-flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-semibold transition-colors focus-ring";
+  const linkIdle = "text-ink-600 hover:text-ink-950 hover:bg-ink-100";
+  const linkActive = "text-brand-700 bg-brand-50";
+
   return (
     <header
-      className={`navbar bg-base-100 border-b border-base-300 sticky top-0 z-50 px-0 ${className}`.trim()}
+      className={`sticky top-0 z-50 w-full border-b transition-colors duration-200 ${
+        scrolled || mobileOpen
+          ? "bg-white/90 border-ink-200 backdrop-blur-md"
+          : "bg-white/70 border-transparent backdrop-blur-sm"
+      } ${className}`.trim()}
       role="banner"
     >
-      <div className="container-narrow flex items-center justify-between">
-        {/* Brand Logo */}
+      <div className="container-narrow flex h-16 items-center justify-between gap-4">
+        {/* Brand */}
         <Link
           href={brandHref}
-          className="flex items-center gap-2.5 text-lg sm:text-xl font-bold text-slate-900 focus-ring rounded-lg py-1 px-1.5 -ml-1.5 transition-opacity hover:opacity-90"
+          className="flex items-center gap-2.5 rounded-xl py-1 pr-2 font-display text-lg font-extrabold tracking-tight text-ink-950 focus-ring"
           aria-label={`${SITE_NAME} homepage`}
         >
           {logoSrc && (
@@ -136,15 +164,14 @@ export default function Navbar({
               width={logoWidth}
               height={logoHeight}
               priority
-              className="w-8 h-8 rounded-lg object-cover shadow-xs border border-lime-600/30 shrink-0"
+              className="h-8 w-8 shrink-0 rounded-[10px] object-cover ring-1 ring-ink-200"
             />
           )}
           <span>{brandName}</span>
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-1 lg:gap-1.5" aria-label={ariaLabel}>
-          {/* Tools Mega-Dropdown */}
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label={ariaLabel}>
           {showToolsDropdown && (
             <div
               className="relative"
@@ -154,90 +181,59 @@ export default function Navbar({
               <button
                 type="button"
                 onClick={() => setToolsDropdownOpen((prev) => !prev)}
-                className={`group relative inline-flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-md focus-ring ${
-                  isToolsActive || toolsDropdownOpen
-                    ? "text-lime-600 font-semibold"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
+                className={`${linkBase} ${isToolsActive || toolsDropdownOpen ? linkActive : linkIdle}`}
                 aria-expanded={toolsDropdownOpen}
                 aria-haspopup="true"
               >
-                <span className="relative inline-block py-0.5">
-                  Tools
-                  <span
-                    aria-hidden="true"
-                    className={`absolute bottom-0 left-0 h-[2px] w-full bg-lime-600 rounded-full transition-transform duration-300 ease-out origin-left pointer-events-none ${
-                      isToolsActive || toolsDropdownOpen
-                        ? "scale-x-100"
-                        : "scale-x-0 group-hover:scale-x-100 group-focus-visible:scale-x-100"
-                    }`}
-                  />
-                </span>
+                Tools
                 <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    toolsDropdownOpen ? "rotate-180 text-lime-700" : "text-slate-500 group-hover:text-slate-700"
-                  }`}
+                  className={`h-3.5 w-3.5 transition-transform duration-200 ${toolsDropdownOpen ? "rotate-180" : ""}`}
                   aria-hidden="true"
                 />
               </button>
 
-              {/* Mega Dropdown Panel */}
               {toolsDropdownOpen && (
                 <div
-                  className="absolute top-full left-0 lg:left-1/2 lg:-translate-x-1/3 mt-1.5 w-[380px] bg-white rounded-2xl border border-slate-200 shadow-2xl p-4 sm:p-5 z-50 animate-fade-in text-left"
+                  className="absolute left-0 top-full z-50 mt-2 w-[360px] overflow-hidden rounded-2xl border border-ink-200 bg-white p-2 text-left shadow-lift animate-fade-in"
                   role="menu"
                   aria-orientation="vertical"
                 >
-                  <div className="grid grid-cols-12 gap-5">
-                    {/* Core Tools */}
-                    <div className="col-span-12 space-y-1.5">
-                      <div className="px-2 pb-1 text-[11px] font-bold tracking-wider uppercase text-slate-600">
-                        Photo Creation Tools
-                      </div>
-                      {PHOTO_TOOLS_MENU.creators.map((tool) => (
-                        <Link
-                          key={tool.href}
-                          href={tool.href}
-                          onClick={() => setToolsDropdownOpen(false)}
-                          className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-lime-50/50 transition-all group/item border border-transparent hover:border-lime-200/50"
-                          role="menuitem"
-                        >
-                          <div className="w-7 h-7 rounded-lg bg-lime-100/70 border border-lime-200 flex items-center justify-center text-sm shrink-0 group-hover/item:scale-105 transition-transform">
-                            {tool.icon}
-                          </div>
-                          <div className="min-w-0">
-                            <div className="flex items-center gap-1.5">
-                              <span className="text-xs font-bold text-slate-900 group-hover/item:text-lime-700 transition-colors">
-                                {tool.title}
+                  {PHOTO_TOOLS_MENU.creators.map((tool) => {
+                    const Icon = tool.icon;
+                    return (
+                      <Link
+                        key={tool.href}
+                        href={tool.href}
+                        onClick={() => setToolsDropdownOpen(false)}
+                        className="group/item flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-brand-50"
+                        role="menuitem"
+                      >
+                        <span className="icon-tile h-10 w-10 group-hover/item:bg-brand-600 group-hover/item:text-white group-hover/item:border-brand-600 transition-colors">
+                          <Icon className="h-5 w-5" aria-hidden="true" />
+                        </span>
+                        <span className="min-w-0">
+                          <span className="flex items-center gap-2">
+                            <span className="text-sm font-bold text-ink-950">{tool.title}</span>
+                            {tool.badge && (
+                              <span className="rounded-full bg-brand-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-700">
+                                {tool.badge}
                               </span>
-                              {tool.badge && (
-                                <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-lime-100 text-lime-800 border border-lime-200">
-                                  {tool.badge}
-                                </span>
-                              )}
-                            </div>
-                            <p className="text-[11px] text-slate-600 line-clamp-1 mt-0.5">
-                              {tool.description}
-                            </p>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Dropdown Footer */}
-                  <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between px-2 bg-slate-50/70 -mx-4 -mb-4 p-3 rounded-b-2xl">
-                    <div className="flex items-center gap-2 text-xs text-slate-700">
-                      <span className="w-2 h-2 rounded-full bg-lime-600 animate-pulse" />
-                      <span className="text-[11px] font-medium">50+ Country Formats · Guaranteed Biometric Compliance</span>
-                    </div>
+                            )}
+                          </span>
+                          <span className="mt-0.5 block text-xs text-ink-500">{tool.description}</span>
+                        </span>
+                      </Link>
+                    );
+                  })}
+                  <div className="mt-1 flex items-center justify-between rounded-xl bg-ink-50 px-3 py-2.5">
+                    <span className="text-xs font-medium text-ink-600">50+ country photo formats</span>
                     <Link
                       href="/passport-size-photo-maker"
                       onClick={() => setToolsDropdownOpen(false)}
-                      className="text-xs font-bold text-lime-700 hover:text-lime-800 inline-flex items-center gap-1 transition-colors"
+                      className="inline-flex items-center gap-1 text-xs font-bold text-brand-700 hover:text-brand-800"
                     >
-                      <span>Create Photo Now</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      Create a photo
+                      <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                     </Link>
                   </div>
                 </div>
@@ -245,7 +241,6 @@ export default function Navbar({
             </div>
           )}
 
-          {/* Standard Navigation Links */}
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -254,126 +249,94 @@ export default function Navbar({
                 href={link.href}
                 target={link.target}
                 rel={link.rel}
-                className={`group relative inline-flex items-center justify-center px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-md focus-ring ${
-                  isActive
-                    ? "text-lime-600 font-semibold"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
+                className={`${linkBase} ${isActive ? linkActive : linkIdle}`}
                 aria-current={isActive ? "page" : undefined}
               >
-                <span className="relative inline-block py-0.5">
-                  {link.label}
-                  <span
-                    aria-hidden="true"
-                    className={`absolute bottom-0 left-0 h-[2px] w-full bg-lime-600 rounded-full transition-transform duration-300 ease-out origin-left pointer-events-none ${
-                      isActive
-                        ? "scale-x-100"
-                        : "scale-x-0 group-hover:scale-x-100 group-focus-visible:scale-x-100"
-                    }`}
-                  />
-                </span>
+                {link.label}
               </Link>
             );
           })}
         </nav>
 
-        {/* Desktop CTA */}
-        {ctaText && (
-          <div className="hidden md:flex items-center gap-3">
-            <Link
-              href={ctaHref}
-              className="btn btn-primary btn-sm px-4 font-bold !text-white text-white shadow-xs hover:shadow-sm"
-            >
+        <div className="flex items-center gap-2">
+          {ctaText && (
+            <Link href={ctaHref} className="btn-brand hidden min-h-10 px-4 py-2 text-sm sm:inline-flex">
               {ctaText}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-          </div>
-        )}
-
-        {/* Mobile menu toggle */}
-        <button
-          className="btn btn-ghost btn-square btn-sm md:hidden text-slate-800"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-navigation-drawer"
-        >
-          {mobileOpen ? (
-            <X className="w-5 h-5" aria-hidden="true" />
-          ) : (
-            <Menu className="w-5 h-5" aria-hidden="true" />
           )}
-        </button>
+
+          {/* Mobile menu toggle */}
+          <button
+            type="button"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-ink-200 bg-white text-ink-900 focus-ring lg:hidden"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation-drawer"
+          >
+            {mobileOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile dropdown menu & backdrop */}
+      {/* Mobile drawer & backdrop */}
       {mobileOpen && (
         <>
           <div
-            className="fixed inset-0 top-[57px] bg-slate-900/40 backdrop-blur-xs z-40 md:hidden animate-fade-in"
+            className="fixed inset-0 top-16 z-40 bg-ink-950/40 backdrop-blur-xs animate-fade-in lg:hidden"
             onClick={() => setMobileOpen(false)}
             aria-hidden="true"
           />
           <div
             id="mobile-navigation-drawer"
-            className="md:hidden bg-base-100 border-t border-base-300 absolute top-full left-0 right-0 z-50 shadow-xl animate-fade-in max-h-[calc(100vh-60px)] overflow-y-auto"
+            className="absolute left-0 right-0 top-full z-50 max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-ink-200 bg-white shadow-lift animate-fade-in lg:hidden"
           >
-            <nav
-              className="menu menu-vertical p-4 gap-1.5"
-              aria-label="Mobile navigation"
-            >
-              {/* Mobile Tools Accordion */}
+            <nav className="container-narrow flex flex-col gap-1 py-4" aria-label="Mobile navigation">
               {showToolsDropdown && (
                 <div className="mb-1">
                   <button
                     type="button"
                     onClick={() => setMobileToolsOpen(!mobileToolsOpen)}
-                    className="w-full flex items-center justify-between py-2.5 px-3 rounded-lg text-slate-800 font-bold text-base hover:bg-slate-50 transition-colors"
+                    className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-base font-bold text-ink-950 hover:bg-ink-50"
                     aria-expanded={mobileToolsOpen}
                   >
                     <span className="flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-lime-600" />
-                      <span>Photo Tools &amp; Sizes</span>
+                      <Wand2 className="h-4 w-4 text-brand-600" aria-hidden="true" />
+                      Photo tools
                     </span>
                     <ChevronDown
-                      className={`w-4 h-4 text-slate-500 transition-transform duration-200 ${
-                        mobileToolsOpen ? "rotate-180 text-lime-600" : ""
-                      }`}
+                      className={`h-4 w-4 text-ink-500 transition-transform duration-200 ${mobileToolsOpen ? "rotate-180" : ""}`}
+                      aria-hidden="true"
                     />
                   </button>
 
                   {mobileToolsOpen && (
-                    <div className="pl-3 pr-2 py-2 space-y-3 bg-slate-50/80 rounded-xl mt-1 border border-slate-200/60">
-                      <div>
-                        <div className="px-2 text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">
-                          Creation Tools
-                        </div>
-                        <div className="space-y-1">
-                          {PHOTO_TOOLS_MENU.creators.map((tool) => (
-                            <Link
-                              key={tool.href}
-                              href={tool.href}
-                              onClick={() => setMobileOpen(false)}
-                              className="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-700 hover:text-lime-700 hover:bg-white transition-colors"
-                            >
-                              <div className="flex items-center gap-2 min-w-0">
-                                <span className="shrink-0">{tool.icon}</span>
-                                <span className="truncate">{tool.title}</span>
-                              </div>
-                              {tool.badge && (
-                                <span className="ml-2 text-[9px] font-bold px-1.5 py-0.2 rounded bg-lime-100 text-lime-800 shrink-0">
-                                  {tool.badge}
-                                </span>
-                              )}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
+                    <div className="mt-1 space-y-1 rounded-2xl border border-ink-200 bg-ink-50 p-2">
+                      {PHOTO_TOOLS_MENU.creators.map((tool) => {
+                        const Icon = tool.icon;
+                        return (
+                          <Link
+                            key={tool.href}
+                            href={tool.href}
+                            onClick={() => setMobileOpen(false)}
+                            className="flex items-center gap-3 rounded-xl px-2.5 py-2.5 text-sm font-semibold text-ink-800 hover:bg-white"
+                          >
+                            <Icon className="h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
+                            <span className="truncate">{tool.title}</span>
+                            {tool.badge && (
+                              <span className="ml-auto shrink-0 rounded-full bg-brand-100 px-2 py-0.5 text-[10px] font-bold uppercase text-brand-700">
+                                {tool.badge}
+                              </span>
+                            )}
+                          </Link>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
               )}
 
-              {/* Standard Nav Links */}
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
@@ -382,39 +345,26 @@ export default function Navbar({
                     href={link.href}
                     target={link.target}
                     rel={link.rel}
-                    className={`group relative flex items-center justify-between py-2.5 px-3 rounded-lg font-medium text-base transition-colors ${
-                      isActive
-                        ? "text-lime-700 bg-lime-50 font-semibold"
-                        : "text-slate-700 hover:bg-slate-50 hover:text-slate-950"
+                    className={`rounded-xl px-3 py-3 text-base font-semibold transition-colors ${
+                      isActive ? "bg-brand-50 text-brand-700" : "text-ink-700 hover:bg-ink-50 hover:text-ink-950"
                     }`}
                     aria-current={isActive ? "page" : undefined}
                     onClick={() => setMobileOpen(false)}
                   >
-                    <span className="relative inline-block py-0.5">
-                      {link.label}
-                      <span
-                        aria-hidden="true"
-                        className={`absolute bottom-0 left-0 h-[2px] w-full bg-lime-600 rounded-full transition-transform duration-300 ease-out origin-left pointer-events-none ${
-                          isActive
-                            ? "scale-x-100"
-                            : "scale-x-0 group-hover:scale-x-100"
-                        }`}
-                      />
-                    </span>
+                    {link.label}
                   </Link>
                 );
               })}
+
               {ctaText && (
-                <>
-                  <div className="divider my-2" />
-                  <Link
-                    href={ctaHref}
-                    className="btn btn-primary w-full text-base font-bold !text-white text-white"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {ctaText}
-                  </Link>
-                </>
+                <Link
+                  href={ctaHref}
+                  className="btn-brand btn-lg mt-3 w-full"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {ctaText}
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
               )}
             </nav>
           </div>

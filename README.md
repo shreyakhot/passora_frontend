@@ -43,7 +43,7 @@ The display name and URL are not hardcoded. They come from `src/lib/site.ts` (`S
 | **Email** | Resend |
 | **Invoices** | `pdf-lib` |
 | **Validation** | Zod |
-| **Fonts** | Geist Sans & Geist Mono via `next/font/google` |
+| **Fonts** | Plus Jakarta Sans, Inter & Geist Mono via `next/font/google` |
 
 ---
 
@@ -51,11 +51,11 @@ The display name and URL are not hardcoded. They come from `src/lib/site.ts` (`S
 
 The UI uses a custom CSS-first DaisyUI theme named `brand`, configured in `src/app/globals.css`:
 
-* **Primary:** `#65A30D` (`lime-600`): brand colour and primary actions
-* **Primary Hover / theme-color:** `#4D7C0F` (`lime-700`)
-* **Secondary / Neutral / Base content:** `#0F172A` (`slate-900`): headers, footer and body text
-* **Accent:** `#0F766E` (`teal-700`): badges and trust indicators
-* **Base Surfaces:** `#FFFFFF` (Base 100) / `#F8FAFC` (Base 200) / `#E2E8F0` (Base 300)
+* **Primary / theme-color:** `#4F46E5` (indigo, `brand-600`), hover `#4338CA`: brand colour and primary actions
+* **Ink / Secondary / Base content:** `#0B1020` (`ink-950`): headings, dark bands, footer and body text
+* **Accent:** `#7C3AED` (violet): highlights
+* **Admin panel:** keeps the original lime/navy palette via the separate `admin` DaisyUI theme
+* **Base Surfaces:** `#FFFFFF` (Base 100) / `#F5F6FB` (Base 200) / `#E3E5EF` (Base 300)
 * **Logo / favicon / OG image:** `public/logo.jpg` (`LOGO_PATH` in `src/lib/site.ts`)
 * **Design Docs:** Full specification in [DESIGN.md](DESIGN.md)
 

@@ -1,9 +1,19 @@
+import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
   Scissors,
   CheckCircle2,
   ShieldCheck,
+  Check,
+  ChevronRight,
+  ArrowRight,
+  Upload,
+  Download,
+  Printer,
+  Sparkles,
+  ClipboardCheck,
+  AlertCircle,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -114,6 +124,46 @@ const PAPER_SIZES = [
   },
 ];
 
+function SectionHeader({
+  eyebrow,
+  title,
+  description,
+  align = "center",
+  dark = false,
+  id,
+}: {
+  eyebrow: string;
+  title: ReactNode;
+  description?: ReactNode;
+  align?: "center" | "left";
+  dark?: boolean;
+  id?: string;
+}) {
+  return (
+    <div className={align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
+      <span className={`eyebrow ${dark ? "eyebrow-dark" : ""}`}>{eyebrow}</span>
+      <h2 id={id} className={`display-2 mt-4 ${dark ? "text-white" : "text-ink-950"}`}>
+        {title}
+      </h2>
+      {description && <p className={`lead mt-4 ${dark ? "text-ink-300" : ""}`}>{description}</p>}
+    </div>
+  );
+}
+
+function CheckItem({ children }: { children: ReactNode }) {
+  return (
+    <li className="flex items-start gap-3">
+      <span
+        className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-700"
+        aria-hidden="true"
+      >
+        <Check className="h-3 w-3" strokeWidth={3} />
+      </span>
+      <span>{children}</span>
+    </li>
+  );
+}
+
 export default function PrintTemplateGeneratorPage() {
   return (
     <>
@@ -141,226 +191,284 @@ export default function PrintTemplateGeneratorPage() {
 
       <Navbar ctaText="Photo Maker Studio" ctaHref="/passport-size-photo-maker" />
 
-      <main className="flex-1 bg-slate-50 text-slate-900" id="main-content">
-        {/* 1. HERO */}
-        <section className="bg-white pt-6 pb-8 sm:pt-10 sm:pb-12 border-b border-slate-200/80">
-          <div className="container-narrow max-w-4xl text-center">
-            <nav className="text-xs text-slate-600 mb-3 sm:mb-4 flex justify-center" aria-label="Breadcrumb">
-              <ol className="flex items-center gap-1.5 list-none p-0 m-0">
-                <li>
-                  <Link href="/" className="text-slate-600 hover:text-lime-800 transition-colors font-medium">
-                    Home
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li className="text-slate-900 font-semibold truncate" aria-current="page">
-                  Print Template Generator
-                </li>
-              </ol>
-            </nav>
+      <main className="flex-1 bg-white text-ink-950" id="main-content">
+        {/* 1. HERO + 2. GENERATOR */}
+        <section className="relative overflow-hidden border-b border-ink-100 bg-white" aria-labelledby="print-hero-heading">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[560px] bg-dots [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" aria-hidden="true" />
+          <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
+          <div className="pointer-events-none absolute -left-32 top-24 h-[380px] w-[380px] rounded-full bg-violet-200/40 blur-3xl" aria-hidden="true" />
 
-            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] tracking-tight leading-[1.15] mb-2 sm:mb-3">
-              Free Passport Photo Sheet Maker for 4×6″ and A4
-            </h1>
-            <p className="text-xs sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed mb-4">
-              Convert your passport photo to 4x6 in seconds. Upload one photo, pick <strong>4×6″ (10×15 cm)</strong> or <strong>A4</strong>, and download a print-ready sheet with up to 8 passport size photos, cutting guides and calibrated 300 DPI quality.
-            </p>
+          <div className="container-narrow relative pt-8 pb-10 sm:pt-12 sm:pb-14 lg:pt-16">
+            <div className="mx-auto max-w-4xl text-center">
+              <nav className="mb-6 flex justify-center text-xs sm:text-sm" aria-label="Breadcrumb">
+                <ol className="m-0 flex list-none items-center gap-1.5 rounded-full border border-ink-200 bg-white/80 px-3 py-1.5 shadow-soft backdrop-blur">
+                  <li>
+                    <Link href="/" className="font-medium text-ink-500 transition-colors hover:text-brand-700">
+                      Home
+                    </Link>
+                  </li>
+                  <li aria-hidden="true">
+                    <ChevronRight className="h-3.5 w-3.5 text-ink-400" />
+                  </li>
+                  <li className="truncate font-semibold text-ink-950" aria-current="page">
+                    Print Template Generator
+                  </li>
+                </ol>
+              </nav>
 
-            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs font-semibold text-slate-700">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#4D7C0F]" /> Calibrated 300 DPI
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200">
-                <Scissors className="w-3.5 h-3.5 text-[#4D7C0F]" /> Corner Crop Marks
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#4D7C0F]" /> 100% Free &amp; In-Browser
-              </span>
+              <h1 id="print-hero-heading" className="display-1 text-ink-950">
+                Free Passport Photo Sheet Maker for <span className="marker">4×6″</span> and <span className="marker">A4</span>
+              </h1>
+              <p className="lead mx-auto mt-5 max-w-2xl">
+                Convert your passport photo to 4x6 in seconds. Upload one photo, pick <strong className="text-ink-950">4×6″ (10×15 cm)</strong> or <strong className="text-ink-950">A4</strong>, and download a print-ready sheet with up to 8 passport size photos, cutting guides and calibrated 300 DPI quality.
+              </p>
+
+              <ul className="m-0 mt-7 flex list-none flex-wrap items-center justify-center gap-2 p-0 text-xs font-semibold text-ink-700 sm:text-sm">
+                <li className="inline-flex items-center gap-1.5 rounded-full border border-ink-200 bg-white px-3 py-1.5">
+                  <CheckCircle2 className="h-4 w-4 text-brand-600" aria-hidden="true" /> Calibrated 300 DPI
+                </li>
+                <li className="inline-flex items-center gap-1.5 rounded-full border border-ink-200 bg-white px-3 py-1.5">
+                  <Scissors className="h-4 w-4 text-brand-600" aria-hidden="true" /> Corner Crop Marks
+                </li>
+                <li className="inline-flex items-center gap-1.5 rounded-full border border-ink-200 bg-white px-3 py-1.5">
+                  <ShieldCheck className="h-4 w-4 text-brand-600" aria-hidden="true" /> 100% Free &amp; In-Browser
+                </li>
+              </ul>
             </div>
           </div>
-        </section>
 
-        {/* 2. GENERATOR */}
-        <section className="py-6 sm:py-10 bg-slate-50 border-b border-slate-200/80" id="generator">
-          <div className="container-narrow max-w-6xl">
-            <PrintTemplateGenerator />
+          {/* 2. GENERATOR */}
+          <div className="relative scroll-mt-24 pb-16 sm:pb-20 lg:pb-24" id="generator">
+            <div className="container-narrow max-w-6xl">
+              <PrintTemplateGenerator />
+              <p className="mt-6 text-center text-sm text-ink-600">
+                Need the photo itself first?{" "}
+                <Link
+                  href="/passport-size-photo-maker"
+                  className="inline-flex items-center gap-1 font-bold text-brand-700 underline decoration-brand-300 decoration-2 underline-offset-2 hover:text-brand-800"
+                >
+                  Make a passport size photo
+                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                </Link>
+              </p>
+            </div>
           </div>
         </section>
 
         {/* 3. WHAT IT IS + BENEFITS */}
-        <section className="py-14 sm:py-20 bg-white border-b border-slate-200/80">
-          <div className="container-narrow max-w-4xl">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight mb-4">
-              What Is a Passport Photo Sheet Maker?
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-4">
-              A passport photo sheet maker tiles one photo into a grid on a single page. Instead of printing one 35×45 mm photo at a time, you print one sheet and cut out every copy. It is the quickest way to make 8 passport size photos online without paying booth prices.
-            </p>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
-              Whether you need a passport size photo A4 sheet for your home printer or a passport size 4×6 photo for your local kiosk, the generator sizes everything for you.
-            </p>
-            <h3 className="text-lg font-bold text-slate-900 mb-3">Why applicants use it</h3>
-            <ul className="space-y-2 text-slate-600 text-sm sm:text-base leading-relaxed list-none p-0">
-              <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 mt-1 shrink-0 text-[#4D7C0F]" /><span><strong>You save money.</strong> Pay for a standard print, not a passport photo service.</span></li>
-              <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 mt-1 shrink-0 text-[#4D7C0F]" /><span><strong>You get up to 8 photos.</strong> That covers a passport, a visa, other ID and spares.</span></li>
-              <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 mt-1 shrink-0 text-[#4D7C0F]" /><span><strong>You print anywhere.</strong> Use a photo kiosk, a print shop, a pharmacy photo counter or your own printer.</span></li>
-              <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 mt-1 shrink-0 text-[#4D7C0F]" /><span><strong>You keep control.</strong> Retake as often as you like, in good light, at home.</span></li>
-            </ul>
+        <section className="section-padding" aria-labelledby="what-heading">
+          <div className="container-narrow">
+            <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-14">
+              <div className="lg:col-span-7">
+                <span className="eyebrow">How it works</span>
+                <h2 id="what-heading" className="display-2 mt-4 text-ink-950">
+                  What Is a Passport Photo Sheet Maker?
+                </h2>
+                <p className="lead mt-5">
+                  A passport photo sheet maker tiles one photo into a grid on a single page. Instead of printing one 35×45 mm photo at a time, you print one sheet and cut out every copy. It is the quickest way to make 8 passport size photos online without paying booth prices.
+                </p>
+                <p className="mt-4 text-base leading-relaxed text-ink-600">
+                  Whether you need a passport size photo A4 sheet for your home printer or a passport size 4×6 photo for your local kiosk, the generator sizes everything for you.
+                </p>
+              </div>
+
+              <div className="surface p-7 shadow-soft sm:p-8 lg:col-span-5">
+                <span className="icon-tile" aria-hidden="true">
+                  <Sparkles className="h-5 w-5" />
+                </span>
+                <h3 className="mt-5 text-xl font-extrabold text-ink-950 sm:text-2xl">Why applicants use it</h3>
+                <ul className="m-0 mt-5 list-none space-y-3.5 p-0 text-sm leading-relaxed text-ink-700 sm:text-base">
+                  <CheckItem><strong className="text-ink-950">You save money.</strong> Pay for a standard print, not a passport photo service.</CheckItem>
+                  <CheckItem><strong className="text-ink-950">You get up to 8 photos.</strong> That covers a passport, a visa, other ID and spares.</CheckItem>
+                  <CheckItem><strong className="text-ink-950">You print anywhere.</strong> Use a photo kiosk, a print shop, a pharmacy photo counter or your own printer.</CheckItem>
+                  <CheckItem><strong className="text-ink-950">You keep control.</strong> Retake as often as you like, in good light, at home.</CheckItem>
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* 4. STEPS */}
-        <section className="py-14 sm:py-20 bg-slate-50 border-b border-slate-200/80">
-          <div className="container-narrow max-w-5xl">
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <span className="inline-block px-3 py-1 rounded-full bg-lime-100 border border-lime-300 text-[#4D7C0F] text-xs font-bold mb-3">
-                Photo Kiosk Tip
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
-                How to Print Passport Photos for the Price of a Standard Print
-              </h2>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                Follow three steps to skip the booth fee and still get correctly sized prints.
-              </p>
+        <section className="border-y border-ink-100 bg-ink-50 section-padding" aria-labelledby="steps-heading">
+          <div className="container-narrow">
+            <SectionHeader
+              id="steps-heading"
+              eyebrow="Photo Kiosk Tip"
+              title="How to Print Passport Photos for the Price of a Standard Print"
+              description="Follow three steps to skip the booth fee and still get correctly sized prints."
+            />
+
+            <div className="relative mt-14">
+              <div className="pointer-events-none absolute left-[16%] right-[16%] top-14 hidden h-px border-t-2 border-dashed border-ink-200 md:block" aria-hidden="true" />
+              <ol className="relative m-0 grid list-none gap-6 p-0 md:grid-cols-3 lg:gap-8">
+                {[
+                  {
+                    n: "01",
+                    icon: Download,
+                    title: "Make your sheet",
+                    body: (
+                      <>
+                        Upload your photo above, choose <strong>4×6″</strong> or <strong>A4</strong>, and download the 300 DPI JPEG to your phone or a USB stick.
+                      </>
+                    ),
+                  },
+                  {
+                    n: "02",
+                    icon: Printer,
+                    title: "Order a standard 4×6″ print",
+                    body: (
+                      <>
+                        At any photo kiosk or print shop, choose <strong>&quot;Standard Photo Prints (4×6″)&quot;</strong>. Do not press the pricier &quot;Passport Photo&quot; button.
+                      </>
+                    ),
+                  },
+                  {
+                    n: "03",
+                    icon: Scissors,
+                    title: "Cut along the crop marks",
+                    body: (
+                      <>
+                        Collect your glossy print. Cut along the corner marks to get up to 8 photos at the exact size you chose.
+                      </>
+                    ),
+                  },
+                ].map(({ n, icon: Icon, title, body }) => (
+                  <li key={n} className="surface surface-hover relative p-7 sm:p-8">
+                    <div className="flex items-center justify-between">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600 text-white shadow-brand" aria-hidden="true">
+                        <Icon className="h-6 w-6" />
+                      </span>
+                      <span className="font-display text-5xl font-extrabold tracking-tighter text-ink-100" aria-hidden="true">
+                        {n}
+                      </span>
+                    </div>
+                    <h3 className="mt-6 text-xl font-extrabold text-ink-950">
+                      <span className="sr-only">Step {Number(n)}: </span>
+                      {title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-600 sm:text-base [&_strong]:text-ink-950">{body}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-              {[
-                {
-                  n: "01",
-                  title: "Make your sheet",
-                  body: (
-                    <>
-                      Upload your photo above, choose <strong>4×6″</strong> or <strong>A4</strong>, and download the 300 DPI JPEG to your phone or a USB stick.
-                    </>
-                  ),
-                },
-                {
-                  n: "02",
-                  title: "Order a standard 4×6″ print",
-                  body: (
-                    <>
-                      At any photo kiosk or print shop, choose <strong>&quot;Standard Photo Prints (4×6″)&quot;</strong>. Do not press the pricier &quot;Passport Photo&quot; button.
-                    </>
-                  ),
-                },
-                {
-                  n: "03",
-                  title: "Cut along the crop marks",
-                  body: (
-                    <>
-                      Collect your glossy print. Cut along the corner marks to get up to 8 photos at the exact size you chose.
-                    </>
-                  ),
-                },
-              ].map((s) => (
-                <div key={s.n} className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-7">
-                  <div className="w-10 h-10 rounded-xl bg-lime-100 text-[#4D7C0F] font-bold flex items-center justify-center mb-4">
-                    {s.n}
-                  </div>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-2">{s.title}</h3>
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">{s.body}</p>
-                </div>
-              ))}
+            <div className="mt-12 text-center">
+              <a href="#generator" className="btn-dark btn-lg">
+                <Upload className="h-5 w-5" aria-hidden="true" />
+                Make My Print Sheet
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </a>
             </div>
           </div>
         </section>
 
         {/* 5. PAPER SIZES + PHOTO RULES */}
-        <section className="py-14 sm:py-20 bg-white border-b border-slate-200/80">
-          <div className="container-narrow max-w-4xl">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight mb-3">
-              4×6″ or A4: Which Sheet Should You Choose?
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
-              Pick 4×6″ for cheap kiosk prints. Pick A4 if you would rather print at home or need several sets at once.
-            </p>
+        <section className="section-padding" aria-labelledby="paper-heading">
+          <div className="container-narrow">
+            <SectionHeader
+              id="paper-heading"
+              align="left"
+              eyebrow="Paper sizes"
+              title="4×6″ or A4: Which Sheet Should You Choose?"
+              description="Pick 4×6″ for cheap kiosk prints. Pick A4 if you would rather print at home or need several sets at once."
+            />
 
-            <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden mb-10">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm border-collapse">
-                  <thead>
-                    <tr className="bg-slate-100 border-b border-slate-200">
-                      <th className="p-4 font-bold text-slate-900">Paper</th>
-                      <th className="p-4 font-bold text-slate-900">Photos per sheet</th>
-                      <th className="p-4 font-bold text-slate-900">Best for</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {PAPER_SIZES.map((r) => (
-                      <tr key={r.paper + r.photos}>
-                        <td className="p-4 font-semibold text-slate-900">{r.paper}</td>
-                        <td className="p-4 text-slate-600">{r.photos}</td>
-                        <td className="p-4 text-slate-600">{r.bestFor}</td>
+            <div className="mt-12 grid items-start gap-6 lg:grid-cols-12">
+              <div className="surface overflow-hidden shadow-soft lg:col-span-7">
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse text-left text-sm sm:text-base">
+                    <thead>
+                      <tr className="border-b border-ink-200 bg-ink-50">
+                        <th className="p-4 text-xs font-bold uppercase tracking-wider text-ink-500 sm:px-6">Paper</th>
+                        <th className="p-4 text-xs font-bold uppercase tracking-wider text-ink-500 sm:px-6">Photos per sheet</th>
+                        <th className="p-4 text-xs font-bold uppercase tracking-wider text-ink-500 sm:px-6">Best for</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="divide-y divide-ink-100">
+                      {PAPER_SIZES.map((r) => (
+                        <tr key={r.paper + r.photos} className="transition-colors hover:bg-brand-50/50">
+                          <td className="p-4 font-bold text-ink-950 sm:px-6">{r.paper}</td>
+                          <td className="p-4 text-ink-700 sm:px-6">{r.photos}</td>
+                          <td className="p-4 text-ink-600 sm:px-6">{r.bestFor}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div className="surface p-7 sm:p-8 lg:col-span-5">
+                <span className="icon-tile" aria-hidden="true">
+                  <ClipboardCheck className="h-5 w-5" />
+                </span>
+                <h3 className="mt-5 text-xl font-extrabold text-ink-950 sm:text-2xl">Photo rules to check before you print</h3>
+                <ul className="m-0 mt-5 list-none space-y-3 p-0 text-sm leading-relaxed text-ink-700 sm:text-base [&_strong]:text-ink-950">
+                  <CheckItem>Print each photo at the <strong>exact size</strong> your document needs, such as 35×45 mm or 2×2″.</CheckItem>
+                  <CheckItem>Check the <strong>head size</strong> rule for your document. It differs between countries.</CheckItem>
+                  <CheckItem>Use a plain, light background with no shadows.</CheckItem>
+                  <CheckItem>Print on photo paper, with no borders or creases.</CheckItem>
+                  <CheckItem>Print at <strong>100% scale</strong>, never &quot;Fit to Page&quot;.</CheckItem>
+                </ul>
+                <p className="mt-6 flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-xs leading-relaxed text-amber-950 sm:text-sm">
+                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-700" aria-hidden="true" />
+                  <span>
+                    Photo rules change and differ between countries and application types. Always confirm the
+                    current requirements with the authority that issues your document. {SITE_DISCLAIMER}
+                  </span>
+                </p>
               </div>
             </div>
-
-            <h3 className="text-xl font-bold text-slate-900 mb-3">Photo rules to check before you print</h3>
-            <ul className="space-y-2 text-slate-600 text-sm sm:text-base leading-relaxed list-disc pl-5">
-              <li>Print each photo at the <strong>exact size</strong> your document needs, such as 35×45 mm or 2×2″.</li>
-              <li>Check the <strong>head size</strong> rule for your document. It differs between countries.</li>
-              <li>Use a plain, light background with no shadows.</li>
-              <li>Print on photo paper, with no borders or creases.</li>
-              <li>Print at <strong>100% scale</strong>, never &quot;Fit to Page&quot;.</li>
-            </ul>
-            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mt-4">
-              Photo rules change and differ between countries and application types. Always confirm the
-              current requirements with the authority that issues your document. {SITE_DISCLAIMER}
-            </p>
           </div>
         </section>
 
         {/* 6. COMPARISON TABLE */}
-        <section className="py-14 sm:py-20 bg-slate-50/70 border-b border-slate-200/80">
-          <div className="container-narrow max-w-4xl">
-            <div className="text-center max-w-2xl mx-auto mb-10">
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight mb-2">
-                Photo Booth vs. 4×6″ Print Template
-              </h2>
-              <p className="text-slate-600 text-sm">
-                Compare a printable sheet with a photo booth or passport photo service.
-              </p>
-            </div>
+        <section className="relative overflow-hidden bg-ink-950 section-padding" aria-labelledby="compare-heading">
+          <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
+          <div className="pointer-events-none absolute -top-48 left-1/2 h-[480px] w-[720px] -translate-x-1/2 rounded-full bg-brand-600/25 blur-3xl" aria-hidden="true" />
+          <div className="container-narrow relative">
+            <SectionHeader
+              id="compare-heading"
+              dark
+              eyebrow="Compare"
+              title="Photo Booth vs. 4×6″ Print Template"
+              description="Compare a printable sheet with a photo booth or passport photo service."
+            />
 
-            <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-2xs">
+            <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-3xl border border-white/10 bg-white shadow-lift">
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm border-collapse">
+                <table className="w-full border-collapse text-left text-sm sm:text-base">
                   <thead>
-                    <tr className="bg-slate-100 border-b border-slate-200">
-                      <th className="p-4 sm:p-5 font-bold text-slate-900">Feature</th>
-                      <th className="p-4 sm:p-5 font-bold text-lime-800 bg-lime-50/50">{SITE_NAME} 4×6″ Sheet</th>
-                      <th className="p-4 sm:p-5 font-bold text-slate-700">Photo Booth</th>
+                    <tr className="border-b border-ink-200 bg-ink-50">
+                      <th className="p-4 text-xs font-bold uppercase tracking-wider text-ink-500 sm:p-5">Feature</th>
+                      <th className="bg-brand-600 p-4 font-display font-extrabold text-white sm:p-5">{SITE_NAME} 4×6″ Sheet</th>
+                      <th className="p-4 font-display font-bold text-ink-700 sm:p-5">Photo Booth</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-ink-100">
                     <tr>
-                      <td className="p-4 sm:p-5 font-semibold text-slate-900">Cost</td>
-                      <td className="p-4 sm:p-5 text-[#365314] font-bold bg-lime-50/30">Free tool + one standard print</td>
-                      <td className="p-4 sm:p-5 text-slate-600">Passport photo service price</td>
+                      <td className="p-4 font-semibold text-ink-950 sm:p-5">Cost</td>
+                      <td className="bg-brand-50 p-4 font-bold text-brand-800 sm:p-5">Free tool + one standard print</td>
+                      <td className="p-4 text-ink-600 sm:p-5">Passport photo service price</td>
                     </tr>
                     <tr>
-                      <td className="p-4 sm:p-5 font-semibold text-slate-900">Photos per sheet</td>
-                      <td className="p-4 sm:p-5 text-[#365314] font-bold bg-lime-50/30">Up to 8</td>
-                      <td className="p-4 sm:p-5 text-slate-600">Usually 4</td>
+                      <td className="p-4 font-semibold text-ink-950 sm:p-5">Photos per sheet</td>
+                      <td className="bg-brand-50 p-4 font-bold text-brand-800 sm:p-5">Up to 8</td>
+                      <td className="p-4 text-ink-600 sm:p-5">Usually 4</td>
                     </tr>
                     <tr>
-                      <td className="p-4 sm:p-5 font-semibold text-slate-900">Retakes</td>
-                      <td className="p-4 sm:p-5 text-[#365314] font-bold bg-lime-50/30">Unlimited, at your own pace</td>
-                      <td className="p-4 sm:p-5 text-slate-600">A few rushed attempts</td>
+                      <td className="p-4 font-semibold text-ink-950 sm:p-5">Retakes</td>
+                      <td className="bg-brand-50 p-4 font-bold text-brand-800 sm:p-5">Unlimited, at your own pace</td>
+                      <td className="p-4 text-ink-600 sm:p-5">A few rushed attempts</td>
                     </tr>
                     <tr>
-                      <td className="p-4 sm:p-5 font-semibold text-slate-900">Cutting guides</td>
-                      <td className="p-4 sm:p-5 text-[#365314] font-bold bg-lime-50/30">Calibrated corner crop marks</td>
-                      <td className="p-4 sm:p-5 text-slate-600">White borders, no marks</td>
+                      <td className="p-4 font-semibold text-ink-950 sm:p-5">Cutting guides</td>
+                      <td className="bg-brand-50 p-4 font-bold text-brand-800 sm:p-5">Calibrated corner crop marks</td>
+                      <td className="p-4 text-ink-600 sm:p-5">White borders, no marks</td>
                     </tr>
                     <tr>
-                      <td className="p-4 sm:p-5 font-semibold text-slate-900">Digital copy</td>
-                      <td className="p-4 sm:p-5 text-[#365314] font-bold bg-lime-50/30">Instant 300 DPI JPEG + PNG</td>
-                      <td className="p-4 sm:p-5 text-slate-600">Often an extra fee</td>
+                      <td className="p-4 font-semibold text-ink-950 sm:p-5">Digital copy</td>
+                      <td className="bg-brand-50 p-4 font-bold text-brand-800 sm:p-5">Instant 300 DPI JPEG + PNG</td>
+                      <td className="p-4 text-ink-600 sm:p-5">Often an extra fee</td>
                     </tr>
                   </tbody>
                 </table>
@@ -370,8 +478,8 @@ export default function PrintTemplateGeneratorPage() {
         </section>
 
         {/* 7. FAQ */}
-        <section className="py-14 sm:py-20 bg-white border-b border-slate-200/80">
-          <div className="container-narrow max-w-4xl">
+        <section className="section-padding">
+          <div className="container-narrow max-w-4xl [&>div]:mt-0 [&>div]:border-t-0 [&>div]:pt-0">
             <FaqAccordion
               faqs={PRINT_FAQS}
               title="Passport Photo Sheet & 4×6 Printing FAQs"

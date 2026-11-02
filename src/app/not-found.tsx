@@ -24,54 +24,58 @@ export default function NotFound() {
       <Navbar ctaText="Create Photo" ctaHref="/passport-size-photo-maker" />
 
       <main
-        className="flex-1 bg-slate-50 min-h-[65vh] flex items-center justify-center py-12 px-4 sm:px-6"
+        className="relative flex flex-1 items-center overflow-hidden bg-white text-ink-950 min-h-[65vh]"
         id="main-content"
       >
-        <div className="max-w-md w-full bg-white border border-slate-200 rounded-3xl p-8 sm:p-10 text-center shadow-xs">
-          <span className="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold tracking-wider uppercase mb-4">
-            Error 404
-          </span>
+        <div className="pointer-events-none absolute inset-0 bg-dots [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" aria-hidden="true" />
+        <div className="pointer-events-none absolute left-1/2 top-1/3 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
-            Page Not Found
-          </h1>
+        <div className="container-narrow relative py-16 sm:py-24">
+          <div className="mx-auto max-w-xl text-center">
+            <span className="eyebrow">Error 404</span>
 
-          <p className="text-sm text-slate-600 leading-relaxed mb-8">
-            The page or document you are looking for does not exist, has been moved, or the link may be outdated.
-          </p>
-
-          <div className="space-y-3">
-            <Link
-              href="/passport-size-photo-maker"
-              className="w-full inline-flex items-center justify-center gap-2 bg-[#4D7C0F] hover:bg-[#3F650C] !text-white text-white font-bold text-sm sm:text-base py-3.5 rounded-xl transition-colors text-center shadow-xs focus-ring"
+            <p
+              className="mt-6 font-display text-[6rem] font-extrabold leading-none tracking-tighter text-ink-950 sm:text-[9rem]"
+              aria-hidden="true"
             >
-              <Camera className="w-4 h-4" aria-hidden="true" />
-              <span>Create Passport Photo</span>
-            </Link>
+              4<span className="text-brand-600">0</span>4
+            </p>
 
-            <Link
-              href="/"
-              className="w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 font-semibold text-sm sm:text-base py-3 rounded-xl border border-slate-300 transition-colors text-center focus-ring"
-            >
-              <Home className="w-4 h-4" aria-hidden="true" />
-              <span>Return to Homepage</span>
-            </Link>
-          </div>
+            <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-ink-950 sm:text-4xl">
+              Page Not Found
+            </h1>
 
-          <div className="mt-8 pt-6 border-t border-slate-100 text-xs text-slate-500 flex items-center justify-center gap-4">
-            <Link
-              href="/#faq"
-              className="hover:text-lime-800 hover:underline transition-colors"
-            >
-              Help &amp; FAQ
-            </Link>
-            <span aria-hidden="true">•</span>
-            <Link
-              href="/contact-us"
-              className="hover:text-lime-800 hover:underline transition-colors"
-            >
-              Contact Support
-            </Link>
+            <p className="lead mx-auto mt-4 max-w-md">
+              The page or document you are looking for does not exist, has been moved, or the link may be outdated.
+            </p>
+
+            <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+              <Link href="/" className="btn-brand btn-lg focus-ring">
+                <Home className="h-5 w-5" aria-hidden="true" />
+                <span>Return to Homepage</span>
+              </Link>
+
+              <Link href="/passport-size-photo-maker" className="btn-outline-brand btn-lg focus-ring">
+                <Camera className="h-5 w-5" aria-hidden="true" />
+                <span>Create Passport Photo</span>
+              </Link>
+            </div>
+
+            <div className="mt-10 flex items-center justify-center gap-2 border-t border-ink-200 pt-6 text-sm text-ink-500">
+              <Link
+                href="/#faq"
+                className="inline-flex min-h-11 items-center rounded-lg px-2 font-semibold text-ink-600 transition-colors hover:text-brand-700 focus-ring"
+              >
+                Help &amp; FAQ
+              </Link>
+              <span aria-hidden="true">&middot;</span>
+              <Link
+                href="/contact-us"
+                className="inline-flex min-h-11 items-center rounded-lg px-2 font-semibold text-ink-600 transition-colors hover:text-brand-700 focus-ring"
+              >
+                Contact Support
+              </Link>
+            </div>
           </div>
         </div>
       </main>

@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect, useSyncExternalStore } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
+  AlertCircle,
   Download,
   Printer,
   FileText,
@@ -229,128 +230,224 @@ export default function ThankYouDownloadPage() {
   const expertPricing = getPlanPricing("expert_edit");
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-100/60 text-slate-900">
+    <div className="min-h-screen flex flex-col bg-ink-50 text-ink-950">
       <Navbar ctaText="Create Another Photo" ctaHref="/passport-size-photo-maker" />
 
-      <main className="flex-1 py-5 sm:py-8 px-3 sm:px-6" id="main-content">
-        <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6">
-          {/* ========================================================================= */}
-          {/* COMPACT TOP SUCCESS HEADER */}
-          {/* ========================================================================= */}
-          <div className="bg-white border border-emerald-200/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xs relative overflow-hidden">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 flex-wrap">
-              <div className="flex items-center gap-3">
-            
-                <div>
-                
-                  <p className="text-xs sm:text-sm text-slate-600 font-medium mt-0.5">
-                    sized and checked against official <strong>{countryName}</strong> {flag} passport &amp; visa standards.
-                  </p>
-                </div>
-              </div>
+      <main className="relative flex-1 overflow-hidden" id="main-content">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent)]" aria-hidden="true" />
+        <div
+          className={`pointer-events-none absolute -top-40 left-1/2 h-[420px] w-[640px] -translate-x-1/2 rounded-full blur-3xl ${
+            paymentState?.status === "failed"
+              ? "bg-red-200/40"
+              : paymentState?.status === "pending"
+                ? "bg-amber-200/40"
+                : "bg-emerald-200/40"
+          }`}
+          aria-hidden="true"
+        />
 
-              {/* Email Callout */}
-              <div className="w-full sm:w-auto inline-flex items-center gap-2 bg-slate-50 border border-slate-200 px-3.5 py-2 rounded-xl text-xs text-slate-700 font-medium">
-                <Mail className="w-4 h-4 text-[#4D7C0F] shrink-0" />
-                <span className="truncate">
-                  Emailed with <strong>Tax Invoice PDF</strong> to: <strong className="text-slate-900">{userEmail}</strong>
+        <div className="container-narrow relative max-w-4xl space-y-5 py-8 sm:space-y-6 sm:py-12">
+          {/* ========================================================================= */}
+          {/* SUCCESS / STATUS HEADER */}
+          {/* ========================================================================= */}
+          <section className="surface p-6 shadow-soft animate-fade-in sm:p-8" aria-labelledby="thankyou-heading">
+            <div className="flex flex-col items-center text-center">
+              {paymentState?.status === "failed" ? (
+                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-red-100 text-red-700 ring-8 ring-red-50" aria-hidden="true">
+                  <AlertCircle className="h-8 w-8" />
                 </span>
-              </div>
+              ) : paymentState?.status === "pending" ? (
+                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-amber-100 text-amber-700 ring-8 ring-amber-50" aria-hidden="true">
+                  <Clock className="h-8 w-8" />
+                </span>
+              ) : (
+                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 ring-8 ring-emerald-50" aria-hidden="true">
+                  <Check className="h-8 w-8" strokeWidth={3} />
+                </span>
+              )}
+
+              <h1 id="thankyou-heading" className="mt-6 text-3xl font-extrabold tracking-tight text-ink-950 sm:text-4xl">
+                {paymentState?.status === "failed"
+                  ? "We couldn’t confirm your payment"
+                  : paymentState?.status === "pending"
+                    ? "Confirming your payment"
+                    : "Thank you! Your photo is ready"}
+              </h1>
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-600 sm:text-base">
+                Sized and checked against the published <strong className="text-ink-950">{countryName}</strong> {flag}{" "}
+                passport &amp; visa photo rules.
+              </p>
             </div>
 
-            {/* VIP Expert Review Notification Banner (if expert_edit plan) */}
-            {activePlanType === "expert_edit" && (
-              <div className="mt-3.5 bg-gradient-to-r from-amber-50 to-yellow-50/80 border border-amber-300/80 p-3.5 sm:p-4 rounded-xl text-xs sm:text-sm text-[#713F12]">
-                <div className="flex items-center justify-between gap-2 flex-wrap mb-1">
-                  <div className="font-black text-[#854D0E] flex items-center gap-1.5 text-xs sm:text-sm">
-                    <Sparkles className="w-4 h-4 text-[#CA8A04] shrink-0" />
-                    <span>VIP Expert Manual Review &amp; Edit Included ({expertPricing.amountFormatted})</span>
-                  </div>
-                  <span className="bg-amber-100 text-amber-900 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-amber-200 flex items-center gap-1">
-                    <Clock className="w-3 h-3 text-amber-700" />
-                    <span>⚡ Guaranteed Delivery: &lt; 20 Minutes</span>
-                  </span>
-                </div>
-                <p className="leading-relaxed text-[11.5px] sm:text-xs text-amber-900/90 font-medium">
-                  Our human passport photo editors have received your original photo for <strong>{countryName}</strong>. They are currently performing precision shadow removal, contrast calibration, and edge refinement. Your human-verified photo will also be delivered to <strong>{userEmail}</strong> within <strong>20 minutes</strong>.
+            {paymentState?.status === "pending" && (
+              <div className="mt-6 flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950" role="status">
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-amber-700" aria-hidden="true" />
+                <p>
+                  Your payment is still being confirmed. This usually takes a moment, so refresh this page shortly. Your
+                  download link is also emailed to <strong>{userEmail}</strong> once payment is confirmed.
                 </p>
               </div>
             )}
-          </div>
+
+            {paymentState?.status === "failed" && (
+              <div className="mt-6 flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-900" role="alert">
+                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-700" aria-hidden="true" />
+                <p>
+                  We couldn’t confirm this payment. If you were charged,{" "}
+                  <Link href="/contact-us" className="font-bold underline underline-offset-2 hover:text-red-950">
+                    contact support
+                  </Link>
+                  {paymentId ? (
+                    <>
+                      {" "}and include your payment ID <span className="font-mono font-semibold">{paymentId}</span>.
+                    </>
+                  ) : (
+                    "."
+                  )}
+                </p>
+              </div>
+            )}
+
+            {/* Order summary */}
+            <dl className="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink-200 bg-ink-200 text-left sm:grid-cols-4">
+              <div className="bg-white p-4">
+                <dt className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-500">Country</dt>
+                <dd className="mt-1 flex items-center gap-1.5 truncate text-sm font-bold text-ink-950">
+                  <span aria-hidden="true">{flag}</span>
+                  <span className="truncate">{countryName}</span>
+                </dd>
+              </div>
+              <div className="bg-white p-4">
+                <dt className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-500">Photo size</dt>
+                <dd className="mt-1 font-mono text-sm font-bold text-ink-950">{dimensions} px</dd>
+              </div>
+              <div className="bg-white p-4">
+                <dt className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-500">Plan</dt>
+                <dd className="mt-1 truncate text-sm font-bold text-ink-950">{getPlanPricing(activePlanType).title}</dd>
+              </div>
+              <div className="bg-white p-4">
+                <dt className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-500">Payment ID</dt>
+                <dd className="mt-1 truncate font-mono text-sm font-semibold text-ink-950" title={paymentId || undefined}>
+                  {paymentId || "—"}
+                </dd>
+              </div>
+            </dl>
+
+            {/* Email Callout */}
+            <div className="mt-4 flex items-center gap-3 rounded-2xl border border-ink-200 bg-ink-50 px-4 py-3 text-sm text-ink-700">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-700" aria-hidden="true">
+                <Mail className="h-4 w-4" />
+              </span>
+              <span className="min-w-0 truncate">
+                Emailed with <strong className="text-ink-950">Tax Invoice PDF</strong> to:{" "}
+                <strong className="text-ink-950">{userEmail}</strong>
+              </span>
+            </div>
+
+            {/* Expert Review Notification Banner (if expert_edit plan) */}
+            {activePlanType === "expert_edit" && (
+              <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950 sm:p-5">
+                <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+                  <p className="flex items-center gap-2 font-bold text-amber-950">
+                    <Sparkles className="h-4 w-4 shrink-0 text-amber-700" aria-hidden="true" />
+                    <span>Expert Review &amp; Edit Included ({expertPricing.amountFormatted})</span>
+                  </p>
+                  <span className="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-white px-2.5 py-1 text-[11px] font-bold text-amber-900">
+                    <Clock className="h-3 w-3 text-amber-700" aria-hidden="true" />
+                    <span>Usually within 20 minutes</span>
+                  </span>
+                </div>
+                <p className="text-xs leading-relaxed text-amber-900 sm:text-sm">
+                  Our photo editors have received your original photo for <strong>{countryName}</strong>. They are
+                  refining shadows, contrast and edges, and will email the reviewed photo to <strong>{userEmail}</strong>,
+                  usually within <strong>20 minutes</strong>.
+                </p>
+              </div>
+            )}
+          </section>
 
           {/* ========================================================================= */}
           {/* MAIN STUDIO: Single Download vs 4×6″ Multi-Photo Print Sheet Generator */}
           {/* ========================================================================= */}
-          <div className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xs">
+          <section className="surface p-4 shadow-soft sm:p-6" aria-label="Download your photo">
             {/* Studio Tab Switcher */}
-            <div className="flex bg-slate-100 p-1.5 rounded-xl mb-4">
+            <div className="mb-5 flex gap-1 rounded-2xl bg-ink-100 p-1.5">
               <button
                 type="button"
                 onClick={() => setActiveTab("single")}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                aria-pressed={activeTab === "single"}
+                className={`flex min-h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-xs font-bold transition-all focus-ring sm:text-sm ${
                   activeTab === "single"
-                    ? "bg-white text-slate-900 shadow-sm"
-                    : "text-slate-600 hover:text-slate-900"
+                    ? "bg-white text-ink-950 shadow-soft"
+                    : "text-ink-600 hover:text-ink-950"
                 }`}
               >
-                <Download className="w-4 h-4" />
+                <Download className="h-4 w-4 shrink-0" aria-hidden="true" />
                 <span>Single Digital Photo (300 DPI)</span>
               </button>
               <button
                 type="button"
                 onClick={() => setActiveTab("sheet")}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                aria-pressed={activeTab === "sheet"}
+                className={`flex min-h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-xs font-bold transition-all focus-ring sm:text-sm ${
                   activeTab === "sheet"
-                    ? "bg-white text-slate-900 shadow-sm"
-                    : "text-slate-600 hover:text-slate-900"
+                    ? "bg-white text-ink-950 shadow-soft"
+                    : "text-ink-600 hover:text-ink-950"
                 }`}
               >
-                <Printer className="w-4 h-4" />
+                <Printer className="h-4 w-4 shrink-0" aria-hidden="true" />
                 <span>Print Sheet Studio (4×6″ / A4)</span>
               </button>
             </div>
 
             {/* Tab 1: Single High-Resolution Master Photo */}
             {activeTab === "single" && (
-              <div className="space-y-4">
-                <div className="bg-slate-50 rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center border border-slate-200 text-center">
-                  <div className="inline-block relative rounded-xl overflow-hidden shadow-md border-2 border-white bg-white">
+              <div className="grid items-center gap-6 md:grid-cols-2 md:gap-8 animate-fade-in">
+                <div className="relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-ink-200 bg-ink-50 p-5 text-center sm:p-8">
+                  <div className="pointer-events-none absolute inset-0 bg-dots" aria-hidden="true" />
+                  <div className="relative inline-block overflow-hidden rounded-xl border-4 border-white bg-white shadow-lift">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={activeImageSource}
                       alt={`${countryName} Verified Master Photo`}
-                      className="max-h-64 sm:max-h-80 w-auto object-contain rounded-lg"
+                      className="max-h-64 w-auto rounded-lg object-contain sm:max-h-80"
                     />
-                    <div className="absolute top-2 right-2 bg-[#4D7C0F] text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-xs">
-                      300 DPI &bull; ICAO Validated
+                    <div className="absolute right-2 top-2 rounded-full bg-ink-950/85 px-2.5 py-0.5 text-[10px] font-bold text-white backdrop-blur">
+                      300 DPI
                     </div>
                   </div>
-                  <p className="text-xs text-slate-600 font-semibold mt-3">
-                    {countryName} Official Dimensions: <span className="font-mono text-slate-900 font-bold">{dimensions} px</span>
+                  <p className="relative mt-4 text-xs font-semibold text-ink-600">
+                    {countryName} photo size: <span className="font-mono font-bold text-ink-950">{dimensions} px</span>
                   </p>
                 </div>
 
                 {/* Single Download Action Button */}
-                <div className="space-y-2.5">
+                <div>
+                  <h2 className="text-xl font-extrabold text-ink-950 sm:text-2xl">Download your photo</h2>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-600">
+                    A high-resolution JPEG at the {countryName} photo size, ready to upload with an online application.
+                    Need prints? Switch to the Print Sheet Studio tab.
+                  </p>
+
                   <button
                     type="button"
                     onClick={handleDownloadSingle}
                     disabled={downloading}
-                    className="w-full inline-flex items-center justify-center gap-2.5 bg-[#4D7C0F] hover:bg-[#3F650C] !text-white text-white font-bold text-sm sm:text-base py-4 rounded-xl transition-all shadow-md focus-ring cursor-pointer"
+                    className="btn-brand btn-lg mt-6 w-full focus-ring"
                   >
-                    <Download className="w-5 h-5" />
+                    <Download className="h-5 w-5 shrink-0" aria-hidden="true" />
                     <span>{downloading ? "Preparing High-Res Download…" : "Download Single Photo (300 DPI JPEG)"}</span>
                   </button>
 
                   {paymentId && (
-                    <div className="pt-1 flex flex-wrap items-center justify-between gap-2.5 text-xs">
+                    <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-ink-100 pt-4 text-sm">
                       <a
                         href={`/api/invoices/${paymentId}?format=pdf`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-slate-700 hover:text-slate-900 font-bold bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg transition-colors"
+                        className="btn-outline-brand focus-ring"
                       >
-                        <FileText className="w-4 h-4 text-[#4D7C0F]" />
+                        <FileText className="h-4 w-4 text-brand-600" aria-hidden="true" />
                         <span>Download Tax Invoice (PDF)</span>
                       </a>
 
@@ -358,10 +455,10 @@ export default function ThankYouDownloadPage() {
                         href={`/api/invoices/${paymentId}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-slate-500 hover:text-slate-900 font-medium transition-colors"
+                        className="inline-flex min-h-11 items-center gap-1.5 rounded-lg px-1 font-semibold text-ink-600 transition-colors hover:text-brand-700 focus-ring"
                       >
                         <span>View Web Invoice</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
+                        <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                       </a>
                     </div>
                   )}
@@ -371,17 +468,21 @@ export default function ThankYouDownloadPage() {
 
             {/* Tab 2: Interactive Print Sheet Studio (Pre-loaded with paid photo) */}
             {activeTab === "sheet" && (
-              <div className="space-y-4">
-                <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-emerald-700 stroke-[3] shrink-0" />
+              <div className="space-y-4 animate-fade-in">
+                <div className="flex flex-col gap-2 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700" aria-hidden="true">
+                      <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                    </span>
                     <span>Your verified photo has been automatically loaded into the print sheet builder.</span>
                   </div>
-                  <span className="font-bold text-emerald-800 shrink-0">4×6″ Standard Ready</span>
+                  <span className="shrink-0 rounded-full bg-white px-2.5 py-1 text-xs font-bold text-emerald-800 ring-1 ring-emerald-200">
+                    4×6″ Standard Ready
+                  </span>
                 </div>
 
                 {/* Embedded Full-Featured Print Sheet Generator */}
-                <div className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50/50">
+                <div className="overflow-hidden rounded-2xl border border-ink-200 bg-ink-50/60">
                   <PrintTemplateGenerator
                     initialImageUrl={activeImageSource}
                     initialPaperSize="4x6"
@@ -391,15 +492,12 @@ export default function ThankYouDownloadPage() {
                 </div>
               </div>
             )}
-          </div>
+          </section>
 
           {/* Action Footer: Create Photo for Another Person */}
           <div className="flex justify-center pt-2">
-            <Link
-              href="/passport-size-photo-maker"
-              className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-semibold text-xs sm:text-sm py-2.5 px-5 rounded-xl transition-all shadow-xs text-center cursor-pointer"
-            >
-              <Upload className="w-4 h-4 text-[#4D7C0F]" />
+            <Link href="/passport-size-photo-maker" className="btn-outline-brand focus-ring">
+              <Upload className="h-4 w-4 text-brand-600" aria-hidden="true" />
               <span>Create Photo for Another Person</span>
             </Link>
           </div>

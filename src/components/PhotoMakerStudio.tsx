@@ -415,283 +415,291 @@ export default function PhotoMakerStudio({
     if (inputRef.current) inputRef.current.value = "";
   }
 
+  const documentTypeLabel = selectedCountry.document_type
+    ? `${selectedCountry.document_type.charAt(0).toUpperCase()}${selectedCountry.document_type.slice(1)} photo`
+    : "Passport photo";
+
   return (
-    <div className={`space-y-4 sm:space-y-5 ${className}`}>
+    <div className={`space-y-4 ${className}`}>
       {/* Error Alert */}
       {error && (
         <div
           role="alert"
           aria-live="assertive"
-          className="mb-4 bg-red-50 border border-red-200 text-red-900 rounded-xl p-3.5 sm:p-4 text-sm flex items-start justify-between gap-3 font-medium"
+          className="flex items-start justify-between gap-3 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm font-medium text-red-900"
         >
           <div className="flex items-start gap-2.5">
-            <AlertCircle className="w-5 h-5 text-red-700 shrink-0 mt-0.5" aria-hidden="true" />
+            <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-700" aria-hidden="true" />
             <span>{error}</span>
           </div>
           <button
-            className="text-red-700 hover:text-red-900 p-1 rounded-lg focus-ring cursor-pointer"
+            className="cursor-pointer rounded-lg p-1 text-red-700 hover:text-red-900 focus-ring"
             onClick={() => setError(null)}
             aria-label="Dismiss error notification"
           >
-            <X className="w-4 h-4" aria-hidden="true" />
+            <X className="h-4 w-4" aria-hidden="true" />
           </button>
         </div>
       )}
 
-      {/* CARD 1 — Country Selector */}
-      <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-xs">
-        <label
-          htmlFor="country-search-trigger"
-          className="block text-xs sm:text-sm font-bold text-slate-900 mb-2"
-        >
-          Select Country / Destination
-        </label>
-
-        <div className="relative" ref={countryBoxRef}>
-          <button
-            id="country-search-trigger"
-            type="button"
-            disabled={isProcessing}
-            onClick={() =>
-              isCountryOpen ? setIsCountryOpen(false) : openCountryDropdown()
-            }
-            className="w-full flex items-center justify-between gap-2 text-slate-900 font-semibold bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm sm:text-base focus-ring transition-colors disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
-            aria-haspopup="listbox"
-            aria-expanded={isCountryOpen}
-            aria-controls="country-listbox"
-            aria-label={`Selected country: ${selectedCountry.country_name}, dimensions ${selectedCountry.dimensions} pixels. Click to change.`}
-          >
-            <span className="flex items-center gap-2 min-w-0">
-              <span className="text-lg leading-none shrink-0" aria-hidden="true">
-                {countryFlag(selectedCountry.country_code)}
-              </span>
-              <span className="truncate">
-                {selectedCountry.country_name} ({selectedCountry.country_code}) —{" "}
-                {selectedCountry.dimensions} px
-              </span>
-            </span>
-            <ChevronDown
-              className={`w-4 h-4 text-slate-600 shrink-0 transition-transform ${
-                isCountryOpen ? "rotate-180" : ""
-              }`}
-              aria-hidden="true"
-            />
-          </button>
-
-          {isCountryOpen && (
-            <div
-              id="country-listbox"
-              className="absolute z-30 mt-2 w-full bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden flex flex-col"
-              role="listbox"
-              aria-label="Supported countries and dimensions"
-            >
-              <div className="p-2 border-b border-slate-100 bg-white shrink-0">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" aria-hidden="true" />
-                  <input
-                    ref={countrySearchRef}
-                    id="country-search-input"
-                    type="text"
-                    value={countryQuery}
-                    onChange={(e) => setCountryQuery(e.target.value)}
-                    placeholder="Search country…"
-                    className="w-full pl-9 pr-3 py-2.5 text-sm text-slate-900 border border-slate-300 rounded-lg focus-ring"
-                    aria-label="Filter countries list"
-                  />
-                </div>
-              </div>
-
-              <ul className="max-h-56 sm:max-h-72 overflow-y-auto py-1 list-none p-0 m-0" role="presentation">
-                {filteredCountries.length === 0 && (
-                  <li className="px-4 py-4 text-sm text-slate-700 text-center">
-                    No countries match &ldquo;{countryQuery}&rdquo;
-                  </li>
-                )}
-                {filteredCountries.map((c) => {
-                  const active = c.country_code === selectedCountry.country_code;
-                  return (
-                    <li key={c.country_code} role="presentation">
-                      <button
-                        type="button"
-                        role="option"
-                        aria-selected={active}
-                        id={`country-opt-${c.country_code}`}
-                        onClick={() => selectCountry(c.country_code)}
-                        className={`w-full flex items-center justify-between gap-2 text-left px-4 py-2.5 text-sm transition-colors cursor-pointer ${
-                          active
-                            ? "bg-lime-50 text-lime-900 font-bold"
-                            : "text-slate-800 hover:bg-slate-50 font-medium"
-                        }`}
-                      >
-                        <span className="flex items-center gap-2 min-w-0">
-                          <span className="text-base leading-none shrink-0" aria-hidden="true">
-                            {countryFlag(c.country_code)}
-                          </span>
-                          <span className="truncate">{c.country_name}</span>
-                        </span>
-                        <span className="flex items-center gap-2 shrink-0">
-                          <span className="font-mono text-xs text-slate-600">
-                            {c.dimensions}px
-                          </span>
-                          {active && (
-                            <Check className="w-4 h-4 text-lime-700" aria-hidden="true" />
-                          )}
-                        </span>
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          )}
+      <div className="overflow-hidden rounded-3xl border border-ink-200 bg-white shadow-lift">
+        {/* Studio header */}
+        <div className="flex items-center justify-between gap-3 border-b border-ink-100 bg-ink-50/70 px-5 py-3 sm:px-6">
+          <div className="flex items-center gap-1.5" aria-hidden="true">
+            <span className="h-2.5 w-2.5 rounded-full bg-ink-200" />
+            <span className="h-2.5 w-2.5 rounded-full bg-ink-200" />
+            <span className="h-2.5 w-2.5 rounded-full bg-ink-200" />
+          </div>
+          <p className="flex items-center gap-1.5 text-xs font-semibold text-ink-500">
+            <Zap className="h-3.5 w-3.5 text-brand-600" aria-hidden="true" />
+            Photo studio · ~10 seconds
+          </p>
         </div>
 
-        <p className="text-slate-700 text-xs mt-2 flex items-center gap-1.5 font-medium">
-          <Globe className="w-3.5 h-3.5 text-slate-600 shrink-0" aria-hidden="true" />
-          <span>
-            {selectedCountry.document_type
-              ? `${selectedCountry.document_type.charAt(0).toUpperCase()}${selectedCountry.document_type.slice(1)} photo`
-              : "Passport photo"}{" "}
-            sized to {selectedCountry.dimensions} px for {selectedCountry.country_name}
-          </span>
-        </p>
-      </div>
-
-      {/* CARD 2 — Upload Card */}
-      <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-8 shadow-xs">
-        <div>
-          <label htmlFor="photo-file-input" className="block text-xs sm:text-sm font-bold text-slate-900 mb-2">
-            Upload or Take Your Photo
-          </label>
-
-          {!preview ? (
-            <div
-              className={`border-2 border-dashed rounded-2xl p-5 sm:p-10 text-center cursor-pointer transition-all ${
-                isDragging
-                  ? "border-lime-700 bg-lime-50/70"
-                  : "border-slate-300 hover:border-lime-700 bg-slate-50/60 hover:bg-slate-50"
-              }`}
-              onDragOver={onDragOver}
-              onDragLeave={onDragLeave}
-              onDrop={onDrop}
-              onClick={() => inputRef.current?.click()}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  inputRef.current?.click();
-                }
-              }}
-              aria-label="Upload photo area. Drag and drop a photo or press enter to browse files."
+        <div className="space-y-6 p-5 sm:p-7">
+          {/* STEP 1 — Country Selector */}
+          <div>
+            <label
+              htmlFor="country-search-trigger"
+              className="mb-2.5 flex items-center gap-2 text-sm font-bold text-ink-950"
             >
-              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white border border-slate-200 flex items-center justify-center mx-auto mb-3 text-slate-600" aria-hidden="true">
-                <ImagePlus className="w-6 h-6 sm:w-7 sm:h-7 text-lime-800" />
-              </div>
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-ink-950 text-[11px] font-bold text-white" aria-hidden="true">
+                1
+              </span>
+              Choose your country
+            </label>
 
-              <p className="text-slate-900 font-bold text-sm sm:text-lg mb-1">
-                Tap to upload photo or take picture
-              </p>
-              <p className="text-slate-700 text-xs sm:text-sm mb-2 font-medium">
-                Drag &amp; drop from your device · JPEG, PNG, or WebP (up to 20 MB)
-              </p>
+            <div className="relative" ref={countryBoxRef}>
+              <button
+                id="country-search-trigger"
+                type="button"
+                disabled={isProcessing}
+                onClick={() => (isCountryOpen ? setIsCountryOpen(false) : openCountryDropdown())}
+                className={`flex w-full cursor-pointer items-center justify-between gap-3 rounded-2xl border bg-white px-4 py-3.5 text-left transition-all focus-ring disabled:cursor-not-allowed disabled:opacity-60 ${
+                  isCountryOpen ? "border-brand-500 ring-4 ring-brand-500/15" : "border-ink-200 hover:border-brand-300"
+                }`}
+                aria-haspopup="listbox"
+                aria-expanded={isCountryOpen}
+                aria-controls="country-listbox"
+                aria-label={`Selected country: ${selectedCountry.country_name}, dimensions ${selectedCountry.dimensions} pixels. Click to change.`}
+              >
+                <span className="flex min-w-0 items-center gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-ink-50 text-2xl leading-none" aria-hidden="true">
+                    {countryFlag(selectedCountry.country_code)}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block truncate text-base font-bold text-ink-950">
+                      {selectedCountry.country_name}{" "}
+                      <span className="font-medium text-ink-400">({selectedCountry.country_code})</span>
+                    </span>
+                    <span className="block font-mono text-xs font-medium text-ink-500">
+                      {selectedCountry.dimensions} px
+                    </span>
+                  </span>
+                </span>
+                <ChevronDown
+                  className={`h-5 w-5 shrink-0 text-ink-500 transition-transform ${isCountryOpen ? "rotate-180" : ""}`}
+                  aria-hidden="true"
+                />
+              </button>
+
+              {isCountryOpen && (
+                <div
+                  id="country-listbox"
+                  className="absolute z-30 mt-2 flex w-full flex-col overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-lift animate-fade-in"
+                  role="listbox"
+                  aria-label="Supported countries and dimensions"
+                >
+                  <div className="shrink-0 border-b border-ink-100 p-2">
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-400" aria-hidden="true" />
+                      <input
+                        ref={countrySearchRef}
+                        id="country-search-input"
+                        type="text"
+                        value={countryQuery}
+                        onChange={(e) => setCountryQuery(e.target.value)}
+                        placeholder="Search country…"
+                        className="field min-h-0 py-2.5 pl-9 text-sm"
+                        aria-label="Filter countries list"
+                      />
+                    </div>
+                  </div>
+
+                  <ul className="m-0 max-h-60 list-none overflow-y-auto p-1.5 sm:max-h-72" role="presentation">
+                    {filteredCountries.length === 0 && (
+                      <li className="px-4 py-4 text-center text-sm text-ink-600">
+                        No countries match &ldquo;{countryQuery}&rdquo;
+                      </li>
+                    )}
+                    {filteredCountries.map((c) => {
+                      const active = c.country_code === selectedCountry.country_code;
+                      return (
+                        <li key={c.country_code} role="presentation">
+                          <button
+                            type="button"
+                            role="option"
+                            aria-selected={active}
+                            id={`country-opt-${c.country_code}`}
+                            onClick={() => selectCountry(c.country_code)}
+                            className={`flex w-full cursor-pointer items-center justify-between gap-2 rounded-xl px-3 py-2.5 text-left text-sm transition-colors ${
+                              active ? "bg-brand-50 font-bold text-brand-800" : "font-medium text-ink-800 hover:bg-ink-50"
+                            }`}
+                          >
+                            <span className="flex min-w-0 items-center gap-2.5">
+                              <span className="shrink-0 text-base leading-none" aria-hidden="true">
+                                {countryFlag(c.country_code)}
+                              </span>
+                              <span className="truncate">{c.country_name}</span>
+                            </span>
+                            <span className="flex shrink-0 items-center gap-2">
+                              <span className="font-mono text-xs text-ink-500">{c.dimensions}px</span>
+                              {active && <Check className="h-4 w-4 text-brand-600" aria-hidden="true" />}
+                            </span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
             </div>
-          ) : (
-            <div className="space-y-4">
-              {/* Photo Preview Card */}
-              <div className="relative bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center">
-                <div className="relative max-h-64 sm:max-h-80 w-auto rounded-xl overflow-hidden border border-slate-300">
+
+            <p className="mt-2 flex items-center gap-1.5 text-xs font-medium text-ink-500">
+              <Globe className="h-3.5 w-3.5 shrink-0 text-ink-400" aria-hidden="true" />
+              <span>
+                {documentTypeLabel} sized to {selectedCountry.dimensions} px for {selectedCountry.country_name}
+              </span>
+            </p>
+          </div>
+
+          {/* STEP 2 — Upload */}
+          <div>
+            <label htmlFor="photo-file-input" className="mb-2.5 flex items-center gap-2 text-sm font-bold text-ink-950">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-ink-950 text-[11px] font-bold text-white" aria-hidden="true">
+                2
+              </span>
+              Upload or take your photo
+            </label>
+
+            {!preview ? (
+              <div
+                className={`group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-dashed p-6 text-center transition-all sm:p-10 ${
+                  isDragging
+                    ? "border-brand-500 bg-brand-50"
+                    : "border-ink-200 bg-ink-50/60 hover:border-brand-400 hover:bg-brand-50/50"
+                }`}
+                onDragOver={onDragOver}
+                onDragLeave={onDragLeave}
+                onDrop={onDrop}
+                onClick={() => inputRef.current?.click()}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    inputRef.current?.click();
+                  }
+                }}
+                aria-label="Upload photo area. Drag and drop a photo or press enter to browse files."
+              >
+                <div
+                  className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600 text-white shadow-brand transition-transform group-hover:-translate-y-0.5 sm:h-16 sm:w-16"
+                  aria-hidden="true"
+                >
+                  <ImagePlus className="h-7 w-7" />
+                </div>
+                <p className="font-display text-base font-extrabold text-ink-950 sm:text-lg">
+                  Drop your photo here, or <span className="text-brand-600 underline decoration-brand-300 decoration-2 underline-offset-4">browse</span>
+                </p>
+                <p className="mt-1.5 text-xs font-medium text-ink-500 sm:text-sm">
+                  JPEG, PNG or WebP · up to 20 MB · tap to use your camera on mobile
+                </p>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center rounded-2xl border border-ink-200 bg-ink-50 p-4">
+                <div className="relative overflow-hidden rounded-xl border border-ink-200 bg-white">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={preview}
                     alt="Uploaded passport photo preview"
-                    className="max-h-64 sm:max-h-80 w-auto object-contain rounded-xl"
+                    className="max-h-64 w-auto rounded-xl object-contain sm:max-h-80"
                   />
                 </div>
 
                 {compressionInfo && compressionInfo.compressed && (
-                  <div className="mt-2 text-xs text-slate-700 bg-lime-50 border border-lime-200 px-3 py-1 rounded-full flex items-center gap-1.5 font-medium">
-                    <Check className="w-3.5 h-3.5 text-[#4D7C0F]" aria-hidden="true" />
+                  <div className="mt-3 flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800">
+                    <Check className="h-3.5 w-3.5" aria-hidden="true" />
                     <span>Pre-compressed for upload ({compressionInfo.finalSizeKB} KB)</span>
                   </div>
                 )}
 
                 {!isProcessing && (
-                  <div className="flex items-center gap-2 mt-3 flex-wrap justify-center">
+                  <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
                     <button
                       type="button"
                       onClick={() => inputRef.current?.click()}
-                      className="inline-flex items-center gap-1.5 bg-white hover:bg-slate-100 text-slate-800 font-semibold text-xs px-3.5 py-2 rounded-lg border border-slate-300 transition-colors focus-ring cursor-pointer"
+                      className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-ink-200 bg-white px-3.5 py-2 text-xs font-semibold text-ink-800 transition-colors hover:border-brand-300 hover:text-brand-700 focus-ring"
                     >
-                      <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-                      <span>Change Photo</span>
+                      <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
+                      <span>Change photo</span>
                     </button>
                     <button
                       type="button"
                       onClick={clearFile}
-                      className="inline-flex items-center gap-1.5 bg-white hover:bg-red-50 text-red-800 font-semibold text-xs px-3.5 py-2 rounded-lg border border-red-300 transition-colors focus-ring cursor-pointer"
+                      className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-red-200 bg-white px-3.5 py-2 text-xs font-semibold text-red-700 transition-colors hover:bg-red-50 focus-ring"
                     >
-                      <X className="w-3.5 h-3.5" aria-hidden="true" />
+                      <X className="h-3.5 w-3.5" aria-hidden="true" />
                       <span>Remove</span>
                     </button>
                   </div>
                 )}
               </div>
+            )}
+
+            <input
+              ref={inputRef}
+              type="file"
+              accept={ACCEPTED_TYPES.join(",")}
+              onChange={onFileChange}
+              className="sr-only"
+              id="photo-file-input"
+              aria-label="Select photo file from device"
+            />
+          </div>
+
+          {/* Action CTA Button */}
+          {file && !isProcessing && (
+            <div ref={processBtnRef}>
+              <button className="btn-brand btn-lg w-full" onClick={() => processPhoto()}>
+                <Zap className="h-5 w-5 shrink-0" aria-hidden="true" />
+                <span className="truncate">Process for {selectedCountry.country_name}</span>
+                <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+              </button>
+              <p className="mt-2.5 text-center text-xs font-medium text-ink-500">
+                10-second crop &amp; check · digital file + 6×4″ printable sheet
+              </p>
             </div>
           )}
 
-          <input
-            ref={inputRef}
-            type="file"
-            accept={ACCEPTED_TYPES.join(",")}
-            onChange={onFileChange}
-            className="sr-only"
-            id="photo-file-input"
-            aria-label="Select photo file from device"
-          />
-        </div>
-
-        {/* Action CTA Button */}
-        {file && !isProcessing && (
-          <div ref={processBtnRef} className="pt-5 sm:pt-6 border-t border-slate-100 mt-5 sm:mt-6">
-            <button
-              className="w-full inline-flex items-center justify-center gap-2 bg-[#4D7C0F] hover:bg-[#3F650C] !text-white text-white font-bold text-sm sm:text-base py-3.5 sm:py-4 rounded-xl transition-colors text-center shadow-xs focus-ring cursor-pointer"
-              onClick={() => processPhoto()}
-            >
-              <Zap className="w-5 h-5 text-lime-300 shrink-0" aria-hidden="true" />
-              <span className="truncate">
-                Process for {selectedCountry.country_name}
-              </span>
-              <ArrowRight className="w-4 h-4 ml-1 shrink-0" aria-hidden="true" />
-            </button>
-            <p className="text-center text-xs text-slate-700 mt-2.5 font-medium">
-              ⚡ 10-second biometric crop &amp; verify · Single digital file + 6×4″ printable sheet
-            </p>
-          </div>
-        )}
-
-        {/* Photo Guidelines Checklist */}
-        <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-slate-100 text-xs text-slate-700">
-          <p className="font-bold text-slate-900 mb-2">
-            Quick Acceptance Tips:
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <div className="flex items-center gap-1.5">
-              <Check className="w-3.5 h-3.5 text-lime-700 shrink-0" aria-hidden="true" />
-              <span>Look straight into camera, neutral face</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Check className="w-3.5 h-3.5 text-lime-700 shrink-0" aria-hidden="true" />
-              <span>Eyes open, mouth closed, no red-eye</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Check className="w-3.5 h-3.5 text-lime-700 shrink-0" aria-hidden="true" />
-              <span>Even lighting on face &amp; shoulders</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Check className="w-3.5 h-3.5 text-lime-700 shrink-0" aria-hidden="true" />
-              <span>Plain background (our AI will auto-clean)</span>
-            </div>
+          {/* Quick tips */}
+          <div className="rounded-2xl bg-ink-50 p-4">
+            <p className="mb-2.5 text-xs font-bold uppercase tracking-wider text-ink-500">Quick tips</p>
+            <ul className="m-0 grid list-none grid-cols-1 gap-2 p-0 text-xs text-ink-700 sm:grid-cols-2 sm:text-sm">
+              {[
+                "Look straight at the camera, neutral face",
+                "Eyes open, mouth closed, no red-eye",
+                "Even lighting on face & shoulders",
+                "Plain background (we clean it up)",
+              ].map((tip) => (
+                <li key={tip} className="flex items-start gap-2">
+                  <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand-600 text-white" aria-hidden="true">
+                    <Check className="h-2.5 w-2.5" strokeWidth={3} />
+                  </span>
+                  <span>{tip}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
@@ -703,82 +711,77 @@ export default function PhotoMakerStudio({
           aria-modal="true"
           aria-labelledby="processing-modal-title"
           aria-describedby="processing-modal-desc"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-xs p-4 animate-fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink-950/75 p-4 backdrop-blur-sm animate-fade-in"
         >
-          <div className="bg-white border border-slate-200 max-w-md w-full max-h-[90vh] overflow-y-auto rounded-2xl p-5 sm:p-8 text-center shadow-2xl">
+          <div className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-3xl border border-ink-200 bg-white p-6 text-center shadow-2xl sm:p-8">
             {/* Screen reader live status announcement */}
             <div aria-live="polite" className="sr-only">
-              Processing passport photo: {PROCESSING_STEPS[processingStepIndex].text} {processingProgress}% completed, {countdown} seconds remaining.
+              Processing passport photo: {PROCESSING_STEPS[processingStepIndex].text} {processingProgress}% completed,{" "}
+              {countdown} seconds remaining.
             </div>
 
-            {/* Countdown circle */}
-            <div className="relative mx-auto w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-lime-50 border border-lime-200 flex items-center justify-center mb-4">
-              <Camera className="w-7 h-7 sm:w-8 sm:h-8 text-[#4D7C0F]" aria-hidden="true" />
-              <span className="absolute -bottom-1 -right-1 font-mono text-xs font-extrabold bg-[#4D7C0F] text-white px-1.5 py-0.5 rounded-full" aria-hidden="true">
+            {/* Scanning visual */}
+            <div className="relative mx-auto mb-5 h-24 w-20 overflow-hidden rounded-2xl border border-brand-200 bg-brand-50" aria-hidden="true">
+              <Camera className="absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 text-brand-600" />
+              <span className="absolute left-0 right-0 h-0.5 bg-brand-500 shadow-[0_0_12px_2px] shadow-brand-400 animate-scan" />
+              <span className="absolute -bottom-0 right-0 rounded-tl-lg bg-brand-600 px-1.5 py-0.5 font-mono text-[11px] font-bold text-white">
                 {countdown}s
               </span>
             </div>
 
-            <h2
-              id="processing-modal-title"
-              className="text-base sm:text-xl font-bold text-slate-900 mb-1"
-            >
-              Processing Passport Photo
+            <h2 id="processing-modal-title" className="text-xl font-extrabold text-ink-950 sm:text-2xl">
+              Making your photo
             </h2>
-            <p id="processing-modal-desc" className="text-xs text-slate-700 font-mono mb-5 font-semibold">
-              {selectedCountry.country_name} · Format: {selectedCountry.dimensions} px
+            <p id="processing-modal-desc" className="mb-6 mt-1 font-mono text-xs font-semibold text-ink-500">
+              {selectedCountry.country_name} · {selectedCountry.dimensions} px
             </p>
 
             {/* Progress Bar */}
-            <div className="space-y-2 mb-6">
+            <div className="mb-6 space-y-2">
               <div
                 role="progressbar"
                 aria-valuenow={processingProgress}
                 aria-valuemin={0}
                 aria-valuemax={100}
                 aria-label="Passport photo processing progress"
-                className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden border border-slate-200"
+                className="h-2.5 w-full overflow-hidden rounded-full bg-ink-100"
               >
                 <div
-                  className="bg-[#4D7C0F] h-2.5 rounded-full transition-all duration-300 ease-out"
+                  className="h-2.5 rounded-full bg-brand-600 transition-all duration-300 ease-out"
                   style={{ width: `${processingProgress}%` }}
                 />
               </div>
-              <div className="flex justify-between text-xs font-mono text-slate-700 font-semibold">
-                <span>{processingProgress}% Complete</span>
+              <div className="flex justify-between font-mono text-xs font-semibold text-ink-500">
+                <span>{processingProgress}%</span>
                 <span>{countdown}s remaining</span>
               </div>
             </div>
 
-            {/* Animated Progress Steps */}
-            <div className="bg-slate-50 p-4 rounded-xl text-left space-y-2.5 border border-slate-200 text-xs">
+            {/* Progress Steps */}
+            <ol className="m-0 list-none space-y-2.5 rounded-2xl bg-ink-50 p-4 text-left text-xs sm:text-sm">
               {PROCESSING_STEPS.map((step, idx) => {
                 const isDone = processingProgress >= step.progress;
                 const isCurrent = processingStepIndex === idx;
 
                 return (
-                  <div
+                  <li
                     key={idx}
                     className={`flex items-center gap-2.5 transition-colors ${
-                      isDone
-                        ? "text-lime-900 font-bold"
-                        : isCurrent
-                        ? "text-[#365314] font-bold"
-                        : "text-slate-500 font-medium"
+                      isDone ? "font-semibold text-ink-900" : isCurrent ? "font-bold text-brand-700" : "font-medium text-ink-400"
                     }`}
                   >
                     {isDone ? (
-                      <CheckCircle className="w-4 h-4 text-[#4D7C0F] shrink-0" aria-hidden="true" />
+                      <CheckCircle className="h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
                     ) : isCurrent ? (
-                      <span className="w-4 h-4 rounded-full border-2 border-[#4D7C0F] border-t-transparent animate-spin shrink-0" aria-hidden="true" />
+                      <span className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-brand-600 border-t-transparent" aria-hidden="true" />
                     ) : (
-                      <div className="w-4 h-4 rounded-full border border-slate-400 shrink-0" aria-hidden="true" />
+                      <span className="h-4 w-4 shrink-0 rounded-full border border-ink-300" aria-hidden="true" />
                     )}
                     <span>{step.text}</span>
-                  </div>
+                  </li>
                 );
               })}
-            </div>
+            </ol>
           </div>
         </div>
       )}

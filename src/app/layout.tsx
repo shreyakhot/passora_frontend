@@ -1,13 +1,20 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { LOGO_PATH, SITE_NAME, SITE_URL } from "@/lib/site";
 import { getPlanPricing } from "@/lib/config/pricing";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
   display: "swap",
 });
 
@@ -24,7 +31,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#4D7C0F",
+  themeColor: "#4F46E5",
 };
 
 export const metadata: Metadata = {
@@ -91,13 +98,13 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="brand"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${jakarta.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
       </head>
-      <body className="min-h-full flex flex-col bg-base-100 text-base-content">
+      <body className="min-h-full flex flex-col bg-base-100 text-base-content font-sans">
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>

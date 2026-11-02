@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   Upload,
-  CheckCircle,
   Shield,
   Printer,
   Zap,
@@ -14,11 +13,14 @@ import {
   RefreshCw,
   BookOpenCheck,
   Users,
-  ChevronRight,
   AlertCircle,
   Baby,
   FileText,
   Check,
+  Plus,
+  Sparkles,
+  ScanFace,
+  UserCheck,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -27,9 +29,10 @@ import PhotoMakerStudio from "@/components/PhotoMakerStudio";
 import OfficialPhotoNotice from "@/components/OfficialPhotoNotice";
 import { LOGO_URL, SITE_DISCLAIMER, SITE_NAME, SITE_URL } from "@/lib/site";
 import { PRICING, getPlanPricing } from "@/lib/config/pricing";
-import { COUNTRIES, getCountryByCode } from "@/config/countries";
+import { COUNTRIES, countryFlag, getCountryByCode } from "@/config/countries";
 
 const standardPlan = getPlanPricing("standard");
+const expertPlan = getPlanPricing("expert_edit");
 
 const PAGE_TITLE = "Passport & Visa Photo Online for 50+ Countries";
 const PAGE_DESCRIPTION = `Make passport and visa photos online for the US, UK, Canada, India, the Schengen Area and 50+ countries. Upload a phone photo, get it sized and checked, and download for ${standardPlan.amountFormatted}.`;
@@ -72,6 +75,17 @@ export const metadata: Metadata = {
     images: [LOGO_URL],
   },
 };
+
+const SHOWCASE_COUNTRY_CODES = ["US", "GB", "CA", "AU", "IN", "EU", "DE", "FR", "AE", "SG", "NZ", "JP"];
+const showcaseCountries = SHOWCASE_COUNTRY_CODES.map((code) => getCountryByCode(code)).filter(
+  (c): c is NonNullable<typeof c> => Boolean(c)
+);
+
+const heroStats = [
+  { value: `${COUNTRIES.length}+`, label: "countries & regions" },
+  { value: "~10s", label: "to process a photo" },
+  { value: standardPlan.amountFormatted, label: "one-off, no subscription" },
+];
 
 const steps = [
   {
@@ -135,13 +149,20 @@ const features = [
   },
 ];
 
-const pricingBenefits = [
+const standardBenefits = [
   "Official photo dimensions for 50+ countries",
   "Automatic passport picture cropping and resizing",
   "Smart in-browser compression to ≤ 3 MB",
   "High-resolution single digital passport photo",
   "Standard 6×4″ (10×15 cm) multi-photo print sheet",
   "Instant download with no registration or subscriptions needed",
+];
+
+const expertBenefits = [
+  "Everything in the Standard photo",
+  "Manual review of your photo by a person",
+  "Hand fixes for shadows, tilt, glare and background",
+  "Updated photo delivered to your email",
 ];
 
 const trustPoints = [
@@ -169,6 +190,38 @@ const trustPoints = [
     description:
       "Photos are processed for your session only and are never sold, shared, or used to train other tools. You control the download, start to finish.",
   },
+];
+
+const qualityRules = [
+  "clear and in focus",
+  "in colour",
+  "not retouched or filtered to change your appearance",
+  "the pixel size your country requires",
+  "within the file-size limits of the service you are uploading to",
+];
+
+const showRules = [
+  "contain no other objects or people",
+  "be taken against a plain background in the colour your country requires (usually white or light-coloured)",
+  "be in clear contrast to the background",
+  "not have ‘red eye’",
+];
+
+const poseRules = [
+  "be facing forwards and looking straight at the camera",
+  "have a plain expression and your mouth closed",
+  "have your eyes open and visible",
+  "not have hair in front of your eyes",
+  "not have a head covering (unless it’s for religious or medical reasons)",
+  "not have anything covering your face",
+  "not have any shadows on your face or behind you",
+];
+
+const childRules = [
+  "Children must be on their own in the picture. Babies must not be holding toys or using pacifiers (dummies).",
+  "Many countries relax the expression and eye-line rules for young children. Check the age limits that apply in your country.",
+  "Some countries allow babies to have their eyes closed. If you support their head with your hand, your hand must not be visible in the photo.",
+  "For a baby, an easy option is to lay them on a plain white or light-coloured sheet and take the photo from above.",
 ];
 
 const faqs = [
@@ -222,6 +275,48 @@ const faqs = [
   },
 ];
 
+function SectionHeader({
+  eyebrow,
+  title,
+  description,
+  align = "center",
+  dark = false,
+  id,
+}: {
+  eyebrow: string;
+  title: React.ReactNode;
+  description?: React.ReactNode;
+  align?: "center" | "left";
+  dark?: boolean;
+  id?: string;
+}) {
+  return (
+    <div className={align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
+      <span className={`eyebrow ${dark ? "eyebrow-dark" : ""}`}>{eyebrow}</span>
+      <h2 id={id} className={`display-2 mt-4 ${dark ? "text-white" : "text-ink-950"}`}>
+        {title}
+      </h2>
+      {description && <p className={`lead mt-4 ${dark ? "text-ink-300" : ""}`}>{description}</p>}
+    </div>
+  );
+}
+
+function CheckItem({ children, tone = "brand" }: { children: React.ReactNode; tone?: "brand" | "dark" }) {
+  return (
+    <li className="flex items-start gap-3">
+      <span
+        className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
+          tone === "dark" ? "bg-white/10 text-brand-300" : "bg-brand-100 text-brand-700"
+        }`}
+        aria-hidden="true"
+      >
+        <Check className="h-3 w-3" strokeWidth={3} />
+      </span>
+      <span>{children}</span>
+    </li>
+  );
+}
+
 export default function HomePage() {
   return (
     <>
@@ -238,543 +333,529 @@ export default function HomePage() {
 
       <Navbar ctaText="Upload Photo" ctaHref="#studio" />
 
-      <main className="flex-1 bg-white text-slate-900" id="main-content">
-        {/* =========================================================================
-            1. HERO SECTION (Clean, responsive, standardized)
-           ========================================================================= */}
-        <section className="bg-white py-10 sm:py-16 lg:py-20 border-b border-slate-200/80" id="hero" aria-label="Introduction and photo maker overview">
-          <div className="container-narrow">
-            <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-              {/* Left copy column */}
-              <div className="lg:col-span-7 max-w-2xl">
-                {/* Official Biometric Badge */}
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lime-50 border border-lime-300 text-xs font-bold text-[#365314] tracking-wide mb-5">
-                  <span className="w-2 h-2 rounded-full bg-[#4D7C0F]" aria-hidden="true" />
-                  <span>PASSPORT &amp; VISA PHOTOS · 50+ COUNTRIES</span>
-                </div>
+      <main className="flex-1 bg-white text-ink-950" id="main-content">
+        {/* ================================================================
+            1. HERO
+           ================================================================ */}
+        <section
+          className="relative overflow-hidden border-b border-ink-100"
+          id="hero"
+          aria-label="Introduction and photo maker overview"
+        >
+          <div className="pointer-events-none absolute inset-0 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" aria-hidden="true" />
+          <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
+          <div className="pointer-events-none absolute -left-32 top-1/2 h-[380px] w-[380px] rounded-full bg-violet-200/40 blur-3xl" aria-hidden="true" />
 
-                {/* Main Heading */}
-                <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-[#0F172A] tracking-tight leading-[1.18] mb-3">
-                  Passport &amp; Visa Photos Online
+          <div className="container-narrow relative pb-16 pt-12 sm:pb-20 sm:pt-16 lg:pb-28 lg:pt-20">
+            <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
+              {/* Copy */}
+              <div className="lg:col-span-7">
+                <Link
+                  href="#studio"
+                  className="group inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white/80 py-1 pl-1 pr-3 text-xs font-semibold text-ink-700 shadow-soft backdrop-blur transition-colors hover:border-brand-300 sm:text-sm"
+                >
+                  <span className="rounded-full bg-brand-600 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">
+                    Global
+                  </span>
+                  Passport &amp; visa photos for 50+ countries
+                  <ArrowRight className="h-3.5 w-3.5 text-ink-400 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                </Link>
+
+                <h1 className="display-1 mt-6 text-ink-950">
+                  Passport &amp; Visa Photos <span className="marker">Online</span>, in seconds.
                 </h1>
 
-                {/* Sub-heading */}
-                <p className="text-lg sm:text-xl text-[#334155] font-semibold mb-4 leading-snug">
-                  Digital and printed photos for new applications and renewals in 50+ countries
+                <p className="lead mt-6 max-w-xl">
+                  Take a photo on your phone, upload it, and get a passport or visa photo sized and checked against
+                  your country&apos;s published photo rules in under 10 seconds. Use it for an online application, or
+                  print it for a paper form, for new applications and renewals.
                 </p>
 
-                {/* Body description */}
-                <p className="text-sm sm:text-base text-slate-700 leading-relaxed mb-7 max-w-xl">
-                  Take a photo on your phone, upload it, and get a passport or
-                  visa photo sized and checked against your country&apos;s
-                  published photo rules in under 10 seconds. Use it for an
-                  online application, or print it for a paper form. Supports
-                  the US, UK, Canada, Australia, India, the Schengen Area and
-                  50+ other countries.
-                </p>
-
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3.5 mb-7">
-                  <a
-                    href="#studio"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#4D7C0F] hover:bg-[#3F650C] active:bg-[#365314] !text-white text-white font-bold text-base px-7 py-3.5 sm:py-4 rounded-xl transition-colors text-center shadow-xs focus-ring"
-                  >
-                    <span>Create My Passport Photo</span>
-                    <ArrowRight className="w-4 h-4 ml-0.5" aria-hidden="true" />
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <a href="#studio" className="btn-brand btn-lg">
+                    <Upload className="h-5 w-5" aria-hidden="true" />
+                    Create My Passport Photo
                   </a>
-                  <a
-                    href="#how-it-works"
-                    className="w-full sm:w-auto inline-flex items-center justify-center bg-white hover:bg-slate-50 text-slate-800 font-semibold text-base px-6 py-3.5 sm:py-4 rounded-xl border border-slate-300 transition-colors text-center focus-ring"
-                  >
-                    How It Works
+                  <a href="#how-it-works" className="btn-outline-brand btn-lg">
+                    See how it works
                   </a>
                 </div>
 
-                {/* Features Badges Row */}
-                <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-2.5">
-                  <span className="inline-flex items-center justify-center sm:justify-start gap-1.5 px-3 py-2 rounded-lg bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800 text-center">
-                    <span aria-hidden="true">🔒</span> Secure &amp; Private
-                  </span>
-                  <span className="inline-flex items-center justify-center sm:justify-start gap-1.5 px-3 py-2 rounded-lg bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800 text-center">
-                    <span className="text-amber-600" aria-hidden="true">⚡</span> Results in 10s
-                  </span>
-                  <span className="inline-flex items-center justify-center sm:justify-start gap-1.5 px-3 py-2 rounded-lg bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800 text-center">
-                    <span aria-hidden="true">🌍</span> 50+ Countries
-                  </span>
-                  <span className="inline-flex items-center justify-center sm:justify-start gap-1.5 px-3 py-2 rounded-lg bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800 text-center">
-                    <span aria-hidden="true">🪪</span> Biometric Validation
-                  </span>
-                </div>
+                <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-ink-200 pt-6">
+                  {heroStats.map((stat) => (
+                    <div key={stat.label}>
+                      <dt className="sr-only">{stat.label}</dt>
+                      <dd className="font-display text-2xl font-extrabold tracking-tight text-ink-950 sm:text-3xl">
+                        {stat.value}
+                      </dd>
+                      <dd className="mt-0.5 text-xs font-medium text-ink-500 sm:text-sm">{stat.label}</dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
 
-              {/* Visual preview column */}
-              <div className="lg:col-span-5 flex justify-center w-full">
-                <div className="w-full max-w-sm lg:max-w-md">
-                  <div className="relative overflow-hidden aspect-[4/5]">
+              {/* Product visual */}
+              <div className="relative mx-auto w-full max-w-sm lg:col-span-5 lg:max-w-none">
+                <div className="relative rounded-[2rem] border border-ink-200 bg-white p-3 shadow-lift">
+                  <div className="flex items-center justify-between px-2 pb-3 pt-1">
+                    <span className="flex items-center gap-2 text-xs font-bold text-ink-700">
+                      <span className="text-base leading-none" aria-hidden="true">
+                        {countryFlag("US")}
+                      </span>
+                      US Passport
+                    </span>
+                    <span className="rounded-full bg-ink-100 px-2.5 py-1 font-mono text-[11px] font-semibold text-ink-600">
+                      {pixelSize("US")} px
+                    </span>
+                  </div>
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-ink-50">
                     <Image
                       src="/images/digital-passport-photo_example.webp"
                       alt="Example passport photo with a plain light grey background"
                       fill
                       priority
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
-                      className="object-cover rounded-xl"
+                      sizes="(max-width: 1024px) 384px, 460px"
+                      className="object-cover"
                     />
+                    {/* Crop guides */}
+                    <div className="pointer-events-none absolute inset-[9%] rounded-[1rem] border-2 border-dashed border-white/80" aria-hidden="true" />
+                    <div className="pointer-events-none absolute left-[30%] right-[30%] top-[16%] h-[48%] rounded-[50%] border-2 border-brand-400/90" aria-hidden="true" />
+                    <span className="pointer-events-none absolute left-0 right-0 h-0.5 bg-brand-400 shadow-[0_0_14px_3px] shadow-brand-400/70 animate-scan" aria-hidden="true" />
                   </div>
                 </div>
+
+                {/* Floating chips */}
+                <div className="absolute -left-4 top-24 hidden items-center gap-2.5 rounded-2xl border border-ink-200 bg-white px-3.5 py-2.5 shadow-lift animate-float sm:flex lg:-left-10">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700" aria-hidden="true">
+                    <Check className="h-4 w-4" strokeWidth={3} />
+                  </span>
+                  <span className="text-xs">
+                    <span className="block font-bold text-ink-950">Background replaced</span>
+                    <span className="text-ink-500">Plain &amp; even</span>
+                  </span>
+                </div>
+                <div className="absolute -right-3 bottom-20 hidden items-center gap-2.5 rounded-2xl border border-ink-200 bg-white px-3.5 py-2.5 shadow-lift animate-float [animation-delay:1.5s] sm:flex lg:-right-8">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-brand-100 text-brand-700" aria-hidden="true">
+                    <ScanFace className="h-4 w-4" />
+                  </span>
+                  <span className="text-xs">
+                    <span className="block font-bold text-ink-950">Face centred</span>
+                    <span className="text-ink-500">Head size checked</span>
+                  </span>
+                </div>
+                <div className="absolute -bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full bg-ink-950 px-4 py-2 text-xs font-semibold text-white shadow-lift">
+                  <Sparkles className="h-3.5 w-3.5 text-brand-300" aria-hidden="true" />
+                  Ready in ~10 seconds
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Country strip */}
+          <div className="relative border-t border-ink-100 bg-white/70 backdrop-blur">
+            <div className="container-narrow flex flex-col items-center gap-4 py-6 lg:flex-row lg:gap-8">
+              <p className="shrink-0 text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Sized for</p>
+              <ul className="m-0 flex list-none flex-wrap items-center justify-center gap-2 p-0 lg:justify-start">
+                {showcaseCountries.map((c) => (
+                  <li
+                    key={c.country_code}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-ink-200 bg-white px-3 py-1.5 text-xs font-semibold text-ink-700"
+                  >
+                    <span aria-hidden="true">{countryFlag(c.country_code)}</span>
+                    {c.country_name}
+                  </li>
+                ))}
+                <li className="inline-flex items-center rounded-full bg-brand-50 px-3 py-1.5 text-xs font-bold text-brand-700">
+                  +{Math.max(COUNTRIES.length - showcaseCountries.length, 0)} more
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================
+            2. PHOTO STUDIO
+           ================================================================ */}
+        <section className="relative bg-ink-50 section-padding" id="studio" aria-labelledby="studio-heading">
+          <div className="container-narrow">
+            <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
+              <div className="lg:col-span-5 lg:pt-6">
+                <span className="eyebrow">Photo studio</span>
+                <h2 id="studio-heading" className="display-2 mt-4 text-ink-950">
+                  Create your passport or visa photo
+                </h2>
+                <p className="lead mt-4">
+                  Upload a recent photo and we will size it and check it against the photo rules for your country.
+                  Check the country matches the passport or visa you are applying for.
+                </p>
+                <ul className="m-0 mt-8 list-none space-y-4 p-0 text-sm text-ink-700 sm:text-base">
+                  <CheckItem>Preview the finished photo before you pay</CheckItem>
+                  <CheckItem>Digital file plus a 6×4″ print sheet</CheckItem>
+                  <CheckItem>Your upload is used only to make your photo</CheckItem>
+                </ul>
+                <OfficialPhotoNotice className="mt-8 hidden bg-white lg:block" />
+              </div>
+              <div className="lg:col-span-7">
+                <PhotoMakerStudio defaultDocumentType="passport" />
+                <OfficialPhotoNotice className="mt-5 bg-white lg:hidden" />
               </div>
             </div>
           </div>
         </section>
 
-        {/* =========================================================================
-            1b. PHOTO MAKER STUDIO (country auto-detected from the visitor's locale)
-           ========================================================================= */}
-        <section className="bg-slate-50 py-10 sm:py-16 border-b border-slate-200/80" id="studio" aria-labelledby="studio-heading">
-          <div className="container-narrow max-w-2xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-5 sm:mb-7">
-              <h2 id="studio-heading" className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                Create Your Passport or Visa Photo
-              </h2>
-              <p className="text-slate-700 text-xs sm:text-sm mt-1.5 max-w-md mx-auto leading-relaxed">
-                Upload a recent photo and we will size it and check it against the photo rules for your country.
-                Check the country below matches the passport or visa you are applying for.
-              </p>
-            </div>
-            <PhotoMakerStudio defaultDocumentType="passport" />
-            <OfficialPhotoNotice className="mt-5" />
-          </div>
-        </section>
-
-        {/* =========================================================================
-            2. HOW IT WORKS SECTION (Clean connected layout, no heavy boxy cards)
-           ========================================================================= */}
-        <section className="bg-slate-50/70 py-14 sm:py-20 border-b border-slate-200/80" id="how-it-works">
+        {/* ================================================================
+            3. HOW IT WORKS
+           ================================================================ */}
+        <section className="section-padding" id="how-it-works" aria-labelledby="how-heading">
           <div className="container-narrow">
-            <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-              <span className="inline-block px-3 py-1 rounded-full bg-lime-100 border border-lime-300 text-[#4D7C0F] text-xs font-bold mb-3">
-                Simple 3-Step Process
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
-                How to Make a Passport Photo Online
-              </h2>
-              <p className="text-slate-700 text-sm sm:text-base">
-                Three steps take you from a regular phone photo to a correctly
-                sized, checked passport or visa photo for 50+ countries.
-              </p>
-            </div>
+            <SectionHeader
+              id="how-heading"
+              eyebrow="3 simple steps"
+              title="How to Make a Passport Photo Online"
+              description="Three steps take you from a regular phone photo to a correctly sized, checked passport or visa photo for 50+ countries."
+            />
 
-            <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+            <div className="relative mt-14">
+            <div className="pointer-events-none absolute left-[16%] right-[16%] top-14 hidden h-px border-t-2 border-dashed border-ink-200 md:block" aria-hidden="true" />
+            <ol className="relative m-0 grid list-none gap-6 p-0 md:grid-cols-3 lg:gap-8">
               {steps.map(({ icon: Icon, step, title, description }) => (
-                <div
-                  key={step}
-                  className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 flex flex-col justify-between hover:border-lime-600 transition-colors"
-                >
-                  <div>
-                    <div className="flex items-center justify-between w-full mb-6">
-                      <div className="w-12 h-12 rounded-xl bg-lime-50 border border-lime-200 flex items-center justify-center text-[#4D7C0F]" aria-hidden="true">
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      <span className="font-mono text-xs font-bold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-md">
-                        Step 0{step}
-                      </span>
-                    </div>
-
-                    <h3 className="text-slate-900 text-lg sm:text-xl font-bold mb-2">
-                      {title}
-                    </h3>
-
-                    <p className="text-slate-700 text-sm leading-relaxed">
-                      {description}
-                    </p>
+                <li key={step} className="surface surface-hover relative p-7 sm:p-8">
+                  <div className="flex items-center justify-between">
+                    <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600 text-white shadow-brand" aria-hidden="true">
+                      <Icon className="h-6 w-6" />
+                    </span>
+                    <span className="font-display text-5xl font-extrabold tracking-tighter text-ink-100" aria-hidden="true">
+                      0{step}
+                    </span>
                   </div>
-                </div>
+                  <h3 className="mt-6 text-xl font-extrabold text-ink-950">
+                    <span className="sr-only">Step {step}: </span>
+                    {title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-600 sm:text-base">{description}</p>
+                </li>
               ))}
+            </ol>
             </div>
 
-            <div className="text-center mt-10 sm:mt-12">
-              <a
-                href="#studio"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#4D7C0F] hover:bg-[#3F650C] !text-white text-white font-bold text-base px-8 py-3.5 sm:py-4 rounded-xl transition-colors text-center shadow-xs"
-              >
-                <Upload className="w-5 h-5" aria-hidden="true" />
-                <span>Upload &amp; Create Photo Now</span>
-                <ArrowRight className="w-4 h-4 ml-0.5" aria-hidden="true" />
+            <div className="mt-12 text-center">
+              <a href="#studio" className="btn-dark btn-lg">
+                <Upload className="h-5 w-5" aria-hidden="true" />
+                Upload &amp; Create Photo Now
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </a>
             </div>
           </div>
         </section>
 
-        {/* =========================================================================
-            3. FEATURES SECTION (Unified border-divided layout, no individual heavy card clutter)
-           ========================================================================= */}
-        <section className="bg-white py-14 sm:py-20 border-b border-slate-200/80" id="features" aria-label="Core features and capabilities">
+        {/* ================================================================
+            4. FEATURES (bento)
+           ================================================================ */}
+        <section className="border-y border-ink-100 bg-ink-50 section-padding" id="features" aria-labelledby="features-heading">
           <div className="container-narrow">
-            <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-              <span className="inline-block px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold mb-3">
-                Engineered for Acceptance
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
-                Everything You Need From a Passport Photo Maker
-              </h2>
-              <p className="text-slate-700 text-sm sm:text-base">
-                Create, crop, verify, and print official biometric passport
-                photos from any device, for a first application or a renewal.
-              </p>
-            </div>
+            <SectionHeader
+              id="features-heading"
+              eyebrow="Engineered for acceptance"
+              title="Everything You Need From a Passport Photo Maker"
+              description="Create, crop, verify, and print biometric passport photos from any device, for a first application or a renewal."
+            />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-              {features.map(({ icon: Icon, title, description }) => (
+            <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {features.map(({ icon: Icon, title, description }, i) => (
                 <div
                   key={title}
-                  className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-7 flex flex-col justify-start hover:border-lime-600 transition-colors"
+                  className={`surface surface-hover flex flex-col p-7 ${
+                    i === 0 ? "border-ink-950 bg-ink-950 text-white hover:border-ink-950 lg:row-span-2" : ""
+                  }`}
                 >
-                  <div className="w-11 h-11 rounded-xl bg-lime-50 border border-lime-200 text-[#4D7C0F] flex items-center justify-center shrink-0 mb-4" aria-hidden="true">
-                    <Icon className="w-5 h-5" />
-                  </div>
-
-                  <h3 className="font-bold text-[#0F172A] text-base sm:text-lg mb-2">
+                  <span
+                    className={
+                      i === 0
+                        ? "flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-600 text-white"
+                        : "icon-tile"
+                    }
+                    aria-hidden="true"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <h3 className={`mt-5 text-lg font-extrabold sm:text-xl ${i === 0 ? "text-white" : "text-ink-950"}`}>
                     {title}
                   </h3>
-
-                  <p className="text-slate-700 text-sm leading-relaxed">
+                  <p className={`mt-2 text-sm leading-relaxed sm:text-base ${i === 0 ? "text-ink-300" : "text-ink-600"}`}>
                     {description}
                   </p>
+                  {i === 0 && (
+                    <ul className="m-0 mt-auto grid list-none grid-cols-2 gap-2 p-0 pt-8">
+                      {showcaseCountries.slice(0, 6).map((c) => (
+                        <li
+                          key={c.country_code}
+                          className="flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2"
+                        >
+                          <span className="flex min-w-0 items-center gap-1.5 text-xs font-semibold text-white">
+                            <span aria-hidden="true">{countryFlag(c.country_code)}</span>
+                            <span className="truncate">{c.country_code}</span>
+                          </span>
+                          <span className="font-mono text-[11px] text-ink-300">{pixelSize(c.country_code)}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* =========================================================================
-            4. TRUST / E-E-A-T SECTION (Clean 2x2 grid, no shadows)
-           ========================================================================= */}
-        <section className="bg-slate-50/70 py-14 sm:py-20 border-b border-slate-200/80" id="trust" aria-label="Trust and compliance verification">
-          <div className="container-narrow">
-            <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-              <span className="inline-block px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold mb-3">
-                Why Trust {SITE_NAME}
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
-                Photo Rules You Can Verify, Not Just Trust
-              </h2>
-              <p className="text-slate-700 text-sm sm:text-base">
-                {SITE_NAME} is built around published passport and visa photo
-                specifications, and we keep every country profile under review.
-                We are independent and not affiliated with any government.
-              </p>
-            </div>
+        {/* ================================================================
+            5. TRUST (dark band)
+           ================================================================ */}
+        <section className="relative overflow-hidden bg-ink-950 section-padding" id="trust" aria-labelledby="trust-heading">
+          <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
+          <div className="pointer-events-none absolute -top-48 left-1/2 h-[480px] w-[720px] -translate-x-1/2 rounded-full bg-brand-600/25 blur-3xl" aria-hidden="true" />
+          <div className="container-narrow relative">
+            <SectionHeader
+              id="trust-heading"
+              dark
+              eyebrow={`Why trust ${SITE_NAME}`}
+              title="Photo Rules You Can Verify, Not Just Trust"
+              description={`${SITE_NAME} is built around published passport and visa photo specifications, and we keep every country profile under review. We are independent and not affiliated with any government.`}
+            />
 
-            <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div className="mx-auto mt-14 grid max-w-5xl gap-5 sm:grid-cols-2">
               {trustPoints.map(({ icon: Icon, title, description }) => (
                 <div
                   key={title}
-                  className="bg-white border border-slate-200 rounded-xl p-6 sm:p-7 flex flex-col justify-between"
+                  className="rounded-[1.25rem] border border-white/10 bg-white/[0.04] p-7 transition-colors hover:border-brand-400/40 hover:bg-white/[0.07]"
                 >
-                  <div>
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-lime-50 border border-lime-200 text-[#4D7C0F] flex items-center justify-center shrink-0" aria-hidden="true">
-                        <Icon className="w-5 h-5" />
-                      </div>
-                      <h3 className="font-bold text-[#0F172A] text-base sm:text-lg">
-                        {title}
-                      </h3>
-                    </div>
-                    <p className="text-slate-700 text-sm leading-relaxed">
-                      {description}
-                    </p>
-                  </div>
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-500/15 text-brand-300 ring-1 ring-brand-400/30" aria-hidden="true">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <h3 className="mt-5 text-lg font-extrabold text-white sm:text-xl">{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-300 sm:text-base">{description}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* =========================================================================
-            5. COMMON DIGITAL PASSPORT PHOTO RULES & GUIDANCE
-           ========================================================================= */}
-        <section className="bg-white py-14 sm:py-20 border-b border-slate-200/80" id="photo-rules" aria-label="Common passport photo rules and guidelines">
+        {/* ================================================================
+            6. PHOTO RULES
+           ================================================================ */}
+        <section className="section-padding" id="photo-rules" aria-labelledby="rules-heading">
           <div className="container-narrow">
-            <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-              <span className="inline-block px-3 py-1 rounded-full bg-lime-100 border border-lime-300 text-[#365314] text-xs font-bold mb-3">
-                Common Photo Rules
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
-                Rules &amp; Guidance for Digital Passport Photos
-              </h2>
-              <p className="text-slate-700 text-sm sm:text-base">
-                Most countries follow similar biometric photo standards. These are the common rules for
-                online applications, phone photos, and child photos. Always confirm the exact requirements
-                with your country&apos;s issuing authority.
-              </p>
-            </div>
+            <SectionHeader
+              id="rules-heading"
+              eyebrow="Common photo rules"
+              title="Rules & Guidance for Digital Passport Photos"
+              description="Most countries follow similar biometric photo standards. These are the common rules for online applications, phone photos, and child photos. Always confirm the exact requirements with your country's issuing authority."
+            />
 
-            <div className="space-y-6 max-w-4xl mx-auto">
-              {/* 1. Digital Photos Overview */}
-              <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8">
-                <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] mb-3 flex items-center gap-2.5">
-                  <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-[#4D7C0F]" aria-hidden="true" />
-                  Digital photos
-                </h3>
-                <p className="text-slate-800 text-sm sm:text-base font-medium mb-4">
+            <div className="mt-14 grid gap-5 lg:grid-cols-12">
+              {/* Digital photos overview */}
+              <div className="surface p-7 sm:p-8 lg:col-span-5">
+                <span className="icon-tile" aria-hidden="true">
+                  <FileText className="h-5 w-5" />
+                </span>
+                <h3 className="mt-5 text-2xl font-extrabold text-ink-950">Digital photos</h3>
+                <p className="mt-2 text-base font-medium text-ink-800">
                   Many countries accept or require a digital photo when you apply for a passport or visa online.
                 </p>
-                <ul className="space-y-2.5 text-slate-700 text-sm sm:text-base mb-5">
-                  <li className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-1" aria-hidden="true" />
-                    <span>Most passport offices ask for a new photo when you get a new passport, even if your appearance has not changed.</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-1" aria-hidden="true" />
-                    <span>Your photo must be recent. Check how recently your country requires it to have been taken.</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-1" aria-hidden="true" />
-                    <span className="text-amber-950 font-semibold">Your application may be delayed or refused if your photos do not meet the rules.</span>
-                  </li>
+                <ul className="m-0 mt-5 list-none space-y-3 p-0 text-sm text-ink-700 sm:text-base">
+                  <CheckItem>
+                    Most passport offices ask for a new photo when you get a new passport, even if your appearance has
+                    not changed.
+                  </CheckItem>
+                  <CheckItem>Your photo must be recent. Check how recently your country requires it to have been taken.</CheckItem>
                 </ul>
-                <div className="pt-4 border-t border-slate-100 text-xs sm:text-sm text-slate-800">
+                <p className="mt-5 flex items-start gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm font-semibold text-amber-950">
+                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-700" aria-hidden="true" />
+                  Your application may be delayed or refused if your photos do not meet the rules.
+                </p>
+                <p className="mt-5 border-t border-ink-100 pt-5 text-sm text-ink-600">
                   If a disability or medical condition makes these rules hard to meet, contact the authority that
                   issues your document. Many offer help or exceptions.
-                </div>
+                </p>
               </div>
 
-              {/* 3. Rules for digital photos */}
-              <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8">
-                <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] mb-5 flex items-center gap-2.5">
-                  <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-[#4D7C0F]" aria-hidden="true" />
-                  Rules for digital photos
-                </h3>
+              {/* Quality + what it must show */}
+              <div className="surface p-7 sm:p-8 lg:col-span-7">
+                <span className="icon-tile" aria-hidden="true">
+                  <Shield className="h-5 w-5" />
+                </span>
+                <h3 className="mt-5 text-2xl font-extrabold text-ink-950">Rules for digital photos</h3>
 
-                <div className="space-y-6">
-                  {/* The quality of your digital photo */}
-                  <div>
-                    <h4 className="font-bold text-[#0F172A] text-base sm:text-lg mb-2">
-                      The quality of your digital photo
-                    </h4>
-                    <p className="text-slate-700 text-sm mb-3">Your photo must be:</p>
-                    <ul className="grid sm:grid-cols-2 gap-2 text-sm text-slate-800">
-                      <li className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-lg">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0" aria-hidden="true" />
-                        <span>clear and in focus</span>
-                      </li>
-                      <li className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-lg">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0" aria-hidden="true" />
-                        <span>in colour</span>
-                      </li>
-                      <li className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-lg">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0" aria-hidden="true" />
-                        <span>not retouched or filtered to change your appearance</span>
-                      </li>
-                      <li className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-lg">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0" aria-hidden="true" />
-                        <span>the pixel size your country requires</span>
-                      </li>
-                      <li className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-lg sm:col-span-2">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0" aria-hidden="true" />
-                        <span>within the file-size limits of the service you are uploading to</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* What your digital photo must show */}
-                  <div className="border-t border-slate-100 pt-6">
-                    <h4 className="font-bold text-[#0F172A] text-base sm:text-lg mb-2">
-                      What your digital photo must show
-                    </h4>
-                    <p className="text-slate-700 text-sm mb-3">The digital photo must:</p>
-                    <ul className="space-y-2 text-sm text-slate-800 mb-4">
-                      <li className="flex items-start gap-2.5">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                        <span>contain no other objects or people</span>
-                      </li>
-                      <li className="flex items-start gap-2.5">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                        <span>be taken against a plain background in the colour your country requires (usually white or light-coloured)</span>
-                      </li>
-                      <li className="flex items-start gap-2.5">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                        <span>be in clear contrast to the background</span>
-                      </li>
-                      <li className="flex items-start gap-2.5">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                        <span>not have ‘red eye’</span>
-                      </li>
-                    </ul>
-
-                    <p className="text-sm bg-lime-50/80 border border-lime-200 text-[#365314] font-medium rounded-xl p-3.5 mb-5">
-                      If you’re using a photo taken on your own device, include your head, shoulders and upper body. Do not crop your photo - it will be done for you. Choose your country in our{" "}
-                      <Link
-                        href="/passport-size-photo-maker"
-                        className="font-bold underline text-[#365314] hover:text-[#4D7C0F] transition-colors"
-                      >
-                        passport size photo maker
-                      </Link>
-                      {" "}and it applies that country’s photo size automatically.
-                    </p>
-
-                    <p className="text-slate-800 text-sm mb-3 font-semibold">In your photo you must:</p>
-                    <ul className="grid sm:grid-cols-2 gap-2 text-sm text-slate-800 mb-4">
-                      <li className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                        <span>be facing forwards and looking straight at the camera</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                        <span>have a plain expression and your mouth closed</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                        <span>have your eyes open and visible</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                        <span>not have hair in front of your eyes</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                        <span>not have a head covering (unless it’s for religious or medical reasons)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                        <span>not have anything covering your face</span>
-                      </li>
-                      <li className="flex items-start gap-2 sm:col-span-2">
-                        <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                        <span>not have any shadows on your face or behind you</span>
-                      </li>
-                    </ul>
-
-                    <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs sm:text-sm text-slate-800">
-                      <strong>Glasses:</strong> Many countries do not allow glasses in passport photos, so remove them unless your country permits them. Where glasses are allowed, they cannot be sunglasses or tinted glasses, and you must make sure your eyes are not covered by the frames or any glare, reflection or shadow.
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* 4. Photos of babies and children */}
-              <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8">
-                <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] mb-4 flex items-center gap-2.5">
-                  <Baby className="w-5 h-5 sm:w-6 sm:h-6 text-[#4D7C0F]" aria-hidden="true" />
-                  Photos of babies and children
-                </h3>
-                <ul className="space-y-3 text-sm sm:text-base text-slate-800">
-                  <li className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-1" aria-hidden="true" />
-                    <span>Children must be on their own in the picture. Babies must not be holding toys or using pacifiers (dummies).</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-1" aria-hidden="true" />
-                    <span>Many countries relax the expression and eye-line rules for young children. Check the age limits that apply in your country.</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-1" aria-hidden="true" />
-                    <span>Some countries allow babies to have their eyes closed. If you support their head with your hand, your hand must not be visible in the photo.</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-1" aria-hidden="true" />
-                    <span>For a baby, an easy option is to lay them on a plain white or light-coloured sheet and take the photo from above.</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================================
-            6. PRICING SECTION (Flat Fee from pricing config, No Shadows)
-           ========================================================================= */}
-        <section className="bg-white py-14 sm:py-20 border-b border-slate-200/80" id="pricing" aria-label="Transparent pricing details">
-          <div className="container-narrow">
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <span className="inline-block px-3 py-1 rounded-full bg-lime-100 border border-lime-300 text-[#365314] text-xs font-bold mb-3">
-                Transparent Pricing
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
-                Passport Photo Maker Package
-              </h2>
-              <p className="text-slate-700 text-sm sm:text-base">
-                One-off payment for your complete compliant digital photo and printable sheet.
-              </p>
-            </div>
-
-            <div className="max-w-md mx-auto">
-              <div className="bg-white border-2 border-[#4D7C0F] rounded-2xl overflow-hidden p-6 sm:p-8">
-                <div className="text-center pb-6 border-b border-slate-200">
-                  <div className="inline-block px-3 py-1 rounded-md bg-lime-100 text-[#365314] mb-3 font-bold text-xs uppercase tracking-wide">
-                    Complete Photo Package
-                  </div>
-                  <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-5xl font-extrabold text-[#0F172A] tracking-tight">
-                      {standardPlan.amountFormatted}
-                    </span>
-                    <span className="text-slate-700 text-base font-medium">
-                      /photo
-                    </span>
-                  </div>
-                  <p className="text-slate-700 text-xs sm:text-sm mt-2">
-                    Includes ready-to-submit digital photo and 6×4″ printable sheet
-                  </p>
-                </div>
-
-                <ul className="py-6 space-y-3 list-none p-0 m-0">
-                  {pricingBenefits.map((benefit) => (
+                <h4 className="mt-6 text-base font-bold text-ink-950 sm:text-lg">The quality of your digital photo</h4>
+                <p className="mt-1 text-sm text-ink-600">Your photo must be:</p>
+                <ul className="m-0 mt-3 flex list-none flex-wrap gap-2 p-0">
+                  {qualityRules.map((rule) => (
                     <li
-                      key={benefit}
-                      className="flex items-start gap-2.5 text-slate-800 text-sm"
+                      key={rule}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-ink-200 bg-ink-50 px-3 py-1.5 text-sm text-ink-800"
                     >
-                      <CheckCircle className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                      <span>{benefit}</span>
+                      <Check className="h-3.5 w-3.5 text-brand-600" strokeWidth={3} aria-hidden="true" />
+                      {rule}
                     </li>
                   ))}
                 </ul>
 
-                <a
-                  href="#studio"
-                  className="inline-flex items-center justify-center w-full text-center bg-[#4D7C0F] hover:bg-[#3F650C] !text-white text-white font-bold text-base py-3.5 sm:py-4 rounded-xl transition-colors shadow-xs"
-                >
+                <h4 className="mt-7 text-base font-bold text-ink-950 sm:text-lg">What your digital photo must show</h4>
+                <p className="mt-1 text-sm text-ink-600">The digital photo must:</p>
+                <ul className="m-0 mt-3 list-none space-y-2.5 p-0 text-sm text-ink-700 sm:text-base">
+                  {showRules.map((rule) => (
+                    <CheckItem key={rule}>{rule}</CheckItem>
+                  ))}
+                </ul>
+
+                <p className="mt-6 rounded-2xl border border-brand-100 bg-brand-50 p-4 text-sm font-medium text-brand-900">
+                  If you’re using a photo taken on your own device, include your head, shoulders and upper body. Do not
+                  crop your photo - it will be done for you. Choose your country in our{" "}
+                  <Link
+                    href="/passport-size-photo-maker"
+                    className="font-bold text-brand-700 underline decoration-brand-300 decoration-2 underline-offset-2 hover:text-brand-800"
+                  >
+                    passport size photo maker
+                  </Link>{" "}
+                  and it applies that country’s photo size automatically.
+                </p>
+              </div>
+
+              {/* Pose */}
+              <div className="surface p-7 sm:p-8 lg:col-span-7">
+                <span className="icon-tile" aria-hidden="true">
+                  <UserCheck className="h-5 w-5" />
+                </span>
+                <h3 className="mt-5 text-2xl font-extrabold text-ink-950">In your photo you must</h3>
+                <ul className="m-0 mt-5 grid list-none gap-3 p-0 text-sm text-ink-700 sm:grid-cols-2 sm:text-base">
+                  {poseRules.map((rule) => (
+                    <CheckItem key={rule}>{rule}</CheckItem>
+                  ))}
+                </ul>
+                <div className="mt-6 rounded-2xl bg-ink-50 p-4 text-sm text-ink-800">
+                  <strong className="text-ink-950">Glasses:</strong> Many countries do not allow glasses in passport
+                  photos, so remove them unless your country permits them. Where glasses are allowed, they cannot be
+                  sunglasses or tinted glasses, and you must make sure your eyes are not covered by the frames or any
+                  glare, reflection or shadow.
+                </div>
+              </div>
+
+              {/* Babies & children */}
+              <div className="surface p-7 sm:p-8 lg:col-span-5">
+                <span className="icon-tile" aria-hidden="true">
+                  <Baby className="h-5 w-5" />
+                </span>
+                <h3 className="mt-5 text-2xl font-extrabold text-ink-950">Photos of babies and children</h3>
+                <ul className="m-0 mt-5 list-none space-y-3 p-0 text-sm text-ink-700 sm:text-base">
+                  {childRules.map((rule) => (
+                    <CheckItem key={rule}>{rule}</CheckItem>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================
+            7. PRICING
+           ================================================================ */}
+        <section className="border-y border-ink-100 bg-ink-50 section-padding" id="pricing" aria-labelledby="pricing-heading">
+          <div className="container-narrow">
+            <SectionHeader
+              id="pricing-heading"
+              eyebrow="Transparent pricing"
+              title="Passport Photo Maker Package"
+              description="One-off payment for your complete digital photo and printable sheet. See your photo first, pay only if you like it."
+            />
+
+            <div className="mx-auto mt-14 grid max-w-4xl gap-6 md:grid-cols-2">
+              {/* Standard */}
+              <div className="relative flex flex-col rounded-[1.5rem] bg-ink-950 p-8 text-white shadow-lift ring-1 ring-ink-950">
+                <span className="absolute -top-3 left-8 rounded-full bg-brand-600 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white shadow-brand">
+                  Most popular
+                </span>
+                <h3 className="text-lg font-extrabold text-white">{standardPlan.title}</h3>
+                <p className="mt-1 text-sm text-ink-300">Ready-to-submit digital photo and 6×4″ printable sheet</p>
+                <p className="mt-6 flex items-baseline gap-1.5">
+                  <span className="font-display text-5xl font-extrabold tracking-tight">{standardPlan.amountFormatted}</span>
+                  <span className="text-sm font-medium text-ink-300">/photo</span>
+                </p>
+                <ul className="m-0 mt-8 list-none space-y-3 p-0 text-sm text-ink-200">
+                  {standardBenefits.map((benefit) => (
+                    <CheckItem key={benefit} tone="dark">
+                      {benefit}
+                    </CheckItem>
+                  ))}
+                </ul>
+                <a href="#studio" className="btn-brand btn-lg mt-8 w-full">
                   Create Your Passport Photo Now
+                </a>
+              </div>
+
+              {/* Expert */}
+              <div className="flex flex-col rounded-[1.5rem] border border-ink-200 bg-white p-8">
+                <h3 className="text-lg font-extrabold text-ink-950">{expertPlan.title}</h3>
+                <p className="mt-1 text-sm text-ink-600">Your photo, plus a careful check by a person</p>
+                <p className="mt-6 flex items-baseline gap-1.5">
+                  <span className="font-display text-5xl font-extrabold tracking-tight text-ink-950">
+                    {expertPlan.amountFormatted}
+                  </span>
+                  <span className="text-sm font-medium text-ink-500">/photo</span>
+                </p>
+                <ul className="m-0 mt-8 list-none space-y-3 p-0 text-sm text-ink-700">
+                  {expertBenefits.map((benefit) => (
+                    <CheckItem key={benefit}>{benefit}</CheckItem>
+                  ))}
+                </ul>
+                <p className="mt-6 text-xs text-ink-500">Choose Expert Edit on the preview page after your photo is processed.</p>
+                <a href="#studio" className="btn-outline-brand btn-lg mt-auto w-full">
+                  Start with my photo
                 </a>
               </div>
             </div>
           </div>
         </section>
 
-        {/* =========================================================================
-            7. FAQ SECTION (Clean accordion, no shadows)
-           ========================================================================= */}
-        <section className="bg-slate-50/70 py-14 sm:py-20 border-b border-slate-200/80" id="faq" aria-label="Frequently Asked Questions">
+        {/* ================================================================
+            8. FAQ
+           ================================================================ */}
+        <section className="section-padding" id="faq" aria-labelledby="faq-heading">
           <div className="container-narrow">
-            <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-              <span className="inline-block px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold mb-3">
-                Got Questions?
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-3">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-slate-700 text-sm sm:text-base">
-                Common questions about country rules, renewals, cropping, and printing.
-              </p>
-            </div>
+            <div className="grid gap-12 lg:grid-cols-12">
+              <div className="lg:col-span-4">
+                <div className="lg:sticky lg:top-28">
+                  <SectionHeader
+                    id="faq-heading"
+                    align="left"
+                    eyebrow="Got questions?"
+                    title="Frequently Asked Questions"
+                    description="Common questions about country rules, renewals, cropping, and printing."
+                  />
+                  <Link href="/contact-us" className="btn-outline-brand mt-8">
+                    Still stuck? Contact us
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </div>
+              </div>
 
-            <div className="max-w-3xl mx-auto space-y-3">
-              {faqs.map(({ question, answer }, index) => (
-                <div
-                  key={index}
-                  className="bg-white border border-slate-200 rounded-xl overflow-hidden"
-                >
-                  <details className="group [&_summary::-webkit-details-marker]:hidden" open={index === 0}>
-                    <summary className="flex items-center justify-between p-5 cursor-pointer select-none font-semibold text-slate-900 text-base sm:text-lg hover:text-[#365314] focus-ring transition-colors rounded-xl">
+              <div className="space-y-3 lg:col-span-8">
+                {faqs.map(({ question, answer }, index) => (
+                  <details
+                    key={index}
+                    className="group overflow-hidden rounded-2xl border border-ink-200 bg-white transition-colors open:border-brand-200 open:bg-brand-50/40 [&_summary::-webkit-details-marker]:hidden"
+                    open={index === 0}
+                  >
+                    <summary className="flex cursor-pointer select-none items-center justify-between gap-4 p-5 font-display text-base font-bold text-ink-950 focus-ring sm:text-lg">
                       <span>{question}</span>
-                      <span className="ml-4 shrink-0 text-slate-700 group-open:rotate-90 transition-transform" aria-hidden="true">
-                        <ChevronRight className="w-5 h-5" />
+                      <span
+                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink-100 text-ink-700 transition-all duration-200 group-open:rotate-45 group-open:bg-brand-600 group-open:text-white"
+                        aria-hidden="true"
+                      >
+                        <Plus className="h-4 w-4" />
                       </span>
                     </summary>
-                    <div className="px-5 pb-5 text-slate-700 text-sm sm:text-base leading-relaxed border-t border-slate-100 pt-3">
-                      {answer}
-                    </div>
+                    <div className="px-5 pb-5 text-sm leading-relaxed text-ink-700 sm:text-base">{answer}</div>
                   </details>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </section>

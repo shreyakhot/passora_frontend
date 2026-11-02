@@ -2,138 +2,131 @@
 
 ## 1. Brand Identity & Design Philosophy
 
-**Photo-Govt** (display name from `SITE_NAME` in `src/lib/site.ts`) is a passport, visa and ID photo maker for 50+ countries. Its design rests on three visual and UX pillars:
-1. **Trust & Clarity:** A clean, neutral, international visual language that gives users confidence when they prepare photos for official documents. It never implies a government affiliation: the site is independent, and `SITE_DISCLAIMER` says so.
-2. **Speed & Clarity:** Minimal cognitive load. Clear step-by-step guidance from choosing a country and uploading, through preview, to download and printing.
-3. **Accessibility & Usability:** High contrast, legible typography, generous tap targets and full keyboard and screen-reader navigation.
+**Photo-Govt** (display name from `SITE_NAME` in `src/lib/site.ts`) is a passport, visa and ID photo maker for 50+ countries. The public site uses a **bold, modern SaaS** look: confident display type, an indigo product colour on near-black "ink" and white, generous whitespace and app-like tool surfaces.
+
+1. **Trust & Clarity:** Clean, neutral and international. It never implies a government affiliation: the site is independent, and `SITE_DISCLAIMER` says so.
+2. **Product-first:** The photo studio and print generator look like real app surfaces (header bar, numbered steps, elevated card), not like forms dropped onto a marketing page.
+3. **Accessibility & Usability:** WCAG 2.1 AA contrast, ≥44px tap targets, full keyboard and screen-reader support.
 
 Brand assets: `public/logo.jpg` (`LOGO_PATH`) for the logo and default social image; `src/app/icon.jpg` and `src/app/apple-icon.jpg` for App Router icons.
 
 ---
 
-## 2. Color Palette & Semantic Tokens
+## 2. Colour
 
-All colour tokens are managed via the CSS-first DaisyUI theme `brand` in `src/app/globals.css` (applied with `data-theme="brand"`).
+All tokens live in `src/app/globals.css`.
 
-### Core Palette
+### DaisyUI theme `brand` (public site, `data-theme="brand"` on `<html>`)
 
-| Token | Hex Value | Purpose & Application |
+| Token | Hex | Use |
 | :--- | :--- | :--- |
-| `--color-primary` | `#65A30D` | Primary brand colour (`lime-600`), active state indicators, key links |
-| `.btn-primary` | `#4D7C0F` → `#3F650C` hover → `#365314` active | Primary CTA buttons (`lime-700` base for AA contrast with white text) |
-| `--color-primary-content` | `#FFFFFF` | Text/icons on primary backgrounds |
-| `--color-secondary` | `#0F172A` | Deep navy (`slate-900`) for high-contrast headers, footer background, bold typography |
-| `--color-secondary-content`| `#FFFFFF` | Text/icons on secondary/dark backgrounds |
-| `--color-accent` | `#0F766E` | Deep teal (`teal-700`) for badges, trust indicators, secondary highlights |
-| `--color-accent-content` | `#FFFFFF` | Text on accent backgrounds |
-| `--color-neutral` | `#0F172A` | Neutral dark accents |
-| `--color-neutral-content` | `#FFFFFF` | Text on neutral backgrounds |
+| `--color-primary` | `#4F46E5` | Indigo. Primary actions, selected states, links (6.3:1 on white) |
+| `--color-secondary` / `--color-neutral` | `#0B1020` | Ink. Headings, dark bands, footer |
+| `--color-accent` | `#7C3AED` | Violet. Sparing highlights |
+| `--color-base-100 / 200 / 300` | `#FFFFFF` / `#F5F6FB` / `#E3E5EF` | Page, alternate sections, borders |
+| `--color-base-content` | `#0B1020` | Body text |
+| `--color-info / success / warning / error` | `#2563EB` / `#047857` / `#B45309` / `#DC2626` | Feedback |
 
-`themeColor` in the root layout metadata is `#4D7C0F`.
+`themeColor` in the root layout is `#4F46E5`.
 
-### Surface & Base Colors
+### Tailwind scales (`@theme`)
 
-| Token | Hex Value | Application |
-| :--- | :--- | :--- |
-| `--color-base-100` | `#FFFFFF` | Main page background, modal surfaces, primary card backgrounds |
-| `--color-base-200` | `#F8FAFC` | Light slate surface for alternating sections (e.g. photo studio, How It Works) |
-| `--color-base-300` | `#E2E8F0` | Subtle borders, dividers, disabled states |
-| `--color-base-content` | `#0F172A` | Primary body text colour (maximum contrast on base-100) |
+* `brand-50 … brand-900`: the indigo scale (`brand-600` = primary, `brand-700` = hover, `brand-50/100` = tinted fills).
+* `ink-50 … ink-950`: the neutral scale (`ink-950` headings and dark bands, `ink-600` body copy, `ink-500` muted, `ink-200` borders, `ink-50/100` subtle fills).
+* Use `emerald-*` for success, `amber-*` for warnings and `red-*` for errors.
 
-### Feedback & Status Tokens
+Do not use raw hex, `slate-*` or `lime-*` in public components.
 
-| Token | Hex Value | Application |
-| :--- | :--- | :--- |
-| `--color-info` | `#0284C7` | Information alerts, helpful hints, tooltips |
-| `--color-success` | `#15803D` | Validated photo indicator, success alerts, checkmarks |
-| `--color-warning` | `#D97706` | Lighting warnings, dimension caution alerts |
-| `--color-error` | `#DC2626` | File format errors, processing errors |
+### DaisyUI theme `admin`
 
-### Radii
-
-`--radius-btn: 0.75rem`, `--radius-box: 1rem`, `--radius-field: 0.75rem`.
+The `/admin` panel keeps its original lime/navy palette (`#65A30D` primary, `#4D7C0F` buttons, `#0F172A` navy). `src/app/admin/layout.tsx` applies it with `data-theme="admin"`. Leave it alone unless you are redesigning the admin panel on purpose.
 
 ---
 
-## 3. Typography Scale & Hierarchy
+## 3. Typography
 
-We use **Geist Sans** for clean geometric clarity and **Geist Mono** for technical/dimension indicators.
+| Role | Font | Notes |
+| :--- | :--- | :--- |
+| Display / headings | **Plus Jakarta Sans** (`font-display`, `--font-jakarta`) | `h1`–`h4` get it automatically: weight 800, tracking −0.025em, balanced wrapping |
+| Body | **Inter** (`font-sans`, `--font-inter`) | 16px base, 1.6 line height |
+| Specs / dimensions | **Geist Mono** (`font-mono`) | Pixel sizes, countdowns |
 
-| Level | Desktop Size / Leading | Mobile Size / Leading | Weight | Tracking |
-| :--- | :--- | :--- | :--- | :--- |
-| **Hero H1** | `3.25rem` (52px) / `1.15` | `2.5rem` (40px) / `1.2` | Bold (`700`) | `-0.02em` |
-| **Section H2**| `2.5rem` (40px) / `1.2` | `2.0rem` (32px) / `1.25` | Bold (`700`) | `-0.01em` |
-| **Card H3** | `1.75rem` (28px) / `1.25` | `1.5rem` (24px) / `1.3` | Bold (`700`) | `0` |
-| **Subhead H4**| `1.125rem` (18px) / `1.4` | `1.125rem` (18px) / `1.4` | SemiBold (`600`) | `0` |
-| **Body (Lead)**| `1.125rem` (18px) / `1.6` | `1.0rem` (16px) / `1.5` | Regular (`400`) | `0` |
-| **Body (Base)**| `1.0rem` (16px) / `1.6` | `1.0rem` (16px) / `1.6` | Regular (`400`) | `0` |
-| **Caption** | `0.875rem` (14px) / `1.4` | `0.875rem` (14px) / `1.4` | Regular (`400`) | `0` |
-| **Mono Specs**| `0.8125rem` (13px) / `1.2` | `0.8125rem` (13px) / `1.2` | Medium (`500`) | `0` |
+Scale helpers:
 
----
+* `.display-1`: hero H1, `clamp(2.5rem, 6vw, 4.5rem)`, line height 1.04
+* `.display-2`: section H2, `clamp(1.875rem, 4vw, 3rem)`
+* `.lead`: intro paragraph, 17–19px, `ink-600`
+* `.marker`: highlights one word in a heading (indigo text with a soft underline bar)
 
-## 4. Spacing, Elevation & Layout Grid
-
-### Layout Dimensions
-* **Max Container Width:** `80rem` (1280px) via `.container-narrow`
-* **Horizontal Padding:** `--container-padding`: `1rem` mobile, `1.5rem` ≥640px, `2rem` ≥1024px
-* **Section Gap:** `--section-gap` via `.section-padding`: `3.5rem` mobile, `4.5rem` ≥640px, `5.5rem` ≥1024px
-* **Grid Baseline:** 8px rhythm for consistent spacing (`gap-2`, `gap-4`, `gap-6`, `gap-8`, `gap-12`)
-
-### Elevation & Shadows
-* **Flat Card Default:** `--shadow-card` via `.card-shadow`
-* **Hover State:** `--shadow-card-hover` (subtle lift with a 250ms `--transition-base` transition)
-* **Button States:** `.btn-primary` uses `#4D7C0F`, hover `#3F650C`, active `#365314`.
-* **Interactive Focus:** `:focus-visible` ring `outline: 2px solid #4D7C0F; outline-offset: 2px;` (`#84CC16` on dark/`bg-secondary` surfaces).
+Base heading styles are in `@layer base`, so Tailwind size utilities on a heading always win.
 
 ---
 
-## 5. UI Component Hierarchy & Standards
+## 4. Layout, Surfaces & Elevation
 
-### 1. Navigation Header (`Navbar.tsx`)
-* Sticky top navigation bar with a white surface and subtle border (`border-base-300`).
-* Shows the brand logo (`LOGO_PATH`) with rounded corners and the `SITE_NAME` wordmark.
-* Desktop links with subtle hover feedback (`btn btn-ghost btn-sm`).
-* Accessible mobile toggle button with clear ARIA attributes and a dropdown drawer.
+* **Container:** `.container-narrow`, 78rem max, padding 1rem / 1.5rem / 2rem
+* **Section rhythm:** `.section-padding`, 4rem / 5rem / 6.5rem
+* **Section header pattern:** `.eyebrow` pill → `h2.display-2` → `p.lead`, centred (left-aligned in two-column layouts)
+* **Cards:** `.surface` (white, 1px `ink-200`, 1.25rem radius); add `.surface-hover` for lift on hover. Tool surfaces use `rounded-3xl` + `shadow-lift`.
+* **Dark bands:** `bg-ink-950` with `.bg-dots-dark` and a blurred `brand-600/25` glow (trust section, footer).
+* **Backdrops:** `.bg-dots` (masked) and blurred `brand-200` / `violet-200` blobs in heroes. Do not put gradients on buttons or cards.
+* **Shadows:** `shadow-soft` (resting), `shadow-lift` (elevated / hover / popovers), `shadow-brand` (primary button glow)
+* **Icon tile:** `.icon-tile`, a 44px indigo-tinted square for Lucide icons
 
-### 2. Homepage Sections (`src/app/page.tsx`)
-Sections in order: `#hero`, `#studio`, `#how-it-works`, `#features`, `#trust`, `#photo-rules`, `#pricing`, `#faq`.
-* **Hero:** International headline (passport, visa and ID photos for many countries) with trust badges and a primary CTA to the studio.
-* **How It Works:** Linear steps: choose your country and upload → automatic background replacement, centring and cropping to that country's size → preview, pay, download and print.
-* **Features / Trust:** Card grids using Lucide icons (e.g. `Globe`, `Shield`, `Lock`, `Printer`, `Crop`, `Zap`).
-* **Photo Rules:** General guidance (background, expression, lighting, accessories). Pair it with `OfficialPhotoNotice` and avoid single-country claims.
-* **Pricing:** Standard and Expert Edit cards. Read prices from `getPlanPricing()`; never hardcode amounts or currency symbols.
-* **FAQ:** `FaqAccordion.tsx`. Answers must match the Schema.org `FAQPage` JSON-LD.
+---
 
-### 3. Photo Studio (`PhotoMakerStudio.tsx`)
-* Country picker (defaults to the page's country, or a guess from browser locales) showing the target pixel size.
-* Upload zone for JPEG, PNG and WebP (up to 20 MB). Large images are compressed client-side (`image-compress.ts`) before upload.
-* Staged processing progress while `/api/passport-photo` runs, then a redirect to `/preview/[id]`.
+## 5. Components
 
-### 4. Official Photo Notice (`OfficialPhotoNotice.tsx`)
-* Info callout (Lucide `Info`) that reminds users to confirm the current photo rules with the issuing authority for the selected country. It reinforces that the site is independent.
+### Buttons
 
-### 5. Print Template Generator (`PrintTemplateGenerator.tsx`)
-* Lays out photos on a 6×4″ (10×15 cm) sheet for home or kiosk printing.
+| Class | Use |
+| :--- | :--- |
+| `.btn-brand` | Primary CTA (indigo, white text, glow) |
+| `.btn-outline-brand` | Secondary on light surfaces |
+| `.btn-dark` | Strong secondary (ink) |
+| `.btn-light` | Primary on dark surfaces |
+| `.btn-lg` | Larger size modifier |
 
-### 6. Footer (`Footer.tsx`)
-* Dark navy background (`bg-secondary text-secondary-content`) as a visual anchor.
-* Brand overview (with the "not affiliated with any government" statement), link groups (Product, Popular Countries, More Countries, Company & Legal) and a copyright notice. No single-country flag or indicator.
+All buttons are ≥44px tall, rounded 0.875rem and bold.
+
+### Forms
+
+`.field` for inputs, selects and textareas: 0.875rem radius, `ink-200` border, indigo focus ring.
+
+### Navigation (`Navbar.tsx`)
+
+Sticky, translucent white with backdrop blur that turns solid on scroll. Pill-shaped nav links (`brand-50` active state), a "Tools" dropdown (Lucide icon tiles), a compact `.btn-brand` CTA and a full-width mobile drawer below `lg`.
+
+### Footer (`Footer.tsx`)
+
+`ink-950` with a dotted texture: an optional CTA band (`showCta`, default on), brand column with the independence statement and support email, link groups (Product, Resources, Company) and a copyright row.
+
+### Homepage (`src/app/page.tsx`)
+
+Sections in order: `#hero` (copy, stats and a product visual with crop guides, scan line and floating chips, then a country strip), `#studio` (copy column + `PhotoMakerStudio`), `#how-it-works`, `#features` (bento grid, first card dark), `#trust` (dark band), `#photo-rules`, `#pricing` (Standard on dark, Expert Edit on white, prices from `getPlanPricing()`), `#faq` (sticky heading + accordion; answers must match the FAQPage JSON-LD).
+
+### Photo Studio (`PhotoMakerStudio.tsx`)
+
+An app-style card: header bar, then step 1 (country picker with flag tile and mono pixel size) and step 2 (drop zone with an indigo icon tile). The processing modal shows a scanning frame, a progress bar and a step list.
+
+### FAQ (`FaqAccordion.tsx`) & Official Photo Notice (`OfficialPhotoNotice.tsx`)
+
+FAQ items are `<details>` cards with a rotating `+` badge. The notice is an `ink-50` callout reminding users to confirm the rules with the issuing authority.
 
 ---
 
 ## 6. Photo Size Specifications
 
-There is no single global photo size. Each country's output size is stored in pixels (`dimensions: "widthxheight"`) in `src/config/countries.ts`. The UI shows it as `width × height px` alongside the aspect ratio. Overlays, previews and copy must use the selected country's dimensions and must not hardcode one country's millimetre spec.
+There is no single global photo size. Each country's output size is stored in pixels (`dimensions: "widthxheight"`) in `src/config/countries.ts`. The UI shows it as `width × height px`. Overlays, previews and copy must use the selected country's dimensions and must not hardcode one country's millimetre spec.
 
 Always tell users to confirm the current rules with their issuing authority, and never imply that the site is affiliated with or approved by a government.
 
 ---
 
-## 7. Accessibility (a11y) & Motion Standards
+## 7. Accessibility & Motion
 
-* **WCAG 2.1 AA Compliance:** Minimum colour contrast ratio of 4.5:1 for normal text and 3:1 for large headings.
-* **Touch Targets:** Minimum tap target size of `44px` (`2.75rem`) for all buttons and interactive controls.
-* **Keyboard Navigation:** Clear `:focus-visible` ring (`#4D7C0F`; `#84CC16` on dark surfaces) across all interactive controls.
-* **Reduced Motion:** Animations are suppressed automatically for users with `prefers-reduced-motion: reduce`.
-* **Language:** The document language is `lang="en"`. Copy uses neutral international English and must not assume the user's country.
+* **Contrast:** WCAG 2.1 AA (4.5:1 text, 3:1 large text). `brand-600` on white is 6.3:1.
+* **Touch targets:** ≥44px for every interactive control.
+* **Focus:** `:focus-visible` uses a 2px primary outline (`brand-300` on dark surfaces). `.focus-ring` applies it explicitly.
+* **Motion:** `animate-fade-in`, `animate-float` and `animate-scan` are all disabled under `prefers-reduced-motion: reduce`.
+* **Language:** `lang="en"`, neutral international English. Copy must not assume the user's country.

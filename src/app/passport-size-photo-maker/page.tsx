@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check, ChevronRight, Printer } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
@@ -72,72 +72,109 @@ export default function PassportSizePhotoMakerPage() {
 
       <Navbar ctaText="Home" ctaHref="/" />
 
-      <main
-        className="flex-1 bg-slate-50 min-h-screen py-6 sm:py-12 text-slate-900"
-        id="main-content"
-      >
-        <div className="container-narrow max-w-3xl mx-auto px-4 sm:px-6">
-          {/* Breadcrumb & Header */}
-          <div className="text-center mb-5 sm:mb-7">
-            <nav
-              className="text-xs text-slate-600 mb-2 flex justify-center"
-              aria-label="Breadcrumb"
-            >
-              <ol className="flex items-center gap-1.5 list-none p-0 m-0">
+      <main className="flex-1 bg-white text-ink-950" id="main-content">
+        <section
+          className="relative overflow-hidden border-b border-ink-100 bg-ink-50"
+          aria-labelledby="maker-heading"
+        >
+          <div className="pointer-events-none absolute inset-0 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent_70%)]" aria-hidden="true" />
+          <div className="pointer-events-none absolute -right-40 -top-40 h-[480px] w-[480px] rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
+          <div className="pointer-events-none absolute -left-32 top-1/2 h-[360px] w-[360px] rounded-full bg-violet-200/40 blur-3xl" aria-hidden="true" />
+
+          <div className="container-narrow relative pb-14 pt-8 sm:pb-20 sm:pt-12 lg:pb-24">
+            {/* Breadcrumb */}
+            <nav className="text-xs text-ink-500 sm:text-sm" aria-label="Breadcrumb">
+              <ol className="m-0 flex list-none items-center gap-1.5 p-0">
                 <li>
                   <Link
                     href="/"
-                    className="text-slate-600 hover:text-lime-800 transition-colors font-medium"
+                    className="font-medium text-ink-500 transition-colors hover:text-brand-700"
                   >
                     Home
                   </Link>
                 </li>
-                <li aria-hidden="true">/</li>
-                <li
-                  className="text-slate-900 font-semibold"
-                  aria-current="page"
-                >
+                <li aria-hidden="true">
+                  <ChevronRight className="h-3.5 w-3.5 text-ink-300" />
+                </li>
+                <li className="font-semibold text-ink-950" aria-current="page">
                   Passport Size Photo Maker
                 </li>
               </ol>
             </nav>
 
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              Passport Photo Maker
-            </h1>
-            <p className="text-slate-700 text-xs sm:text-sm mt-1.5 max-w-md mx-auto leading-relaxed">
-              Select your country, upload your photo, and let AI automatically size and verify biometrics in 10 seconds.
-            </p>
-          </div>
-
-          {/* Unified Photo Maker Studio Component */}
-          <PhotoMakerStudio defaultDocumentType="passport" />
-          <OfficialPhotoNotice className="mt-5" />
-
-          {/* Print Template Generator Feature Card */}
-          <div className="mt-8 bg-gradient-to-br from-lime-900 via-slate-900 to-slate-900 border border-lime-600/40 rounded-2xl p-5 sm:p-6 text-white shadow-md relative overflow-hidden">
-            <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-lime-500/20 text-lime-300 font-mono text-[11px] font-bold uppercase tracking-wider mb-2 border border-lime-500/30">
-                  Free 4×6″ &amp; A4 Print Sheets
-                </span>
-                <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
-                  Need to print on 4×6″ (10×15 cm) paper?
-                </h3>
-                <p className="text-slate-300 text-xs sm:text-sm mt-1 max-w-lg leading-relaxed">
-                  Tile multiple passport photos onto standard 4×6″ or A4 sheets with cutting guides. Print them at a local pharmacy, photo shop, or on your home printer.
+            <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:gap-14">
+              {/* Copy column */}
+              <div className="lg:col-span-5 lg:pt-4">
+                <span className="eyebrow">Photo studio</span>
+                <h1 id="maker-heading" className="display-2 mt-4 text-ink-950">
+                  Passport Photo <span className="marker">Maker</span>
+                </h1>
+                <p className="lead mt-4 max-w-xl">
+                  Select your country, upload your photo, and let AI automatically size and verify biometrics in 10 seconds.
                 </p>
+                <ul className="m-0 mt-8 list-none space-y-4 p-0 text-sm text-ink-700 sm:text-base">
+                  {[
+                    "Preview the finished photo before you pay",
+                    "Digital file plus a 6×4″ print sheet",
+                    "Your upload is used only to make your photo",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span
+                        className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-700"
+                        aria-hidden="true"
+                      >
+                        <Check className="h-3 w-3" strokeWidth={3} />
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <Link
-                href="/passport-photo-print-template-generator"
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-lime-500 hover:bg-lime-400 text-slate-950 font-bold text-xs sm:text-sm transition-colors shrink-0 shadow-sm"
-              >
-                <span>Open Print Generator</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+
+              {/* Unified Photo Maker Studio Component */}
+              <div className="lg:col-span-7">
+                <PhotoMakerStudio defaultDocumentType="passport" />
+                <OfficialPhotoNotice className="mt-5 bg-white" />
+              </div>
             </div>
           </div>
-        </div>
+        </section>
+
+        {/* Print Template Generator Feature Card */}
+        <section className="section-padding" aria-labelledby="print-heading">
+          <div className="container-narrow">
+            <div className="relative overflow-hidden rounded-[1.5rem] bg-ink-950 p-7 text-white shadow-lift sm:p-10">
+              <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
+              <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand-600/30 blur-3xl" aria-hidden="true" />
+              <div className="relative flex flex-col justify-between gap-6 md:flex-row md:items-center">
+                <div className="flex items-start gap-5">
+                  <span
+                    className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand-500/15 text-brand-300 ring-1 ring-brand-400/30 sm:flex"
+                    aria-hidden="true"
+                  >
+                    <Printer className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <span className="eyebrow eyebrow-dark">Free 4×6″ &amp; A4 Print Sheets</span>
+                    <h2 id="print-heading" className="mt-3 text-xl font-extrabold text-white sm:text-2xl">
+                      Need to print on 4×6″ (10×15 cm) paper?
+                    </h2>
+                    <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink-300 sm:text-base">
+                      Tile multiple passport photos onto standard 4×6″ or A4 sheets with cutting guides. Print them at a local pharmacy, photo shop, or on your home printer.
+                    </p>
+                  </div>
+                </div>
+                <Link
+                  href="/passport-photo-print-template-generator"
+                  className="btn-light btn-lg shrink-0"
+                >
+                  <span>Open Print Generator</span>
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />

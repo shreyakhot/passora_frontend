@@ -131,24 +131,15 @@ function getCountryFlag(countryCode?: string, countryName?: string): string {
 }
 
 const METRIC_FIXES = [
-  { key: "gov12", label: "ICAO Standard photo" },
-  { key: "gov", label: "Government compliant photo" },
-  { key: "gov5", label: "AI biometric validation" },
-  { key: "gov2", label: "Acceptance guarantee" },
-  { key: "gov0", label: "Refund if rejected" },
+  { key: "gov12", label: "Sized to ICAO photo guidance" },
+  { key: "gov", label: "Checked against published photo rules" },
+  { key: "gov5", label: "Automated biometric checks" },
+  { key: "gov2", label: "Free re-processing if rejected for sizing" },
+  { key: "gov0", label: "Refund policy applies" },
   { key: "gov3", label: "Instant download + print sheet" },
 ];
 
 const BEFORE_AFTER_PAIRS = [
-  {
-    title: "Wall Shadow Removal & Background Calibration",
-    beforeImg:
-      "https://res.cloudinary.com/dipzpwbbk/image/upload/v1786628280/before_uk_f24dre.jpg",
-    afterImg:
-      "https://res.cloudinary.com/dipzpwbbk/image/upload/v1786627664/eu_pixpassport.com_ppfhlr.jpg",
-    beforeTag: "Original: Wall Shadow & Yellow Tint",
-    afterTag: "Expert Fixed: Plain White Background",
-  },
   {
     title: "Biometric Eye Level & Face Centering",
     beforeImg:
@@ -195,13 +186,13 @@ const BEFORE_AFTER_PAIRS = [
     afterTag: "Expert Fixed: Pure Plain White Surface",
   },
   {
-    title: "Official Passport Aspect Ratio & Crop",
+    title: "Passport Aspect Ratio & Crop",
     beforeImg:
       "https://res.cloudinary.com/dipzpwbbk/image/upload/v1786629405/A_passport_e4y2u3.jpg",
     afterImg:
       "https://res.cloudinary.com/dipzpwbbk/image/upload/v1786629172/pix_passport_y4bjki.jpg",
     beforeTag: "Original: Incorrect Crop Ratio",
-    afterTag: "Expert Fixed: Exact Embassy Dimensions",
+    afterTag: "Expert Fixed: Exact Required Dimensions",
   },
   {
     title: "Color Balance & Tone Normalization",
@@ -222,7 +213,7 @@ const BEFORE_AFTER_PAIRS = [
     afterTag: "Expert Fixed: Balanced Posture",
   },
   {
-    title: "Full ICAO Standard Compliance Verification",
+    title: "Full Check Against ICAO Photo Guidance",
     beforeImg:
       "https://res.cloudinary.com/dipzpwbbk/image/upload/v1786630292/1000383509_ffkmf2.jpg",
     afterImg:
@@ -428,7 +419,7 @@ export default function PassportPhotoPreviewPage() {
           planType: activePlan,
         },
         theme: {
-          color: activePlan === "expert_edit" ? "#65A30D" : "#0F172A",
+          color: "#4F46E5",
         },
         modal: {
           ondismiss: () => {

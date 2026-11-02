@@ -530,85 +530,106 @@ export default function PrintTemplateGenerator({
           className="hidden"
         />
 
-        {/* Big Interactive Upload Zone */}
-        <div
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-          onClick={() => fileInputRef.current?.click()}
-          className={`relative border-2 border-dashed rounded-3xl p-8 sm:p-12 text-center cursor-pointer transition-all bg-white shadow-sm hover:shadow-md ${
-            isDragging
-              ? "border-[#4D7C0F] bg-lime-50/60 ring-4 ring-lime-100"
-              : "border-slate-300 hover:border-lime-500 hover:bg-slate-50/70"
-          }`}
-        >
-          {/* Top subtle badge */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-lime-100 text-lime-900 border border-lime-300 text-xs font-bold mb-5">
-            <Sparkles className="w-3.5 h-3.5 text-[#4D7C0F]" />
-            <span>Step 1: Upload Your Passport Photo</span>
+        <div className="overflow-hidden rounded-3xl border border-ink-200 bg-white shadow-lift">
+          {/* Tool header */}
+          <div className="flex items-center justify-between gap-3 border-b border-ink-100 bg-ink-50/70 px-5 py-3 sm:px-6">
+            <div className="flex items-center gap-1.5" aria-hidden="true">
+              <span className="h-2.5 w-2.5 rounded-full bg-ink-200" />
+              <span className="h-2.5 w-2.5 rounded-full bg-ink-200" />
+              <span className="h-2.5 w-2.5 rounded-full bg-ink-200" />
+            </div>
+            <p className="flex items-center gap-1.5 text-xs font-semibold text-ink-500">
+              <Printer className="h-3.5 w-3.5 text-brand-600" aria-hidden="true" />
+              Print sheet studio · 300 DPI
+            </p>
           </div>
 
-          {/* Central Upload Graphic */}
-          <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-lime-100 to-lime-50 text-[#4D7C0F] border border-lime-200/80 flex items-center justify-center mx-auto mb-5 shadow-xs transition-transform group-hover:scale-105">
-            <Upload className="w-9 h-9 stroke-[2.2]" />
-          </div>
+          <div className="p-5 sm:p-7">
+            {/* Step label */}
+            <div className="mb-2.5 flex items-center gap-2 text-sm font-bold text-ink-950">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-ink-950 text-[11px] font-bold text-white" aria-hidden="true">
+                1
+              </span>
+              <span className="sr-only">Step 1: </span>
+              <span>Upload Your Passport Photo</span>
+              <Sparkles className="h-3.5 w-3.5 text-brand-600" aria-hidden="true" />
+            </div>
 
-          <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight mb-2">
-            Click or Drag &amp; Drop to Upload
-          </h3>
-          <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed mb-6">
-            Upload your cropped passport photo. We will instantly tile it onto a 300 DPI printable 4×6″ or A4 sheet with cut lines.
-          </p>
-
-          {/* Primary Upload CTA Button */}
-          <div className="flex items-center justify-center max-w-xs mx-auto">
-            <button
-              type="button"
-              className="w-full px-7 py-3.5 rounded-xl bg-lime-600 hover:bg-lime-700 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-sm transition-all hover:scale-[1.02] cursor-pointer"
+            {/* Big Interactive Upload Zone */}
+            <div
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              onClick={() => fileInputRef.current?.click()}
+              className={`group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-dashed p-6 text-center transition-all sm:p-10 ${
+                isDragging
+                  ? "border-brand-500 bg-brand-50 ring-4 ring-brand-500/15"
+                  : "border-ink-200 bg-ink-50/60 hover:border-brand-400 hover:bg-brand-50/50"
+              }`}
             >
-              <Upload className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span>Choose Photo from Device</span>
-            </button>
-          </div>
+              {/* Central Upload Graphic */}
+              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600 text-white shadow-brand transition-transform group-hover:-translate-y-0.5 sm:h-16 sm:w-16">
+                <Upload className="h-7 w-7" />
+              </div>
 
-          <div className="text-[11px] text-slate-400 mt-4">
-            Supports JPG, PNG, WebP · 100% In-Browser &amp; Private · No Image Sent to Any Server
+              <h3 className="mb-2 text-xl font-extrabold text-ink-950 sm:text-2xl">
+                Click or Drag &amp; Drop to Upload
+              </h3>
+              <p className="mx-auto mb-6 max-w-md text-sm leading-relaxed text-ink-600">
+                Upload your cropped passport photo. We will instantly tile it onto a 300 DPI printable 4×6″ or A4 sheet with cut lines.
+              </p>
+
+              {/* Primary Upload CTA Button */}
+              <div className="mx-auto flex max-w-xs items-center justify-center">
+                <button
+                  type="button"
+                  className="btn-brand btn-lg w-full"
+                >
+                  <Upload className="h-5 w-5" />
+                  <span>Choose Photo from Device</span>
+                </button>
+              </div>
+
+              <div className="mt-4 text-xs font-medium text-ink-500">
+                Supports JPG, PNG, WebP · 100% In-Browser &amp; Private · No Image Sent to Any Server
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Feature Highlights Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mt-6">
-          <div className="bg-white border border-slate-200/80 rounded-2xl p-4 flex items-start gap-3 shadow-2xs">
-            <div className="w-8 h-8 rounded-lg bg-lime-100 text-[#4D7C0F] flex items-center justify-center shrink-0 mt-0.5">
-              <Printer className="w-4 h-4" />
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="surface flex items-start gap-3 p-4 sm:p-5">
+            <div className="icon-tile h-10 w-10 rounded-xl">
+              <Printer className="h-[18px] w-[18px]" />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-slate-900">True 300 DPI Sizing</h4>
-              <p className="text-[11px] text-slate-600 mt-0.5 leading-snug">
+              <h4 className="text-sm font-extrabold text-ink-950">True 300 DPI Sizing</h4>
+              <p className="mt-1 text-xs leading-snug text-ink-600">
                 Millimeter-perfect 35×45 mm, US 2×2″ &amp; other common photo sizes.
               </p>
             </div>
           </div>
 
-          <div className="bg-white border border-slate-200/80 rounded-2xl p-4 flex items-start gap-3 shadow-2xs">
-            <div className="w-8 h-8 rounded-lg bg-lime-100 text-[#4D7C0F] flex items-center justify-center shrink-0 mt-0.5">
-              <Scissors className="w-4 h-4" />
+          <div className="surface flex items-start gap-3 p-4 sm:p-5">
+            <div className="icon-tile h-10 w-10 rounded-xl">
+              <Scissors className="h-[18px] w-[18px]" />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-slate-900">Corner Crop Marks</h4>
-              <p className="text-[11px] text-slate-600 mt-0.5 leading-snug">
+              <h4 className="text-sm font-extrabold text-ink-950">Corner Crop Marks</h4>
+              <p className="mt-1 text-xs leading-snug text-ink-600">
                 Subtle corner guides make cutting with scissors clean and easy.
               </p>
             </div>
           </div>
 
-          <div className="bg-white border border-slate-200/80 rounded-2xl p-4 flex items-start gap-3 shadow-2xs">
-            <div className="w-8 h-8 rounded-lg bg-lime-100 text-[#4D7C0F] flex items-center justify-center shrink-0 mt-0.5">
-              <Sparkles className="w-4 h-4" />
+          <div className="surface flex items-start gap-3 p-4 sm:p-5">
+            <div className="icon-tile h-10 w-10 rounded-xl">
+              <Sparkles className="h-[18px] w-[18px]" />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-slate-900">Print Cheaply Anywhere</h4>
-              <p className="text-[11px] text-slate-600 mt-0.5 leading-snug">
+              <h4 className="text-sm font-extrabold text-ink-950">Print Cheaply Anywhere</h4>
+              <p className="mt-1 text-xs leading-snug text-ink-600">
                 Order a standard 4×6″ photo print instead of a pricier passport photo service.
               </p>
             </div>
@@ -617,6 +638,12 @@ export default function PrintTemplateGenerator({
       </div>
     );
   }
+
+  // Shared option-card styles (selected = brand-50 + brand-600 ring)
+  const optionSelected = "border-brand-600 bg-brand-50 ring-1 ring-brand-600";
+  const optionIdle = "border-ink-200 bg-white hover:border-brand-300";
+  const tabSelected = "bg-brand-600 text-white shadow-brand";
+  const tabIdle = "text-ink-600 hover:bg-white hover:text-ink-950";
 
   // =========================================================================
   // VIEW 2: COMPACT, LOW-SCROLL STUDIO WORKSPACE (After upload)
@@ -632,464 +659,464 @@ export default function PrintTemplateGenerator({
         className="hidden"
       />
 
-      {/* Main Studio Grid (Side-by-Side on desktop for LOW SCROLL) */}
-      <div className="grid lg:grid-cols-12 gap-5 sm:gap-6 items-start">
-        {/* =========================================================================
-            STAGE 1: LIVE CANVAS PREVIEW (Sticky, compact, responsive)
-           ========================================================================= */}
-        <div className="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-2xl p-3 sm:p-5 shadow-md flex flex-col justify-between relative overflow-hidden">
-          {/* Canvas Top Status Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-slate-300 text-xs mb-3 pb-2.5 border-b border-slate-800">
-            {/* Sheet & DPI info */}
-            <div className="flex items-center justify-between sm:justify-start gap-2 font-mono text-[11px] w-full sm:w-auto">
-              <div className="flex items-center gap-1.5 min-w-0">
-                <span className="inline-block w-2 h-2 rounded-full bg-lime-400 animate-pulse shrink-0" />
-                <span className="text-slate-200 font-semibold whitespace-nowrap">300 DPI Live</span>
-                <span className="text-slate-600">|</span>
-                <span className="text-slate-400 truncate">
-                  {currentPaper.id === "4x6" ? "4×6″" : currentPaper.name.split("(")[0]}
-                </span>
-              </div>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-800 text-lime-400 border border-slate-700 sm:hidden">
-                {activePhotoCount} Photos
-              </span>
-            </div>
-
-            {/* Quick Canvas & Photo Action Controls */}
-            <div className="flex items-center justify-between sm:justify-end gap-1.5 w-full sm:w-auto">
-              <button
-                type="button"
-                onClick={() => setOrientation(orientation === "landscape" ? "portrait" : "landscape")}
-                className="flex-1 sm:flex-initial px-2.5 py-1.5 sm:py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-medium flex items-center justify-center gap-1 transition-colors cursor-pointer border border-slate-700"
-                title="Rotate Sheet Orientation"
-              >
-                <RefreshCw className="w-3 h-3" />
-                <span className="capitalize">{orientation}</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                className="flex-1 sm:flex-initial px-2.5 py-1.5 sm:py-1 rounded-md bg-lime-500/10 hover:bg-lime-500/20 text-lime-400 text-[11px] font-bold flex items-center justify-center gap-1 transition-colors cursor-pointer border border-lime-500/30"
-                title="Upload another photo"
-              >
-                <Upload className="w-3 h-3" />
-                <span>Change Photo</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={handleReset}
-                className="px-2.5 py-1.5 sm:py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 text-[11px] transition-colors cursor-pointer border border-slate-700 flex items-center justify-center"
-                title="Reset back to upload screen"
-              >
-                <RotateCcw className="w-3 h-3" />
-              </button>
-            </div>
+      <div className="overflow-hidden rounded-3xl border border-ink-200 bg-white shadow-lift">
+        {/* Tool header */}
+        <div className="flex items-center justify-between gap-3 border-b border-ink-100 bg-ink-50/70 px-5 py-3 sm:px-6">
+          <div className="flex items-center gap-1.5" aria-hidden="true">
+            <span className="h-2.5 w-2.5 rounded-full bg-ink-200" />
+            <span className="h-2.5 w-2.5 rounded-full bg-ink-200" />
+            <span className="h-2.5 w-2.5 rounded-full bg-ink-200" />
           </div>
-
-          {/* Interactive Live Canvas Area */}
-          <div className="w-full flex items-center justify-center p-2 sm:p-4 min-h-[220px] max-h-[380px] sm:min-h-[320px] sm:max-h-[520px] overflow-hidden bg-slate-950/60 rounded-xl border border-slate-800/80">
-            <div className="relative shadow-2xl transition-all max-w-full max-h-[460px] flex items-center justify-center">
-              <canvas
-                ref={canvasRef}
-                className="max-w-full max-h-[360px] sm:max-h-[440px] w-auto h-auto rounded-sm object-contain bg-white shadow-xl ring-1 ring-white/20"
-                style={{ imageRendering: "crisp-edges" }}
-              />
-            </div>
-          </div>
-
-          {/* Canvas Footer Legend */}
-          <div className="flex items-center justify-between text-[10px] sm:text-[11px] text-slate-400 mt-2.5 sm:mt-3 pt-2 sm:pt-2.5 border-t border-slate-800">
-            <span className="truncate">
-              Fits <strong>{activePhotoCount}</strong> {photoWidthMm}×{photoHeightMm}mm photos
-            </span>
-            <span className="text-slate-500 font-mono shrink-0 ml-2">
-              Margin: {marginMm}mm · Gap: {gapMm}mm
-            </span>
-          </div>
+          <p className="flex items-center gap-1.5 text-xs font-semibold text-ink-500">
+            <Printer className="h-3.5 w-3.5 text-brand-600" aria-hidden="true" />
+            Print sheet studio · 300 DPI
+          </p>
         </div>
 
-        {/* =========================================================================
-            STAGE 2: COMPACT TABBED CONTROL PANEL (Zero-scroll editing)
-           ========================================================================= */}
-        <div className="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-2xs">
-          {/* Segmented Tab Navigation */}
-          <div className="flex rounded-xl p-1 bg-slate-100 border border-slate-200 mb-4">
-            <button
-              type="button"
-              onClick={() => setActiveTab("preset")}
-              className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                activeTab === "preset"
-                  ? "bg-white text-slate-900 shadow-2xs border border-slate-200/80"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <FileText className="w-3.5 h-3.5 text-lime-700" />
-              <span>1. Paper</span>
-            </button>
+        {/* Main Studio Grid (Side-by-Side on desktop for LOW SCROLL) */}
+        <div className="grid items-stretch lg:grid-cols-12">
+          {/* =========================================================================
+              STAGE 1: LIVE CANVAS PREVIEW (Sticky, compact, responsive)
+             ========================================================================= */}
+          <div className="relative flex flex-col justify-between overflow-hidden bg-ink-950 p-3 sm:p-5 lg:col-span-7">
+            <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
 
-            <button
-              type="button"
-              onClick={() => setActiveTab("grid")}
-              className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                activeTab === "grid"
-                  ? "bg-white text-slate-900 shadow-2xs border border-slate-200/80"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <Grid className="w-3.5 h-3.5 text-lime-700" />
-              <span>2. Layout</span>
-            </button>
+            {/* Canvas Top Status Bar */}
+            <div className="relative mb-3 flex flex-col justify-between gap-2.5 border-b border-white/10 pb-3 text-xs text-ink-300 sm:flex-row sm:items-center">
+              {/* Sheet & DPI info */}
+              <div className="flex w-full items-center justify-between gap-2 font-mono text-[11px] sm:w-auto sm:justify-start">
+                <div className="flex min-w-0 items-center gap-1.5">
+                  <span className="inline-block h-2 w-2 shrink-0 animate-pulse rounded-full bg-emerald-400" />
+                  <span className="whitespace-nowrap font-semibold text-white">300 DPI Live</span>
+                  <span className="text-ink-600">|</span>
+                  <span className="truncate text-ink-300">
+                    {currentPaper.id === "4x6" ? "4×6″" : currentPaper.name.split("(")[0]}
+                  </span>
+                </div>
+                <span className="rounded-full border border-white/10 bg-white/10 px-2 py-0.5 text-[10px] font-bold text-brand-200 sm:hidden">
+                  {activePhotoCount} Photos
+                </span>
+              </div>
 
-            <button
-              type="button"
-              onClick={() => setActiveTab("guides")}
-              className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                activeTab === "guides"
-                  ? "bg-white text-slate-900 shadow-2xs border border-slate-200/80"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <Scissors className="w-3.5 h-3.5 text-lime-700" />
-              <span>3. Guides</span>
-            </button>
+              {/* Quick Canvas & Photo Action Controls */}
+              <div className="flex w-full items-center justify-between gap-1.5 sm:w-auto sm:justify-end">
+                <button
+                  type="button"
+                  onClick={() => setOrientation(orientation === "landscape" ? "portrait" : "landscape")}
+                  className="flex min-h-11 flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 text-xs font-semibold text-ink-100 transition-colors hover:bg-white/10 sm:min-h-9 sm:flex-initial"
+                  title="Rotate Sheet Orientation"
+                >
+                  <RefreshCw className="h-3.5 w-3.5" />
+                  <span className="capitalize">{orientation}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="flex min-h-11 flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-brand-400/40 bg-brand-500/15 px-3 text-xs font-bold text-brand-200 transition-colors hover:bg-brand-500/25 sm:min-h-9 sm:flex-initial"
+                  title="Upload another photo"
+                >
+                  <Upload className="h-3.5 w-3.5" />
+                  <span>Change Photo</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  className="flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 px-3 text-ink-300 transition-colors hover:bg-white/10 hover:text-white sm:min-h-9 sm:min-w-9"
+                  title="Reset back to upload screen"
+                  aria-label="Reset back to upload screen"
+                >
+                  <RotateCcw className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Interactive Live Canvas Area */}
+            <div className="relative flex max-h-[380px] min-h-[220px] w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-ink-900/70 p-2 sm:max-h-[520px] sm:min-h-[320px] sm:p-4">
+              <div className="relative flex max-h-[460px] max-w-full items-center justify-center shadow-2xl transition-all">
+                <canvas
+                  ref={canvasRef}
+                  className="h-auto max-h-[360px] w-auto max-w-full rounded-sm bg-white object-contain shadow-xl ring-1 ring-white/20 sm:max-h-[440px]"
+                  style={{ imageRendering: "crisp-edges" }}
+                />
+              </div>
+            </div>
+
+            {/* Canvas Footer Legend */}
+            <div className="relative mt-3 flex items-center justify-between border-t border-white/10 pt-2.5 text-[11px] text-ink-300 sm:text-xs">
+              <span className="truncate">
+                Fits <strong className="text-white">{activePhotoCount}</strong> {photoWidthMm}×{photoHeightMm}mm photos
+              </span>
+              <span className="ml-2 shrink-0 font-mono text-ink-400">
+                Margin: {marginMm}mm · Gap: {gapMm}mm
+              </span>
+            </div>
           </div>
 
-          {/* TAB 1: PAPER & STANDARD */}
-          {activeTab === "preset" && (
-            <div className="space-y-4">
-              {/* Paper Format Selection */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-                  Paper Format (Sheet Size)
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  {PAPER_SIZES.map((paper) => (
-                    <button
-                      key={paper.id}
-                      type="button"
-                      onClick={() => setPaperSizeId(paper.id)}
-                      className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
-                        paperSizeId === paper.id
-                          ? "border-[#4D7C0F] bg-lime-50/60 ring-1 ring-[#4D7C0F]"
-                          : "border-slate-200 hover:border-slate-300 bg-white"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-bold text-xs text-slate-900">
-                          {paper.id === "4x6" ? "4 × 6″ (Kiosk)" : paper.name.split("(")[0]}
-                        </span>
-                        {paper.popular && (
-                          <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-lime-200 text-[#365314]">
-                            Popular
-                          </span>
-                        )}
-                      </div>
-                      <span className="text-[10px] text-slate-500 font-mono block mt-0.5">
-                        {paper.widthMm} × {paper.heightMm} mm
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </div>
+          {/* =========================================================================
+              STAGE 2: COMPACT TABBED CONTROL PANEL (Zero-scroll editing)
+             ========================================================================= */}
+          <div className="border-t border-ink-100 p-4 sm:p-6 lg:col-span-5 lg:border-l lg:border-t-0">
+            {/* Segmented Tab Navigation */}
+            <div className="mb-5 flex gap-1 rounded-2xl border border-ink-200 bg-ink-50 p-1">
+              <button
+                type="button"
+                onClick={() => setActiveTab("preset")}
+                className={`flex min-h-11 flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-xl px-2 text-xs font-bold transition-all ${
+                  activeTab === "preset" ? tabSelected : tabIdle
+                }`}
+              >
+                <FileText className="h-3.5 w-3.5" />
+                <span>1. Paper</span>
+              </button>
 
-              {/* Photo Standard */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-                  Passport Standard
-                </label>
-                <div className="space-y-1.5">
-                  {PHOTO_STANDARDS.map((std) => (
-                    <button
-                      key={std.id}
-                      type="button"
-                      onClick={() => setPhotoStandardId(std.id)}
-                      className={`w-full p-2 rounded-xl border flex items-center justify-between transition-all cursor-pointer ${
-                        photoStandardId === std.id
-                          ? "border-[#4D7C0F] bg-lime-50/60 ring-1 ring-[#4D7C0F]"
-                          : "border-slate-200 hover:border-slate-300 bg-white"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2 min-w-0">
-                        <span className="text-base shrink-0">{std.flag}</span>
-                        <div className="text-left min-w-0">
-                          <span className="font-bold text-xs text-slate-900 block truncate">
-                            {std.name}
-                          </span>
-                          <span className="text-[10px] text-slate-500 block truncate">
-                            {std.country}
-                          </span>
-                        </div>
-                      </div>
-                      <span className="font-mono text-[11px] font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded">
-                        {std.spec}
-                      </span>
-                    </button>
-                  ))}
-
-                  {/* Custom Option */}
-                  <button
-                    type="button"
-                    onClick={() => setPhotoStandardId("custom")}
-                    className={`w-full p-2 rounded-xl border flex items-center justify-between transition-all cursor-pointer ${
-                      photoStandardId === "custom"
-                        ? "border-[#4D7C0F] bg-lime-50/60 ring-1 ring-[#4D7C0F]"
-                        : "border-slate-200 hover:border-slate-300 bg-white"
-                    }`}
-                  >
-                    <span className="font-bold text-xs text-slate-800">Custom Dimensions (mm)</span>
-                    <span className="text-[11px] font-mono text-slate-500">
-                      {customPhotoWidth} × {customPhotoHeight} mm
-                    </span>
-                  </button>
-                </div>
-
-                {/* Custom Width / Height Inputs if active */}
-                {photoStandardId === "custom" && (
-                  <div className="grid grid-cols-2 gap-2 mt-2 p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
-                    <div>
-                      <span className="text-[10px] font-bold text-slate-600 block mb-1">Width (mm)</span>
-                      <input
-                        type="number"
-                        min="20"
-                        max="100"
-                        value={customPhotoWidth}
-                        onChange={(e) => setCustomPhotoWidth(Number(e.target.value))}
-                        className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1 text-xs font-mono"
-                      />
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-bold text-slate-600 block mb-1">Height (mm)</span>
-                      <input
-                        type="number"
-                        min="20"
-                        max="100"
-                        value={customPhotoHeight}
-                        onChange={(e) => setCustomPhotoHeight(Number(e.target.value))}
-                        className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1 text-xs font-mono"
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Next Tab Button */}
               <button
                 type="button"
                 onClick={() => setActiveTab("grid")}
-                className="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                className={`flex min-h-11 flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-xl px-2 text-xs font-bold transition-all ${
+                  activeTab === "grid" ? tabSelected : tabIdle
+                }`}
               >
-                <span>Next: Adjust Layout &amp; Copies</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <Grid className="h-3.5 w-3.5" />
+                <span>2. Layout</span>
               </button>
-            </div>
-          )}
 
-          {/* TAB 2: GRID & SPACING */}
-          {activeTab === "grid" && (
-            <div className="space-y-4">
-              {/* Photo Count Override */}
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <label className="text-xs font-bold uppercase tracking-wider text-slate-700">
-                    Number of Photos
-                  </label>
-                  <span className="text-xs font-bold text-slate-900 font-mono">
-                    {activePhotoCount} / {maxCapacity} Max
-                  </span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  {[2, 4, 6, maxCapacity].filter((v, i, a) => a.indexOf(v) === i && v <= maxCapacity).map((count) => (
-                    <button
-                      key={count}
-                      type="button"
-                      onClick={() => setPhotoCountOverride(count === maxCapacity ? null : count)}
-                      className={`flex-1 py-1.5 rounded-lg border text-xs font-bold transition-all cursor-pointer ${
-                        activePhotoCount === count
-                          ? "bg-lime-600 text-white border-lime-600"
-                          : "bg-white border-slate-200 text-slate-700 hover:border-slate-300"
-                      }`}
-                    >
-                      {count} {count === maxCapacity ? "(Max)" : ""}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Trim Gap between photos */}
-              <div>
-                <div className="flex items-center justify-between mb-1">
-                  <label className="text-xs font-bold text-slate-700">
-                    Gap between photos (Cut space)
-                  </label>
-                  <span className="text-xs font-mono font-bold text-slate-900">{gapMm} mm</span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="8"
-                  step="0.5"
-                  value={gapMm}
-                  onChange={(e) => setGapMm(parseFloat(e.target.value))}
-                  className="w-full accent-lime-600 cursor-pointer"
-                />
-                <div className="flex justify-between text-[10px] text-slate-400 font-mono">
-                  <span>0 mm (Edge-to-edge)</span>
-                  <span>2.5 mm (Standard)</span>
-                  <span>8 mm</span>
-                </div>
-              </div>
-
-              {/* Safe Print Margins */}
-              <div>
-                <div className="flex items-center justify-between mb-1">
-                  <label className="text-xs font-bold text-slate-700">
-                    Safe Print Margins (Outer edge)
-                  </label>
-                  <span className="text-xs font-mono font-bold text-slate-900">{marginMm} mm</span>
-                </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="12"
-                  step="0.5"
-                  value={marginMm}
-                  onChange={(e) => setMarginMm(parseFloat(e.target.value))}
-                  className="w-full accent-lime-600 cursor-pointer"
-                />
-                <div className="flex justify-between text-[10px] text-slate-400 font-mono">
-                  <span>1 mm (Tight)</span>
-                  <span>4 mm (Recommended)</span>
-                  <span>12 mm</span>
-                </div>
-              </div>
-
-              {/* Next Tab Button */}
               <button
                 type="button"
                 onClick={() => setActiveTab("guides")}
-                className="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                className={`flex min-h-11 flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-xl px-2 text-xs font-bold transition-all ${
+                  activeTab === "guides" ? tabSelected : tabIdle
+                }`}
               >
-                <span>Next: Cutting Guides &amp; Export</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <Scissors className="h-3.5 w-3.5" />
+                <span>3. Guides</span>
               </button>
             </div>
-          )}
 
-          {/* TAB 3: GUIDES & EXPORT */}
-          {activeTab === "guides" && (
-            <div className="space-y-4">
-              {/* Cutting Guide Style */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-                  Cutting Guide Style
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  {[
-                    { id: "corner", label: "Corner Marks", desc: "Subtle L-crop marks" },
-                    { id: "dashed", label: "Dashed Lines", desc: "Scissor cut lines" },
-                    { id: "solid", label: "Solid Border", desc: "Thin 1px border" },
-                    { id: "none", label: "None", desc: "Clean borderless" },
-                  ].map((style) => (
+            {/* TAB 1: PAPER & STANDARD */}
+            {activeTab === "preset" && (
+              <div className="space-y-5 animate-fade-in">
+                {/* Paper Format Selection */}
+                <div>
+                  <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-ink-500">
+                    Paper Format (Sheet Size)
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {PAPER_SIZES.map((paper) => (
+                      <button
+                        key={paper.id}
+                        type="button"
+                        onClick={() => setPaperSizeId(paper.id)}
+                        className={`min-h-11 cursor-pointer rounded-xl border p-2.5 text-left transition-all ${
+                          paperSizeId === paper.id ? optionSelected : optionIdle
+                        }`}
+                      >
+                        <div className="flex items-center justify-between gap-1">
+                          <span className="text-xs font-bold text-ink-950">
+                            {paper.id === "4x6" ? "4 × 6″ (Kiosk)" : paper.name.split("(")[0]}
+                          </span>
+                          {paper.popular && (
+                            <span className="rounded-full bg-brand-600 px-1.5 py-0.5 text-[9px] font-extrabold uppercase text-white">
+                              Popular
+                            </span>
+                          )}
+                        </div>
+                        <span className="mt-0.5 block font-mono text-[10px] text-ink-500">
+                          {paper.widthMm} × {paper.heightMm} mm
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Photo Standard */}
+                <div>
+                  <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-ink-500">
+                    Passport Standard
+                  </label>
+                  <div className="space-y-1.5">
+                    {PHOTO_STANDARDS.map((std) => (
+                      <button
+                        key={std.id}
+                        type="button"
+                        onClick={() => setPhotoStandardId(std.id)}
+                        className={`flex min-h-11 w-full cursor-pointer items-center justify-between gap-2 rounded-xl border p-2 transition-all ${
+                          photoStandardId === std.id ? optionSelected : optionIdle
+                        }`}
+                      >
+                        <div className="flex min-w-0 items-center gap-2">
+                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-ink-50 text-base leading-none">{std.flag}</span>
+                          <div className="min-w-0 text-left">
+                            <span className="block truncate text-xs font-bold text-ink-950">
+                              {std.name}
+                            </span>
+                            <span className="block truncate text-[10px] text-ink-500">
+                              {std.country}
+                            </span>
+                          </div>
+                        </div>
+                        <span className="shrink-0 rounded-md bg-ink-100 px-2 py-0.5 font-mono text-[11px] font-bold text-ink-700">
+                          {std.spec}
+                        </span>
+                      </button>
+                    ))}
+
+                    {/* Custom Option */}
                     <button
-                      key={style.id}
                       type="button"
-                      onClick={() => setGuideStyle(style.id as typeof guideStyle)}
-                      className={`p-2 rounded-xl border text-left transition-all cursor-pointer ${
-                        guideStyle === style.id
-                          ? "border-[#4D7C0F] bg-lime-50/60 ring-1 ring-[#4D7C0F]"
-                          : "border-slate-200 hover:border-slate-300 bg-white"
+                      onClick={() => setPhotoStandardId("custom")}
+                      className={`flex min-h-11 w-full cursor-pointer items-center justify-between gap-2 rounded-xl border p-2 pl-3 transition-all ${
+                        photoStandardId === "custom" ? optionSelected : optionIdle
                       }`}
                     >
-                      <span className="font-bold text-xs text-slate-900 block">
-                        {style.label}
-                      </span>
-                      <span className="text-[10px] text-slate-500 block">
-                        {style.desc}
+                      <span className="text-xs font-bold text-ink-900">Custom Dimensions (mm)</span>
+                      <span className="font-mono text-[11px] text-ink-500">
+                        {customPhotoWidth} × {customPhotoHeight} mm
                       </span>
                     </button>
-                  ))}
+                  </div>
+
+                  {/* Custom Width / Height Inputs if active */}
+                  {photoStandardId === "custom" && (
+                    <div className="mt-2 grid grid-cols-2 gap-2 rounded-xl border border-ink-200 bg-ink-50 p-3">
+                      <label className="block">
+                        <span className="mb-1 block text-[11px] font-bold text-ink-600">Width (mm)</span>
+                        <input
+                          type="number"
+                          min="20"
+                          max="100"
+                          value={customPhotoWidth}
+                          onChange={(e) => setCustomPhotoWidth(Number(e.target.value))}
+                          className="field min-h-11 px-3 py-2 font-mono text-sm"
+                        />
+                      </label>
+                      <label className="block">
+                        <span className="mb-1 block text-[11px] font-bold text-ink-600">Height (mm)</span>
+                        <input
+                          type="number"
+                          min="20"
+                          max="100"
+                          value={customPhotoHeight}
+                          onChange={(e) => setCustomPhotoHeight(Number(e.target.value))}
+                          className="field min-h-11 px-3 py-2 font-mono text-sm"
+                        />
+                      </label>
+                    </div>
+                  )}
                 </div>
-              </div>
 
-              {/* Export Format (JPEG vs PNG) */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-                  File Format
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setExportFormat("jpeg")}
-                    className={`p-2 rounded-xl border text-left transition-all cursor-pointer ${
-                      exportFormat === "jpeg"
-                        ? "border-[#4D7C0F] bg-lime-50/60 ring-1 ring-[#4D7C0F]"
-                        : "border-slate-200 hover:border-slate-300 bg-white"
-                    }`}
-                  >
-                    <span className="font-bold text-xs text-slate-900 block">JPEG (300 DPI)</span>
-                    <span className="text-[10px] text-slate-500 block">Best for photo kiosks</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setExportFormat("png")}
-                    className={`p-2 rounded-xl border text-left transition-all cursor-pointer ${
-                      exportFormat === "png"
-                        ? "border-[#4D7C0F] bg-lime-50/60 ring-1 ring-[#4D7C0F]"
-                        : "border-slate-200 hover:border-slate-300 bg-white"
-                    }`}
-                  >
-                    <span className="font-bold text-xs text-slate-900 block">PNG (Lossless)</span>
-                    <span className="text-[10px] text-slate-500 block">Maximum clarity</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="pt-2 border-t border-slate-100 space-y-2">
+                {/* Next Tab Button */}
                 <button
                   type="button"
-                  onClick={() => handleDownload(exportFormat)}
-                  disabled={isExporting}
-                  className="w-full py-3 rounded-xl bg-lime-600 hover:bg-lime-700 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer"
+                  onClick={() => setActiveTab("grid")}
+                  className="btn-outline-brand w-full text-sm"
                 >
-                  <Download className="w-4 h-4" />
-                  <span>Download {exportFormat.toUpperCase()} Sheet (300 DPI)</span>
+                  <span>Next: Adjust Layout &amp; Copies</span>
+                  <ArrowRight className="h-4 w-4" />
                 </button>
+              </div>
+            )}
 
-                <div className="grid grid-cols-2 gap-2">
+            {/* TAB 2: GRID & SPACING */}
+            {activeTab === "grid" && (
+              <div className="space-y-5 animate-fade-in">
+                {/* Photo Count Override */}
+                <div>
+                  <div className="mb-2 flex items-center justify-between">
+                    <label className="text-xs font-bold uppercase tracking-wider text-ink-500">
+                      Number of Photos
+                    </label>
+                    <span className="rounded-full bg-ink-100 px-2 py-0.5 font-mono text-xs font-bold text-ink-900">
+                      {activePhotoCount} / {maxCapacity} Max
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    {[2, 4, 6, maxCapacity].filter((v, i, a) => a.indexOf(v) === i && v <= maxCapacity).map((count) => (
+                      <button
+                        key={count}
+                        type="button"
+                        onClick={() => setPhotoCountOverride(count === maxCapacity ? null : count)}
+                        className={`min-h-11 flex-1 cursor-pointer rounded-xl border text-xs font-bold transition-all ${
+                          activePhotoCount === count
+                            ? "border-brand-600 bg-brand-600 text-white shadow-brand"
+                            : "border-ink-200 bg-white text-ink-700 hover:border-brand-300"
+                        }`}
+                      >
+                        {count} {count === maxCapacity ? "(Max)" : ""}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Trim Gap between photos */}
+                <div>
+                  <div className="mb-1.5 flex items-center justify-between">
+                    <label className="text-xs font-bold text-ink-800">
+                      Gap between photos (Cut space)
+                    </label>
+                    <span className="font-mono text-xs font-bold text-brand-700">{gapMm} mm</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="8"
+                    step="0.5"
+                    value={gapMm}
+                    onChange={(e) => setGapMm(parseFloat(e.target.value))}
+                    className="w-full cursor-pointer accent-brand-600"
+                  />
+                  <div className="flex justify-between font-mono text-[10px] text-ink-500">
+                    <span>0 mm (Edge-to-edge)</span>
+                    <span>2.5 mm (Standard)</span>
+                    <span>8 mm</span>
+                  </div>
+                </div>
+
+                {/* Safe Print Margins */}
+                <div>
+                  <div className="mb-1.5 flex items-center justify-between">
+                    <label className="text-xs font-bold text-ink-800">
+                      Safe Print Margins (Outer edge)
+                    </label>
+                    <span className="font-mono text-xs font-bold text-brand-700">{marginMm} mm</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    max="12"
+                    step="0.5"
+                    value={marginMm}
+                    onChange={(e) => setMarginMm(parseFloat(e.target.value))}
+                    className="w-full cursor-pointer accent-brand-600"
+                  />
+                  <div className="flex justify-between font-mono text-[10px] text-ink-500">
+                    <span>1 mm (Tight)</span>
+                    <span>4 mm (Recommended)</span>
+                    <span>12 mm</span>
+                  </div>
+                </div>
+
+                {/* Next Tab Button */}
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("guides")}
+                  className="btn-outline-brand w-full text-sm"
+                >
+                  <span>Next: Cutting Guides &amp; Export</span>
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+            )}
+
+            {/* TAB 3: GUIDES & EXPORT */}
+            {activeTab === "guides" && (
+              <div className="space-y-5 animate-fade-in">
+                {/* Cutting Guide Style */}
+                <div>
+                  <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-ink-500">
+                    Cutting Guide Style
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { id: "corner", label: "Corner Marks", desc: "Subtle L-crop marks" },
+                      { id: "dashed", label: "Dashed Lines", desc: "Scissor cut lines" },
+                      { id: "solid", label: "Solid Border", desc: "Thin 1px border" },
+                      { id: "none", label: "None", desc: "Clean borderless" },
+                    ].map((style) => (
+                      <button
+                        key={style.id}
+                        type="button"
+                        onClick={() => setGuideStyle(style.id as typeof guideStyle)}
+                        className={`min-h-11 cursor-pointer rounded-xl border p-2.5 text-left transition-all ${
+                          guideStyle === style.id ? optionSelected : optionIdle
+                        }`}
+                      >
+                        <span className="block text-xs font-bold text-ink-950">
+                          {style.label}
+                        </span>
+                        <span className="block text-[10px] text-ink-500">
+                          {style.desc}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Export Format (JPEG vs PNG) */}
+                <div>
+                  <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-ink-500">
+                    File Format
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setExportFormat("jpeg")}
+                      className={`min-h-11 cursor-pointer rounded-xl border p-2.5 text-left transition-all ${
+                        exportFormat === "jpeg" ? optionSelected : optionIdle
+                      }`}
+                    >
+                      <span className="block text-xs font-bold text-ink-950">JPEG (300 DPI)</span>
+                      <span className="block text-[10px] text-ink-500">Best for photo kiosks</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setExportFormat("png")}
+                      className={`min-h-11 cursor-pointer rounded-xl border p-2.5 text-left transition-all ${
+                        exportFormat === "png" ? optionSelected : optionIdle
+                      }`}
+                    >
+                      <span className="block text-xs font-bold text-ink-950">PNG (Lossless)</span>
+                      <span className="block text-[10px] text-ink-500">Maximum clarity</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="space-y-2 border-t border-ink-100 pt-4">
                   <button
                     type="button"
-                    onClick={handlePrint}
-                    className="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-slate-200"
+                    onClick={() => handleDownload(exportFormat)}
+                    disabled={isExporting}
+                    className="btn-brand btn-lg w-full"
                   >
-                    <Printer className="w-3.5 h-3.5" />
-                    <span>Print 1:1 Scale</span>
+                    <Download className="h-5 w-5" />
+                    <span>Download {exportFormat.toUpperCase()} Sheet (300 DPI)</span>
                   </button>
 
-                  <button
-                    type="button"
-                    onClick={handleCopy}
-                    className="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-slate-200"
-                  >
-                    {copied ? (
-                      <>
-                        <CheckCheck className="w-3.5 h-3.5 text-lime-600" />
-                        <span className="text-lime-800 font-bold">Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5" />
-                        <span>Copy Image</span>
-                      </>
-                    )}
-                  </button>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={handlePrint}
+                      className="btn-outline-brand px-3 text-sm"
+                    >
+                      <Printer className="h-4 w-4" />
+                      <span>Print 1:1 Scale</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleCopy}
+                      className="btn-outline-brand px-3 text-sm"
+                    >
+                      {copied ? (
+                        <>
+                          <CheckCheck className="h-4 w-4 text-emerald-600" />
+                          <span className="font-bold text-emerald-700">Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="h-4 w-4" />
+                          <span>Copy Image</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -32,7 +32,7 @@ The brand is never hardcoded. Read it from `src/lib/site.ts`:
 * **Icons:** Lucide React (`lucide-react`)
 * **Content:** `@next/mdx`; Markdown tool pages via `gray-matter` + `remark` / `remark-gfm` / `remark-html`
 * **Data & Services:** MongoDB (`mongodb`), Razorpay (payments), Cloudinary (storage), Resend (email), `pdf-lib` (invoices), Zod (validation)
-* **Fonts:** `next/font/google` (Geist Sans, Geist Mono)
+* **Fonts:** `next/font/google` (Plus Jakarta Sans for display headings, Inter for body, Geist Mono for specs)
 
 ---
 
@@ -69,12 +69,13 @@ npm run indexnow
 7. **Country-Neutral Copy:** Do not assume one country. Use the selected country's name and dimensions, and mention a specific country only as one example among several.
 
 ### Design & Styling (`src/app/globals.css`)
-* Theme is configured via `@plugin "daisyui/theme"` with the custom theme name `brand` (`data-theme="brand"` on `<html>`).
-* **Primary:** `#65A30D` (Lime Green — `lime-600`), hover / `themeColor` `#4D7C0F` (`lime-700`)
-* **Secondary:** `#0F172A` (Deep Navy — `slate-900`)
-* **Accent:** `#0F766E` (Teal — `teal-700`)
-* **Neutral / Content:** `#0F172A`
-* **Base 100 / 200 / 300:** `#FFFFFF` / `#F8FAFC` / `#E2E8F0`
+* Public site theme: DaisyUI `brand` (`data-theme="brand"` on `<html>`). Bold modern SaaS look; full spec in `DESIGN.md`.
+* **Primary:** `#4F46E5` (Indigo — `brand-600`), hover `#4338CA` (`brand-700`); `themeColor` `#4F46E5`
+* **Ink (secondary / neutral / content):** `#0B1020` (`ink-950`)
+* **Accent:** `#7C3AED` (Violet)
+* **Base 100 / 200 / 300:** `#FFFFFF` / `#F5F6FB` / `#E3E5EF`
+* Use the `brand-*` and `ink-*` Tailwind scales and the component classes (`.btn-brand`, `.btn-outline-brand`, `.btn-dark`, `.surface`, `.eyebrow`, `.display-1/2`, `.lead`, `.icon-tile`, `.field`) instead of raw hex or `slate-*`.
+* The admin panel keeps its original lime/navy look through a separate DaisyUI theme, `admin`, applied in `src/app/admin/layout.tsx`.
 
 ### Image Handling & Icons
 * Use `LOGO_PATH` (`/logo.jpg`, file `public/logo.jpg`) for brand logos and OpenGraph/Twitter previews. App Router icons are `src/app/icon.jpg` and `src/app/apple-icon.jpg`.
@@ -204,7 +205,7 @@ Everything is in this app; the Python photo API is not involved (the admin panel
 * **Order actions** (`src/lib/admin/orders.ts`) reuse the shop's pipelines: `fulfillPayment` (resend email with `notifyTeam: false`, retry fulfilment), the Razorpay SDK for refunds (per-order `refundLockAt` lock), and `sendExpertEditDeliveredEmailAction`.
 * **Expert Edit:** claim → upload edited JPEG (Cloudinary `passport/expert/{resultId}_expert`) → `image.imageUrl` is replaced (the AI result stays in `expertEdit.aiImageUrl`) and a new 72-hour download token is issued.
 * **User journeys:** `/api/passport-photo` logs `photo_processed` (with `metadata.resultId`) or `photo_processing_failed` via `after()` — outcome only, never the image, file name or IP. `src/lib/admin/journeys.ts` joins each upload to its order (`payments.image.resultId`) and `image_downloaded` events, for the Journeys page and the dashboard funnel. Activity logs expire after 90 days.
-* **Global CSS gotcha:** `globals.css` has unlayered `h1`–`h4` sizes and `a { color: inherit }`, which beat Tailwind utilities and DaisyUI classes. Admin headings use the important modifier (`text-sm!`).
+* **Admin theme & CSS gotcha:** `src/app/admin/layout.tsx` wraps the panel in `data-theme="admin"` (lime/navy). Under that theme `globals.css` keeps unlayered `h1`–`h4` sizes and `a { color: inherit }`, which beat Tailwind utilities and DaisyUI classes, so admin headings use the important modifier (`text-sm!`). Public pages use layered base styles, so utilities win there.
 * `/admin/` is disallowed in `robots.ts` and every admin page is `noindex`. Optional env: `ADMIN_SESSION_HOURS` (default 12).
 
 ---
