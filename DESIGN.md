@@ -8,7 +8,7 @@
 2. **Product-first:** The photo studio and print generator look like real app surfaces (header bar, numbered steps, elevated card), not like forms dropped onto a marketing page.
 3. **Accessibility & Usability:** WCAG 2.1 AA contrast, ≥44px tap targets, full keyboard and screen-reader support.
 
-Brand assets: `public/logo.jpg` (`LOGO_PATH`) for the logo and default social image; `src/app/icon.jpg` and `src/app/apple-icon.jpg` for App Router icons.
+Brand assets: the logo mark (white portrait inside passport-photo crop corners on an indigo `#4F46E5` rounded square) lives in `public/logo-mark.svg`; `public/logo-mark.jpg` (`LOGO_PATH`) is the raster logo and default social image; `src/app/icon.png` and `src/app/apple-icon.png` are the App Router icons.
 
 ---
 

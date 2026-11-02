@@ -186,15 +186,6 @@ const BEFORE_AFTER_PAIRS = [
     afterTag: "Expert Fixed: Pure Plain White Surface",
   },
   {
-    title: "Passport Aspect Ratio & Crop",
-    beforeImg:
-      "https://res.cloudinary.com/dipzpwbbk/image/upload/v1786629405/A_passport_e4y2u3.jpg",
-    afterImg:
-      "https://res.cloudinary.com/dipzpwbbk/image/upload/v1786629172/pix_passport_y4bjki.jpg",
-    beforeTag: "Original: Incorrect Crop Ratio",
-    afterTag: "Expert Fixed: Exact Required Dimensions",
-  },
-  {
     title: "Color Balance & Tone Normalization",
     beforeImg:
       "https://res.cloudinary.com/dipzpwbbk/image/upload/v1786629541/1000379376_1_d2ibas.jpg",
@@ -593,88 +584,98 @@ export default function PassportPhotoPreviewPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-200/40 flex flex-col">
+    <div className="min-h-screen bg-ink-50 flex flex-col">
       <Navbar ctaText="Create New Photo" ctaHref="/passport-size-photo-maker" />
 
       {/* Main container with bottom padding on mobile for sticky payment bar */}
-      <main className="flex-1 flex items-start justify-center px-3.5 sm:px-4 py-5 sm:py-8 pb-40 lg:pb-8 text-slate-900" id="main-content">
-        <div className="w-full max-w-6xl">
+      <main className="relative flex-1 overflow-hidden flex items-start justify-center px-4 sm:px-6 pt-8 sm:pt-12 pb-48 lg:pb-16 text-ink-950" id="main-content">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent)]" aria-hidden="true" />
+        <div className="pointer-events-none absolute -right-40 -top-48 h-[460px] w-[460px] rounded-full bg-brand-200/40 blur-3xl" aria-hidden="true" />
+
+        <div className="relative w-full max-w-6xl">
           {!fullImageUrl && !previewUrl ? (
             /* Empty or Expired Session State */
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-12 text-center max-w-lg mx-auto shadow-xs">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-amber-50 border border-amber-200 text-amber-800 flex items-center justify-center mx-auto mb-4" aria-hidden="true">
-                <AlertCircle className="w-7 h-7 sm:w-8 sm:h-8" />
+            <div className="mx-auto max-w-lg rounded-3xl border border-ink-200 bg-white p-7 text-center shadow-lift sm:p-12">
+              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-amber-200 bg-amber-50 text-amber-700" aria-hidden="true">
+                <AlertCircle className="h-7 w-7" />
               </div>
-              <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-2">
+              <h1 className="mb-3 text-2xl text-ink-950 sm:text-3xl">
                 Photo Session Not Found
               </h1>
-              <p className="text-xs sm:text-sm text-slate-600 mb-6 font-medium">
+              <p className="mb-8 text-sm text-ink-600 sm:text-base">
                 No active photo preview found for ID:{" "}
-                <span className="font-mono font-semibold text-slate-900 break-all">{resultId}</span>.
-                Please upload your photo to process an official verified result.
+                <span className="break-all font-mono font-semibold text-ink-950">{resultId}</span>.
+                Please upload your photo again to create a new preview.
               </p>
               <Link
                 href="/passport-size-photo-maker"
-                className="w-full inline-flex items-center justify-center gap-2 bg-[#0F172A] hover:bg-[#1E293B] !text-white text-white font-bold text-sm sm:text-base py-3.5 rounded-xl transition-colors text-center shadow-xs focus-ring"
+                className="btn-brand btn-lg w-full focus-ring"
               >
-                <Upload className="w-4 h-4" aria-hidden="true" />
+                <Upload className="h-4 w-4" aria-hidden="true" />
                 <span>Upload New Photo</span>
               </Link>
             </div>
           ) : (
             <>
               {/* Header Title & Subtitle */}
-              <div className="mb-4 text-center lg:text-left">
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 tracking-tight leading-tight">
-                  Your <span className="text-lime-600">ID Photo</span> Is Ready{" "}
-                  <span className="inline-block text-xl sm:text-2xl" aria-hidden="true">{flag}</span> {countryName}
+              <div className="mb-8 text-center lg:mb-10 lg:text-left">
+                <span className="eyebrow">
+                  <Check className="h-3.5 w-3.5" strokeWidth={3} aria-hidden="true" />
+                  Preview ready
+                </span>
+                <h1 className="mt-4 text-3xl text-ink-950 sm:text-4xl lg:text-5xl">
+                  Your <span className="marker">ID photo</span> is ready{" "}
+                  <span className="inline-block" aria-hidden="true">{flag}</span> {countryName}
                 </h1>
-                <div className="flex items-center justify-center lg:justify-start gap-2 mt-2 flex-wrap text-center lg:text-left">
+                <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 lg:justify-start">
                   {/* 24*7 Mail Support Badge */}
                   <a
                     href={`mailto:${SUPPORT_EMAIL}?subject=Support%20Request%20-%20Photo%20Session%20${encodeURIComponent(resultId)}`}
-                    className="inline-flex items-center gap-1.5 bg-lime-50 hover:bg-lime-100 text-lime-900 border border-lime-300 px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-bold transition-colors shadow-2xs group"
+                    className="group inline-flex min-h-[2.25rem] items-center gap-2 rounded-full border border-ink-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-ink-700 shadow-soft transition-colors hover:border-brand-300 hover:text-brand-700"
                   >
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
-                    <Mail className="w-3.5 h-3.5 text-lime-700 group-hover:scale-110 transition-transform" aria-hidden="true" />
-                    <span>24/7 Email Support: <span className="underline font-extrabold text-lime-950">{SUPPORT_EMAIL}</span></span>
+                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
+                    <Mail className="h-3.5 w-3.5 text-brand-600" aria-hidden="true" />
+                    <span>24/7 Email Support: <span className="font-bold text-ink-950 underline decoration-brand-300 decoration-2 underline-offset-2 group-hover:text-brand-700">{SUPPORT_EMAIL}</span></span>
                   </a>
 
-                  <p className="text-[11px] sm:text-[12px] text-slate-500 font-semibold flex items-center gap-1 flex-wrap justify-center lg:justify-start">
-                    <Shield className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>Acceptance Guarantee &bull; Refund if Rejected</span>
-                    <span className="ml-1 font-bold text-slate-700 inline-flex items-center gap-1">
-                      <span>{flag}</span> {countryName} Compliant
+                  <p className="flex flex-wrap items-center justify-center gap-1.5 text-xs font-medium text-ink-600 lg:justify-start">
+                    <Shield className="h-3.5 w-3.5 shrink-0 text-emerald-600" aria-hidden="true" />
+                    <span>
+                      <Link href="/refund-policy" className="underline decoration-ink-300 underline-offset-2 hover:text-brand-700">Refund policy</Link>{" "}
+                      applies if rejected
+                    </span>
+                    <span className="ml-1 inline-flex items-center gap-1 font-semibold text-ink-800">
+                      <span aria-hidden="true">{flag}</span> Sized for {countryName}
                     </span>
                   </p>
                 </div>
               </div>
 
               {/* 2-Column Responsive Layout */}
-              <div className="flex flex-col lg:flex-row gap-4 sm:gap-5 items-start">
+              <div className="flex flex-col items-start gap-5 lg:flex-row lg:gap-8">
                 {/* ========================================================================= */}
                 {/* LEFT COLUMN: Photo Display & "Your Photo Meets Official Requirements" Card */}
                 {/* ========================================================================= */}
-                <div className="w-full lg:w-[60%] space-y-4">
+                <div className="w-full space-y-5 lg:w-[58%]">
                   {/* Photo Card */}
-                  <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
+                  <div className="overflow-hidden rounded-3xl border border-ink-200 bg-white shadow-lift">
                     {/* Top Bar */}
-                    <div className="px-4 sm:px-5 pt-3.5 sm:pt-4 pb-3 flex items-center justify-between border-b border-slate-100 flex-wrap gap-2">
-                      <div className="flex items-center gap-2 min-w-0">
-                        <span className="text-base shrink-0">{flag}</span>
-                        <p className="text-xs sm:text-sm font-bold text-slate-900 truncate">
-                          {countryName} Official Photo ({dimensions} px)
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-ink-100 bg-ink-50/70 px-5 py-3 sm:px-6">
+                      <div className="flex min-w-0 items-center gap-2">
+                        <span className="shrink-0 text-base" aria-hidden="true">{flag}</span>
+                        <p className="truncate text-sm font-bold text-ink-950">
+                          {countryName} photo <span className="font-mono text-xs font-semibold text-ink-500">· {dimensions} px</span>
                         </p>
                       </div>
-                      <div className="flex items-center gap-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-2.5 py-0.5 sm:py-1 shadow-2xs shrink-0">
-                        <Check className="w-3 h-3 stroke-[3]" />
-                        <span className="text-[10px] sm:text-[11px] font-bold">Verified Compliant</span>
+                      <div className="flex shrink-0 items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-emerald-700">
+                        <Check className="h-3 w-3 stroke-[3]" aria-hidden="true" />
+                        <span className="text-[11px] font-bold">Rules checked</span>
                       </div>
                     </div>
 
                     {/* Photo Container */}
                     <div
-                      className="relative cursor-zoom-in group mx-3 sm:mx-5 my-3 sm:my-4 rounded-xl overflow-hidden bg-slate-50 border border-slate-200 flex items-center justify-center select-none"
+                      className="group relative mx-4 my-4 flex cursor-zoom-in select-none items-center justify-center overflow-hidden rounded-2xl border border-ink-200 bg-ink-50 bg-dots p-4 focus-ring sm:mx-6 sm:my-6 sm:p-6"
                       onClick={() => setIsZoomOpen(true)}
                       role="button"
                       tabIndex={0}
@@ -692,21 +693,21 @@ export default function PassportPhotoPreviewPage() {
                       <img
                         src={isPaid ? (fullImageUrl || previewUrl) : previewUrl}
                         alt={`${countryName} Passport Photo Preview`}
-                        className="max-h-[300px] sm:max-h-[380px] w-auto max-w-full object-contain select-none pointer-events-none block rounded-md"
+                        className="pointer-events-none block max-h-[300px] w-auto max-w-full select-none rounded-lg object-contain shadow-soft ring-1 ring-ink-200 sm:max-h-[380px]"
                         draggable={false}
                         onContextMenu={(e) => !isPaid && e.preventDefault()}
                       />
 
                       {/* Subtle Glass Tag (Non-obstructive) */}
-                      <div className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 bg-slate-900/80 text-white text-[10px] sm:text-[11px] font-semibold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full backdrop-blur-xs flex items-center gap-1.5 shadow-sm pointer-events-none">
-                        <Eye className="w-3 h-3 text-lime-400" />
-                        <span>Official Preview</span>
+                      <div className="pointer-events-none absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full bg-ink-950/85 px-2.5 py-1 text-[11px] font-semibold text-white shadow-soft backdrop-blur-xs">
+                        <Eye className="h-3 w-3 text-brand-300" aria-hidden="true" />
+                        <span>Preview</span>
                       </div>
 
                       {/* Hover Zoom Hint */}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors flex items-center justify-center pointer-events-none">
-                        <div className="bg-white/95 backdrop-blur-xs border border-slate-200 rounded-full px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-all transform scale-95 group-hover:scale-100 shadow-md flex items-center gap-1.5 text-xs font-bold text-slate-800">
-                          <ZoomIn className="w-3.5 h-3.5 text-slate-700" />
+                      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-ink-950/0 transition-colors group-hover:bg-ink-950/5">
+                        <div className="flex scale-95 items-center gap-1.5 rounded-full border border-ink-200 bg-white/95 px-3.5 py-2 text-xs font-bold text-ink-950 opacity-0 shadow-lift backdrop-blur-xs transition-all group-hover:scale-100 group-hover:opacity-100">
+                          <ZoomIn className="h-3.5 w-3.5 text-brand-600" aria-hidden="true" />
                           <span>Click to Zoom</span>
                         </div>
                       </div>
@@ -714,15 +715,14 @@ export default function PassportPhotoPreviewPage() {
 
                     {/* Post-Payment Action Buttons */}
                     {isPaid && (
-                      <div className="px-4 sm:px-5 pb-5 pt-2 border-t border-slate-100 space-y-3">
+                      <div className="space-y-3 border-t border-ink-100 px-5 pb-6 pt-5 sm:px-6">
                         <button
                           type="button"
                           onClick={() => handleDownload("single")}
                           disabled={downloading}
-                          className="w-full inline-flex items-center justify-center gap-2 bg-[#4D7C0F] hover:bg-[#3F650C] !text-white text-white font-bold text-sm py-3.5 rounded-xl transition-all text-center shadow-xs focus-ring cursor-pointer"
-                          style={{ color: "#ffffff" }}
+                          className="btn-brand btn-lg w-full focus-ring"
                         >
-                          <Download className="w-4 h-4 text-white" aria-hidden="true" />
+                          <Download className="h-4 w-4" aria-hidden="true" />
                           <span>{downloading ? "Preparing High-Res Download…" : "Download Single Photo (300 DPI)"}</span>
                         </button>
 
@@ -732,11 +732,11 @@ export default function PassportPhotoPreviewPage() {
                               href={`/api/invoices/${paymentState.paymentId}?format=pdf`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 text-xs text-slate-600 hover:text-slate-900 font-semibold transition-colors"
+                              className="inline-flex min-h-[2.75rem] items-center gap-1.5 text-sm font-semibold text-ink-600 transition-colors hover:text-brand-700"
                             >
-                              <Receipt className="w-3.5 h-3.5 text-emerald-700" aria-hidden="true" />
+                              <Receipt className="h-4 w-4 text-brand-600" aria-hidden="true" />
                               <span>Download Tax Invoice (PDF)</span>
-                              <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                              <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                             </a>
                           </div>
                         )}
@@ -745,71 +745,75 @@ export default function PassportPhotoPreviewPage() {
                   </div>
 
                   {/* "Your Photo Meets Official Requirements" Card */}
-                  <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 shadow-xs">
-                    <div className="flex items-center gap-2.5 mb-3.5 sm:mb-4">
-                      <div className="w-7 h-7 sm:w-8 sm:h-8 bg-lime-100 rounded-lg flex items-center justify-center text-lime-700 shrink-0">
-                        <Camera className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                  <div className="surface p-6 sm:p-7">
+                    <div className="mb-5 flex items-center gap-3">
+                      <span className="icon-tile" aria-hidden="true">
+                        <Camera className="h-5 w-5" />
+                      </span>
+                      <div>
+                        <h2 className="text-lg text-ink-950 sm:text-xl">
+                          Checked against {countryName}&apos;s photo rules
+                        </h2>
+                        <p className="text-xs text-ink-500 sm:text-sm">What&apos;s included with your photo</p>
                       </div>
-                      <p className="text-sm sm:text-base font-bold text-slate-900">
-                        Your Photo Meets Official Requirements
-                      </p>
                     </div>
 
-                    <div className="space-y-0">
+                    <ul className="m-0 grid list-none gap-x-6 p-0 sm:grid-cols-2">
                       {METRIC_FIXES.map((metric) => (
-                        <div
+                        <li
                           key={metric.key}
-                          className="flex items-center gap-2.5 py-2 sm:py-2.5 border-b border-slate-100 last:border-0"
+                          className="flex items-start gap-3 border-b border-ink-100 py-3 last:border-0 sm:[&:nth-last-child(2)]:border-0"
                         >
-                          <div className="w-4.5 h-4.5 sm:w-5 sm:h-5 rounded-full bg-lime-100 flex items-center justify-center shrink-0">
-                            <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-lime-700 stroke-[3]" />
-                          </div>
-                          <span className="text-[12px] sm:text-[13px] text-slate-700 font-medium">
+                          <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-700" aria-hidden="true">
+                            <Check className="h-3 w-3 stroke-[3]" />
+                          </span>
+                          <span className="text-sm font-medium text-ink-700">
                             {metric.label}
                           </span>
-                        </div>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
 
                     {/* Bottom Highlight Box */}
-                    <div className="mt-3.5 sm:mt-4 rounded-xl bg-lime-50 border border-lime-200 px-3 py-2 sm:px-3.5 sm:py-2.5 flex items-center gap-2">
-                      <Star className="w-3.5 h-3.5 text-lime-600 shrink-0 fill-lime-300" />
-                      <Check className="w-3.5 h-3.5 text-lime-700 stroke-[3] shrink-0" />
-                      <p className="text-[11px] sm:text-[11.5px] text-lime-800 font-semibold leading-relaxed">
-                        Background professionally corrected to official requirements
+                    <div className="mt-5 flex items-center gap-3 rounded-2xl border border-brand-100 bg-brand-50 px-4 py-3">
+                      <Star className="h-4 w-4 shrink-0 fill-brand-200 text-brand-600" aria-hidden="true" />
+                      <p className="text-sm font-semibold leading-relaxed text-brand-800">
+                        Background replaced and corrected to the published requirements
                       </p>
                     </div>
                   </div>
 
                   {/* Dedicated 24/7 Mail Support Card */}
-                  <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 text-white rounded-2xl p-4 sm:p-5 shadow-xs border border-slate-700/60 relative overflow-hidden">
-                    <div className="flex items-start gap-3.5 relative z-10">
-                      <div className="w-10 h-10 rounded-xl bg-lime-400/20 border border-lime-400/30 text-lime-300 flex items-center justify-center shrink-0 mt-0.5">
-                        <Mail className="w-5 h-5" />
+                  <div className="relative overflow-hidden rounded-3xl bg-ink-950 p-6 text-white sm:p-7">
+                    <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
+                    <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-brand-600/30 blur-3xl" aria-hidden="true" />
+                    <div className="relative z-10 flex items-start gap-4">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-white/10 text-brand-300" aria-hidden="true">
+                        <Mail className="h-5 w-5" />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap mb-1">
-                          <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
+                      <div className="min-w-0 flex-1">
+                        <div className="mb-1.5 flex flex-wrap items-center gap-2">
+                          <h3 className="text-base text-white sm:text-lg">
                             24/7 Dedicated Email Support
                           </h3>
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10.5px] font-bold border border-emerald-500/30">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/15 px-2 py-0.5 text-[11px] font-bold text-emerald-300">
+                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
                             Live 24×7
                           </span>
                         </div>
-                        <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-3">
+                        <p className="mb-5 text-sm leading-relaxed text-ink-300">
                           Questions about embassy requirements, print sizing, or need custom assistance with your photo? Our biometric support team is ready to help 24 hours a day, 7 days a week.
                         </p>
-                        <div className="flex items-center gap-3 flex-wrap">
+                        <div className="flex flex-wrap items-center gap-4">
                           <a
                             href={`mailto:${SUPPORT_EMAIL}?subject=Passport%20Photo%20Support%20-%20Session%20${encodeURIComponent(resultId)}`}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-lime-500 hover:bg-lime-400 text-slate-950 font-bold text-xs transition-colors shadow-xs cursor-pointer"
+                            className="btn-light max-w-full text-sm"
                           >
-                            <Mail className="w-3.5 h-3.5" />
-                            <span>Email {SUPPORT_EMAIL}</span>
+                            <Mail className="h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
+                            <span className="truncate">Email {SUPPORT_EMAIL}</span>
                           </a>
-                          <span className="text-[11px] text-slate-400 font-medium flex items-center gap-1.5">
-                            <Clock className="w-3.5 h-3.5 text-lime-400" />
+                          <span className="flex items-center gap-1.5 text-xs font-medium text-ink-400">
+                            <Clock className="h-3.5 w-3.5 text-brand-300" aria-hidden="true" />
                             Average reply &lt;15 mins
                           </span>
                         </div>
@@ -821,60 +825,69 @@ export default function PassportPhotoPreviewPage() {
                 {/* ========================================================================= */}
                 {/* RIGHT COLUMN: Order Summary & Plan Choices */}
                 {/* ========================================================================= */}
-                <div className="w-full lg:w-[40%] space-y-4">
-                  <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs lg:sticky lg:top-6">
-                    <div className="p-4 sm:p-6">
+                <div className="w-full space-y-5 lg:sticky lg:top-24 lg:w-[42%]">
+                  <div className="overflow-hidden rounded-3xl border border-ink-200 bg-white shadow-lift">
+                    <div className="p-5 sm:p-7">
                       {!isPaid ? (
-                        <div className="space-y-4">
+                        <div className="space-y-5">
                           {/* Top Heading */}
-                          <div className="flex items-center gap-2">
-                            <Shield className="w-4 h-4 text-emerald-600 shrink-0" />
-                            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                              Order Summary &bull; Accepted for {countryName}
+                          <div className="flex items-center justify-between gap-3">
+                            <h2 className="text-xl text-ink-950 sm:text-2xl">Choose your plan</h2>
+                            <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-ink-500">
+                              <Shield className="h-3.5 w-3.5 shrink-0 text-emerald-600" aria-hidden="true" />
+                              <span>Order summary</span>
                             </p>
                           </div>
 
                           {/* Plans Selection */}
-                          <div className="space-y-3">
+                          <div className="space-y-4">
                             {/* Plan 1: Standard Pack */}
                             <button
                               type="button"
                               onClick={() => setSelectedPlan("standard")}
-                              className={`w-full text-left rounded-xl border-2 p-3.5 sm:p-4 transition-all duration-150 relative cursor-pointer ${
+                              aria-pressed={selectedPlan === "standard"}
+                              className={`relative w-full cursor-pointer rounded-2xl border p-4 text-left transition-all duration-150 focus-ring sm:p-5 ${
                                 selectedPlan === "standard"
-                                  ? "border-emerald-500 bg-emerald-50/60 shadow-xs"
-                                  : "border-slate-200 bg-white hover:border-slate-300"
+                                  ? "border-brand-600 bg-brand-50/50 ring-4 ring-brand-500/15"
+                                  : "border-ink-200 bg-white hover:border-brand-300"
                               }`}
                             >
-                              <div className="flex justify-between items-start mb-2">
-                                <div>
-                                  <h4 className="text-sm font-bold text-slate-900">
+                              <div className="mb-3 flex items-start justify-between gap-3">
+                                <div className="flex items-center gap-3">
+                                  <span
+                                    className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
+                                      selectedPlan === "standard" ? "border-brand-600 bg-brand-600" : "border-ink-300 bg-white"
+                                    }`}
+                                    aria-hidden="true"
+                                  >
+                                    {selectedPlan === "standard" && <span className="h-1.5 w-1.5 rounded-full bg-white" />}
+                                  </span>
+                                  <h4 className="text-base text-ink-950">
                                     Standard Pack
                                   </h4>
                                 </div>
-                                <div className="text-right">
-                                  <p className="text-lg sm:text-xl font-black text-slate-900">
-                                    {standardPricing.amountFormatted}
-                                  </p>
-                                </div>
+                                <p className="font-display text-2xl font-extrabold tracking-tight text-ink-950">
+                                  {standardPricing.amountFormatted}
+                                </p>
                               </div>
-                              <ul className="space-y-1.5">
+                              <ul className="m-0 list-none space-y-2 p-0 pl-8">
                                 {[
                                   "AI Biometric Check",
                                   "Instant digital download",
                                   "Official 6×4″ print sheet",
-                                  "Acceptance guarantee",
+                                  "Refund policy applies",
                                 ].map((f) => (
                                   <li
                                     key={f}
-                                    className="flex items-center gap-2 text-[12.5px] sm:text-[13px] text-slate-600 font-medium"
+                                    className="flex items-center gap-2.5 text-sm font-medium text-ink-600"
                                   >
                                     <Check
-                                      className={`w-3.5 h-3.5 stroke-[3] shrink-0 ${
+                                      className={`h-3.5 w-3.5 shrink-0 stroke-[3] ${
                                         selectedPlan === "standard"
-                                          ? "text-emerald-600"
-                                          : "text-slate-300"
+                                          ? "text-brand-600"
+                                          : "text-ink-300"
                                       }`}
+                                      aria-hidden="true"
                                     />
                                     <span>{f}</span>
                                   </li>
@@ -885,36 +898,45 @@ export default function PassportPhotoPreviewPage() {
                             {/* Plan 2: Premium Pack (Expert Review) */}
                             <div
                               onClick={() => setSelectedPlan("expert_edit")}
-                              className={`w-full text-left rounded-2xl border-2 p-3.5 sm:p-5 transition-all duration-200 relative cursor-pointer ${
+                              className={`relative w-full cursor-pointer rounded-2xl border p-4 text-left transition-all duration-200 sm:p-5 ${
                                 selectedPlan === "expert_edit"
-                                  ? "border-lime-500 bg-lime-50/30 shadow-[0_0_0_1px_rgba(132,204,22,0.2)]"
-                                  : "border-slate-200 bg-white hover:border-lime-300"
+                                  ? "border-brand-600 bg-brand-50/50 ring-4 ring-brand-500/15"
+                                  : "border-ink-200 bg-white hover:border-brand-300"
                               }`}
                             >
                               {/* Floating MOST POPULAR Badge */}
-                              <div className="absolute -top-3 right-4 sm:right-5 bg-[#ff9500] text-white text-[9px] sm:text-[10px] font-extrabold px-2.5 sm:px-3 py-0.5 rounded-full uppercase tracking-wider shadow-xs z-10">
-                                MOST POPULAR
+                              <div className="absolute -top-3 right-5 z-10 inline-flex items-center gap-1 rounded-full bg-brand-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-brand">
+                                <Star className="h-3 w-3 fill-white" aria-hidden="true" />
+                                Most popular
                               </div>
 
                               {/* Header: Tag, Title & Price */}
-                              <div className="flex justify-between items-start mb-2.5 sm:mb-3">
-                                <div>
-                                  <span className="inline-block bg-lime-100 text-lime-800 text-[9.5px] sm:text-[10px] font-extrabold px-2 sm:px-2.5 py-0.5 rounded uppercase tracking-wider">
-                                    EXPERT REVIEW
+                              <div className="mb-3 flex items-start justify-between gap-3">
+                                <div className="flex items-start gap-3">
+                                  <span
+                                    className={`mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
+                                      selectedPlan === "expert_edit" ? "border-brand-600 bg-brand-600" : "border-ink-300 bg-white"
+                                    }`}
+                                    aria-hidden="true"
+                                  >
+                                    {selectedPlan === "expert_edit" && <span className="h-1.5 w-1.5 rounded-full bg-white" />}
                                   </span>
-                                  <h4 className="text-base sm:text-lg font-bold text-slate-900 mt-0.5 sm:mt-1">
-                                    Premium Pack
-                                  </h4>
+                                  <div>
+                                    <span className="inline-block rounded-md bg-brand-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-800">
+                                      Expert review
+                                    </span>
+                                    <h4 className="mt-1 text-lg text-ink-950">
+                                      Premium Pack
+                                    </h4>
+                                  </div>
                                 </div>
-                                <div className="text-right">
-                                  <p className="text-xl sm:text-2xl font-black text-slate-900">
-                                    {expertPricing.amountFormatted}
-                                  </p>
-                                </div>
+                                <p className="font-display text-3xl font-extrabold tracking-tight text-ink-950">
+                                  {expertPricing.amountFormatted}
+                                </p>
                               </div>
 
-                              {/* Features List with Green Checkmarks */}
-                              <ul className="space-y-1.5 sm:space-y-2 mb-3.5 sm:mb-4">
+                              {/* Features List with Checkmarks */}
+                              <ul className="m-0 mb-4 list-none space-y-2 p-0 pl-8">
                                 {[
                                   "Everything in Standard",
                                   "Human expert review in <15 min",
@@ -925,33 +947,37 @@ export default function PassportPhotoPreviewPage() {
                                 ].map((f) => (
                                   <li
                                     key={f}
-                                    className="flex items-center gap-2 text-[12.5px] sm:text-[13.5px] text-slate-700 font-medium leading-snug"
+                                    className="flex items-center gap-2.5 text-sm font-medium leading-snug text-ink-700"
                                   >
-                                    <Check className="w-3.5 h-3.5 text-emerald-500 stroke-[3] shrink-0" />
+                                    <Check
+                                      className={`h-3.5 w-3.5 shrink-0 stroke-[3] ${
+                                        selectedPlan === "expert_edit" ? "text-brand-600" : "text-ink-300"
+                                      }`}
+                                      aria-hidden="true"
+                                    />
                                     <span>{f}</span>
                                   </li>
                                 ))}
                               </ul>
 
                               {/* Sub-Card: See What Our Experts Fix */}
-                              <div
+                              <button
+                                type="button"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setSelectedPlan("expert_edit");
                                   setIsFixModalOpen(true);
                                 }}
-                                className="bg-lime-50/80 border border-lime-200/90 rounded-xl p-3 sm:p-3.5 flex items-center justify-between gap-2.5 sm:gap-3 group/fix hover:bg-lime-100/70 transition-colors cursor-pointer"
+                                className="group/fix flex w-full cursor-pointer items-center justify-between gap-3 rounded-xl border border-ink-200 bg-white p-3 text-left transition-colors hover:border-brand-300 focus-ring sm:p-3.5"
                               >
-                                <div className="space-y-1.5">
-                                  <div>
-                                    <h5 className="text-xs sm:text-sm font-bold text-slate-900 leading-tight group-hover/fix:text-lime-700 transition-colors">
-                                      See What Our Experts Fix
-                                    </h5>
-                                  </div>
+                                <span className="block space-y-1.5">
+                                  <span className="block font-display text-sm font-bold leading-tight text-ink-950 transition-colors group-hover/fix:text-brand-700">
+                                    See What Our Experts Fix
+                                  </span>
 
                                   {/* Avatars + Count */}
-                                  <div className="flex items-center">
-                                    <div className="flex -space-x-1.5 sm:-space-x-2 overflow-hidden py-0.5">
+                                  <span className="flex items-center">
+                                    <span className="flex -space-x-2 overflow-hidden py-0.5">
                                       {[
                                         "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80",
                                         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80",
@@ -959,6 +985,7 @@ export default function PassportPhotoPreviewPage() {
                                         "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80",
                                         "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80",
                                       ].map((src, idx) => (
+                                        // eslint-disable-next-line @next/next/no-img-element
                                         <img
                                           key={idx}
                                           src={src}
@@ -966,31 +993,31 @@ export default function PassportPhotoPreviewPage() {
                                           width={24}
                                           height={24}
                                           loading="lazy"
-                                          className="inline-block h-5 w-5 sm:h-6 sm:w-6 rounded-full ring-2 ring-white object-cover"
+                                          className="inline-block h-6 w-6 rounded-full object-cover ring-2 ring-white"
                                         />
                                       ))}
-                                    </div>
-                                    <span className="text-[11px] sm:text-xs font-semibold text-slate-600 ml-2">
+                                    </span>
+                                    <span className="ml-2 text-xs font-semibold text-ink-600">
                                       +2.7k
                                     </span>
-                                  </div>
-                                </div>
+                                  </span>
+                                </span>
 
-                                {/* Green Action Button */}
-                                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-emerald-500 group-hover/fix:bg-emerald-600 text-white flex items-center justify-center transition-transform group-hover/fix:scale-105 shrink-0 shadow-xs">
-                                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
-                                </div>
-                              </div>
+                                {/* Action Arrow */}
+                                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink-950 text-white transition-all group-hover/fix:translate-x-0.5 group-hover/fix:bg-brand-600" aria-hidden="true">
+                                  <ArrowRight className="h-4 w-4 stroke-[2.5]" />
+                                </span>
+                              </button>
                             </div>
                           </div>
 
                           {/* Desktop Only: Email Input & Checkout Button (Hidden on Mobile) */}
-                          <div className="hidden lg:block space-y-4 pt-1">
+                          <div className="hidden space-y-4 pt-1 lg:block">
                             {/* Email Input Field */}
                             <div>
                               <label
                                 htmlFor="checkout-email-desktop"
-                                className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5"
+                                className="mb-2 block text-sm font-bold text-ink-950"
                               >
                                 Email for Delivery
                               </label>
@@ -1000,16 +1027,16 @@ export default function PassportPhotoPreviewPage() {
                                 value={email}
                                 onChange={handleEmailChange}
                                 placeholder="Enter your email"
-                                className={`w-full px-3.5 py-3 bg-slate-50 border rounded-xl text-sm focus:outline-none focus:ring-2 transition-all ${
+                                className={`field ${
                                   emailError
-                                    ? "border-red-400 focus:ring-red-400/30 text-red-950"
-                                    : "border-slate-200 focus:ring-lime-500 focus:border-transparent"
+                                    ? "border-red-400 text-red-950 focus:border-red-500 focus:shadow-[0_0_0_4px_rgb(239_68_68/0.15)]"
+                                    : ""
                                 }`}
                                 required
                                 aria-invalid={!!emailError}
                               />
                               {emailError && (
-                                <p className="text-xs text-red-600 font-semibold mt-1">
+                                <p className="mt-1.5 text-xs font-semibold text-red-600">
                                   {emailError}
                                 </p>
                               )}
@@ -1017,8 +1044,8 @@ export default function PassportPhotoPreviewPage() {
 
                             {/* Error Alert */}
                             {paymentError && (
-                              <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 flex items-start gap-2 font-medium">
-                                <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                              <div className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 p-3 text-sm font-medium text-red-700">
+                                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                                 <span>{paymentError}</span>
                               </div>
                             )}
@@ -1029,17 +1056,13 @@ export default function PassportPhotoPreviewPage() {
                                 type="button"
                                 onClick={handleMainCtaClick}
                                 disabled={isProcessingPayment}
-                                className={`w-full font-bold py-4 rounded-xl transition-all text-sm tracking-wide flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer shadow-md ${
-                                  selectedPlan === "expert_edit"
-                                    ? "bg-lime-600 hover:bg-lime-700 text-white shadow-lime-600/20"
-                                    : "bg-slate-900 hover:bg-black text-white shadow-slate-900/20"
-                                }`}
+                                className="btn-brand btn-lg w-full focus-ring"
                               >
                                 {isProcessingPayment ? (
-                                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                  <div className="h-5 w-5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
                                 ) : (
                                   <>
-                                    <Lock className="w-4 h-4 shrink-0" />
+                                    <Lock className="h-4 w-4 shrink-0" aria-hidden="true" />
                                     <span>
                                       {selectedPlan === "expert_edit"
                                         ? "Get Expert Review"
@@ -1054,60 +1077,61 @@ export default function PassportPhotoPreviewPage() {
                               </button>
 
                               {/* Desktop Trust Badges */}
-                              <div className="flex items-center justify-center gap-x-5 gap-y-1.5 py-3 flex-wrap border-t border-slate-100 mt-3">
-                                <div className="flex items-center gap-1.5 text-slate-500">
-                                  <span className="text-[14px]">{flag}</span>
-                                  <span className="text-[11px] font-semibold text-slate-700">
-                                    {countryName} Compliant
+                              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 border-t border-ink-100 py-4">
+                                <div className="flex items-center gap-1.5 text-ink-600">
+                                  <span className="text-[14px]" aria-hidden="true">{flag}</span>
+                                  <span className="text-xs font-semibold text-ink-700">
+                                    Sized for {countryName}
                                   </span>
                                 </div>
-                                <div className="flex items-center gap-1.5 text-slate-500">
-                                  <Shield className="w-3.5 h-3.5 text-emerald-600" />
-                                  <span className="text-[11px] font-semibold">Secure Checkout</span>
+                                <div className="flex items-center gap-1.5 text-ink-600">
+                                  <Shield className="h-3.5 w-3.5 text-emerald-600" aria-hidden="true" />
+                                  <span className="text-xs font-semibold">Secure Checkout</span>
                                 </div>
-                                <div className="flex items-center gap-1.5 text-slate-500">
-                                  <RotateCcw className="w-3.5 h-3.5 text-emerald-600" />
-                                  <span className="text-[11px] font-semibold">Refund if Rejected</span>
+                                <div className="flex items-center gap-1.5 text-ink-600">
+                                  <RotateCcw className="h-3.5 w-3.5 text-emerald-600" aria-hidden="true" />
+                                  <span className="text-xs font-semibold">Refund policy applies</span>
                                 </div>
-                                <div className="flex items-center gap-1.5 text-slate-500">
-                                  <Lock className="w-3.5 h-3.5 text-slate-400" />
-                                  <span className="text-[11px] font-semibold">256-bit SSL</span>
+                                <div className="flex items-center gap-1.5 text-ink-600">
+                                  <Lock className="h-3.5 w-3.5 text-ink-400" aria-hidden="true" />
+                                  <span className="text-xs font-semibold">256-bit SSL</span>
                                 </div>
                               </div>
 
                                 {/* 24/7 Mail Support in Order Summary */}
-                                <div className="mt-3 pt-3 border-t border-slate-100">
+                                <div className="border-t border-ink-100 pt-4">
                                   <a
                                     href={`mailto:${SUPPORT_EMAIL}?subject=Passport%20Photo%20Support%20-%20Session%20${encodeURIComponent(resultId)}`}
-                                    className="group flex items-center gap-2.5 p-2.5 rounded-xl bg-slate-50 hover:bg-lime-50/80 border border-slate-200/90 hover:border-lime-300 transition-colors"
+                                    className="group flex items-center gap-3 rounded-2xl border border-ink-200 bg-ink-50 p-3 transition-colors hover:border-brand-300 hover:bg-brand-50/60"
                                   >
-                                    <div className="w-8 h-8 rounded-lg bg-lime-100 text-lime-800 flex items-center justify-center shrink-0">
-                                      <Mail className="w-4 h-4" />
+                                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-brand-600 ring-1 ring-ink-200" aria-hidden="true">
+                                      <Mail className="h-4 w-4" />
                                     </div>
                                     <div className="min-w-0 flex-1 text-left">
                                       <div className="flex items-center gap-1.5">
-                                        <p className="text-xs font-bold text-slate-900 group-hover:text-lime-900 transition-colors">
+                                        <p className="text-sm font-bold text-ink-950 transition-colors group-hover:text-brand-800">
                                           24/7 Email Support
                                         </p>
-                                        <span className="text-[9px] font-bold bg-emerald-100 text-emerald-800 px-1.5 py-0.2 rounded-full">
+                                        <span className="rounded-full bg-emerald-100 px-1.5 py-0.5 text-[10px] font-bold text-emerald-800">
                                           Active
                                         </span>
                                       </div>
-                                      <p className="text-[11px] font-semibold text-slate-500 group-hover:text-lime-700 truncate">
+                                      <p className="truncate text-xs font-medium text-ink-500 group-hover:text-brand-700">
                                         {SUPPORT_EMAIL}
                                       </p>
                                     </div>
-                                    <ExternalLink className="w-3 h-3 text-slate-400 group-hover:text-lime-700 shrink-0" />
+                                    <ExternalLink className="h-3.5 w-3.5 shrink-0 text-ink-400 group-hover:text-brand-700" aria-hidden="true" />
                                   </a>
                                 </div>
 
                                 {/* Razorpay Badge */}
-                                <div className="flex justify-center pt-2">
+                                <div className="flex justify-center pt-3">
                                   <a
                                     href="https://razorpay.com/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                   >
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
                                       referrerPolicy="origin"
                                       src="https://badges.razorpay.com/badge-dark.png"
@@ -1120,22 +1144,22 @@ export default function PassportPhotoPreviewPage() {
                             </div>
 
                             {/* Mobile Trust Badges Notice */}
-                            <div className="block lg:hidden pt-2 border-t border-slate-100">
-                              <div className="flex items-center justify-center gap-3 py-2 flex-wrap text-slate-500">
+                            <div className="block border-t border-ink-100 pt-3 lg:hidden">
+                              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 py-1 text-ink-600">
                                 <a
                                   href={`mailto:${SUPPORT_EMAIL}?subject=Passport%20Photo%20Support%20-%20Session%20${encodeURIComponent(resultId)}`}
-                                  className="flex items-center gap-1 text-lime-800 font-bold hover:underline"
+                                  className="flex min-h-[2.75rem] items-center gap-1.5 font-semibold text-brand-700 hover:underline"
                                 >
-                                  <Mail className="w-3 h-3 text-lime-700" />
-                                  <span className="text-[10.5px]">24/7 Mail Support: {SUPPORT_EMAIL}</span>
+                                  <Mail className="h-3.5 w-3.5 text-brand-600" aria-hidden="true" />
+                                  <span className="text-xs">24/7 Mail Support: {SUPPORT_EMAIL}</span>
                                 </a>
-                                <div className="flex items-center gap-1">
-                                  <Shield className="w-3 h-3 text-emerald-600" />
-                                  <span className="text-[10.5px] font-semibold">Acceptance Guarantee</span>
+                                <div className="flex items-center gap-1.5">
+                                  <Shield className="h-3.5 w-3.5 text-emerald-600" aria-hidden="true" />
+                                  <span className="text-xs font-semibold">Refund policy applies</span>
                                 </div>
-                                <div className="flex items-center gap-1">
-                                  <RotateCcw className="w-3 h-3 text-emerald-600" />
-                                  <span className="text-[10.5px] font-semibold">Instant Refund</span>
+                                <div className="flex items-center gap-1.5">
+                                  <RotateCcw className="h-3.5 w-3.5 text-emerald-600" aria-hidden="true" />
+                                  <span className="text-xs font-semibold">Free re-processing if rejected for sizing</span>
                                 </div>
                               </div>
                             </div>
@@ -1143,14 +1167,14 @@ export default function PassportPhotoPreviewPage() {
                         ) : (
                           /* Paid State Receipt */
                           <div className="space-y-4">
-                            <div className="bg-emerald-50 rounded-2xl p-5 sm:p-6 text-center border border-emerald-200">
-                              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 text-2xl sm:text-3xl">
-                                🎉
+                            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center">
+                              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-600 text-white shadow-soft" aria-hidden="true">
+                                <Check className="h-7 w-7 stroke-[3]" />
                               </div>
-                              <h2 className="text-emerald-800 font-bold text-lg sm:text-xl">
+                              <h2 className="text-xl text-emerald-900 sm:text-2xl">
                                 Payment Successful!
                               </h2>
-                              <p className="mt-2 text-emerald-700 text-xs leading-relaxed">
+                              <p className="mt-2 text-sm leading-relaxed text-emerald-800">
                                 Your photo is unlocked. Receipt and download links have been sent to{" "}
                                 <strong>{paymentState?.email || email}</strong>.
                               </p>
@@ -1158,16 +1182,15 @@ export default function PassportPhotoPreviewPage() {
 
                             <Link
                               href={`/preview/${resultId}/thankyou?paymentId=${paymentState?.paymentId || ""}`}
-                              className="w-full bg-[#4D7C0F] hover:bg-[#3F650C] !text-white text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2.5 transition-all text-sm sm:text-base shadow-md text-center cursor-pointer"
-                              style={{ color: "#ffffff" }}
+                              className="btn-brand btn-lg w-full focus-ring"
                             >
-                              <Download className="w-5 h-5 text-white" />
-                              <span className="!text-white text-white font-bold">Go to Download Studio &rarr;</span>
+                              <Download className="h-5 w-5" aria-hidden="true" />
+                              <span>Go to Download Studio &rarr;</span>
                             </Link>
 
-                            <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-center gap-2 text-center text-xs text-slate-600">
-                              <Mail className="w-3.5 h-3.5 text-lime-700 shrink-0" />
-                              <span>Need assistance? 24/7 Support: <a href={`mailto:${SUPPORT_EMAIL}`} className="font-bold text-slate-900 underline hover:text-lime-700">{SUPPORT_EMAIL}</a></span>
+                            <div className="flex items-center justify-center gap-2 rounded-2xl border border-ink-200 bg-ink-50 p-3 text-center text-sm text-ink-600">
+                              <Mail className="h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
+                              <span>Need assistance? 24/7 Support: <a href={`mailto:${SUPPORT_EMAIL}`} className="font-bold text-ink-950 underline decoration-brand-300 underline-offset-2 hover:text-brand-700">{SUPPORT_EMAIL}</a></span>
                             </div>
                           </div>
                         )}
@@ -1182,12 +1205,12 @@ export default function PassportPhotoPreviewPage() {
           {/* MOBILE STICKY BOTTOM PAYMENT BAR (With inline email input & action button) */}
           {/* ========================================================================= */}
           {!isPaid && (fullImageUrl || previewUrl) && (
-            <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-3.5 pt-2.5 pb-3.5 sm:pb-4 shadow-[0_-6px_30px_rgba(0,0,0,0.12)] lg:hidden">
-              <div className="max-w-md mx-auto space-y-2">
+            <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-ink-200 bg-white/95 px-4 pb-4 pt-3 shadow-[0_-12px_32px_-12px_rgb(11_16_32/0.25)] backdrop-blur-md lg:hidden">
+              <div className="mx-auto max-w-md space-y-2.5">
                 {/* Mobile Sticky Email Input */}
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                    <Mail className="w-4 h-4" />
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-ink-400" aria-hidden="true">
+                    <Mail className="h-4 w-4" />
                   </div>
                   <input
                     type="email"
@@ -1195,38 +1218,38 @@ export default function PassportPhotoPreviewPage() {
                     value={email}
                     onChange={handleEmailChange}
                     placeholder="Enter email to receive photo & invoice"
-                    className={`w-full pl-9 pr-3 py-2.5 bg-slate-50 border rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 transition-all ${
+                    className={`field pl-10 text-sm ${
                       emailError
-                        ? "border-red-400 focus:ring-red-400/30 text-red-950"
-                        : "border-slate-300 focus:ring-lime-500 focus:border-transparent"
+                        ? "border-red-400 text-red-950 focus:border-red-500 focus:shadow-[0_0_0_4px_rgb(239_68_68/0.15)]"
+                        : ""
                     }`}
                     required
                   />
                 </div>
 
                 {emailError && (
-                  <p className="text-[11px] text-red-600 font-semibold px-1">
+                  <p className="px-1 text-xs font-semibold text-red-600">
                     {emailError}
                   </p>
                 )}
 
                 {/* Bottom Row: Selected Plan Info & Primary Action Button */}
-                <div className="flex items-center justify-between gap-2.5">
+                <div className="flex items-center justify-between gap-3">
                   {/* Left side: selected plan & price */}
                   <div className="min-w-0 shrink-0">
                     <div className="flex items-center gap-1.5">
-                      <span className="text-[9.5px] font-extrabold uppercase tracking-wider px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">
+                      <span className="rounded-md bg-brand-50 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-700">
                         {selectedPlan === "expert_edit" ? "Expert Review" : "Standard Pack"}
                       </span>
                     </div>
-                    <div className="flex items-baseline gap-1 mt-0.5">
-                      <span className="text-base sm:text-lg font-black text-slate-900 leading-none">
+                    <div className="mt-1 flex items-baseline gap-1.5">
+                      <span className="font-display text-xl font-extrabold leading-none tracking-tight text-ink-950">
                         {selectedPlan === "expert_edit"
                           ? expertPricing.amountFormatted
                           : standardPricing.amountFormatted}
                       </span>
-                      <span className="text-[10px] text-emerald-600 font-bold flex items-center gap-0.5">
-                        <Shield className="w-2.5 h-2.5" /> Guaranteed
+                      <span className="flex items-center gap-0.5 text-[10px] font-bold text-emerald-700">
+                        <Shield className="h-2.5 w-2.5" aria-hidden="true" /> Secure
                       </span>
                     </div>
                   </div>
@@ -1236,21 +1259,17 @@ export default function PassportPhotoPreviewPage() {
                     type="button"
                     onClick={handleMainCtaClick}
                     disabled={isProcessingPayment}
-                    className={`flex-1 font-bold py-3 px-3.5 rounded-xl text-xs sm:text-sm tracking-wide flex items-center justify-center gap-1.5 cursor-pointer shadow-md transition-all active:scale-[0.98] disabled:opacity-50 ${
-                      selectedPlan === "expert_edit"
-                        ? "bg-lime-600 hover:bg-lime-700 text-white shadow-lime-600/25"
-                        : "bg-slate-900 hover:bg-black text-white shadow-slate-900/25"
-                    }`}
+                    className="btn-brand flex-1 px-4 text-sm focus-ring"
                   >
                     {isProcessingPayment ? (
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
                     ) : (
                       <>
-                        <Lock className="w-3.5 h-3.5 shrink-0" />
+                        <Lock className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                         <span className="truncate">
                           {selectedPlan === "expert_edit" ? "Get Review" : "Download Now"}
                         </span>
-                        <ArrowRight className="w-3.5 h-3.5 shrink-0" />
+                        <ArrowRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                       </>
                     )}
                   </button>
@@ -1264,51 +1283,51 @@ export default function PassportPhotoPreviewPage() {
           {/* ========================================================================= */}
           {isEmailModalOpen && (
             <div
-              className="fixed inset-0 z-[300] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in"
+              className="fixed inset-0 z-[300] flex items-end justify-center bg-ink-950/75 p-0 backdrop-blur-sm animate-fade-in sm:items-center sm:p-4"
               onClick={() => setIsEmailModalOpen(false)}
               role="dialog"
               aria-modal="true"
               aria-labelledby="email-modal-title"
             >
               <div
-                className="relative w-full sm:max-w-md bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl border-t sm:border border-slate-200 overflow-hidden max-h-[92dvh] overflow-y-auto"
+                className="relative max-h-[92dvh] w-full overflow-hidden overflow-y-auto rounded-t-3xl border-t border-ink-200 bg-white shadow-2xl sm:max-w-md sm:rounded-3xl sm:border"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Close Button */}
                 <button
                   type="button"
                   onClick={() => setIsEmailModalOpen(false)}
-                  className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors cursor-pointer z-10"
+                  className="absolute right-4 top-4 z-10 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-ink-100 text-ink-600 transition-colors hover:bg-ink-200 focus-ring"
                   aria-label="Close modal"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="h-4 w-4" />
                 </button>
 
-                <div className="p-5 sm:p-7">
+                <div className="p-6 sm:p-8">
                   {/* Top Icon & Titles */}
-                  <div className="flex items-center gap-3 mb-3 pr-8">
-                    <div className="w-10 h-10 rounded-xl bg-lime-100 text-lime-700 flex items-center justify-center shrink-0">
-                      <Mail className="w-5 h-5" />
-                    </div>
+                  <div className="mb-4 flex items-center gap-3 pr-12">
+                    <span className="icon-tile" aria-hidden="true">
+                      <Mail className="h-5 w-5" />
+                    </span>
                     <div>
-                      <h3 id="email-modal-title" className="text-base sm:text-xl font-bold text-slate-900 leading-tight">
+                      <h3 id="email-modal-title" className="text-lg leading-tight text-ink-950 sm:text-xl">
                         Where should we send your photo?
                       </h3>
-                      <p className="text-[11px] sm:text-xs text-slate-500 font-medium">
+                      <p className="mt-0.5 text-xs text-ink-500">
                         Instant delivery &bull; High-res file &bull; 6×4″ print sheet &bull; Invoice
                       </p>
                     </div>
                   </div>
 
                   {/* Plan Pill */}
-                  <div className="my-3 sm:my-4 p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
+                  <div className="my-5 flex items-center justify-between gap-3 rounded-2xl border border-ink-200 bg-ink-50 p-3.5">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm">{flag}</span>
-                      <span className="text-xs font-bold text-slate-800">
+                      <span className="text-sm" aria-hidden="true">{flag}</span>
+                      <span className="text-sm font-bold text-ink-800">
                         {selectedPlan === "expert_edit" ? "Premium Pack (Expert Review)" : "Standard Pack (AI Verified)"}
                       </span>
                     </div>
-                    <span className="text-xs font-black text-slate-900 bg-white px-2 py-0.5 rounded border border-slate-200">
+                    <span className="rounded-lg border border-ink-200 bg-white px-2 py-0.5 font-display text-sm font-extrabold text-ink-950">
                       {selectedPlan === "expert_edit" ? expertPricing.amountFormatted : standardPricing.amountFormatted}
                     </span>
                   </div>
@@ -1316,8 +1335,8 @@ export default function PassportPhotoPreviewPage() {
                   {/* Form */}
                   <form onSubmit={handleModalEmailSubmit} className="space-y-4">
                     <div>
-                      <label htmlFor="modal-email-input" className="block text-xs font-bold text-slate-700 mb-1.5">
-                        Email Address <span className="text-red-500">*</span>
+                      <label htmlFor="modal-email-input" className="mb-2 block text-sm font-bold text-ink-950">
+                        Email Address <span className="text-red-600">*</span>
                       </label>
                       <input
                         type="email"
@@ -1329,28 +1348,28 @@ export default function PassportPhotoPreviewPage() {
                           if (modalEmailError) setModalEmailError("");
                         }}
                         placeholder="e.g. yourname@example.com"
-                        className={`w-full px-3.5 py-3 bg-white border rounded-xl text-sm focus:outline-none focus:ring-2 transition-all ${
+                        className={`field ${
                           modalEmailError
-                            ? "border-red-400 focus:ring-red-400/30 text-red-950"
-                            : "border-slate-300 focus:ring-lime-500 focus:border-transparent"
+                            ? "border-red-400 text-red-950 focus:border-red-500 focus:shadow-[0_0_0_4px_rgb(239_68_68/0.15)]"
+                            : ""
                         }`}
                         required
                       />
                       {modalEmailError && (
-                        <p className="text-xs text-red-600 font-semibold mt-1">
+                        <p className="mt-1.5 text-xs font-semibold text-red-600">
                           {modalEmailError}
                         </p>
                       )}
                     </div>
 
-                    <div className="space-y-2 pt-1">
+                    <div className="space-y-2.5 pt-1">
                       <button
                         type="submit"
                         disabled={isProcessingPayment}
-                        className="w-full bg-lime-600 hover:bg-lime-700 text-white font-bold py-3.5 px-4 rounded-xl text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md disabled:opacity-50"
+                        className="btn-brand btn-lg w-full focus-ring"
                       >
                         {isProcessingPayment ? (
-                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          <div className="h-5 w-5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
                         ) : (
                           <>
                             <span>Continue to Payment &rarr;</span>
@@ -1360,15 +1379,18 @@ export default function PassportPhotoPreviewPage() {
                       <button
                         type="button"
                         onClick={() => setIsEmailModalOpen(false)}
-                        className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-xl text-xs transition-colors cursor-pointer"
+                        className="btn-outline-brand w-full text-sm focus-ring"
                       >
                         Cancel
                       </button>
                     </div>
 
-                    <p className="text-[10.5px] sm:text-[11px] text-center text-slate-400 flex items-center justify-center gap-1.5 pt-1">
-                      <Shield className="w-3 h-3 text-emerald-600" />
-                      <span>Money-back guarantee if your photo is rejected</span>
+                    <p className="flex items-center justify-center gap-1.5 pt-1 text-center text-xs text-ink-500">
+                      <Shield className="h-3.5 w-3.5 text-emerald-600" aria-hidden="true" />
+                      <span>
+                        <Link href="/refund-policy" className="underline decoration-ink-300 underline-offset-2 hover:text-brand-700">Refund policy</Link>{" "}
+                        applies if your photo is rejected for sizing
+                      </span>
                     </p>
                   </form>
                 </div>
@@ -1381,46 +1403,46 @@ export default function PassportPhotoPreviewPage() {
           {/* ========================================================================= */}
           {isZoomOpen && (
             <div
-              className="fixed inset-0 z-[200] flex items-center justify-center bg-slate-950/85 backdrop-blur-sm p-3 sm:p-4 animate-in fade-in"
+              className="fixed inset-0 z-[200] flex items-center justify-center bg-ink-950/80 p-3 backdrop-blur-sm animate-fade-in sm:p-4"
               onClick={() => setIsZoomOpen(false)}
               role="dialog"
               aria-modal="true"
             >
               <div
-                className="relative max-w-2xl w-full bg-white rounded-2xl p-4 sm:p-6 shadow-2xl border border-slate-200 text-center max-h-[92dvh] overflow-y-auto"
+                className="relative max-h-[92dvh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-ink-200 bg-white p-5 text-center shadow-2xl sm:p-7"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button
                   type="button"
                   onClick={() => setIsZoomOpen(false)}
-                  className="absolute top-3 right-3 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
+                  className="absolute right-3 top-3 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-ink-100 text-ink-700 transition-colors hover:bg-ink-200 focus-ring sm:right-4 sm:top-4"
                   aria-label="Close zoom preview"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="h-4 w-4" />
                 </button>
-                <div className="flex items-center justify-center gap-2 mb-3 pr-6 sm:pr-0">
-                  <span className="text-base">{flag}</span>
-                  <h3 className="text-xs sm:text-base font-bold text-slate-900">
-                    {countryName} Official Photo Preview ({dimensions} px)
+                <div className="mb-4 flex items-center justify-center gap-2 px-12">
+                  <span className="text-base" aria-hidden="true">{flag}</span>
+                  <h3 className="text-base text-ink-950 sm:text-lg">
+                    {countryName} Photo Preview <span className="font-mono text-xs font-semibold text-ink-500 sm:text-sm">({dimensions} px)</span>
                   </h3>
                 </div>
 
-                <div className="flex justify-center items-center bg-slate-50 rounded-xl p-2 sm:p-6 border border-slate-200 overflow-hidden">
+                <div className="flex items-center justify-center overflow-hidden rounded-2xl border border-ink-200 bg-ink-50 bg-dots p-3 sm:p-6">
                   {/* Clean preview image with no dark overlays */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={isPaid ? (fullImageUrl || previewUrl) : previewUrl}
                     alt={`${countryName} Enlarged Preview`}
-                    className="max-h-[50vh] sm:max-h-[60vh] max-w-full object-contain rounded-lg shadow-sm"
+                    className="max-h-[50vh] max-w-full rounded-lg object-contain shadow-soft ring-1 ring-ink-200 sm:max-h-[60vh]"
                   />
                 </div>
 
-                <div className="mt-3 sm:mt-4 flex items-center justify-between gap-3 flex-wrap">
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-3 sm:mt-5">
                   <div className="text-left">
-                    <p className="text-[11px] sm:text-xs font-bold text-emerald-700 flex items-center gap-1">
-                      <Check className="w-3.5 h-3.5 stroke-[3]" /> Official Embassy Dimensions &amp; Biometric Alignment
+                    <p className="flex items-center gap-1.5 text-xs font-bold text-emerald-700 sm:text-sm">
+                      <Check className="h-3.5 w-3.5 stroke-[3]" aria-hidden="true" /> Sized to {countryName}&apos;s published dimensions
                     </p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500 font-medium">
+                    <p className="text-xs text-ink-500">
                       High-resolution 300 DPI version is generated upon checkout.
                     </p>
                   </div>
@@ -1430,7 +1452,7 @@ export default function PassportPhotoPreviewPage() {
                       setIsZoomOpen(false);
                       handleMainCtaClick();
                     }}
-                    className="w-full sm:w-auto bg-lime-600 hover:bg-lime-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition-colors cursor-pointer shadow-xs sm:ml-auto"
+                    className="btn-brand w-full text-sm focus-ring sm:ml-auto sm:w-auto"
                   >
                     Proceed to Download &rarr;
                   </button>
@@ -1444,89 +1466,89 @@ export default function PassportPhotoPreviewPage() {
           {/* ========================================================================= */}
           {isFixModalOpen && (
             <div
-              className="fixed inset-0 z-[250] flex items-end sm:items-center justify-center p-0 sm:p-4 md:p-6 bg-slate-950/75 backdrop-blur-md animate-in fade-in"
+              className="fixed inset-0 z-[250] flex items-end justify-center bg-ink-950/75 p-0 backdrop-blur-md animate-fade-in sm:items-center sm:p-4 md:p-6"
               onClick={() => setIsFixModalOpen(false)}
               role="dialog"
               aria-modal="true"
             >
               <div
-                className="bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl w-full max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-5xl overflow-hidden border-t sm:border border-slate-200/80 relative h-[94dvh] sm:h-auto max-h-[94dvh] sm:max-h-[88vh] flex flex-col transition-all duration-200"
+                className="relative flex h-[94dvh] max-h-[94dvh] w-full max-w-full flex-col overflow-hidden rounded-t-3xl border-t border-ink-200 bg-white shadow-2xl transition-all duration-200 sm:h-auto sm:max-h-[88vh] sm:max-w-xl sm:rounded-3xl sm:border md:max-w-2xl lg:max-w-4xl xl:max-w-5xl"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Header */}
-                <div className="px-4 py-3 sm:px-6 sm:py-4 bg-white border-b border-slate-200/80 relative shrink-0">
+                <div className="relative shrink-0 border-b border-ink-100 bg-white px-5 py-4 sm:px-7 sm:py-5">
                   <button
                     onClick={() => setIsFixModalOpen(false)}
-                    className="absolute top-3 sm:top-4 right-3.5 sm:right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors cursor-pointer z-10"
+                    className="absolute right-3.5 top-3.5 z-10 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-ink-100 text-ink-600 transition-colors hover:bg-ink-200 focus-ring sm:right-5 sm:top-4"
                     aria-label="Close modal"
                   >
-                    <X className="w-4 h-4" />
+                    <X className="h-4 w-4" />
                   </button>
 
-                  <div className="pr-10 sm:pr-12">
-                    <div className="flex items-center gap-2 mb-0.5 flex-wrap">
-                      <span className="bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                  <div className="pr-14">
+                    <div className="mb-2 flex flex-wrap items-center gap-2">
+                      <span className="eyebrow py-1 text-[10px]">
                         Human Expert Review
                       </span>
-                      <span className="text-[11px] text-slate-500 font-medium hidden sm:inline">
-                        &bull; Acceptance Guaranteed
+                      <span className="hidden text-xs font-medium text-ink-500 sm:inline">
+                        &bull; Checked by a person before delivery
                       </span>
                     </div>
-                    <h3 className="text-base sm:text-xl font-bold text-slate-900 leading-tight">
+                    <h3 className="text-xl leading-tight text-ink-950 sm:text-2xl">
                       See What Our Experts Fix
                     </h3>
                   </div>
                 </div>
 
                 {/* Modal Body */}
-                <div className="p-3.5 sm:p-6 overflow-y-auto space-y-3.5 sm:space-y-4 grow bg-slate-50/60">
+                <div className="grow space-y-4 overflow-y-auto bg-ink-50 p-4 sm:space-y-5 sm:p-7">
                   {/* Banner */}
-                  <div className="bg-purple-50/90 border border-purple-200/80 rounded-xl p-3 sm:p-3.5 text-xs text-purple-900 font-medium flex items-start sm:items-center gap-2.5 sm:gap-3 shadow-2xs">
-                    <div className="w-7 h-7 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
-                      <Shield className="w-4 h-4" />
+                  <div className="flex items-start gap-3 rounded-2xl border border-brand-100 bg-brand-50 p-3.5 text-sm font-medium text-brand-900 sm:items-center">
+                    <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-brand-600 ring-1 ring-brand-100 sm:mt-0" aria-hidden="true">
+                      <Shield className="h-4 w-4" />
                     </div>
                     <span className="leading-snug">
-                      This information and customer feedback is added based on user confirmation &amp; verified embassy submission results.
+                      Examples of the kinds of fixes our editors make. Results depend on your original photo.
                     </span>
                   </div>
 
                   {/* Transformation Cards Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     {BEFORE_AFTER_PAIRS.map((pair, idx) => (
                       <div
                         key={idx}
-                        className="bg-white border border-slate-200/90 rounded-2xl p-3.5 sm:p-4 space-y-3 flex flex-col justify-between shadow-2xs hover:border-slate-300 transition-colors"
+                        className="surface flex flex-col justify-between space-y-3 p-4 transition-colors hover:border-brand-200 sm:p-5"
                       >
                         <div>
-                          <div className="flex items-center gap-2 mb-2.5">
-                            <span className="w-5 h-5 rounded-full bg-lime-100 text-lime-800 text-[11px] font-extrabold flex items-center justify-center shrink-0">
+                          <div className="mb-3 flex items-center gap-2.5">
+                            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink-950 text-[11px] font-bold text-white" aria-hidden="true">
                               {idx + 1}
                             </span>
-                            <h4 className="text-xs sm:text-sm font-bold text-slate-900 leading-snug">
+                            <h4 className="text-sm leading-snug text-ink-950 sm:text-base">
                               {pair.title}
                             </h4>
                           </div>
 
-                          <div className="grid grid-cols-2 gap-2.5">
+                          <div className="grid grid-cols-2 gap-3">
                             {/* Before Image */}
                             <div className="space-y-1.5">
                               <div
-                                className="relative w-full rounded-xl overflow-hidden bg-slate-100 border border-red-200 shadow-2xs"
+                                className="relative w-full overflow-hidden rounded-xl border border-ink-200 bg-ink-100"
                                 style={{ aspectRatio: "3 / 4" }}
                               >
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                   src={pair.beforeImg}
                                   alt={pair.beforeTag}
-                                  className="absolute inset-0 w-full h-full object-cover object-center"
+                                  className="absolute inset-0 h-full w-full object-cover object-center"
                                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
                                   loading="lazy"
                                 />
-                                <span className="absolute top-2 left-2 bg-red-600/95 backdrop-blur-xs text-white text-[9.5px] font-extrabold px-2 py-0.5 rounded shadow-xs z-10 uppercase tracking-wider">
+                                <span className="absolute left-2 top-2 z-10 rounded-md bg-red-600 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-soft">
                                   Before
                                 </span>
                               </div>
-                              <p className="text-[10px] sm:text-[11px] text-slate-500 font-medium leading-tight line-clamp-2">
+                              <p className="line-clamp-2 text-[11px] font-medium leading-tight text-ink-500 sm:text-xs">
                                 {pair.beforeTag}
                               </p>
                             </div>
@@ -1534,22 +1556,22 @@ export default function PassportPhotoPreviewPage() {
                             {/* After Image */}
                             <div className="space-y-1.5">
                               <div
-                                className="relative w-full rounded-xl overflow-hidden bg-slate-100 border border-emerald-300 shadow-2xs"
+                                className="relative w-full overflow-hidden rounded-xl border border-emerald-300 bg-ink-100 ring-2 ring-emerald-500/15"
                                 style={{ aspectRatio: "3 / 4" }}
                               >
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                   src={pair.afterImg}
                                   alt={pair.afterTag}
-                                  className="absolute inset-0 w-full h-full object-cover object-center"
+                                  className="absolute inset-0 h-full w-full object-cover object-center"
                                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
                                   loading="lazy"
                                 />
-                                <span className="absolute top-2 left-2 bg-emerald-600/95 backdrop-blur-xs text-white text-[9.5px] font-extrabold px-2 py-0.5 rounded shadow-xs z-10 uppercase tracking-wider">
+                                <span className="absolute left-2 top-2 z-10 rounded-md bg-emerald-600 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-soft">
                                   After
                                 </span>
                               </div>
-                              <p className="text-[10px] sm:text-[11px] text-emerald-700 font-bold leading-tight line-clamp-2">
+                              <p className="line-clamp-2 text-[11px] font-bold leading-tight text-emerald-700 sm:text-xs">
                                 {pair.afterTag}
                               </p>
                             </div>
@@ -1561,25 +1583,25 @@ export default function PassportPhotoPreviewPage() {
                 </div>
 
                 {/* Footer Action */}
-                <div className="p-3.5 sm:p-5 bg-white border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
-                  <div className="text-xs text-slate-600 font-medium text-center sm:text-left">
-                    Select <strong>Expert Edit ({expertPricing.amountFormatted})</strong> for guaranteed human verification.
+                <div className="flex shrink-0 flex-col items-center justify-between gap-3 border-t border-ink-100 bg-white p-4 sm:flex-row sm:p-5">
+                  <div className="text-center text-sm text-ink-600 sm:text-left">
+                    Select <strong className="text-ink-950">Expert Edit ({expertPricing.amountFormatted})</strong> for a manual check by a person.
                   </div>
-                  <div className="flex items-center gap-2.5 w-full sm:w-auto">
+                  <div className="flex w-full items-center gap-2.5 sm:w-auto">
                     <button
                       type="button"
                       onClick={() => {
                         setSelectedPlan("expert_edit");
                         setIsFixModalOpen(false);
                       }}
-                      className="flex-1 sm:flex-initial bg-lime-600 hover:bg-lime-700 text-white font-bold py-3 px-6 rounded-xl text-xs sm:text-sm transition-colors text-center shadow-xs cursor-pointer"
+                      className="btn-brand flex-1 text-sm focus-ring sm:flex-initial"
                     >
                       Continue with Expert Review ({expertPricing.amountFormatted}) &rarr;
                     </button>
                     <button
                       type="button"
                       onClick={() => setIsFixModalOpen(false)}
-                      className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-4 rounded-xl text-xs sm:text-sm transition-colors cursor-pointer"
+                      className="btn-outline-brand text-sm focus-ring"
                     >
                       Close
                     </button>

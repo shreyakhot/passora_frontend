@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Mail, Clock, Shield } from "lucide-react";
+import { Mail, Clock, Shield, ArrowRight, ChevronRight, LifeBuoy } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
@@ -104,164 +104,168 @@ export default function ContactUsPage() {
 
       <Navbar ctaText="Create Photo" ctaHref="/passport-size-photo-maker" />
 
-      <main
-        className="flex-1 bg-slate-50 min-h-screen py-8 sm:py-14 text-slate-900"
-        id="main-content"
-      >
-        <div className="container-narrow max-w-4xl px-4 sm:px-6">
-          {/* Breadcrumb */}
-          <nav className="text-xs text-slate-600 mb-4" aria-label="Breadcrumb">
-            <ol className="flex items-center gap-1.5 list-none p-0 m-0">
-              <li>
-                <Link
-                  href="/"
-                  className="text-slate-600 hover:text-lime-800 transition-colors font-medium"
-                >
-                  Home
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li className="text-slate-900 font-semibold" aria-current="page">
-                Contact Us
-              </li>
-            </ol>
-          </nav>
+      <main className="flex-1 bg-white text-ink-950" id="main-content">
+        {/* Page Heading */}
+        <section
+          className="relative overflow-hidden border-b border-ink-100"
+          aria-labelledby="contact-page-heading"
+        >
+          <div className="pointer-events-none absolute inset-0 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" aria-hidden="true" />
+          <div className="pointer-events-none absolute -right-40 -top-40 h-[440px] w-[440px] rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
 
-          {/* Page Heading */}
-          <div className="mb-8 sm:mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lime-100 border border-lime-300 text-[#365314] text-xs font-bold mb-3">
-              <span>SUPPORT &amp; INQUIRIES</span>
+          <div className="container-narrow relative pb-14 pt-8 sm:pb-20 sm:pt-12">
+            {/* Breadcrumb */}
+            <nav className="text-sm" aria-label="Breadcrumb">
+              <ol className="m-0 flex list-none flex-wrap items-center gap-1.5 p-0 text-ink-500">
+                <li>
+                  <Link
+                    href="/"
+                    className="inline-flex min-h-11 items-center font-medium text-ink-500 transition-colors hover:text-brand-700"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li aria-hidden="true">
+                  <ChevronRight className="h-3.5 w-3.5 text-ink-300" />
+                </li>
+                <li className="font-semibold text-ink-950" aria-current="page">
+                  Contact Us
+                </li>
+              </ol>
+            </nav>
+
+            <div className="mt-4 max-w-3xl">
+              <span className="eyebrow">
+                <LifeBuoy className="h-3.5 w-3.5" aria-hidden="true" />
+                SUPPORT &amp; INQUIRIES
+              </span>
+              <h1 id="contact-page-heading" className="display-1 mt-5 text-ink-950">
+                Contact {SITE_NAME} Support
+              </h1>
+              <p className="lead mt-5 max-w-2xl">
+                Have questions about passport or visa photo requirements, an existing
+                download session, or need assistance? Fill out the form below or
+                email us directly.
+              </p>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight leading-tight">
-              Contact {SITE_NAME} Support
-            </h1>
-            <p className="text-slate-700 text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">
-              Have questions about passport or visa photo requirements, an existing
-              download session, or need assistance? Fill out the form below or
-              email us directly.
-            </p>
           </div>
+        </section>
 
-          <div className="grid lg:grid-cols-12 gap-8 items-start">
-            {/* Form Column */}
-            <div className="lg:col-span-7">
-              <ContactForm />
-            </div>
+        <section className="bg-ink-50 py-12 sm:py-16 lg:py-20" aria-label="Contact form and support details">
+          <div className="container-narrow">
+            <div className="grid items-start gap-8 lg:grid-cols-12 lg:gap-10">
+              {/* Form Column */}
+              <div className="lg:col-span-7">
+                <ContactForm />
+              </div>
 
-            {/* Sidebar Information Column */}
-            <div className="lg:col-span-5 space-y-6">
-              {/* Direct Contact Card */}
-              <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
-                <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                  <Mail className="w-5 h-5 text-[#4D7C0F]" aria-hidden="true" />
-                  <span>Direct Support</span>
-                </h2>
-                <div className="space-y-3.5 text-sm text-slate-700">
-                  <div>
-                    <span className="text-xs text-slate-500 font-bold uppercase tracking-wider block mb-1">
-                      Email Address
+              {/* Sidebar Information Column */}
+              <div className="space-y-5 lg:sticky lg:top-24 lg:col-span-5">
+                {/* Direct Contact Card */}
+                <div className="surface p-6 sm:p-7">
+                  <h2 className="flex items-center gap-3 text-lg font-extrabold text-ink-950">
+                    <span className="icon-tile" aria-hidden="true">
+                      <Mail className="h-5 w-5" />
                     </span>
-                    <a
-                      href={`mailto:${SUPPORT_EMAIL}`}
-                      className="text-base font-bold text-[#365314] hover:underline"
-                    >
-                      {SUPPORT_EMAIL}
-                    </a>
-                  </div>
+                    <span>Direct Support</span>
+                  </h2>
+                  <div className="mt-5 space-y-4 text-sm text-ink-700">
+                    <div>
+                      <span className="mb-1 block text-xs font-bold uppercase tracking-wider text-ink-500">
+                        Email Address
+                      </span>
+                      <a
+                        href={`mailto:${SUPPORT_EMAIL}`}
+                        className="inline-flex min-h-11 items-center break-all text-base font-bold text-brand-700 underline decoration-brand-300 decoration-2 underline-offset-4 transition-colors hover:text-brand-800 hover:decoration-brand-600"
+                      >
+                        {SUPPORT_EMAIL}
+                      </a>
+                    </div>
 
-                  <div className="pt-3 border-t border-slate-100">
-                    <span className="text-xs text-slate-500 font-bold uppercase tracking-wider block mb-1">
-                      Operating Hours
-                    </span>
-                    <p className="text-slate-800 font-medium">
-                      Monday – Friday: 9:00 AM – 5:00 PM UTC
-                    </p>
-                  </div>
+                    <div className="border-t border-ink-100 pt-4">
+                      <span className="mb-1 block text-xs font-bold uppercase tracking-wider text-ink-500">
+                        Operating Hours
+                      </span>
+                      <p className="font-medium text-ink-800">
+                        Monday – Friday: 9:00 AM – 5:00 PM UTC
+                      </p>
+                    </div>
 
-                  <div className="pt-3 border-t border-slate-100">
-                    <span className="text-xs text-slate-500 font-bold uppercase tracking-wider block mb-1">
-                      Response Expectations
-                    </span>
-                    <p className="text-slate-800 font-medium flex items-center gap-1.5">
-                      <Clock
-                        className="w-4 h-4 text-slate-600 shrink-0"
-                        aria-hidden="true"
-                      />
-                      <span>Replies within 24 business hours</span>
-                    </p>
+                    <div className="border-t border-ink-100 pt-4">
+                      <span className="mb-1 block text-xs font-bold uppercase tracking-wider text-ink-500">
+                        Response Expectations
+                      </span>
+                      <p className="flex items-center gap-1.5 font-medium text-ink-800">
+                        <Clock
+                          className="h-4 w-4 shrink-0 text-brand-600"
+                          aria-hidden="true"
+                        />
+                        <span>Replies within 24 business hours</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Quick Guidance Box */}
-              <div className="bg-lime-50 border border-lime-200 rounded-2xl p-6 text-xs text-slate-800 space-y-3">
-                <h3 className="font-bold text-sm text-[#365314] flex items-center gap-2">
-                  <Shield
-                    className="w-4 h-4 text-[#4D7C0F]"
-                    aria-hidden="true"
-                  />
-                  <span>Acceptance Guarantee</span>
-                </h3>
-                <p className="leading-relaxed font-medium">
-                  If your passport or visa photo created on {SITE_NAME} is
-                  rejected by the issuing authority for dimensional reasons, we will gladly re-process your photo or
-                  issue a full refund in accordance with our{" "}
-                  <Link
-                    href="/refund-policy"
-                    className="font-bold underline text-[#365314]"
-                  >
-                    Refund Policy
-                  </Link>
-                  .
-                </p>
-                <p className="leading-relaxed text-slate-600">
-                  {SITE_DISCLAIMER}
-                </p>
-              </div>
-
-              {/* Useful Links Box */}
-              <div className="bg-white border border-slate-200 rounded-2xl p-6 text-sm space-y-3 shadow-xs">
-                <h3 className="font-bold text-slate-900">
-                  Frequently Accessed:
-                </h3>
-                <ul className="space-y-2 list-none p-0 m-0 text-slate-700">
-                  <li>
-                    <Link
-                      href="/#faq"
-                      className="hover:text-lime-800 hover:underline font-medium"
-                    >
-                      • Frequently Asked Questions
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/#photo-rules"
-                      className="hover:text-lime-800 hover:underline font-medium"
-                    >
-                      • Common Passport Photo Rules
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/data-security-privacy-safeguards"
-                      className="hover:text-lime-800 hover:underline font-medium"
-                    >
-                      • Data Security &amp; Privacy Safeguards
-                    </Link>
-                  </li>
-                  <li>
+                {/* Quick Guidance Box */}
+                <div className="space-y-3 rounded-[1.25rem] border border-brand-100 bg-brand-50 p-6 text-sm text-ink-800 sm:p-7">
+                  <h3 className="flex items-center gap-2 text-base font-extrabold text-ink-950">
+                    <Shield
+                      className="h-5 w-5 text-brand-600"
+                      aria-hidden="true"
+                    />
+                    <span>Acceptance Guarantee</span>
+                  </h3>
+                  <p className="font-medium leading-relaxed">
+                    If your passport or visa photo created on {SITE_NAME} is
+                    rejected by the issuing authority for dimensional reasons, we will gladly re-process your photo or
+                    issue a full refund in accordance with our{" "}
                     <Link
                       href="/refund-policy"
-                      className="hover:text-lime-800 hover:underline font-medium"
+                      className="font-bold text-brand-700 underline decoration-brand-300 decoration-2 underline-offset-2 hover:text-brand-800"
                     >
-                      • Refund Policy &amp; Terms
+                      Refund Policy
                     </Link>
-                  </li>
-                </ul>
+                    .
+                  </p>
+                  <p className="border-t border-brand-100 pt-3 text-xs leading-relaxed text-ink-600">
+                    {SITE_DISCLAIMER}
+                  </p>
+                </div>
+
+                {/* Useful Links Box */}
+                <div className="surface p-6 text-sm sm:p-7">
+                  <h3 className="text-base font-extrabold text-ink-950">
+                    Frequently Accessed:
+                  </h3>
+                  <ul className="m-0 mt-3 list-none divide-y divide-ink-100 p-0 text-ink-700">
+                    {[
+                      { href: "/#faq", label: "Frequently Asked Questions" },
+                      { href: "/#photo-rules", label: "Common Passport Photo Rules" },
+                      {
+                        href: "/data-security-privacy-safeguards",
+                        label: "Data Security & Privacy Safeguards",
+                      },
+                      { href: "/refund-policy", label: "Refund Policy & Terms" },
+                    ].map((item) => (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          className="group flex min-h-11 items-center justify-between gap-3 py-2.5 font-semibold transition-colors hover:text-brand-700"
+                        >
+                          <span>{item.label}</span>
+                          <ArrowRight
+                            className="h-4 w-4 shrink-0 text-ink-300 transition-transform group-hover:translate-x-0.5 group-hover:text-brand-600"
+                            aria-hidden="true"
+                          />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </main>
 
       <Footer />

@@ -139,7 +139,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/logo.jpg",
+        source: "/logo-mark.jpg",
         headers: [
           {
             key: "Cache-Control",
@@ -148,7 +148,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/icon.jpg",
+        source: "/icon.png",
         headers: [
           {
             key: "Cache-Control",
@@ -157,7 +157,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/apple-icon.jpg",
+        source: "/apple-icon.png",
         headers: [
           {
             key: "Cache-Control",

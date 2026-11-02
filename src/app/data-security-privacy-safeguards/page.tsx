@@ -10,6 +10,9 @@ import {
   CheckCircle,
   Mail,
   ShieldCheck,
+  ChevronDown,
+  ChevronRight,
+  ListOrdered,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -47,6 +50,56 @@ export const metadata: Metadata = {
   },
 };
 
+type TocItem = { id: string; label: string };
+
+/** "On this page" navigation built from the section headings below. */
+function PageToc({ items }: { items: TocItem[] }) {
+  const links = (linkClassName: string) => (
+    <ol className="m-0 list-none p-0">
+      {items.map((item) => (
+        <li key={item.id}>
+          <a href={`#${item.id}`} className={linkClassName}>
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ol>
+  );
+
+  return (
+    <>
+      {/* Mobile / tablet: collapsible */}
+      <details className="surface group overflow-hidden lg:hidden [&_summary::-webkit-details-marker]:hidden">
+        <summary className="flex min-h-12 cursor-pointer select-none list-none items-center justify-between gap-3 px-5 py-3 text-sm font-bold text-ink-950 focus-ring">
+          <span className="flex items-center gap-2">
+            <ListOrdered className="h-4 w-4 text-brand-600" aria-hidden="true" />
+            On this page
+          </span>
+          <ChevronDown
+            className="h-4 w-4 text-ink-500 transition-transform group-open:rotate-180"
+            aria-hidden="true"
+          />
+        </summary>
+        <nav aria-label="On this page" className="border-t border-ink-100 px-2 py-2">
+          {links(
+            "flex min-h-11 items-center rounded-xl px-3 py-2 text-sm font-medium text-ink-700 transition-colors hover:bg-brand-50 hover:text-brand-700"
+          )}
+        </nav>
+      </details>
+
+      {/* Desktop: sticky sidebar */}
+      <nav aria-label="On this page" className="hidden lg:sticky lg:top-24 lg:block">
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-ink-500">On this page</p>
+        <div className="border-l border-ink-200">
+          {links(
+            "-ml-px block border-l-2 border-transparent py-2 pl-4 pr-2 text-sm font-medium leading-snug text-ink-600 transition-colors hover:border-brand-600 hover:text-ink-950"
+          )}
+        </div>
+      </nav>
+    </>
+  );
+}
+
 export default function DataSecurityPrivacySafeguardsPage() {
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -76,195 +129,232 @@ export default function DataSecurityPrivacySafeguardsPage() {
 
       <Navbar ctaText="Create Photo" ctaHref="/passport-size-photo-maker" />
 
-      <main className="flex-1 bg-white text-slate-900" id="main-content">
+      <main className="flex-1 bg-white text-ink-950" id="main-content">
         {/* Hero Section */}
-        <section className="bg-slate-50/80 py-10 sm:py-16 border-b border-slate-200/80" aria-label="Data security and safeguards overview">
-          <div className="container-narrow max-w-4xl">
+        <section className="relative overflow-hidden border-b border-ink-100" aria-label="Data security and safeguards overview">
+          <div className="pointer-events-none absolute inset-0 bg-dots [mask-image:linear-gradient(to_bottom,black,transparent_85%)]" aria-hidden="true" />
+          <div className="pointer-events-none absolute -right-40 -top-40 h-[440px] w-[440px] rounded-full bg-brand-200/50 blur-3xl" aria-hidden="true" />
+
+          <div className="container-narrow relative pb-14 pt-8 sm:pb-20 sm:pt-12">
             {/* Breadcrumb */}
-            <nav className="text-xs text-slate-600 mb-4" aria-label="Breadcrumb">
-              <ol className="flex items-center gap-1.5 list-none p-0 m-0">
+            <nav className="text-sm" aria-label="Breadcrumb">
+              <ol className="m-0 flex list-none flex-wrap items-center gap-1.5 p-0 text-ink-500">
                 <li>
-                  <Link href="/" className="text-slate-600 hover:text-lime-800 transition-colors font-medium">
+                  <Link href="/" className="inline-flex min-h-11 items-center font-medium text-ink-500 transition-colors hover:text-brand-700">
                     Home
                   </Link>
                 </li>
-                <li aria-hidden="true">/</li>
-                <li className="text-slate-900 font-semibold" aria-current="page">
+                <li aria-hidden="true">
+                  <ChevronRight className="h-3.5 w-3.5 text-ink-300" />
+                </li>
+                <li className="font-semibold text-ink-950" aria-current="page">
                   Data Security &amp; Privacy Safeguards
                 </li>
               </ol>
             </nav>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lime-100 border border-lime-300 text-[#365314] text-xs font-bold mb-4">
-              <span>🔒 PRIVACY-FIRST ARCHITECTURE</span>
-            </div>
+            <div className="mt-4 max-w-3xl">
+              <span className="eyebrow">
+                <Lock className="h-3.5 w-3.5" aria-hidden="true" />
+                PRIVACY-FIRST ARCHITECTURE
+              </span>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] tracking-tight leading-tight mb-4">
-              Data Security &amp; Privacy Safeguards
-            </h1>
-            <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal">
-              {SITE_NAME} is built from the ground up to protect your personal photographs and privacy. This document outlines our actual technical safeguards, transmission security, and data handling practices.
-            </p>
+              <h1 className="display-1 mt-5 text-ink-950">
+                Data Security &amp; Privacy Safeguards
+              </h1>
+              <p className="lead mt-5 max-w-2xl">
+                {SITE_NAME} is built from the ground up to protect your personal photographs and privacy. This document outlines our actual technical safeguards, transmission security, and data handling practices.
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* Content Article */}
-        <article className="container-narrow max-w-4xl py-12 sm:py-16 space-y-12">
-          {/* Summary Box */}
-          <div className="bg-lime-50/70 border border-lime-300 rounded-2xl p-6 sm:p-8">
-            <h2 className="text-xl font-bold text-[#0F172A] mb-3 flex items-center gap-2.5">
-              <ShieldCheck className="w-6 h-6 text-[#4D7C0F]" aria-hidden="true" />
-              <span>Core Security Principles</span>
-            </h2>
-            <div className="grid sm:grid-cols-2 gap-4 text-sm text-slate-800 font-medium">
-              <div className="flex items-start gap-2.5">
-                <CheckCircle className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                <span>No facial-recognition database or biometric profiling</span>
+        <div className="container-narrow py-12 sm:py-16 lg:py-20">
+          <div className="grid gap-10 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-16">
+            <aside>
+              <PageToc
+                items={[
+                  { id: "client-side-heading", label: "1. In-Browser Image Processing" },
+                  { id: "encryption-heading", label: "2. Encrypted Transmission (TLS 1.3 / HTTPS)" },
+                  { id: "retention-heading", label: "3. Limited Storage & Expiring Download Links" },
+                  { id: "isolation-heading", label: "4. Server-Side Security Isolation" },
+                  { id: "payment-heading", label: "5. Payment Processing Security" },
+                  { id: "rights-heading", label: "6. User Privacy Rights & Client Storage Control" },
+                  { id: "contact-sec-heading", label: "Security Contacts & Inquiries" },
+                ]}
+              />
+            </aside>
+
+            {/* Content Article */}
+            <article className="min-w-0 max-w-[72ch] text-base leading-relaxed text-ink-600 sm:text-[1.0625rem]">
+              {/* Summary Box */}
+              <div className="relative overflow-hidden rounded-3xl border border-brand-200 bg-brand-50 p-6 sm:p-8">
+                <div className="pointer-events-none absolute inset-0 bg-dots opacity-60 [mask-image:linear-gradient(to_left,black,transparent_70%)]" aria-hidden="true" />
+                <div className="relative">
+                  <h2 className="flex items-center gap-3 text-xl font-extrabold text-ink-950 sm:text-2xl">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-white shadow-brand" aria-hidden="true">
+                      <ShieldCheck className="h-5 w-5" />
+                    </span>
+                    <span>Core Security Principles</span>
+                  </h2>
+                  <div className="mt-5 grid gap-3 text-sm font-medium text-ink-800 sm:grid-cols-2">
+                    <div className="flex items-start gap-2.5 rounded-2xl border border-brand-100 bg-white p-4">
+                      <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
+                      <span>No facial-recognition database or biometric profiling</span>
+                    </div>
+                    <div className="flex items-start gap-2.5 rounded-2xl border border-brand-100 bg-white p-4">
+                      <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
+                      <span>Client-side in-browser image optimization</span>
+                    </div>
+                    <div className="flex items-start gap-2.5 rounded-2xl border border-brand-100 bg-white p-4">
+                      <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
+                      <span>End-to-end TLS 1.3 encrypted data transmission</span>
+                    </div>
+                    <div className="flex items-start gap-2.5 rounded-2xl border border-brand-100 bg-white p-4">
+                      <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
+                      <span>No user account creation required</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-start gap-2.5">
-                <CheckCircle className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                <span>Client-side in-browser image optimization</span>
+
+              <div className="mt-10 divide-y divide-ink-100 [&>section]:py-10 [&>section:first-child]:pt-0">
+                {/* 1. Client-Side Processing & Memory Handling */}
+                <section aria-labelledby="client-side-heading" className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="icon-tile" aria-hidden="true">
+                      <EyeOff className="h-5 w-5" />
+                    </span>
+                    <h2 id="client-side-heading" className="scroll-mt-24 text-xl font-extrabold text-ink-950 sm:text-2xl">
+                      1. In-Browser Image Processing
+                    </h2>
+                  </div>
+                  <p>
+                    Whenever you upload a photograph to {SITE_NAME}, initial image inspection, local previews, and size pre-compression (down to &le; 3 MB) occur directly inside your browser via standard HTML5 Canvas and Web APIs.
+                  </p>
+                  <p>
+                    This ensures your uncompressed high-resolution original file never leaves your computer or phone unnecessarily, minimizing bandwidth and exposure.
+                  </p>
+                </section>
+
+                {/* 2. Encryption in Transit */}
+                <section aria-labelledby="encryption-heading" className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="icon-tile" aria-hidden="true">
+                      <Lock className="h-5 w-5" />
+                    </span>
+                    <h2 id="encryption-heading" className="scroll-mt-24 text-xl font-extrabold text-ink-950 sm:text-2xl">
+                      2. Encrypted Transmission (TLS 1.3 / HTTPS)
+                    </h2>
+                  </div>
+                  <p>
+                    When processing requires automated biometric alignment and background formatting, your image payload is transmitted over an encrypted HTTPS connection utilizing modern Transport Layer Security (TLS 1.3) protocols.
+                  </p>
+                  <p>
+                    HTTP Strict Transport Security (HSTS) is enforced to ensure man-in-the-middle attacks and protocol downgrades are prevented.
+                  </p>
+                </section>
+
+                {/* 3. Zero Permanent Storage & Ephemeral Processing */}
+                <section aria-labelledby="retention-heading" className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="icon-tile" aria-hidden="true">
+                      <Trash2 className="h-5 w-5" />
+                    </span>
+                    <h2 id="retention-heading" className="scroll-mt-24 text-xl font-extrabold text-ink-950 sm:text-2xl">
+                      3. Limited Storage &amp; Expiring Download Links
+                    </h2>
+                  </div>
+                  <p>
+                    {SITE_NAME} does not maintain a facial-recognition database, biometric repository, or public photo gallery of uploaded images.
+                  </p>
+                  <p>
+                    Your processed photo, and the original photo you uploaded when you place an order, are stored with our secure cloud image-hosting provider only so we can deliver your files, carry out Expert Edit reviews, and handle support and refund requests. Download links are private and expire 72 hours after they are issued. See our{" "}
+                    <Link href="/privacy-policy" className="font-semibold text-brand-700 underline decoration-brand-300 decoration-2 underline-offset-2 transition-colors hover:text-brand-800 hover:decoration-brand-600">Privacy Policy</Link>{" "}
+                    for full retention details.
+                  </p>
+                </section>
+
+                {/* 4. API Key Isolation & Server-Side Proxies */}
+                <section aria-labelledby="isolation-heading" className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="icon-tile" aria-hidden="true">
+                      <KeyRound className="h-5 w-5" />
+                    </span>
+                    <h2 id="isolation-heading" className="scroll-mt-24 text-xl font-extrabold text-ink-950 sm:text-2xl">
+                      4. Server-Side Security Isolation
+                    </h2>
+                  </div>
+                  <p>
+                    All interactions with backend processing services are isolated inside Next.js server-side route handlers (<code className="rounded-md border border-brand-100 bg-brand-50 px-1.5 py-0.5 font-mono text-[0.85em] font-semibold text-brand-800">/api/passport-photo</code>).
+                  </p>
+                  <p>
+                    Secret API keys, credentials, and internal endpoints are never exposed to client browsers or visible in network inspection tools.
+                  </p>
+                </section>
+
+                {/* 5. Payment Security */}
+                <section aria-labelledby="payment-heading" className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="icon-tile" aria-hidden="true">
+                      <CreditCard className="h-5 w-5" />
+                    </span>
+                    <h2 id="payment-heading" className="scroll-mt-24 text-xl font-extrabold text-ink-950 sm:text-2xl">
+                      5. Payment Processing Security
+                    </h2>
+                  </div>
+                  <p>
+                    Payment transactions are processed by Razorpay, a PCI-DSS compliant payment gateway.
+                  </p>
+                  <p>
+                    {SITE_NAME} never handles, processes, or stores your raw credit or debit card numbers, CVVs, or banking credentials on our web servers.
+                  </p>
+                </section>
+
+                {/* 6. User Privacy Rights & Local Control */}
+                <section aria-labelledby="rights-heading" className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="icon-tile" aria-hidden="true">
+                      <UserCheck className="h-5 w-5" />
+                    </span>
+                    <h2 id="rights-heading" className="scroll-mt-24 text-xl font-extrabold text-ink-950 sm:text-2xl">
+                      6. User Privacy Rights &amp; Client Storage Control
+                    </h2>
+                  </div>
+                  <p>
+                    Result previews and session references are kept in your browser&rsquo;s temporary <code className="rounded-md border border-brand-100 bg-brand-50 px-1.5 py-0.5 font-mono text-[0.85em] font-semibold text-brand-800">sessionStorage</code> and <code className="rounded-md border border-brand-100 bg-brand-50 px-1.5 py-0.5 font-mono text-[0.85em] font-semibold text-brand-800">localStorage</code>.
+                  </p>
+                  <p>
+                    You can instantly purge all locally stored references at any time simply by closing your browser tab or clearing your browser site data. Depending on applicable data-protection laws (including the GDPR where it applies), you may also have the right to request confirmation, a copy, or deletion of any data we hold about you.
+                  </p>
+                </section>
               </div>
-              <div className="flex items-start gap-2.5">
-                <CheckCircle className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                <span>End-to-end TLS 1.3 encrypted data transmission</span>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <CheckCircle className="w-4 h-4 text-[#4D7C0F] shrink-0 mt-0.5" aria-hidden="true" />
-                <span>No user account creation required</span>
-              </div>
-            </div>
+
+              {/* 7. Incident Response & Security Contact */}
+              <section aria-labelledby="contact-sec-heading" className="relative mt-6 overflow-hidden rounded-3xl bg-ink-950 p-7 text-white sm:p-10">
+                <div className="pointer-events-none absolute inset-0 bg-dots-dark" aria-hidden="true" />
+                <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-brand-600/30 blur-3xl" aria-hidden="true" />
+                <div className="relative space-y-4">
+                  <h2 id="contact-sec-heading" className="scroll-mt-24 text-xl font-extrabold text-white sm:text-2xl">
+                    Security Contacts &amp; Inquiries
+                  </h2>
+                  <p className="max-w-2xl text-sm leading-relaxed text-ink-300 sm:text-base">
+                    If you have any questions about our data security architecture or wish to report a security inquiry, please contact our technical team directly:
+                  </p>
+                  <div className="pt-2">
+                    <a
+                      href={`mailto:${SUPPORT_EMAIL}`}
+                      className="btn-brand max-w-full"
+                    >
+                      <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
+                      <span className="break-all">{SUPPORT_EMAIL}</span>
+                    </a>
+                  </div>
+                </div>
+              </section>
+            </article>
           </div>
-
-          {/* 1. Client-Side Processing & Memory Handling */}
-          <section aria-labelledby="client-side-heading" className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-lime-50 border border-lime-200 flex items-center justify-center text-[#4D7C0F]" aria-hidden="true">
-                <EyeOff className="w-5 h-5" />
-              </div>
-              <h2 id="client-side-heading" className="text-2xl font-bold text-[#0F172A] tracking-tight">
-                1. In-Browser Image Processing
-              </h2>
-            </div>
-            <p className="text-slate-700 leading-relaxed text-base">
-              Whenever you upload a photograph to {SITE_NAME}, initial image inspection, local previews, and size pre-compression (down to &le; 3 MB) occur directly inside your browser via standard HTML5 Canvas and Web APIs.
-            </p>
-            <p className="text-slate-700 leading-relaxed text-base">
-              This ensures your uncompressed high-resolution original file never leaves your computer or phone unnecessarily, minimizing bandwidth and exposure.
-            </p>
-          </section>
-
-          {/* 2. Encryption in Transit */}
-          <section aria-labelledby="encryption-heading" className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-lime-50 border border-lime-200 flex items-center justify-center text-[#4D7C0F]" aria-hidden="true">
-                <Lock className="w-5 h-5" />
-              </div>
-              <h2 id="encryption-heading" className="text-2xl font-bold text-[#0F172A] tracking-tight">
-                2. Encrypted Transmission (TLS 1.3 / HTTPS)
-              </h2>
-            </div>
-            <p className="text-slate-700 leading-relaxed text-base">
-              When processing requires automated biometric alignment and background formatting, your image payload is transmitted over an encrypted HTTPS connection utilizing modern Transport Layer Security (TLS 1.3) protocols.
-            </p>
-            <p className="text-slate-700 leading-relaxed text-base">
-              HTTP Strict Transport Security (HSTS) is enforced to ensure man-in-the-middle attacks and protocol downgrades are prevented.
-            </p>
-          </section>
-
-          {/* 3. Zero Permanent Storage & Ephemeral Processing */}
-          <section aria-labelledby="retention-heading" className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-lime-50 border border-lime-200 flex items-center justify-center text-[#4D7C0F]" aria-hidden="true">
-                <Trash2 className="w-5 h-5" />
-              </div>
-              <h2 id="retention-heading" className="text-2xl font-bold text-[#0F172A] tracking-tight">
-                3. Limited Storage &amp; Expiring Download Links
-              </h2>
-            </div>
-            <p className="text-slate-700 leading-relaxed text-base">
-              {SITE_NAME} does not maintain a facial-recognition database, biometric repository, or public photo gallery of uploaded images.
-            </p>
-            <p className="text-slate-700 leading-relaxed text-base">
-              Your processed photo, and the original photo you uploaded when you place an order, are stored with our secure cloud image-hosting provider only so we can deliver your files, carry out Expert Edit reviews, and handle support and refund requests. Download links are private and expire 72 hours after they are issued. See our{" "}
-              <Link href="/privacy-policy" className="text-[#365314] font-semibold underline">Privacy Policy</Link>{" "}
-              for full retention details.
-            </p>
-          </section>
-
-          {/* 4. API Key Isolation & Server-Side Proxies */}
-          <section aria-labelledby="isolation-heading" className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-lime-50 border border-lime-200 flex items-center justify-center text-[#4D7C0F]" aria-hidden="true">
-                <KeyRound className="w-5 h-5" />
-              </div>
-              <h2 id="isolation-heading" className="text-2xl font-bold text-[#0F172A] tracking-tight">
-                4. Server-Side Security Isolation
-              </h2>
-            </div>
-            <p className="text-slate-700 leading-relaxed text-base">
-              All interactions with backend processing services are isolated inside Next.js server-side route handlers (<code className="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono text-slate-800">/api/passport-photo</code>).
-            </p>
-            <p className="text-slate-700 leading-relaxed text-base">
-              Secret API keys, credentials, and internal endpoints are never exposed to client browsers or visible in network inspection tools.
-            </p>
-          </section>
-
-          {/* 5. Payment Security */}
-          <section aria-labelledby="payment-heading" className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-lime-50 border border-lime-200 flex items-center justify-center text-[#4D7C0F]" aria-hidden="true">
-                <CreditCard className="w-5 h-5" />
-              </div>
-              <h2 id="payment-heading" className="text-2xl font-bold text-[#0F172A] tracking-tight">
-                5. Payment Processing Security
-              </h2>
-            </div>
-            <p className="text-slate-700 leading-relaxed text-base">
-              Payment transactions are processed by Razorpay, a PCI-DSS compliant payment gateway.
-            </p>
-            <p className="text-slate-700 leading-relaxed text-base">
-              {SITE_NAME} never handles, processes, or stores your raw credit or debit card numbers, CVVs, or banking credentials on our web servers.
-            </p>
-          </section>
-
-          {/* 6. User Privacy Rights & Local Control */}
-          <section aria-labelledby="rights-heading" className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-lime-50 border border-lime-200 flex items-center justify-center text-[#4D7C0F]" aria-hidden="true">
-                <UserCheck className="w-5 h-5" />
-              </div>
-              <h2 id="rights-heading" className="text-2xl font-bold text-[#0F172A] tracking-tight">
-                6. User Privacy Rights &amp; Client Storage Control
-              </h2>
-            </div>
-            <p className="text-slate-700 leading-relaxed text-base">
-              Result previews and session references are kept in your browser&rsquo;s temporary <code className="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono text-slate-800">sessionStorage</code> and <code className="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono text-slate-800">localStorage</code>.
-            </p>
-            <p className="text-slate-700 leading-relaxed text-base">
-              You can instantly purge all locally stored references at any time simply by closing your browser tab or clearing your browser site data. Depending on applicable data-protection laws (including the GDPR where it applies), you may also have the right to request confirmation, a copy, or deletion of any data we hold about you.
-            </p>
-          </section>
-
-          {/* 7. Incident Response & Security Contact */}
-          <section aria-labelledby="contact-sec-heading" className="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 space-y-4">
-            <h2 id="contact-sec-heading" className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-              Security Contacts &amp; Inquiries
-            </h2>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
-              If you have any questions about our data security architecture or wish to report a security inquiry, please contact our technical team directly:
-            </p>
-            <div className="pt-2">
-              <a
-                href={`mailto:${SUPPORT_EMAIL}`}
-                className="inline-flex items-center gap-2 bg-[#4D7C0F] hover:bg-[#3F650C] text-white font-bold text-sm px-5 py-3 rounded-xl transition-colors focus-ring"
-              >
-                <Mail className="w-4 h-4" aria-hidden="true" />
-                <span>{SUPPORT_EMAIL}</span>
-              </a>
-            </div>
-          </section>
-        </article>
+        </div>
       </main>
 
       <Footer />

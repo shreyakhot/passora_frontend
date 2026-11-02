@@ -56,7 +56,7 @@ The UI uses a custom CSS-first DaisyUI theme named `brand`, configured in `src/a
 * **Accent:** `#7C3AED` (violet): highlights
 * **Admin panel:** keeps the original lime/navy palette via the separate `admin` DaisyUI theme
 * **Base Surfaces:** `#FFFFFF` (Base 100) / `#F5F6FB` (Base 200) / `#E3E5EF` (Base 300)
-* **Logo / favicon / OG image:** `public/logo.jpg` (`LOGO_PATH` in `src/lib/site.ts`)
+* **Logo / favicon / OG image:** `public/logo-mark.jpg` (`LOGO_PATH` in `src/lib/site.ts`; vector source `public/logo-mark.svg`)
 * **Design Docs:** Full specification in [DESIGN.md](DESIGN.md)
 
 ---
@@ -163,7 +163,7 @@ Rules change and can differ between online and paper applications, embassies and
 frontend/
 ├── public/
 │   ├── images/                    # Marketing images
-│   ├── logo.jpg                   # Brand logo and default OG/Twitter image
+│   ├── logo-mark.svg / .jpg       # Brand logo and default OG/Twitter image
 │   └── <indexnow-key>.txt         # IndexNow key file
 ├── scripts/
 │   └── submit-indexnow.mjs        # CLI IndexNow submission
@@ -182,7 +182,7 @@ frontend/
 │   │   ├── passport-photo-print-template-generator/
 │   │   ├── about-us/ contact-us/ data-security-privacy-safeguards/
 │   │   ├── privacy-policy/ refund-policy/ terms-of-service/
-│   │   ├── apple-icon.jpg / icon.jpg # App Router icons
+│   │   ├── apple-icon.png / icon.png # App Router icons
 │   │   ├── globals.css            # Tailwind CSS v4, DaisyUI "brand" theme, tokens
 │   │   ├── layout.tsx             # Root layout and site-wide metadata
 │   │   ├── not-found.tsx

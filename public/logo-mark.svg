@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640">
+  <title>Logo mark: portrait inside passport-photo crop corners</title>
+  <rect width="640" height="640" rx="148" fill="#4F46E5"/>
+  <!-- crop corners -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="36" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M140 236 V176 Q140 140 176 140 H236"/>
+    <path d="M404 140 H464 Q500 140 500 176 V236"/>
+    <path d="M500 404 V464 Q500 500 464 500 H404"/>
+    <path d="M236 500 H176 Q140 500 140 464 V404"/>
+  </g>
+  <!-- portrait -->
+  <circle cx="320" cy="272" r="66" fill="#FFFFFF"/>
+  <path d="M212 452 C212 390 262 354 320 354 C378 354 428 390 428 452 Z" fill="#FFFFFF"/>
+</svg>

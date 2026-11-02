@@ -30,7 +30,7 @@ export const SUPPORT_EMAIL =
   process.env.NEXT_PUBLIC_CONTACT_EMAIL || `support@${SITE_DOMAIN}`;
 
 /** Logo / favicon / default social image, served from /public. */
-export const LOGO_PATH = "/logo.jpg";
+export const LOGO_PATH = "/logo-mark.jpg";
 export const LOGO_URL = `${SITE_URL}${LOGO_PATH}`;
 
 /** Independence disclaimer used in footers, notices and legal pages. */

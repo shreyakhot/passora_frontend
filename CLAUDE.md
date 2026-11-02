@@ -12,7 +12,7 @@ The brand is never hardcoded. Read it from `src/lib/site.ts`:
 | `SITE_DOMAIN` | derived from `SITE_URL` | `photo-govt.com` |
 | `SITE_NAME` | `NEXT_PUBLIC_SITE_NAME` | `Photo-Govt` |
 | `SUPPORT_EMAIL` | `NEXT_PUBLIC_CONTACT_EMAIL` | `support@<SITE_DOMAIN>` |
-| `LOGO_PATH` / `LOGO_URL` | — | `/logo.jpg` (file: `public/logo.jpg`) |
+| `LOGO_PATH` / `LOGO_URL` | — | `/logo-mark.jpg` (file: `public/logo-mark.jpg`, source `public/logo-mark.svg`) |
 | `SITE_DISCLAIMER` | — | "…is an independent photo service and is not affiliated with… any government, passport office, embassy or consulate." |
 
 ### Core Value Propositions
@@ -78,7 +78,7 @@ npm run indexnow
 * The admin panel keeps its original lime/navy look through a separate DaisyUI theme, `admin`, applied in `src/app/admin/layout.tsx`.
 
 ### Image Handling & Icons
-* Use `LOGO_PATH` (`/logo.jpg`, file `public/logo.jpg`) for brand logos and OpenGraph/Twitter previews. App Router icons are `src/app/icon.jpg` and `src/app/apple-icon.jpg`.
+* Use `LOGO_PATH` (`/logo-mark.jpg`, file `public/logo-mark.jpg`, vector source `public/logo-mark.svg`) for brand logos and OpenGraph/Twitter previews. App Router icons are `src/app/icon.png` and `src/app/apple-icon.png`. The asset paths are served with a one-year immutable cache, so a new logo needs a new file name.
 * Use the Next.js `<Image />` component with descriptive `alt` text for brand logos and visual assets.
 
 ### Pricing & Payments
@@ -125,7 +125,7 @@ Do not present any size as an official guarantee. Photo rules change and can dif
 frontend/
 ├── public/
 │   ├── images/                # Marketing images
-│   ├── logo.jpg               # Brand logo, default OG/Twitter image (LOGO_PATH)
+│   ├── logo-mark.svg / .jpg   # Brand logo (vector source + raster LOGO_PATH, default OG image)
 │   └── <indexnow-key>.txt     # IndexNow key file
 ├── scripts/
 │   └── submit-indexnow.mjs    # CLI IndexNow submission
@@ -144,9 +144,9 @@ frontend/
 │   │   ├── passport-photo-print-template-generator/
 │   │   ├── about-us/, contact-us/, data-security-privacy-safeguards/,
 │   │   │   privacy-policy/, refund-policy/, terms-of-service/
-│   │   ├── apple-icon.jpg     # App Router apple touch icon
+│   │   ├── apple-icon.png     # App Router apple touch icon
 │   │   ├── globals.css        # Tailwind CSS v4, DaisyUI "brand" theme, CSS tokens
-│   │   ├── icon.jpg           # App Router favicon/icon
+│   │   ├── icon.png           # App Router favicon/icon
 │   │   ├── layout.tsx         # Root layout and site-wide metadata
 │   │   ├── not-found.tsx
 │   │   ├── page.tsx           # Homepage
