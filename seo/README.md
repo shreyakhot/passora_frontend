@@ -1,6 +1,6 @@
 # SEO guide pages: daily workflow
 
-The 40-page plan in [content-strategy.txt](content-strategy.txt) is published five pages a day in the `/tool` section. [PROGRESS.md](PROGRESS.md) is the source of truth for what is done and what comes next. Read both before writing anything.
+The 40-page plan in [content-strategy.txt](content-strategy.txt), with per-page detail (H1, supporting keywords, H2/H3 outline, cannibalization guard, keyword-to-page mapping) in [content-plan-sheets.txt](content-plan-sheets.txt), is published five pages a day in the `/tool` section. [PROGRESS.md](PROGRESS.md) is the source of truth for what is done and what comes next. Read both before writing anything.
 
 ## Where pages live
 

@@ -1,0 +1,1085 @@
+================================================================================
+PASSPORT PHOTO SEO CONTENT PLAN - ALL SHEETS
+Source file: passport-photo-seo-content-plan-all-sheets.txt (supplied 2026-11-05)
+Companion to content-strategy.txt. This file holds the per-page detail:
+H1s, supporting keywords, H2/H3 outlines, cannibalization guards and the
+full keyword -> page mapping (528 keywords). Every keyword maps to ONE page.
+================================================================================
+
+================================================================================
+SHEET: Content Plan
+================================================================================
+Passport Photo SEO Content Plan - 40 Pages
+Source: Keyword_Stats_2026-09-30 (528 keywords, Google Keyword Planner export). Volumes are Keyword Planner ranges (50 / 500 / 5,000 / 50,000 / 500,000), so totals are ballpark. See "Notes & Flags" tab. Assumed site type: passport photo brand with an online photo tool + guides.
+
+Columns: # | Cluster | URL slug | Page type | Search intent | Primary keyword | Primary kw searches/mo | Content idea | H1 | Supporting keywords (top 10) | Keywords mapped | Est. total searches/mo | H2/H3 outline | Cannibalization guard & internal links
+
+--------------------------------------------------------------------------------
+#1 | A. Core & Local | passport-photo | Pillar / hub | Informational + commercial
+Primary: passport photo (500000)
+Idea: Definitive pillar guide: what a passport photo is, the rules at a glance, and a "5 ways to get one" decision table that hands readers to the right spoke page. Also absorbs "passport-style photo" and "picture of a passport" variants as short explainer sections.
+H1: Passport Photos: Requirements, Where to Get One & How to Take Your Own
+Supporting: foto passport, passport photo for passport, passport pictures, passport photograph, passport pics, passport style photo, my passport photo, pass photo, passport photo picture, passport style photograph
+Keywords mapped: 19 | Est. total: 1569200
+Outline: H2: What Is a Passport Photo? / H3: Passport photo vs passport-style photo vs ID photo / H3: A picture of a passport vs a photo for a passport / H2: Passport Photo Rules at a Glance / H3: Size and framing / H3: Background and lighting / H3: Expression, glasses and attire / H2: 5 Ways to Get a Passport Photo (Comparison Table) / H3: Retail stores and pharmacies / H3: Post office / H3: Studio or photographer / H3: Take it yourself at home / H3: Online passport photo tool / H2: How Much Do Passport Photos Cost? / H2: Passport Photos for Other Documents / H3: Visa photos / H3: ID and immigration photos / H3: Baby and child photos / H2: Common Mistakes That Get Photos Rejected / H2: Passport Photo FAQ
+Guard: Hub only summarizes; it never targets near-me, size, cost or brand terms. Each of those has a dedicated spoke - link out from every H2. Owns the head term "passport photo" and generic synonyms (pictures, pics, photograph, style photo).
+
+--------------------------------------------------------------------------------
+#2 | A. Core & Local | passport-photos-near-me | Local hub / locator | Local / transactional
+Primary: passport photos near me (500000)
+Idea: Location-finder page: ZIP/city search plus a "by type of place" comparison (pharmacy, shipping store, post office, warehouse club, studio) with walk-in vs appointment guidance. Template scales to city/state landing pages later. Includes a short Spanish-language FAQ to catch "foto pasaporte near me".
+H1: Passport Photos Near Me: Find Nearby Locations, Hours & Prices
+Supporting: pass photo near me, passport photo locations near me, passport pics near me, passport pictures near me, get passport photo near me, passport photo taken near me, take passport photo near me, foto pasaporte near me, get passport pictures near me, passport photo around me
+Keywords mapped: 20 | Est. total: 2069650
+Outline: H2: Find Passport Photo Locations Near You / H3: Search by ZIP code or city / H3: Open now / open today filter / H2: Where You Can Get Passport Photos Nearby / H3: Pharmacies and drugstores / H3: Shipping and office-supply stores / H3: Post offices / H3: Big-box and warehouse stores / H3: Photo studios / H2: Walk-In vs Appointment / H2: What to Bring and How to Prepare / H2: Nothing Nearby? Take or Upload Your Own / H2: Passport Photos Near Me by City / H3: Top 20 cities (link grid) / H2: FAQ / H3: Are passport photos available on weekends? / H3: Foto de pasaporte cerca de mi (Spanish FAQ)
+Guard: Generic, brand-agnostic local intent only. Brand queries -> retailer pages; studio/professional -> passport-photographer-near-me; "passport size" print queries -> passport-size-photo-near-me; visa -> visa-photo-near-me.
+
+--------------------------------------------------------------------------------
+#3 | A. Core & Local | passport-photographer-near-me | Local service guide | Local / commercial
+Primary: passport photographer near me (500000)
+Idea: Guide for people who want a professional: when a photographer is worth paying for (babies, glasses, headwear, tight deadlines), how to vet one for compliance, what to ask, and typical pricing.
+H1: Passport Photographer Near Me: Professional Studios & Mobile Photographers
+Supporting: passport photography near me, passport photo studio, photo studio passport photo, passport photo studio near me, professional passport photo, studio for passport photo near me, professional passport photo near me, idpc compliant photographer near me, passport studio near me, photo studio near me for passport
+Keywords mapped: 14 | Est. total: 1115800
+Outline: H2: When a Professional Passport Photographer Is Worth It / H2: What a Passport Photo Studio Provides / H3: Compliant lighting and backdrop / H3: Prints plus a digital file / H3: Retouching limits (why heavy editing gets photos rejected) / H2: How to Choose a Compliant Photographer / H3: Checklist / H3: Red flags / H3: Questions to ask before you book / H2: Studio vs Pharmacy vs Online / H2: Mobile and On-Site Photographers / H2: How Much Do Studios Charge? / H2: FAQ
+Guard: Owns professional/studio/photographer intent only. No generic "near me" (passport-photos-near-me) and no chain stores. Cross-link to infant page for baby specialists.
+
+--------------------------------------------------------------------------------
+#4 | A. Core & Local | passport-photo-services | Comparison guide | Informational / commercial
+Primary: passport photo services (50000)
+Idea: Explains the types of "services" (photo-only, photo + application acceptance, online compliance check, expedited passport services) with a situation-based decision guide (need it today / cheapest / digital / baby). Also captures "where to take" and "get passport photo" queries.
+H1: Passport Photo Services: Where to Get Your Passport Photo Taken
+Supporting: passport photo where to take, get passport photo, passport photo locations, passport photo services near me, get passport photo taken, new passport with photo services, passport with photo services
+Keywords mapped: 8 | Est. total: 116500
+Outline: H2: What Are Passport Photo Services? / H2: Types of Services Compared / H3: In-person photo only / H3: Photo + passport application acceptance / H3: Online photo check and formatting / H3: Expedited passport services / H2: Where to Take a Passport Photo: By Situation / H3: Need it today / H3: Need the cheapest / H3: Need a digital copy / H3: Baby or child / H2: What Each Service Typically Includes / H3: Prints / H3: Digital file / H3: Compliance guarantee / H2: How to Avoid Scams and Overpriced Middlemen / H2: Getting Photo and Application Done in One Trip / H2: FAQ
+Guard: Service-TYPE overview. Not a locator (passport-photos-near-me) and not brand-specific. Warn against overpriced expediters; link to same-day and cost pages for speed/price detail.
+
+--------------------------------------------------------------------------------
+#5 | A. Core & Local | same-day-instant-passport-photos | Landing / guide | Transactional / urgent
+Primary: same day passport photo (500)
+Idea: Speed-first page ranking options by time-to-photo (online tool, kiosk/booth, walk-in retail, studio) with an "urgent travel" checklist and an explanation of what "instant" really means (print vs digital).
+H1: Same-Day & Instant Passport Photos: Get Yours in Minutes
+Supporting: instant passport, instant passport photo, instant passport photo near me, instant photo near me
+Keywords mapped: 5 | Est. total: 2500
+Outline: H2: Fastest Ways to Get a Passport Photo (Ranked by Speed) / H3: Online tool / H3: Photo booth or kiosk / H3: Walk-in retail / H3: Studio appointment / H2: What "Instant" Means: Prints vs Digital Files / H2: Same-Day Checklist / H2: Urgent Travel: Photo Timing and Expedited Passports / H2: Are Instant Passport Photos Accepted? / H2: FAQ
+Guard: Speed is the only angle; price -> passport-photo-cost, locations -> passport-photos-near-me. CTA to the online maker as the fastest route.
+
+--------------------------------------------------------------------------------
+#6 | A. Core & Local | passport-photo-cost | Cost / price guide | Commercial investigation
+Primary: passport photo cost (5000)
+Idea: Price-comparison hub: average cost by location type, cheapest and free options, coupons/memberships, and the risk trade-off of very cheap photos. Also owns "cheap / cheapest" queries.
+H1: Passport Photo Cost: How Much It Costs & Where to Get Them Cheapest
+Supporting: cheap passport photos, cheapest passport photos near me, passport photo price, passport picture cost, passport pictures price
+Keywords mapped: 6 | Est. total: 21000
+Outline: H2: Average Passport Photo Prices by Location / H3: Pharmacy chains / H3: Shipping and office stores / H3: Post office / H3: Warehouse clubs / H3: Studios / H3: Online and DIY / H2: Cheapest Ways to Get Passport Photos / H3: Free options / H3: DIY at home / H3: Coupons and memberships / H2: What Affects the Price? / H2: Is a Cheap Passport Photo Safe? Rejection Risk / H2: Cost of Passport Photos for Kids and Babies / H2: FAQ
+Guard: Generic price intent. Brand-specific price/cost queries live on each retailer page (CVS, Walgreens, etc.) - link to them from the comparison table.
+
+--------------------------------------------------------------------------------
+#7 | A. Core & Local | best-passport-photos | Roundup | Commercial investigation
+Primary: best passport photos (5000)
+Idea: Best-of roundup across ALL methods (stores, studios, DIY, apps) using transparent criteria (accuracy guarantee, price, speed, convenience) and "best for..." picks. Includes a head-to-head table.
+H1: Best Passport Photo Options: Stores, Studios & Apps Compared
+Supporting: best passport pictures, best passport photos near me, best passport photo studio near me, best passport size photo
+Keywords mapped: 5 | Est. total: 10600
+Outline: H2: How We Evaluated Passport Photo Options / H2: Best Passport Photo Options by Need / H3: Best for speed / H3: Best for price / H3: Best for babies / H3: Best digital option / H3: Best acceptance guarantee / H2: Head-to-Head Comparison Table / H2: Best Passport Photo Apps and Websites / H2: Best Passport Photo Studios: What to Look For / H2: FAQ
+Guard: Cross-method "best of". Online-only brand comparison -> best-online-passport-photo-services; posing/lighting tips -> how-to-take-a-good-passport-photo.
+
+--------------------------------------------------------------------------------
+#8 | A. Core & Local | passport-size-photo-near-me | Local / format guide | Local / transactional
+Primary: passport size photo near me (500000)
+Idea: Format-driven local page for "passport size" (multi-country wording common in India/UK/Canada): where to get small ID-size photo sets (4/6/8 copies), studio vs print shop vs booth, price ranges, and how to print from a digital file.
+H1: Passport Size Photo Near Me: Studios, Print Shops & Prices
+Supporting: passport size photo cost, passport size photo price, passport size photo studio, passport size photo studio near me, passport size picture near me, photo studio near me for passport size photo, get passport size photo near me, passport size photograph near me, photo studio for passport size photo near me, us passport size photo near me
+Keywords mapped: 11 | Est. total: 503200
+Outline: H2: Where to Get Passport Size Photos Nearby / H3: Photo studios / H3: Print shops and copy centers / H3: Retail photo counters / H3: Photo booths / H2: Passport Size Photo Packages and Prices / H3: 4, 6 and 8-copy sets / H3: Studio vs print-shop pricing / H2: Which Size Do You Need? / H3: US 2x2 inch / H3: 35x45 mm / H2: Print Passport Size Photos From a Digital File / H2: Passport Size Photos in India, UK and Canada / H2: FAQ
+Guard: Targets the "passport SIZE" phrasing and small-print packages. US "passport photos near me" -> passport-photos-near-me; size specs -> passport-photo-size. Do not duplicate the locator.
+
+--------------------------------------------------------------------------------
+#9 | B. Retailer Brands | cvs-passport-photos | Brand / retailer page | Navigational + commercial
+Primary: cvs passport photo (50000)
+Idea: One authoritative page for every CVS passport-photo query (price, hours, near me, digital, visa/ID, 2x2 prints), ending with honest pros/cons and a compliant alternative. Verify current CVS services before publishing.
+H1: CVS Passport Photos: Cost, Hours, Locations & What to Know
+Supporting: cvs passport pics, cvs passport pictures, cvs near me passport photo, cvs passport, cvs passport photo cost, cvs passport photo price, cvs passport photos near me, digital passport photo cvs, 2x2 photo prints cvs, cvs id photo
+Keywords mapped: 15 | Est. total: 183000
+Outline: H2: Does CVS Take Passport Photos? / H2: CVS Passport Photo Cost / H2: CVS Passport Photo Hours and Locations / H3: How to find a CVS Photo location / H3: Walk-in vs appointment / H2: How CVS Passport Photos Work / H3: In-store printing / H3: Digital passport photo / H2: Other CVS Photo Types: Visa, ID and 2x2 Prints / H2: CVS Pros and Cons / H2: Alternatives to CVS / H2: FAQ
+Guard: Owns ALL "cvs ..." queries so no second CVS page is needed. Links to cost, near-me and online-maker pages; do not compete with them on generic terms.
+
+--------------------------------------------------------------------------------
+#10 | B. Retailer Brands | walgreens-passport-photos | Brand / retailer page | Navigational + commercial
+Primary: walgreens passport photo (50000)
+Idea: Complete Walgreens guide including Duane Reade (Walgreens-owned), digital passport photo option, 2x2 prints and how in-store taking works.
+H1: Walgreens Passport Photos: Price, Hours, Digital Option & Alternatives
+Supporting: passport picture walgreens, walgreens passport, 2x2 photo prints walgreens, digital passport photo walgreens, duane reade passport photo, walgreens take passport photos
+Keywords mapped: 7 | Est. total: 107000
+Outline: H2: Does Walgreens Do Passport Photos? / H2: Walgreens Passport Photo Price / H2: How to Get a Passport Photo at Walgreens / H3: In-store / H3: Digital passport photo / H3: 2x2 photo prints / H2: Duane Reade Passport Photos / H2: Hours and Locations / H2: Pros, Cons and Alternatives / H2: FAQ
+Guard: Owns all Walgreens/Duane Reade queries. Generic pharmacy comparisons live on passport-photo-cost and passport-photos-near-me.
+
+--------------------------------------------------------------------------------
+#11 | B. Retailer Brands | walmart-passport-photos | Brand / retailer page | Navigational + commercial
+Primary: walmart passport photo (50000)
+Idea: Walmart-specific guide covering photo-center availability, price, hours, passport-size prints and online order/pick-up options where offered.
+H1: Walmart Passport Photos: Cost, Locations, Hours & How It Works
+Supporting: passport pictures walmart, passport size photo walmart, walmart passport photo cost, walmart passport photos price, walmart passport photo hours, walmart passport photo locations
+Keywords mapped: 7 | Est. total: 161000
+Outline: H2: Does Walmart Take Passport Photos? / H2: Walmart Passport Photo Cost / H2: Locations and Hours / H3: Which stores have a photo center / H3: Checking availability before you go / H2: Passport Size Photos at Walmart / H2: Ordering Online vs In Store / H2: Pros, Cons and Alternatives / H2: FAQ
+Guard: Owns all Walmart queries including "passport size photo walmart". Avoid generic size/cost head terms.
+
+--------------------------------------------------------------------------------
+#12 | B. Retailer Brands | costco-passport-photos | Brand / retailer page | Navigational + commercial
+Primary: costco passport photos (5000)
+Idea: Explains membership requirement, which warehouses offer passport photos, price, and the Costco Canada variation (links to the Canadian page).
+H1: Costco Passport Photos: Availability, Cost & Costco Canada Options
+Supporting: costco passport, costco passport pictures, costco passport photos near me, costco canada passport photos
+Keywords mapped: 5 | Est. total: 15550
+Outline: H2: Does Costco Do Passport Photos? / H2: Do You Need a Membership? / H2: Costco Passport Photo Cost / H2: Costco Canada Passport Photos / H2: Finding a Warehouse With Photo Service / H2: Alternatives to Costco / H2: FAQ
+Guard: Owns all Costco queries incl. Costco Canada; link to canadian-passport-photos for citizen/visa specs.
+
+--------------------------------------------------------------------------------
+#13 | B. Retailer Brands | staples-passport-photos | Brand / retailer page | Navigational + commercial
+Primary: staples passport photo (50000)
+Idea: Staples guide covering photo price, near-me availability and what "Staples passport renewal" actually includes (photo only vs application).
+H1: Staples Passport Photos: Price, Locations & Passport Renewal Help
+Supporting: staples passport pictures, staples photo passport, staples passport, staples passport photo cost, staples passport photo price, staples passport photos near me, staples passport renewal
+Keywords mapped: 8 | Est. total: 157000
+Outline: H2: Does Staples Take Passport Photos? / H2: Staples Passport Photo Price / H2: Staples Passport Renewal: Photo Only or Full Service? / H2: Find a Staples Near You / H2: Pros, Cons and Alternatives / H2: FAQ
+Guard: Owns all Staples queries. Renewal procedure detail -> passport-application-photo.
+
+--------------------------------------------------------------------------------
+#14 | B. Retailer Brands | fedex-office-passport-photos | Brand / retailer page | Navigational + commercial
+Primary: fedex passport photo (5000)
+Idea: Clears up FedEx vs FedEx Office vs Kinkos naming, price and locations, and answers "can you renew a passport at FedEx?" (photo vs application).
+H1: FedEx Office Passport Photos (Kinkos): Cost, Locations & Renewal Info
+Supporting: fedex kinkos passport photo, fedex office passport photo, fedex passport photo cost, fedex passport photo price, fedex photo passport, kinkos passport photos, fedex office passport, fedex passport photo locations, fedex passport photo near me, fedex passport pictures
+Keywords mapped: 12 | Est. total: 37500
+Outline: H2: Does FedEx Office Do Passport Photos? / H2: FedEx Passport Photo Cost / H2: FedEx vs FedEx Office vs Kinkos / H2: Locations and Hours / H2: Can You Renew a Passport at FedEx? / H2: Alternatives to FedEx / H2: FAQ
+Guard: Owns all FedEx/Kinkos queries; renewal how-to lives on passport-application-photo.
+
+--------------------------------------------------------------------------------
+#15 | B. Retailer Brands | usps-post-office-passport-photos | Brand / retailer page | Navigational + commercial
+Primary: usps passport photo (5000)
+Idea: Explains USPS photo service at participating post offices, cost, appointment rules, and the difference between getting a photo and submitting a passport application there.
+H1: USPS & Post Office Passport Photos: Cost, Locations & Appointments
+Supporting: passport pictures post office, post office passport photo cost, post office passport photos, usps passport photo cost, usps passport photo price, usps passport pictures, passport photos near me post office, passport photos post office near me, post office photo, usps photo service
+Keywords mapped: 11 | Est. total: 37000
+Outline: H2: Does the Post Office Take Passport Photos? / H2: USPS Passport Photo Cost / H2: Which Post Offices Offer Photo Service / H2: Photo Service vs Passport Application Acceptance / H2: Appointments and Hours / H2: Other USPS Photo Services / H2: FAQ
+Guard: Owns USPS/post office queries incl. "passport photos near me post office". Application-form steps stay on passport-application-photo.
+
+--------------------------------------------------------------------------------
+#16 | B. Retailer Brands | rite-aid-passport-photos | Brand / legacy-demand page | Informational / navigational
+Primary: rite aid passport photo (5000)
+Idea: Captures lingering Rite Aid demand with an accurate answer: all Rite Aid stores have closed (confirmed by news reports in Oct 2025). Page redirects searchers to the nearest equivalents (CVS, Walgreens, etc.) and the online option.
+H1: Rite Aid Passport Photos: Stores Have Closed - Where to Go Instead
+Supporting: rite aid passport photo cost, rite aid passport photo price, rite aid passport photos near me, rite aid passport, rite aid passport photo hours, rite aid passport photo locations
+Keywords mapped: 7 | Est. total: 6650
+Outline: H2: Does Rite Aid Still Offer Passport Photos? / H3: Rite Aid store closures / H2: Best Alternatives to Rite Aid Passport Photos / H3: Pharmacies / H3: Shipping stores / H3: Online / H2: What Happened to Rite Aid Photo Services? / H2: FAQ
+Guard: Keep as a short, honest page (no fake prices/hours). Do NOT create separate pages for Rite Aid price/hours/locations - all mapped here. Re-evaluate/301 to passport-photos-near-me if traffic decays.
+
+--------------------------------------------------------------------------------
+#17 | B. Retailer Brands | other-stores-that-take-passport-photos | Roundup (long-tail brands) | Navigational + commercial
+Primary: target passport photos (5000)
+Idea: Roundup for smaller-volume brands not worth their own page (Target, AAA, Kodak, other chains) with a "how to check if a store offers passport photos" checklist.
+H1: Other Places That Take Passport Photos: Target, AAA, Kodak & More
+Supporting: aaa passport photos, aaa passport pictures, aaa passport photo cost, aaa passport services near me, rimowa passport photos, kodak passport photo
+Keywords mapped: 7 | Est. total: 16550
+Outline: H2: Target Passport Photos / H2: AAA Passport Photos and Services / H3: Member pricing / H3: AAA passport photo cost / H2: Kodak and Other Photo Providers / H2: How to Check Whether a Store Offers Passport Photos / H2: Bigger Chains With Their Own Guides / H3: CVS / H3: Walgreens / H3: Walmart / H2: FAQ
+Guard: Long-tail brand catch-all. Any brand that grows past ~5k searches can be promoted to its own page.
+
+--------------------------------------------------------------------------------
+#18 | C. DIY, Online & Tools | passport-photo-at-home | How-to guide | Informational / DIY
+Primary: passport photo at home (5000)
+Idea: Full DIY process: backdrop, lighting, camera position, helper, cropping to spec and print/submit options. Ends with a compliance check via the tool.
+H1: How to Take a Passport Photo at Home (Step-by-Step DIY Guide)
+Supporting: passport picture at home, take passport photo, take passport photo at home, take passport picture, take your own passport photo, self passport photo, take my own passport photo, take own passport photo, passport size photo at home, take passport size photo
+Keywords mapped: 12 | Est. total: 31650
+Outline: H2: Can You Take Your Own Passport Photo? / H2: What You Need / H3: Backdrop / H3: Lighting / H3: Camera or tripod / H3: A helper / H2: Step-by-Step: Take the Photo / H2: Crop and Size It Correctly / H2: Print or Upload Your Photo / H2: Mistakes That Get DIY Photos Rejected / H2: Check Your Photo Before You Submit / H2: FAQ
+Guard: Setup and process guide. Phone-specific instructions -> take-passport-photo-with-phone; print steps -> print-passport-photos.
+
+--------------------------------------------------------------------------------
+#19 | C. DIY, Online & Tools | take-passport-photo-with-phone | How-to guide | Informational / DIY
+Primary: take passport photo with iphone (5000)
+Idea: Phone-specific guide: camera settings, selfie vs helper, distortion and shadow pitfalls, and apps to crop/check. Includes selfie-related queries.
+H1: How to Take a Passport Photo With Your iPhone or Android
+Supporting: passport photo on iphone, take a passport photo on iphone, passport phone, passport photo on phone, passport photo selfie, selfie passport photo, take passport photo with phone, click passport size photo, passport photo with phone, passport selfie
+Keywords mapped: 14 | Est. total: 17800
+Outline: H2: Is a Phone Photo Accepted for a Passport? / H2: Camera Settings / H3: iPhone / H3: Android / H2: Selfie vs Having Someone Take It / H2: Step-by-Step With Your Phone / H2: Apps and Tools to Crop and Check / H2: Common Phone-Photo Problems / H3: Distortion / H3: Shadows and glare / H3: Filters and beauty mode / H2: FAQ
+Guard: Phone/selfie angle only. General DIY setup -> passport-photo-at-home; conversion of an existing photo -> online-passport-photo-maker.
+
+--------------------------------------------------------------------------------
+#20 | C. DIY, Online & Tools | digital-passport-photo | Requirements + how-to | Informational / transactional
+Primary: digital passport photo (5000)
+Idea: Digital-file guide: file format, resolution and size limits, where to get a digital copy (including near-me variants), online renewal upload steps, and e-passport/biometric photo notes.
+H1: Digital Passport Photo: How to Get One & Upload It to Your Application
+Supporting: digital passport photos near me, digital passport picture, digital photo for passport near me, digital passport pictures near me, e passport picture, electronic passport photo, get a digital passport photo, get digital passport photo, passport digital photo near me, digital passport size photo
+Keywords mapped: 11 | Est. total: 23050
+Outline: H2: What Is a Digital Passport Photo? / H2: Digital Photo File Requirements / H3: Format / H3: Pixel dimensions / H3: File size / H2: Where to Get a Digital Passport Photo / H3: Online / H3: In store / H3: Near me / H2: Upload Your Digital Photo for Online Renewal / H2: Digital vs Printed Photos / H2: Electronic and E-Passport Photo Notes / H2: FAQ
+Guard: File/format intent only. Print sizes -> passport-photo-size / 2x2; DIY capture -> at-home page. Retailer digital options link to their brand pages.
+
+--------------------------------------------------------------------------------
+#21 | C. DIY, Online & Tools | online-passport-photo-maker | Money page / tool | Transactional
+Primary: ai passport photo (500)
+Idea: Your core conversion page: AI background removal, cropping and compliance check with country presets. Also captures "turn photo into passport photo", upload and website queries.
+H1: Online Passport Photo Maker: Turn Any Photo Into a Compliant Passport Photo
+Supporting: passport photo ai, passport photo taker, passport photo upload, passport photo website, turn photo into passport photo, 2x2 to passport size, passport size photo ai, photo to passport photo, pic to passport size, picture to 2x2
+Keywords mapped: 11 | Est. total: 3250
+Outline: H2: How It Works / H3: Upload or take a photo / H3: AI crops and fixes the background / H3: Compliance check and download / H2: What Our AI Checks / H2: Turn Any Photo Into a Passport Photo / H2: Supported Countries and Sizes / H2: Pricing and Guarantee / H2: Privacy and Photo Storage / H2: FAQ / H3: Is an AI-generated passport photo accepted?
+Guard: Only product/tool page. Brand comparisons -> best-online-passport-photo-services; manual editing -> photoshop/word page. Keep FAQ schema and a prominent CTA.
+
+--------------------------------------------------------------------------------
+#22 | C. DIY, Online & Tools | passport-photo-editing-photoshop-word | Technical how-to | Informational
+Primary: photoshop passport photo (500)
+Idea: Software-specific tutorials (canvas size, resolution, multi-photo layout) with downloadable templates and a note on retouching limits.
+H1: Passport Photo in Photoshop, GIMP & Word: Sizes, Templates & Settings
+Supporting: gimp passport photo, passport photo size in photoshop, passport photo size photoshop, passport photoshop, passport size in word, passport size photo in word, passport size photo size in photoshop, passport size picture in word, photoshop passport size
+Keywords mapped: 10 | Est. total: 950
+Outline: H2: Passport Photo in Photoshop / H3: Canvas size and resolution / H3: Background / H3: Layout multiple copies on one sheet / H2: Passport Photo in GIMP (Free) / H2: Passport Size Photo in Word / H2: Retouching Limits / H2: Free Templates / H2: Faster Alternative: Online Maker
+Guard: Software how-to only; a tool-based shortcut CTA to online-passport-photo-maker.
+
+--------------------------------------------------------------------------------
+#23 | C. DIY, Online & Tools | best-online-passport-photo-services | Brand comparison | Commercial investigation / navigational
+Primary: epassportphoto (5000)
+Idea: Fair side-by-side comparison of named online services (price, guarantee, speed, countries) to capture competitor/brand searches and "alternative" intent.
+H1: Online Passport Photo Services Compared: ePassportPhoto, 123Passport, iVisa, AIPassportPhoto & More
+Supporting: 123 passport photo, aipassportphoto, ivisa passport photos, 123 passport size photo, 123passport, 123passport photo, passport photo photoaid, photo me digital photo, photo me digital photo upload, photo me passport
+Keywords mapped: 11 | Est. total: 6850
+Outline: H2: Comparison Table / H2: Service Reviews / H3: ePassportPhoto / H3: 123 Passport Photo / H3: iVisa / H3: AIPassportPhoto / H3: PhotoAid / H3: Photo-Me (digital upload) / H2: How to Choose an Online Service / H2: Are Online Passport Photos Accepted? / H2: Free vs Paid Tools / H2: FAQ
+Guard: Online-only, brand-named comparison. Cross-method "best of" lives on best-passport-photos. Avoid disparaging claims; cite verifiable facts.
+
+--------------------------------------------------------------------------------
+#24 | C. DIY, Online & Tools | print-passport-photos | How-to / product | Transactional / informational
+Primary: passport photo prints (50000)
+Idea: Print guide: 4x6 sheet layout, paper and printer settings, in-store printing options, dedicated passport-size photo printers and cost per print.
+H1: Passport Photo Prints: How to Print 2x2 Photos at Home or In Store
+Supporting: 4x6 passport photo, passport size photo printer
+Keywords mapped: 3 | Est. total: 51000
+Outline: H2: Print Options Compared / H2: Print at Home / H3: 4x6 sheet layout / H3: Paper choice / H3: Printer settings / H2: Print In Store / H3: Sheet vs individual prints / H3: Cost per print / H2: Passport Size Photo Printers / H2: Print Quality Requirements / H2: FAQ
+Guard: Printing only. Capturing the photo -> at-home / phone pages; retailer print pricing -> brand pages.
+
+--------------------------------------------------------------------------------
+#25 | D. Size & Requirements | passport-photo-size | Reference guide | Informational
+Primary: passport size photo (50000)
+Idea: The canonical size reference: inches/mm/cm/pixels, head and eye position, passport-size vs ID vs stamp size, with a diagram and a country quick-table.
+H1: Passport Photo Size: Dimensions, Head Size & Standard Requirements
+Supporting: passphoto size, passphoto size photo, passport photo standard size, passport size photo for passport, passport size pic, passport size pic size, passport size picture size, american passport size photo, american size passport picture, passport size
+Keywords mapped: 26 | Est. total: 427450
+Outline: H2: Standard Passport Photo Size / H3: Inches, mm, cm / H3: Pixel dimensions for digital / H2: Head Size and Eye Position / H2: Passport Size vs ID Size vs Stamp Size / H2: Passport Size by Country (Quick Table) / H2: How to Check Your Photo Size / H2: FAQ
+Guard: Owns generic "passport size / passport photo size" and "american passport size". Format-specific: 2x2 -> 2x2 page; 35x45 mm -> 35x45 page; per-country detail -> by-country hub.
+
+--------------------------------------------------------------------------------
+#26 | D. Size & Requirements | 2x2-passport-photo | Format guide | Informational + local
+Primary: 2x2 passport photo (5000)
+Idea: Everything about the 2x2 in (51x51 mm) format across documents, plus pixel/cm conversions, head placement, and where to get or make one.
+H1: 2x2 Photo: Size, Requirements & Where to Get a 2x2 Passport Photo
+Supporting: 2x2 photo, 2 * 2 passport photo, 2 * 2 photo, 2 * 2 photo size, 2 2 size photo, 2 by 2 passport photo, 2 by 2 photo, 2 by 2 photo size, 2 by 2 picture size, 2 x 2 passport photo
+Keywords mapped: 39 | Est. total: 21750
+Outline: H2: What Is a 2x2 Photo? / H3: 2x2 in = 51x51 mm = 5x5 cm / H2: Documents That Use 2x2 Photos / H2: 2x2 Size in Pixels, cm and mm / H2: Head Position in a 2x2 Frame / H2: Get 2x2 Photos Near You / H2: Make a 2x2 Photo Online / H2: 2x2 vs 35x45 mm / H2: FAQ
+Guard: Owns every "2x2 / 2 by 2 / 2*2" spelling. Generic passport size -> passport-photo-size; mm standard -> 35x45 page.
+
+--------------------------------------------------------------------------------
+#27 | D. Size & Requirements | 35x45mm-passport-photo | Format guide | Informational
+Primary: 35mm x 45mm photo (500)
+Idea: Metric-standard guide: which countries use 35x45, head size in the frame, conversions between mm/cm/in/px, and how to create one.
+H1: 35mm x 45mm Photo: Passport Photo Size, Countries & Requirements
+Supporting: 35 x 45 mm photo, 45mm x 35mm passport photo, 35 * 45 mm photo, 35 * 45 photo, 35 * 45 photo size, 35 45 mm photo, 35 45 photo size, 35 by 45 mm photo, 35mm * 45mm photo, 35mm 45mm photo size
+Keywords mapped: 22 | Est. total: 2450
+Outline: H2: What Is 35x45 mm? / H3: Conversion to inches, cm and pixels / H2: Countries That Use 35x45 mm / H2: Head and Face Size Inside the Frame / H2: Passport Size in mm: Quick Reference / H2: 35x45 mm vs 2x2 Inch / H2: Make a 35x45 Photo Online / H2: FAQ
+Guard: Owns all 35x45 spellings and "size in mm" queries. US 2x2 -> 2x2 page.
+
+--------------------------------------------------------------------------------
+#28 | D. Size & Requirements | biometric-passport-photo | Standards guide | Informational + local
+Primary: biometric photo (500)
+Idea: Explains what makes a photo biometric (ICAO 9303 specs), how it differs from a regular photo, and where to get one.
+H1: Biometric Passport Photo: ICAO Standards, Requirements & Where to Get One
+Supporting: biometric passport photo, biometric photo near me, biometric picture, icao standard photo, icao standard photograph, biometric passport photo near me, biometric photo size, biometric photograph
+Keywords mapped: 9 | Est. total: 3150
+Outline: H2: What Makes a Photo Biometric? / H2: ICAO Standard Explained / H3: Face position / H3: Expression / H3: Lighting and background / H2: Biometric vs Regular Passport Photo / H2: Biometric Photo Size / H2: Biometric Photo Near Me / H2: FAQ
+Guard: Biometric/ICAO standard only. General rules -> passport-photo-requirements.
+
+--------------------------------------------------------------------------------
+#29 | D. Size & Requirements | passport-photo-requirements | Compliance checklist | Informational
+Primary: photo required for passport (50000)
+Idea: Official-style checklist with do/don't visuals, special cases (glasses, hijab/religious headwear, medical devices), color vs black-and-white, and common rejection reasons. Cite State Dept sources.
+H1: Passport Photo Requirements: What Makes a Photo Acceptable
+Supporting: acceptable passport photos, passport photo us, approved passport photos, black and white passport photo, correct passport photo, hijab passport photo, passport quality photo, proper passport photo, black and white passport size photo, gov passport photo
+Keywords mapped: 17 | Est. total: 63400
+Outline: H2: Official Requirements Checklist / H3: Size and quality / H3: Background / H3: Head position / H3: Expression / H3: Glasses / H3: Attire and headwear / H3: Recent photo and color / H2: Do's and Don'ts / H2: Special Situations / H3: Hijab and religious head coverings / H3: Medical devices / H3: Children / H2: Common Rejection Reasons and Fixes / H2: Check Your Photo Before Submitting / H2: FAQ
+Guard: Compliance rules only. Posing/styling -> how-to-take-a-good-passport-photo; size -> passport-photo-size.
+
+--------------------------------------------------------------------------------
+#30 | D. Size & Requirements | how-to-take-a-good-passport-photo | Tips guide | Informational
+Primary: good passport photo (5000)
+Idea: Style-and-pose tips: hair, makeup, clothing vs background, lighting, expression, plus a light-hearted "why passport photos look bad" section that captures funny/ugly/bad queries.
+H1: How to Take a Good Passport Photo (Look Your Best Within the Rules)
+Supporting: bad passport photo, beautiful passport photos, funny passport photos, passport photo reddit, pretty passport photo, real passport photo, ugly passport photo, perfect passport photo
+Keywords mapped: 9 | Est. total: 8550
+Outline: H2: Why Passport Photos Look Bad / H2: Prepare Before the Photo / H3: Hair and makeup / H3: Clothing vs backdrop / H3: Glasses and glare / H2: Posing and Expression Tips / H2: Lighting and Camera Distance / H2: Funny, Bad and Ugly Passport Photos (What to Avoid) / H2: What Reddit Recommends (and What Is Allowed) / H2: Retake or Accept? / H2: FAQ
+Guard: Aesthetics and technique. Rules -> passport-photo-requirements. Avoid duplicating the requirements checklist.
+
+--------------------------------------------------------------------------------
+#31 | D. Size & Requirements | passport-application-photo | Process guide | Informational
+Primary: passport renewal photo (5000)
+Idea: Explains photo rules for renewals and new applications, form attachment steps, accepted ID list, and online renewal photo upload.
+H1: Passport Renewal Photo: Requirements & How to Submit With Your Application
+Supporting: passport photo application, passport renewal picture, new passport photo, new passport picture, passport acceptable id, passport application photo size, passport renewal photo size
+Keywords mapped: 8 | Est. total: 16150
+Outline: H2: Do You Need a New Photo to Renew? / H2: Renewal vs New Application Photo Rules / H2: Photo Size for Application Forms / H2: How to Attach the Photo to Your Application / H2: Acceptable ID for a New Passport / H2: Online Renewal Photo Upload / H2: FAQ
+Guard: Application/renewal procedure. Retailer renewal services stay on brand pages; digital file specs -> digital-passport-photo.
+
+--------------------------------------------------------------------------------
+#32 | D. Size & Requirements | infant-newborn-passport-photo | Specialty guide | Informational + local
+Primary: infant passport photo (50000)
+Idea: Baby-specific guide: eyes open, no support hands, plain sheet backdrop, car-seat trick, newborn timing, where to book a baby-friendly photographer.
+H1: Infant & Newborn Passport Photos: Rules, Tips & Where to Get Them
+Supporting: newborn passport photo, infant passport photo near me, new born passport photo, newborn passport photo near me
+Keywords mapped: 5 | Est. total: 101500
+Outline: H2: Rules for Baby Passport Photos / H2: How to Photograph Your Baby / H3: Laying baby on a plain sheet / H3: Car-seat trick / H3: Eyes open vs asleep / H2: Newborn Passport Photos: How Early? / H2: Where to Get Infant Passport Photos / H3: Studios / H3: Retail / H3: Online / H2: Infant Passport Photo Near Me / H2: Common Rejection Reasons / H2: FAQ
+Guard: Owns infant/newborn/baby queries incl. near me; general rules -> passport-photo-requirements.
+
+--------------------------------------------------------------------------------
+#33 | D. Size & Requirements | id-photo | Guide | Informational + local
+Primary: id photos (5000)
+Idea: Covers non-passport ID photo use (work/student/licence) and "passport ID photo" wording; explains differences and gives local options.
+H1: ID Photos: Size, Requirements & Where to Get ID Pictures Near You
+Supporting: id photo near me, id photo size, id pictures near me, passport id photo, passport id photo near me, passport id picture, passport photo id, photo for documents near me, id card size photo, id photo studio near me
+Keywords mapped: 14 | Est. total: 13750
+Outline: H2: What Is an ID Photo? / H2: ID Photo vs Passport Photo / H2: Common ID Photo Sizes / H2: Documents That Need ID Photos / H2: Where to Get ID Photos Near You / H2: Take an ID Photo Yourself / H2: FAQ
+Guard: Non-passport IDs. Passport specifics -> passport-photo pillar.
+
+--------------------------------------------------------------------------------
+#34 | E. Visa, Immigration & Countries | visa-photo | Requirements guide | Informational
+Primary: visa photo (5000)
+Idea: Generic visa-photo guide with a deep US visa section (size, digital specs, DS-160 upload) and a table linking to Schengen, Canada, India and other destination pages.
+H1: Visa Photo Requirements: Size, Background & Rules (US Visa Photo Guide)
+Supporting: america visa photo size, american visa photo, us visa application photo, us visa photo, us visa photo size, visa pic, visa picture, us visa passport photo size, us visa pic, us visa picture
+Keywords mapped: 28 | Est. total: 44600
+Outline: H2: US Visa Photo Requirements / H3: Size and digital specs / H3: Background / H3: Glasses / H3: Recent photo / H2: Visa Photo Size by Destination (Table) / H2: How to Upload a Visa Photo Online / H2: Common Visa Photo Rejections / H2: Make a Visa Photo Online / H2: FAQ
+Guard: Generic + US visa. Schengen, Canada, India, other countries have their own pages; near-me -> visa-photo-near-me.
+
+--------------------------------------------------------------------------------
+#35 | E. Visa, Immigration & Countries | visa-photo-near-me | Local guide | Local / transactional
+Primary: visa photo near me (5000)
+Idea: Local-intent page for visa photos: where to go, what to ask for per destination, studios/photographers, same-day, and online alternative.
+H1: Visa Photo Near Me: Where to Get a Compliant Visa Photo Today
+Supporting: us visa photo near me, visa photo studio near me, visa pictures near me, photo for us visa near me, us visa photo studio near me, visa photographer near me
+Keywords mapped: 7 | Est. total: 6650
+Outline: H2: Where to Get Visa Photos Nearby / H2: What to Ask For by Destination / H3: US visa / H3: Schengen / H3: Other countries / H2: Visa Photo Studios and Photographers / H2: Same-Day Visa Photos / H2: Online Alternative / H2: FAQ
+Guard: Visa + near-me only. Requirements -> visa-photo; generic near-me -> passport-photos-near-me.
+
+--------------------------------------------------------------------------------
+#36 | E. Visa, Immigration & Countries | schengen-eu-photo-size | Requirements guide | Informational
+Primary: photo size for schengen visa (5000)
+Idea: Schengen/EU-specific rules: size, head size, biometric standard, VFS/embassy nuances, near-me variants, and Spanish variant "foto visa Schengen".
+H1: Schengen Visa Photo Size & Requirements (35x45 mm)
+Supporting: eu passport photo size, europe passport size photo, foto visa schengen, photo for schengen visa, schengen visa passport photo size, schengen visa photo near me, schengen visa picture, european visa photo size, schengen passport photo size, schengen photo
+Keywords mapped: 18 | Est. total: 9000
+Outline: H2: Schengen Photo Requirements / H3: Size / H3: Head size / H3: Background / H3: Biometric standard / H2: EU Passport Photo Size / H2: VFS and Embassy Rules / H2: Schengen Visa Photos Near Me / H2: Foto para Visa Schengen (Spanish) / H2: FAQ
+Guard: Schengen/EU only. US visa -> visa-photo; mm-format explainer -> 35x45 page.
+
+--------------------------------------------------------------------------------
+#37 | E. Visa, Immigration & Countries | canadian-passport-photos | Country guide | Informational + local
+Primary: canadian passport photo (5000)
+Idea: Canadian passport, citizenship and visa photo specs; where to get compliant photos (including local searches); Costco Canada link.
+H1: Canadian Passport Photos: Size, Requirements & Where to Get Them
+Supporting: canadian passport photos near me, canadian passport pictures, canadian citizenship photo, canadian passport photo size, canadian passport pictures near me, canadian passport size, best canadian passport photos near me, canadian citizenship card with photo, canadian citizenship photo near me, canadian citizenship photo size
+Keywords mapped: 15 | Est. total: 17400
+Outline: H2: Canadian Passport Photo Size and Specs / H2: Photographer Requirements / H2: Where to Get Canadian Passport Photos / H3: Near me / H3: Toronto and Spadina / H2: Canadian Citizenship Photos / H2: Canadian Visa Photo Size / H2: Cost / H2: FAQ
+Guard: Canada-only; other countries live on separate pages.
+
+--------------------------------------------------------------------------------
+#38 | E. Visa, Immigration & Countries | indian-passport-photo-oci-photo | Country guide | Informational + local
+Primary: indian passport size photo (5000)
+Idea: Indian passport, visa and OCI photo specs, "PP size" shorthand explained, upload dimensions, and where to get them.
+H1: Indian Passport Size Photo & OCI Photo: Size, Requirements & Upload Guide
+Supporting: passport size photo for indian passport, oci photo, passport photo for indian passport, photo for indian passport, photo size for indian visa, pp photo, pp size, indian passport size photo size, oci card photo, oci passport photo
+Keywords mapped: 16 | Est. total: 13400
+Outline: H2: Indian Passport Photo Specs / H2: Photo for Indian Visa / H2: OCI Photo Requirements / H3: Size / H3: Upload size / H2: "PP Size" Photos Explained / H2: Where to Get Indian Passport Photos / H2: Make It Online / H2: FAQ
+Guard: India-only; do not duplicate generic size guide.
+
+--------------------------------------------------------------------------------
+#39 | E. Visa, Immigration & Countries | passport-photo-size-by-country | Reference hub | Informational
+Primary: international passport photo size (50)
+Idea: Aggregator hub for long-tail country queries (UK, Ireland, Germany, France, Italy, Spain, Poland, Greece, Turkey, China, Japan, Korea, Brazil, Nigeria, etc.) with a quick-reference table and per-country H2/H3 sections. Promote any country to its own page once it earns volume.
+H1: Passport Photo Size by Country: UK, Germany, China, Japan & More
+Supporting: brazilian passport photo size, british passport photo, british passport photo size, british passport picture size, british passport size, chinese passport photo, chinese passport photo size, french passport photo size, german passport photo, german passport photo size
+Keywords mapped: 44 | Est. total: 13450
+Outline: H2: Quick Reference Table / H2: Europe / H3: UK / H3: Ireland / H3: Germany / H3: France / H3: Italy / H3: Spain / H3: Poland / H3: Greece / H2: Asia and Middle East / H3: China / H3: Japan / H3: South Korea / H3: Iran / H3: Israel / H3: Lebanon / H3: Saudi Arabia / H3: Syria / H3: Nepal / H3: Turkey / H2: Africa and Americas / H3: Nigeria / H3: Egypt / H3: Ethiopia / H3: South Africa / H3: Brazil / H2: 2x2 vs 35x45 mm: Which Countries Use Which / H2: International Passport Photos Abroad / H2: FAQ
+Guard: Long-tail country catch-all. Countries with own pages (US, Canada, India, Schengen) are excluded.
+
+--------------------------------------------------------------------------------
+#40 | E. Visa, Immigration & Countries | uscis-immigration-photos | Requirements guide | Informational + local
+Primary: immigration photo (500)
+Idea: USCIS-related photo guide: green card, citizenship, EAD and OPT photo rules, size, where to get them.
+H1: Immigration Photos: Green Card, Citizenship, EAD & OPT Photo Requirements
+Supporting: citizenship photo, ead photo, green card pictures, immigration photos near me, opt photo, passport immigration photos, picture of green card, uscis passport photo, citizenship application photo, citizenship photo near me
+Keywords mapped: 12 | Est. total: 4650
+Outline: H2: USCIS Photo Requirements / H3: Green card photos / H3: Citizenship photos / H3: EAD and OPT photos / H2: Immigration Photo Size / H2: Immigration Photos Near Me / H2: Passport Photos for Immigration / H2: Picture of a Green Card vs Application Photo / H2: FAQ
+Guard: US immigration only; Canadian citizenship -> canadian-passport-photos.
+
+--------------------------------------------------------------------------------
+TOTAL keywords mapped: 528 | Est. total searches/mo: 7031550
+Keywords in source file: 528 | Unmapped (should be 0): 0
+
+================================================================================
+SHEET: Keyword Mapping
+================================================================================
+Format: keyword | avg. monthly searches | page # | role (P = primary, S = supporting)
+Grouped by page; slug shown in each group header.
+
+[1 passport-photo]
+foto passport | 500000 | S
+passport photo | 500000 | P
+passport photo for passport | 500000 | S
+passport pictures | 50000 | S
+passport photograph | 5000 | S
+passport pics | 5000 | S
+passport style photo | 5000 | S
+my passport photo | 500 | S
+pass photo | 500 | S
+passport photo picture | 500 | S
+passport style photograph | 500 | S
+passport style picture | 500 | S
+passport type photo | 500 | S
+pic of passport | 500 | S
+picture of passport | 500 | S
+a passport photo | 50 | S
+passport like photo | 50 | S
+passport style | 50 | S
+selfie with passport | 50 | S
+
+[2 passport-photos-near-me]
+pass photo near me | 500000 | S
+passport photo locations near me | 500000 | S
+passport photos near me | 500000 | P
+passport pics near me | 500000 | S
+passport pictures near me | 50000 | S
+get passport photo near me | 5000 | S
+passport photo taken near me | 5000 | S
+take passport photo near me | 5000 | S
+foto pasaporte near me | 500 | S
+get passport pictures near me | 500 | S
+passport photo around me | 500 | S
+passport photo near me now | 500 | S
+passport photo shops near me | 500 | S
+passport photos nearby | 500 | S
+passport style photo near me | 500 | S
+photo near me passport | 500 | S
+take passport pictures near me | 500 | S
+pass foto near me | 50 | S
+passphoto near me | 50 | S
+take photo for passport near me | 50 | S
+
+[3 passport-photographer-near-me]
+passport photographer near me | 500000 | P
+passport photography near me | 500000 | S
+passport photo studio | 50000 | S
+photo studio passport photo | 50000 | S
+passport photo studio near me | 5000 | S
+professional passport photo | 5000 | S
+studio for passport photo near me | 5000 | S
+professional passport photo near me | 500 | S
+idpc compliant photographer near me | 50 | S
+passport studio near me | 50 | S
+photo studio near me for passport | 50 | S
+photographer near me for passport photos | 50 | S
+professional passport size photo | 50 | S
+studio near me for passport photo | 50 | S
+
+[4 passport-photo-services]
+passport photo services | 50000 | P
+passport photo where to take | 50000 | S
+get passport photo | 5000 | S
+passport photo locations | 5000 | S
+passport photo services near me | 5000 | S
+get passport photo taken | 500 | S
+new passport with photo services | 500 | S
+passport with photo services | 500 | S
+
+[5 same-day-instant-passport-photos]
+instant passport | 500 | S
+instant passport photo | 500 | S
+instant passport photo near me | 500 | S
+instant photo near me | 500 | S
+same day passport photo | 500 | P
+
+[6 passport-photo-cost]
+cheap passport photos | 5000 | S
+cheapest passport photos near me | 5000 | S
+passport photo cost | 5000 | P
+passport photo price | 5000 | S
+passport picture cost | 500 | S
+passport pictures price | 500 | S
+
+[7 best-passport-photos]
+best passport photos | 5000 | P
+best passport pictures | 5000 | S
+best passport photos near me | 500 | S
+best passport photo studio near me | 50 | S
+best passport size photo | 50 | S
+
+[8 passport-size-photo-near-me]
+passport size photo near me | 500000 | P
+passport size photo cost | 500 | S
+passport size photo price | 500 | S
+passport size photo studio | 500 | S
+passport size photo studio near me | 500 | S
+passport size picture near me | 500 | S
+photo studio near me for passport size photo | 500 | S
+get passport size photo near me | 50 | S
+passport size photograph near me | 50 | S
+photo studio for passport size photo near me | 50 | S
+us passport size photo near me | 50 | S
+
+[9 cvs-passport-photos]
+cvs passport photo | 50000 | P
+cvs passport pics | 50000 | S
+cvs passport pictures | 50000 | S
+cvs near me passport photo | 5000 | S
+cvs passport | 5000 | S
+cvs passport photo cost | 5000 | S
+cvs passport photo price | 5000 | S
+cvs passport photos near me | 5000 | S
+digital passport photo cvs | 5000 | S
+2x2 photo prints cvs | 500 | S
+cvs id photo | 500 | S
+cvs passport photo hours | 500 | S
+cvs passport photo locations | 500 | S
+cvs take passport photos | 500 | S
+cvs visa photo | 500 | S
+
+[10 walgreens-passport-photos]
+passport picture walgreens | 50000 | S
+walgreens passport photo | 50000 | P
+walgreens passport | 5000 | S
+2x2 photo prints walgreens | 500 | S
+digital passport photo walgreens | 500 | S
+duane reade passport photo | 500 | S
+walgreens take passport photos | 500 | S
+
+[11 walmart-passport-photos]
+passport pictures walmart | 50000 | S
+passport size photo walmart | 50000 | S
+walmart passport photo | 50000 | P
+walmart passport photo cost | 5000 | S
+walmart passport photos price | 5000 | S
+walmart passport photo hours | 500 | S
+walmart passport photo locations | 500 | S
+
+[12 costco-passport-photos]
+costco passport | 5000 | S
+costco passport photos | 5000 | P
+costco passport pictures | 5000 | S
+costco passport photos near me | 500 | S
+costco canada passport photos | 50 | S
+
+[13 staples-passport-photos]
+staples passport photo | 50000 | P
+staples passport pictures | 50000 | S
+staples photo passport | 50000 | S
+staples passport | 5000 | S
+staples passport photo cost | 500 | S
+staples passport photo price | 500 | S
+staples passport photos near me | 500 | S
+staples passport renewal | 500 | S
+
+[14 fedex-office-passport-photos]
+fedex kinkos passport photo | 5000 | S
+fedex office passport photo | 5000 | S
+fedex passport photo | 5000 | P
+fedex passport photo cost | 5000 | S
+fedex passport photo price | 5000 | S
+fedex photo passport | 5000 | S
+kinkos passport photos | 5000 | S
+fedex office passport | 500 | S
+fedex passport photo locations | 500 | S
+fedex passport photo near me | 500 | S
+fedex passport pictures | 500 | S
+renew passport fedex | 500 | S
+
+[15 usps-post-office-passport-photos]
+passport pictures post office | 5000 | S
+post office passport photo cost | 5000 | S
+post office passport photos | 5000 | S
+usps passport photo | 5000 | P
+usps passport photo cost | 5000 | S
+usps passport photo price | 5000 | S
+usps passport pictures | 5000 | S
+passport photos near me post office | 500 | S
+passport photos post office near me | 500 | S
+post office photo | 500 | S
+usps photo service | 500 | S
+
+[16 rite-aid-passport-photos]
+rite aid passport photo | 5000 | P
+rite aid passport photo cost | 500 | S
+rite aid passport photo price | 500 | S
+rite aid passport photos near me | 500 | S
+rite aid passport | 50 | S
+rite aid passport photo hours | 50 | S
+rite aid passport photo locations | 50 | S
+
+[17 other-stores-that-take-passport-photos]
+aaa passport photos | 5000 | S
+aaa passport pictures | 5000 | S
+target passport photos | 5000 | P
+aaa passport photo cost | 500 | S
+aaa passport services near me | 500 | S
+rimowa passport photos | 500 | S
+kodak passport photo | 50 | S
+
+[18 passport-photo-at-home]
+passport photo at home | 5000 | P
+passport picture at home | 5000 | S
+take passport photo | 5000 | S
+take passport photo at home | 5000 | S
+take passport picture | 5000 | S
+take your own passport photo | 5000 | S
+self passport photo | 500 | S
+take my own passport photo | 500 | S
+take own passport photo | 500 | S
+passport size photo at home | 50 | S
+take passport size photo | 50 | S
+take passport size photo at home | 50 | S
+
+[19 take-passport-photo-with-phone]
+passport photo on iphone | 5000 | S
+take a passport photo on iphone | 5000 | S
+take passport photo with iphone | 5000 | P
+passport phone | 500 | S
+passport photo on phone | 500 | S
+passport photo selfie | 500 | S
+selfie passport photo | 500 | S
+take passport photo with phone | 500 | S
+click passport size photo | 50 | S
+passport photo with phone | 50 | S
+passport selfie | 50 | S
+passport size photo on iphone | 50 | S
+take a passport photo on phone | 50 | S
+taking a passport photo on your phone | 50 | S
+
+[20 digital-passport-photo]
+digital passport photo | 5000 | P
+digital passport photos near me | 5000 | S
+digital passport picture | 5000 | S
+digital photo for passport near me | 5000 | S
+digital passport pictures near me | 500 | S
+e passport picture | 500 | S
+electronic passport photo | 500 | S
+get a digital passport photo | 500 | S
+get digital passport photo | 500 | S
+passport digital photo near me | 500 | S
+digital passport size photo | 50 | S
+
+[21 online-passport-photo-maker]
+ai passport photo | 500 | P
+passport photo ai | 500 | S
+passport photo taker | 500 | S
+passport photo upload | 500 | S
+passport photo website | 500 | S
+turn photo into passport photo | 500 | S
+2x2 to passport size | 50 | S
+passport size photo ai | 50 | S
+photo to passport photo | 50 | S
+pic to passport size | 50 | S
+picture to 2x2 | 50 | S
+
+[22 passport-photo-editing-photoshop-word]
+photoshop passport photo | 500 | P
+gimp passport photo | 50 | S
+passport photo size in photoshop | 50 | S
+passport photo size photoshop | 50 | S
+passport photoshop | 50 | S
+passport size in word | 50 | S
+passport size photo in word | 50 | S
+passport size photo size in photoshop | 50 | S
+passport size picture in word | 50 | S
+photoshop passport size | 50 | S
+
+[23 best-online-passport-photo-services]
+epassportphoto | 5000 | P
+123 passport photo | 500 | S
+aipassportphoto | 500 | S
+ivisa passport photos | 500 | S
+123 passport size photo | 50 | S
+123passport | 50 | S
+123passport photo | 50 | S
+passport photo photoaid | 50 | S
+photo me digital photo | 50 | S
+photo me digital photo upload | 50 | S
+photo me passport | 50 | S
+
+[24 print-passport-photos]
+passport photo prints | 50000 | P
+4x6 passport photo | 500 | S
+passport size photo printer | 500 | S
+
+[25 passport-photo-size]
+passphoto size | 50000 | S
+passphoto size photo | 50000 | S
+passport photo standard size | 50000 | S
+passport size photo | 50000 | P
+passport size photo for passport | 50000 | S
+passport size pic | 50000 | S
+passport size pic size | 50000 | S
+passport size picture size | 50000 | S
+american passport size photo | 5000 | S
+american size passport picture | 5000 | S
+passport size | 5000 | S
+passport size size | 5000 | S
+size of passport size | 5000 | S
+passport size photo size | 500 | S
+passport size photo standard size | 500 | S
+passport size photograph | 500 | S
+passport size picture | 500 | S
+pass post size photo | 50 | S
+passport size photo hd | 50 | S
+passport size photograph size | 50 | S
+passport standard size | 50 | S
+passport style photo size | 50 | S
+past post size photo | 50 | S
+small passport size photo | 50 | S
+standard passport picture size | 50 | S
+student passport size photo | 50 | S
+
+[26 2x2-passport-photo]
+2x2 passport photo | 5000 | P
+2x2 photo | 5000 | S
+2 * 2 passport photo | 500 | S
+2 * 2 photo | 500 | S
+2 * 2 photo size | 500 | S
+2 2 size photo | 500 | S
+2 by 2 passport photo | 500 | S
+2 by 2 photo | 500 | S
+2 by 2 photo size | 500 | S
+2 by 2 picture size | 500 | S
+2 x 2 passport photo | 500 | S
+2by2 picture | 500 | S
+2x2 passport photo near me | 500 | S
+2x2 photo near me | 500 | S
+2x2 photo size | 500 | S
+2x2 pic | 500 | S
+2x2 pic size | 500 | S
+2x2 picture | 500 | S
+2x2 picture near me | 500 | S
+2x2 picture size | 500 | S
+passport size photo 2x2 | 500 | S
+photo 2x2 near me | 500 | S
+size 2x2 | 500 | S
+size 2x2 picture | 500 | S
+2 * 2 picture size | 50 | S
+2 * 2 size photo | 50 | S
+2 2 id picture | 50 | S
+2 2 picture size | 50 | S
+2 by 2 id picture size | 50 | S
+2 x 2 picture | 50 | S
+2 x 2 picture size | 50 | S
+2x2 colored picture | 50 | S
+2x2 id | 50 | S
+2x2 id picture | 50 | S
+2x2 id picture size | 50 | S
+2x2 id size | 50 | S
+51 x 51 mm photo size | 50 | S
+passport size 2x2 | 50 | S
+size for 2x2 picture | 50 | S
+
+[27 35x45mm-passport-photo]
+35 x 45 mm photo | 500 | S
+35mm x 45mm photo | 500 | P
+45mm x 35mm passport photo | 500 | S
+35 * 45 mm photo | 50 | S
+35 * 45 photo | 50 | S
+35 * 45 photo size | 50 | S
+35 45 mm photo | 50 | S
+35 45 photo size | 50 | S
+35 by 45 mm photo | 50 | S
+35mm * 45mm photo | 50 | S
+35mm 45mm photo size | 50 | S
+35mm by 45mm passport photo | 50 | S
+35x45 photo | 50 | S
+35x45 photo size | 50 | S
+35x45mm photo | 50 | S
+35x45mm photo size | 50 | S
+45x35mm photo | 50 | S
+passport photo size in millimeters | 50 | S
+passport size in mm | 50 | S
+passport size photo size in mm | 50 | S
+passport size picture in mm | 50 | S
+photo size 35mm x 45mm | 50 | S
+
+[28 biometric-passport-photo]
+biometric passport photo | 500 | S
+biometric photo | 500 | P
+biometric photo near me | 500 | S
+biometric picture | 500 | S
+icao standard photo | 500 | S
+icao standard photograph | 500 | S
+biometric passport photo near me | 50 | S
+biometric photo size | 50 | S
+biometric photograph | 50 | S
+
+[29 passport-photo-requirements]
+photo required for passport | 50000 | P
+acceptable passport photos | 5000 | S
+passport photo us | 5000 | S
+approved passport photos | 500 | S
+black and white passport photo | 500 | S
+correct passport photo | 500 | S
+hijab passport photo | 500 | S
+passport quality photo | 500 | S
+proper passport photo | 500 | S
+black and white passport size photo | 50 | S
+gov passport photo | 50 | S
+official passport photo | 50 | S
+official passport size photo | 50 | S
+passport photo with date | 50 | S
+recent passport size photo | 50 | S
+valid passport photo | 50 | S
+verifying passport photo | 50 | S
+
+[30 how-to-take-a-good-passport-photo]
+good passport photo | 5000 | P
+bad passport photo | 500 | S
+beautiful passport photos | 500 | S
+funny passport photos | 500 | S
+passport photo reddit | 500 | S
+pretty passport photo | 500 | S
+real passport photo | 500 | S
+ugly passport photo | 500 | S
+perfect passport photo | 50 | S
+
+[31 passport-application-photo]
+passport photo application | 5000 | S
+passport renewal photo | 5000 | P
+passport renewal picture | 5000 | S
+new passport photo | 500 | S
+new passport picture | 500 | S
+passport acceptable id | 50 | S
+passport application photo size | 50 | S
+passport renewal photo size | 50 | S
+
+[32 infant-newborn-passport-photo]
+infant passport photo | 50000 | P
+newborn passport photo | 50000 | S
+infant passport photo near me | 500 | S
+new born passport photo | 500 | S
+newborn passport photo near me | 500 | S
+
+[33 id-photo]
+id photo near me | 5000 | S
+id photos | 5000 | P
+id photo size | 500 | S
+id pictures near me | 500 | S
+passport id photo | 500 | S
+passport id photo near me | 500 | S
+passport id picture | 500 | S
+passport photo id | 500 | S
+photo for documents near me | 500 | S
+id card size photo | 50 | S
+id photo studio near me | 50 | S
+id picture passport size | 50 | S
+passport id size | 50 | S
+take id photos near me | 50 | S
+
+[34 visa-photo]
+america visa photo size | 5000 | S
+american visa photo | 5000 | S
+us visa application photo | 5000 | S
+us visa photo | 5000 | S
+us visa photo size | 5000 | S
+visa photo | 5000 | P
+visa pic | 5000 | S
+visa picture | 5000 | S
+us visa passport photo size | 500 | S
+us visa pic | 500 | S
+us visa picture | 500 | S
+us visa picture size | 500 | S
+visa passport photo | 500 | S
+visa photo size | 500 | S
+visa photograph | 500 | S
+visa picture size | 500 | S
+american visa picture | 50 | S
+embassy photo size | 50 | S
+passport size photo for visa | 50 | S
+photo for visa application | 50 | S
+photo size for visa application | 50 | S
+us embassy photo size | 50 | S
+us visa application photo size | 50 | S
+us visa passport photo | 50 | S
+us visa passport size | 50 | S
+us visa photo size 2022 | 50 | S
+visa passport size | 50 | S
+visa size | 50 | S
+
+[35 visa-photo-near-me]
+visa photo near me | 5000 | P
+us visa photo near me | 500 | S
+visa photo studio near me | 500 | S
+visa pictures near me | 500 | S
+photo for us visa near me | 50 | S
+us visa photo studio near me | 50 | S
+visa photographer near me | 50 | S
+
+[36 schengen-eu-photo-size]
+photo size for schengen visa | 5000 | P
+eu passport photo size | 500 | S
+europe passport size photo | 500 | S
+foto visa schengen | 500 | S
+photo for schengen visa | 500 | S
+schengen visa passport photo size | 500 | S
+schengen visa photo near me | 500 | S
+schengen visa picture | 500 | S
+european visa photo size | 50 | S
+schengen passport photo size | 50 | S
+schengen photo | 50 | S
+schengen photo size | 50 | S
+schengen visa application photo size | 50 | S
+schengen visa passport photo | 50 | S
+schengen visa photo size 2022 | 50 | S
+schengen visa photo size vfs | 50 | S
+schengen visa photos near me | 50 | S
+schengen visa picture size | 50 | S
+
+[37 canadian-passport-photos]
+canadian passport photo | 5000 | P
+canadian passport photos near me | 5000 | S
+canadian passport pictures | 5000 | S
+canadian citizenship photo | 500 | S
+canadian passport photo size | 500 | S
+canadian passport pictures near me | 500 | S
+canadian passport size | 500 | S
+best canadian passport photos near me | 50 | S
+canadian citizenship card with photo | 50 | S
+canadian citizenship photo near me | 50 | S
+canadian citizenship photo size | 50 | S
+canadian passport picture size | 50 | S
+canadian visa photo size | 50 | S
+canadian visa picture size | 50 | S
+passport photo spadina | 50 | S
+
+[38 indian-passport-photo-oci-photo]
+indian passport size photo | 5000 | P
+passport size photo for indian passport | 5000 | S
+oci photo | 500 | S
+passport photo for indian passport | 500 | S
+photo for indian passport | 500 | S
+photo size for indian visa | 500 | S
+pp photo | 500 | S
+pp size | 500 | S
+indian passport size photo size | 50 | S
+oci card photo | 50 | S
+oci passport photo | 50 | S
+oci photo near me | 50 | S
+oci photo upload size | 50 | S
+passport ke photo | 50 | S
+pp size photo | 50 | S
+pp size photo size | 50 | S
+
+[39 passport-photo-size-by-country]
+brazilian passport photo size | 500 | S
+british passport photo | 500 | S
+british passport photo size | 500 | S
+british passport picture size | 500 | S
+british passport size | 500 | S
+chinese passport photo | 500 | S
+chinese passport photo size | 500 | S
+french passport photo size | 500 | S
+german passport photo | 500 | S
+german passport photo size | 500 | S
+german passport size photo | 500 | S
+greek passport photos | 500 | S
+international passport photos near me | 500 | S
+irish passport photo | 500 | S
+irish passport photo size | 500 | S
+israeli passport photo size | 500 | S
+italian passport photo size | 500 | S
+japanese passport photo | 500 | S
+japanese passport photo size | 500 | S
+korean passport photo | 500 | S
+korean passport photo size | 500 | S
+nigerian passport photo size | 500 | S
+polish passport photo | 500 | S
+spanish passport photo size | 500 | S
+turkish passport photo size | 500 | S
+biometric photo for german visa | 50 | S
+chinese passport size | 50 | S
+egyptian passport photo size | 50 | S
+ethiopian passport photo size | 50 | S
+german passport size | 50 | S
+international passport photo size | 50 | P
+international passport size | 50 | S
+iranian passport photo size | 50 | S
+irish passport size | 50 | S
+korean visa photo | 50 | S
+lebanese passport photo size | 50 | S
+nepali passport size photo | 50 | S
+passport photo orchard | 50 | S
+passport photos new plymouth | 50 | S
+saudi passport photo size | 50 | S
+saudi passport size photo | 50 | S
+south african passport photo size | 50 | S
+syrian passport photo size | 50 | S
+turkish visa photo size | 50 | S
+
+[40 uscis-immigration-photos]
+citizenship photo | 500 | S
+ead photo | 500 | S
+green card pictures | 500 | S
+immigration photo | 500 | P
+immigration photos near me | 500 | S
+opt photo | 500 | S
+passport immigration photos | 500 | S
+picture of green card | 500 | S
+uscis passport photo | 500 | S
+citizenship application photo | 50 | S
+citizenship photo near me | 50 | S
+us green card photo size | 50 | S
+
+================================================================================
+SHEET: Architecture
+================================================================================
+Site Architecture: Clusters & Linking Rules
+
+A. Core & Local | 8 pages | 5408450 searches/mo | Hub: passport-photo
+Purpose: Head terms, local intent, price and speed. The pillar page owns "passport photo" and routes readers to spokes.
+Linking: Every page links up to /passport-photo/. Local pages (near-me, photographer, size-near-me, visa-near-me) cross-link only as "looking for X instead?" boxes, never with the other page's primary keyword as the anchor.
+
+B. Retailer Brands | 9 pages | 721250 searches/mo | Hub: passport-photos-near-me
+Purpose: One page per retailer/brand so branded queries never compete with generic pages.
+Linking: Each brand page links up to /passport-photos-near-me/ and /passport-photo-cost/, across to 2 alternatives, and to /online-passport-photo-maker/ as the no-trip option. Generic pages link DOWN to brand pages from comparison tables.
+
+C. DIY, Online & Tools | 7 pages | 134550 searches/mo | Hub: online-passport-photo-maker
+Purpose: DIY method and tool pages that feed conversions on the product page.
+Linking: All DIY/tool pages carry a contextual CTA to /online-passport-photo-maker/ (the only money page). Comparison page links to it as the recommended option.
+
+D. Size & Requirements | 9 pages | 658150 searches/mo | Hub: passport-photo-requirements
+Purpose: Size, format and compliance references that answer pre-purchase questions.
+Linking: Size pages form a triangle: /passport-photo-size/ (concept) <-> /2x2-passport-photo/ <-> /35x45mm-passport-photo/. Requirements <-> good-photo tips link once each, with descriptive anchors.
+
+E. Visa, Immigration & Countries | 7 pages | 109150 searches/mo | Hub: visa-photo
+Purpose: Destination-specific rules and immigration use cases.
+Linking: Each country page links up to /visa-photo/ or /passport-photo-size-by-country/ and across to the matching size format (2x2 or 35x45). Promote hub sections to standalone pages when volume justifies.
+
+Total: 40 pages | 7031550 searches/mo
+
+On this site, every /slug/ above is served at /tool/<slug>.
+
+================================================================================
+SHEET: Notes & Flags
+================================================================================
+How keywords were mapped: Each keyword was assigned to exactly ONE page using ordered rules (brand > country > format > intent). One primary keyword per page; all other keywords on that page are supporting. Synonyms/spelling variants (e.g., "2x2", "2 by 2", "2*2") are consolidated so Google sees one page per intent.
+
+Volume data caveat: Search volumes in the export are bucketed (50 / 500 / 5,000 / 50,000 / 500,000), typical of a Keyword Planner account without active ad spend. "Est. total searches" sums those buckets, so treat it as an order-of-magnitude ranking, not a forecast. Validate priorities with a second tool (Semrush, Ahrefs, Search Console).
+
+Rite Aid: All Rite Aid stores have closed (confirmed by CBS/CNN reports, Oct 2025). Page 16 is written as a short "closed - go here instead" page; do not publish prices or hours.
+
+Retailer facts: Prices, hours and which locations offer passport photos change often. Verify every brand-page claim on the retailer's own site before publishing; outlines are structured as questions for that reason.
+
+Official requirements: Photo size, pixel and file specs vary by country and change. Validate every requirements page against the issuing authority (e.g., US State Department, IRCC, USCIS, VFS/embassy sites).
+
+Ambiguous / low-value keywords: "rimowa passport photos" (luggage brand, mapped to page 17), "passport phone" (mapped to page 19), "pp size / pp photo" (assumed Indian shorthand for passport photo, page 38), "passport photo orchard" and "passport photos new plymouth" (Singapore / NZ place names, mapped to page 39), "passport photo spadina" (Toronto, page 37). Review or drop if you are not targeting those markets.
+
+Non-English variants: "foto passport", "foto pasaporte near me", "pass foto near me", "foto visa schengen" are mapped to English pages with short Spanish sections. If Spanish-speaking US traffic is a priority, build a dedicated /es/ page with hreflang.
+
+Near-me pages: Near-me pages need real, crawlable location content (city pages, a locator, LocalBusiness/Place schema where appropriate) or they will underperform. Four near-me pages are deliberately separated by intent: generic locator, professional/studio, passport-SIZE print shops, visa.
+
+Cannibalization safeguards: (1) One primary keyword per page, none repeated. (2) Brand pages own every query containing that brand. (3) Size pages split by format: concept / 2x2 / 35x45 mm / by-country. (4) "Best" roundups split by scope: cross-method vs online-only brands. (5) Cost head terms live on one page; brand cost terms live on brand pages.
+
+Site-type assumption: No business details were provided, so pages assume a passport photo brand with an online photo tool (the money page is /online-passport-photo-maker/). Swap the CTAs if you are a studio, a retailer, or an affiliate publisher.

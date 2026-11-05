@@ -1,5 +1,5 @@
 import { after, NextResponse, type NextRequest } from "next/server";
-import { processPassportPhoto } from "@/lib/passport-api";
+import { isBackgroundMode, processPassportPhoto } from "@/lib/passport-api";
 import { DEFAULT_COUNTRY } from "@/config/countries";
 import { logActivity } from "@/lib/logging/activity-logger";
 
@@ -11,6 +11,7 @@ export const dynamic = "force-dynamic";
  *
  * Endpoint: POST /api/passport-photo
  * Accepts: multipart/form-data with "image", "country_code", "document_type"
+ * and optional "background_mode" ("auto" | "keep"; "keep" = crop only)
  */
 export async function POST(req: NextRequest) {
   const startedAt = Date.now();
@@ -34,6 +35,8 @@ export async function POST(req: NextRequest) {
       DEFAULT_COUNTRY.country_code;
     const documentType =
       (formData.get("document_type") as string) || "passport";
+    const requestedMode = formData.get("background_mode");
+    const backgroundMode = isBackgroundMode(requestedMode) ? requestedMode : "auto";
 
     const fileName =
       image instanceof File && image.name
@@ -49,7 +52,16 @@ export async function POST(req: NextRequest) {
     const result = await processPassportPhoto(buffer, fileName, {
       country_code: countryCode,
       document_type: documentType,
+      background_mode: backgroundMode,
     }, mimeType);
+
+    // Crop-only must never return an edited photo. A photo API that predates
+    // background_mode ignores the field and may still replace the background.
+    if (backgroundMode === "keep" && result.metrics?.background_corrected) {
+      result.status = "error";
+      result.error =
+        "Crop-only mode is not available right now. Please try again later, or take your photo against a plain white or off-white wall.";
+    }
 
     // Record the upload for the admin user-journey view (after the response is sent).
     // Only the outcome is stored: no image, file name or IP address.
@@ -63,6 +75,7 @@ export async function POST(req: NextRequest) {
               metadata: {
                 countryCode: countryCode.toUpperCase(),
                 documentType,
+                backgroundMode,
                 durationMs: Date.now() - startedAt,
                 error: String(result.error || result.message || "").slice(0, 300),
               },
@@ -78,6 +91,8 @@ export async function POST(req: NextRequest) {
                 sizeKb: result.size_kb,
                 dimensions: result.dimensions,
                 backgroundCorrected: result.metrics?.background_corrected,
+                backgroundMode,
+                backgroundValid: result.metrics?.background_valid,
               },
             }
       )

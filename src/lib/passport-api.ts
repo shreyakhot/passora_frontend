@@ -18,6 +18,18 @@ export interface PassportMetrics {
   top_margin_pct?: number;
   background_valid?: boolean;
   background_corrected?: boolean;
+  background_mode?: BackgroundMode;
+}
+
+/**
+ * "auto" replaces a background that fails validation.
+ * "keep" is crop-only: the photo is cropped, resized and compressed, never
+ * edited. Use it where the issuing authority rejects altered photos (US passports).
+ */
+export type BackgroundMode = "auto" | "keep";
+
+export function isBackgroundMode(value: unknown): value is BackgroundMode {
+  return value === "auto" || value === "keep";
 }
 
 export interface PassportProcessResult {
@@ -36,6 +48,7 @@ export interface PassportProcessResult {
 export interface PassportProcessOptions {
   country_code: string; // ISO 3166-1 alpha-2, e.g. "US", "AU", "IN"
   document_type?: string; // default: "passport"
+  background_mode?: BackgroundMode; // default: "auto"
 }
 
 /**
@@ -85,6 +98,7 @@ export async function processPassportPhoto(
     formData.append("image", blob, fileName);
     formData.append("country_code", options.country_code || DEFAULT_COUNTRY.country_code);
     formData.append("document_type", options.document_type || "passport");
+    formData.append("background_mode", options.background_mode || "auto");
 
     const endpoint = `${API_BASE_URL.replace(/\/+$/, "")}/process`;
 

@@ -57,6 +57,16 @@ const PROCESSING_STEPS = [
   { text: "Finalizing digital photo & 6×4″ print sheet…", progress: 95 },
 ];
 
+const CROP_ONLY_PROCESSING_STEPS = PROCESSING_STEPS.map((step, idx) =>
+  idx === 1 ? { ...step, text: "Checking your background (left unedited)…" } : step
+);
+
+// Countries whose passport authority rejects digitally altered photos. The
+// maker offers crop-only processing there and turns it on by default.
+// US: travel.state.gov — "Do not change your photo using computer software,
+// phone apps or filters."
+const CROP_ONLY_COUNTRY_CODES = new Set(["US"]);
+
 // Browser-locale country guess. Read through useSyncExternalStore so the server
 // render (and hydration) uses no guess and the client switches after mount.
 function subscribeToLocaleChanges(onChange: () => void) {
@@ -105,6 +115,13 @@ export default function PhotoMakerStudio({
 
   const selectedCountry: CountryPassportConfig =
     getCountryByCode(selectedCountryCode) || DEFAULT_COUNTRY;
+
+  // Crop-only (keep the original background) is offered where edited photos
+  // are rejected, and is on by default there.
+  const cropOnlyAvailable = CROP_ONLY_COUNTRY_CODES.has(selectedCountry.country_code);
+  const [cropOnlyPreferred, setCropOnlyPreferred] = useState(true);
+  const cropOnly = cropOnlyAvailable && cropOnlyPreferred;
+  const processingSteps = cropOnly ? CROP_ONLY_PROCESSING_STEPS : PROCESSING_STEPS;
 
   // Searchable country dropdown state
   const [isCountryOpen, setIsCountryOpen] = useState(false);
@@ -251,6 +268,7 @@ export default function PhotoMakerStudio({
           "document_type",
           defaultDocumentType || selectedCountry.document_type || "passport"
         );
+        formData.append("background_mode", cropOnly ? "keep" : "auto");
 
         const apiPromise = fetch("/api/passport-photo", {
           method: "POST",
@@ -282,6 +300,7 @@ export default function PhotoMakerStudio({
           country_name: selectedCountry.country_name,
           target_dimensions: selectedCountry.dimensions,
           document_type: selectedCountry.document_type,
+          background_mode: cropOnly ? "keep" : "auto",
           original_preview: targetPreview,
           timestamp,
         };
@@ -322,6 +341,7 @@ export default function PhotoMakerStudio({
       file,
       preview,
       selectedCountry,
+      cropOnly,
       defaultDocumentType,
       router,
       setIsProcessing,
@@ -571,6 +591,32 @@ export default function PhotoMakerStudio({
                 {documentTypeLabel} sized to {selectedCountry.dimensions} px for {selectedCountry.country_name}
               </span>
             </p>
+
+            {cropOnlyAvailable && (
+              <div className="mt-3 rounded-2xl border border-ink-200 bg-ink-50/60 p-4">
+                <label className="flex cursor-pointer items-start gap-3">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-primary checkbox-sm mt-0.5"
+                    checked={cropOnlyPreferred}
+                    disabled={isProcessing}
+                    onChange={(e) => setCropOnlyPreferred(e.target.checked)}
+                    aria-describedby="crop-only-help"
+                  />
+                  <span className="text-sm font-bold text-ink-950">
+                    Crop only: keep my original background
+                    <span className="ml-1.5 rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-bold text-emerald-700">
+                      Recommended
+                    </span>
+                  </span>
+                </label>
+                <p id="crop-only-help" className="mt-2 pl-7 text-xs font-medium leading-relaxed text-ink-600">
+                  {cropOnly
+                    ? `The ${selectedCountry.country_name} passport office rejects photos changed with software, so we only crop and size your photo. Take it against a plain white or off-white wall in even light.`
+                    : `We will replace the background if it is not plain. The ${selectedCountry.country_name} passport office says not to change photos with software, so an edited background can be rejected.`}
+                </p>
+              </div>
+            )}
           </div>
 
           {/* STEP 2 — Upload */}
@@ -690,7 +736,9 @@ export default function PhotoMakerStudio({
                 "Look straight at the camera, neutral face",
                 "Eyes open, mouth closed, no red-eye",
                 "Even lighting on face & shoulders",
-                "Plain background (we clean it up)",
+                cropOnly
+                  ? "Plain white or off-white wall behind you"
+                  : "Plain background (we clean it up)",
               ].map((tip) => (
                 <li key={tip} className="flex items-start gap-2">
                   <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand-600 text-white" aria-hidden="true">
@@ -716,7 +764,7 @@ export default function PhotoMakerStudio({
           <div className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-3xl border border-ink-200 bg-white p-6 text-center shadow-2xl sm:p-8">
             {/* Screen reader live status announcement */}
             <div aria-live="polite" className="sr-only">
-              Processing passport photo: {PROCESSING_STEPS[processingStepIndex].text} {processingProgress}% completed,{" "}
+              Processing passport photo: {processingSteps[processingStepIndex].text} {processingProgress}% completed,{" "}
               {countdown} seconds remaining.
             </div>
 
@@ -759,7 +807,7 @@ export default function PhotoMakerStudio({
 
             {/* Progress Steps */}
             <ol className="m-0 list-none space-y-2.5 rounded-2xl bg-ink-50 p-4 text-left text-xs sm:text-sm">
-              {PROCESSING_STEPS.map((step, idx) => {
+              {processingSteps.map((step, idx) => {
                 const isDone = processingProgress >= step.progress;
                 const isCurrent = processingStepIndex === idx;
 

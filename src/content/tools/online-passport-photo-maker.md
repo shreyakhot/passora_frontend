@@ -46,7 +46,7 @@ Getting the size right is the hard part of a home-made passport photo. Each coun
 
 1. **Finds your face.** It locates your eyes, chin and the top of your head.
 2. **Scales and centres.** It sizes your head to the range your country sets and centres it in the frame.
-3. **Cleans up the background.** It evens out the area behind you to a plain, light background.
+3. **Checks the background.** For most countries, it evens out the area behind you to a plain, light background if needed. For a US passport it uses **crop-only mode** by default: your background is checked but left exactly as you took it.
 4. **Crops to size.** It crops the photo to the country's exact dimensions, for example 2×2 inches for a US passport or 35×45 mm for many European passports.
 5. **Shows you the result.** You check the preview before paying. Nothing is charged if you do not like it.
 
@@ -71,7 +71,7 @@ Some passport authorities do not accept photos that have been digitally changed.
 
 What this means in practice:
 
-- **For a US passport**, take your photo against a plain white or off-white wall in even light, so it needs only cropping and sizing. Do not use beauty filters, face reshaping or AI-generated backgrounds.
+- **For a US passport**, take your photo against a plain white or off-white wall in even light, so it needs only cropping and sizing. Do not use beauty filters, face reshaping or AI-generated backgrounds. When you choose the United States, the maker switches to crop-only mode: it measures, crops and sizes your photo without changing the background or adding to the frame. If your photo is framed too tightly to crop without adding background, it asks you to retake it from a little further away.
 - **For other countries and visas**, rules differ. Some services crop the photo themselves after you upload it, and some ask for a photo-booth or studio code. Read the instructions of the authority you are applying to.
 - **If in doubt, ask the authority.** No online tool, studio or retailer can promise that a photo will be accepted. The issuing authority makes that decision.
 

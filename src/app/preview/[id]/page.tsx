@@ -40,6 +40,7 @@ interface StoredPassportResult extends PassportProcessResult {
   country_name?: string;
   target_dimensions?: string;
   document_type?: string;
+  background_mode?: "auto" | "keep";
   original_preview?: string;
   timestamp?: number;
 }
@@ -648,6 +649,22 @@ export default function PassportPhotoPreviewPage() {
                   </p>
                 </div>
               </div>
+
+              {/* Crop-only uploads keep the original background; warn when it did not pass the check */}
+              {data?.background_mode === "keep" && data.metrics?.background_valid === false && (
+                <div
+                  role="status"
+                  className="mb-6 flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"
+                >
+                  <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" aria-hidden="true" />
+                  <p className="m-0">
+                    <span className="font-bold">Check your background before you buy.</span>{" "}
+                    We only cropped and sized this photo and left the background as you took it. Our check
+                    found it may not be plain white or off-white. If it looks grey, shadowed or patterned,
+                    retake the photo against a plain white or off-white wall in even light.
+                  </p>
+                </div>
+              )}
 
               {/* 2-Column Responsive Layout */}
               <div className="flex flex-col items-start gap-5 lg:flex-row lg:gap-8">
