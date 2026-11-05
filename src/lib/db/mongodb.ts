@@ -28,17 +28,15 @@ export function getClientPromise(): Promise<MongoClient> {
     );
   }
 
-  if (process.env.NODE_ENV === "development") {
-    if (!g._mongoClientPromise) {
-      const client = new MongoClient(uri, options);
-      g._mongoClientPromise = client.connect();
-    }
-    return g._mongoClientPromise;
-  }
-
   if (!g._mongoClientPromise) {
     const client = new MongoClient(uri, options);
-    g._mongoClientPromise = client.connect();
+    const promise = client.connect();
+    g._mongoClientPromise = promise;
+    // Drop a failed connection so the next request retries instead of
+    // reusing the rejected promise until the server restarts.
+    promise.catch(() => {
+      if (g._mongoClientPromise === promise) g._mongoClientPromise = undefined;
+    });
   }
   return g._mongoClientPromise;
 }
