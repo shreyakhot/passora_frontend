@@ -65,4 +65,4 @@ related: [passport-photo-size, passport-photo-requirements] # slugs shown as car
 
 - **US altered-photo rule.** The State Department says: "Do not change your photo using computer software, phone apps or filters," "We check all photos to ensure they were not digitally enhanced or altered," and "Submit the original, unchanged photo." Its pages also name artificial intelligence. Pages must not claim that an AI-edited photo is accepted for a US passport. Recommend taking the photo against a plain white or off-white background in good light, so it needs only cropping and sizing.
 - **Independence.** The site is not affiliated with any government. The template shows `OfficialPhotoNotice` on every page. Never imply approval or guaranteed acceptance.
-- **Retailers.** Rite Aid closed all stores (reported Oct 2025). Costco closed its in-store photo centres in 2024. Check both before writing about them.
+- **Retailers.** Rite Aid closed all stores (reported Oct 2025). Costco closed its in-store photo centres in 2021 (its online photo service moved to Shutterfly in 2024). Check both before writing about them.

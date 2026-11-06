@@ -14,11 +14,11 @@ Five pages a day, in the order below (the strategy's Phase 1 → 4, top to botto
 | 2 | 9 | cvs-passport-photos | cvs passport photo | retailer-brands | 2 | done | 2026-11-05 |
 | 2 | 11 | walmart-passport-photos | walmart passport photo | retailer-brands | 2 | done | 2026-11-05 |
 | 2 | 13 | staples-passport-photos | staples passport photo | retailer-brands | 2 | done | 2026-11-05 |
-| 3 | 10 | walgreens-passport-photos | walgreens passport photo | retailer-brands | 2 | todo | |
-| 3 | 32 | infant-newborn-passport-photo | infant passport photo | size-requirements | 2 | todo | |
-| 3 | 24 | print-passport-photos | passport photo prints | diy-tools | 2 | todo | |
-| 3 | 4 | passport-photo-services | passport photo services | core-local | 3 | todo | |
-| 3 | 6 | passport-photo-cost | passport photo cost | core-local | 3 | todo | |
+| 3 | 10 | walgreens-passport-photos | walgreens passport photo | retailer-brands | 2 | done | 2026-11-06 |
+| 3 | 32 | infant-newborn-passport-photo | infant passport photo | size-requirements | 2 | done | 2026-11-06 |
+| 3 | 24 | print-passport-photos | passport photo prints | diy-tools | 2 | done | 2026-11-06 |
+| 3 | 4 | passport-photo-services | passport photo services | core-local | 3 | done | 2026-11-06 |
+| 3 | 6 | passport-photo-cost | passport photo cost | core-local | 3 | done | 2026-11-06 |
 | 4 | 5 | same-day-instant-passport-photos | same day passport photo | core-local | 3 | todo | |
 | 4 | 7 | best-passport-photos | best passport photos | core-local | 3 | todo | |
 | 4 | 18 | passport-photo-at-home | passport photo at home | diy-tools | 3 | todo | |
@@ -66,3 +66,12 @@ After day 8, follow the strategy's maintenance rules (section 11): promote growi
 - Re-check monthly: Walmart price, CVS and Staples prices and options, Staples' expediting partner (HelloGov), whether CVS/Walmart change photo services after store closures.
 - Online renewal digital file rules seen on travel.state.gov (snippet): JPG/JPEG/PNG/HEIC/HEIF, 54 KB to 10 MB, no pixel dimensions stated. Confirm in a browser before writing digital-passport-photo (day 4).
 - Crop-only mode added for US passports (site owner's decision, 2026-11-05). The maker sends `background_mode=keep` for the US by default; the photo API skips background replacement and refuses to pad the frame. Updated the online-passport-photo-maker guide to say so. Pages may now say that US photos are cropped and sized only, not edited.
+
+### Day 3 — 2026-11-06
+- Published pages 10, 32, 24, 4, 6 (walgreens-passport-photos, infant-newborn-passport-photo, print-passport-photos, passport-photo-services, passport-photo-cost).
+- Prices quoted (each fetched from the company's own site on 2026-11-06, dated on the page): Walgreens $16.99 for two prints incl. free emailed digital copy; Walmart $7.64; USPS $15.00 photo fee ($35.00 acceptance fee); FedEx Office $15.95 for two prints or a USB copy (from a Houston store page); AAA Club Alliance free (Premier) / $8.99 / $11.99 / $14.99 non-member.
+- Not quoted: CVS ($17.99 and $3.99 digital seen only in own-domain snippets; the $16.99 seen earlier comes from a CVS QA site), Staples (snippets about 612 days old), The UPS Store (set per franchise).
+- Correction: Costco closed its in-store photo centres in 2021, not 2024 (2024 was the online photo service moving to Shutterfly). Fixed in README.md.
+- State Department infant rules (own-domain snippets; travel.state.gov blocks fetching): infant eyes need not be fully open, all other children must have them open; no other person in the photo; plain white or off-white sheet; covered car seat (wording from the visa FAQ); photo taken in the last 6 months. Online renewal is adults only (age 25+); under-16s apply in person with DS-11.
+- Walgreens: "most" stores; digital copy must be selected at order time, link expires after 30 days; Duane Reade stores appear in Walgreens' passport-photo locator (same price not confirmed).
+- Re-check monthly: all quoted prices, the Walgreens digital copy terms, CVS and Staples prices (open in a browser).
