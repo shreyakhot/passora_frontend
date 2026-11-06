@@ -4,7 +4,19 @@ import { useState, useEffect, useRef, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, ArrowRight, Wand2, Printer, type LucideIcon } from "lucide-react";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  ArrowRight,
+  Wand2,
+  Printer,
+  BookOpen,
+  MapPin,
+  Camera,
+  Ruler,
+  type LucideIcon,
+} from "lucide-react";
 import { LOGO_PATH, SITE_NAME } from "@/lib/site";
 
 export interface NavLinkItem {
@@ -22,7 +34,16 @@ export interface PhotoToolMenuItem {
   badge?: string;
 }
 
-export const PHOTO_TOOLS_MENU: { creators: PhotoToolMenuItem[] } = {
+export interface GuideMenuItem {
+  title: string;
+  href: string;
+  icon: LucideIcon;
+}
+
+export const PHOTO_TOOLS_MENU: {
+  creators: PhotoToolMenuItem[];
+  guides: GuideMenuItem[];
+} = {
   creators: [
     {
       title: "Passport Photo Maker",
@@ -37,6 +58,29 @@ export const PHOTO_TOOLS_MENU: { creators: PhotoToolMenuItem[] } = {
       href: "/passport-photo-print-template-generator",
       icon: Printer,
       badge: "Free",
+    },
+  ],
+  /** Hub guide of each /tool topic (published, so the links never 404). */
+  guides: [
+    {
+      title: "Passport photo basics",
+      href: "/tool/passport-photo",
+      icon: BookOpen,
+    },
+    {
+      title: "Where to get photos taken",
+      href: "/tool/passport-photos-near-me",
+      icon: MapPin,
+    },
+    {
+      title: "Make and print your own",
+      href: "/tool/online-passport-photo-maker",
+      icon: Camera,
+    },
+    {
+      title: "Sizes and photo rules",
+      href: "/tool/passport-photo-requirements",
+      icon: Ruler,
     },
   ],
 };
@@ -101,7 +145,8 @@ export default function Navbar({
 
   const isToolsActive =
     pathname === "/passport-size-photo-maker" ||
-    pathname === "/passport-photo-print-template-generator";
+    pathname === "/passport-photo-print-template-generator" ||
+    pathname.startsWith("/tool/");
 
   // Close menus on Escape key
   useEffect(() => {
@@ -171,7 +216,10 @@ export default function Navbar({
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-0.5 lg:flex" aria-label={ariaLabel}>
+        <nav
+          className="hidden items-center gap-0.5 lg:flex"
+          aria-label={ariaLabel}
+        >
           {showToolsDropdown && (
             <div
               className="relative"
@@ -194,39 +242,90 @@ export default function Navbar({
 
               {toolsDropdownOpen && (
                 <div
-                  className="absolute left-0 top-full z-50 mt-2 w-[360px] overflow-hidden rounded-2xl border border-ink-200 bg-white p-2 text-left shadow-lift animate-fade-in"
+                  className="absolute left-0 top-full z-50 mt-2 w-[600px] overflow-hidden rounded-2xl border border-ink-200 bg-white p-2 text-left shadow-lift animate-fade-in"
                   role="menu"
                   aria-orientation="vertical"
                 >
-                  {PHOTO_TOOLS_MENU.creators.map((tool) => {
-                    const Icon = tool.icon;
-                    return (
+                  <div className="grid grid-cols-[1fr_220px] gap-2">
+                    <div>
+                      <p className="px-3 pb-1 pt-2 text-[11px] font-bold uppercase tracking-wide text-ink-400">
+                        Photo tools
+                      </p>
+                      {PHOTO_TOOLS_MENU.creators.map((tool) => {
+                        const Icon = tool.icon;
+                        return (
+                          <Link
+                            key={tool.href}
+                            href={tool.href}
+                            onClick={() => setToolsDropdownOpen(false)}
+                            className="group/item flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-brand-50"
+                            role="menuitem"
+                          >
+                            <span className="icon-tile h-10 w-10 group-hover/item:bg-brand-600 group-hover/item:text-white group-hover/item:border-brand-600 transition-colors">
+                              <Icon className="h-5 w-5" aria-hidden="true" />
+                            </span>
+                            <span className="min-w-0">
+                              <span className="flex items-center gap-2">
+                                <span className="text-sm font-bold text-ink-950">
+                                  {tool.title}
+                                </span>
+                                {tool.badge && (
+                                  <span className="rounded-full bg-brand-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-700">
+                                    {tool.badge}
+                                  </span>
+                                )}
+                              </span>
+                              <span className="mt-0.5 block text-xs text-ink-500">
+                                {tool.description}
+                              </span>
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                    <div className="rounded-xl bg-ink-50 p-2">
+                      <p className="px-2 pb-1 pt-1 text-[11px] font-bold uppercase tracking-wide text-ink-400">
+                        Photo guides
+                      </p>
+                      <ul className="m-0 list-none p-0">
+                        {PHOTO_TOOLS_MENU.guides.map((guide) => {
+                          const Icon = guide.icon;
+                          return (
+                            <li key={guide.href}>
+                              <Link
+                                href={guide.href}
+                                onClick={() => setToolsDropdownOpen(false)}
+                                className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm font-semibold text-ink-800 transition-colors hover:bg-white hover:text-brand-700"
+                                role="menuitem"
+                              >
+                                <Icon
+                                  className="h-4 w-4 shrink-0 text-brand-600"
+                                  aria-hidden="true"
+                                />
+                                {guide.title}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
                       <Link
-                        key={tool.href}
-                        href={tool.href}
+                        href="/tool"
                         onClick={() => setToolsDropdownOpen(false)}
-                        className="group/item flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-brand-50"
+                        className="mt-1 inline-flex items-center gap-1 px-2 py-1.5 text-xs font-bold text-brand-700 hover:text-brand-800"
                         role="menuitem"
                       >
-                        <span className="icon-tile h-10 w-10 group-hover/item:bg-brand-600 group-hover/item:text-white group-hover/item:border-brand-600 transition-colors">
-                          <Icon className="h-5 w-5" aria-hidden="true" />
-                        </span>
-                        <span className="min-w-0">
-                          <span className="flex items-center gap-2">
-                            <span className="text-sm font-bold text-ink-950">{tool.title}</span>
-                            {tool.badge && (
-                              <span className="rounded-full bg-brand-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-700">
-                                {tool.badge}
-                              </span>
-                            )}
-                          </span>
-                          <span className="mt-0.5 block text-xs text-ink-500">{tool.description}</span>
-                        </span>
+                        All guides
+                        <ArrowRight
+                          className="h-3.5 w-3.5"
+                          aria-hidden="true"
+                        />
                       </Link>
-                    );
-                  })}
+                    </div>
+                  </div>
                   <div className="mt-1 flex items-center justify-between rounded-xl bg-ink-50 px-3 py-2.5">
-                    <span className="text-xs font-medium text-ink-600">50+ country photo formats</span>
+                    <span className="text-xs font-medium text-ink-600">
+                      50+ country photo formats
+                    </span>
                     <Link
                       href="/passport-size-photo-maker"
                       onClick={() => setToolsDropdownOpen(false)}
@@ -260,7 +359,10 @@ export default function Navbar({
 
         <div className="flex items-center gap-2">
           {ctaText && (
-            <Link href={ctaHref} className="btn-brand hidden min-h-10 px-4 py-2 text-sm sm:inline-flex">
+            <Link
+              href={ctaHref}
+              className="btn-brand hidden min-h-10 px-4 py-2 text-sm sm:inline-flex"
+            >
               {ctaText}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
@@ -275,7 +377,11 @@ export default function Navbar({
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation-drawer"
           >
-            {mobileOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
+            {mobileOpen ? (
+              <X className="h-5 w-5" aria-hidden="true" />
+            ) : (
+              <Menu className="h-5 w-5" aria-hidden="true" />
+            )}
           </button>
         </div>
       </div>
@@ -292,7 +398,10 @@ export default function Navbar({
             id="mobile-navigation-drawer"
             className="absolute left-0 right-0 top-full z-50 max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-ink-200 bg-white shadow-lift animate-fade-in lg:hidden"
           >
-            <nav className="container-narrow flex flex-col gap-1 py-4" aria-label="Mobile navigation">
+            <nav
+              className="container-narrow flex flex-col gap-1 py-4"
+              aria-label="Mobile navigation"
+            >
               {showToolsDropdown && (
                 <div className="mb-1">
                   <button
@@ -302,7 +411,10 @@ export default function Navbar({
                     aria-expanded={mobileToolsOpen}
                   >
                     <span className="flex items-center gap-2">
-                      <Wand2 className="h-4 w-4 text-brand-600" aria-hidden="true" />
+                      <Wand2
+                        className="h-4 w-4 text-brand-600"
+                        aria-hidden="true"
+                      />
                       Photo tools
                     </span>
                     <ChevronDown
@@ -322,7 +434,10 @@ export default function Navbar({
                             onClick={() => setMobileOpen(false)}
                             className="flex items-center gap-3 rounded-xl px-2.5 py-2.5 text-sm font-semibold text-ink-800 hover:bg-white"
                           >
-                            <Icon className="h-4 w-4 shrink-0 text-brand-600" aria-hidden="true" />
+                            <Icon
+                              className="h-4 w-4 shrink-0 text-brand-600"
+                              aria-hidden="true"
+                            />
                             <span className="truncate">{tool.title}</span>
                             {tool.badge && (
                               <span className="ml-auto shrink-0 rounded-full bg-brand-100 px-2 py-0.5 text-[10px] font-bold uppercase text-brand-700">
@@ -332,6 +447,34 @@ export default function Navbar({
                           </Link>
                         );
                       })}
+                      <p className="px-2.5 pb-1 pt-3 text-[11px] font-bold uppercase tracking-wide text-ink-400">
+                        Photo guides
+                      </p>
+                      {PHOTO_TOOLS_MENU.guides.map((guide) => {
+                        const Icon = guide.icon;
+                        return (
+                          <Link
+                            key={guide.href}
+                            href={guide.href}
+                            onClick={() => setMobileOpen(false)}
+                            className="flex items-center gap-3 rounded-xl px-2.5 py-2.5 text-sm font-semibold text-ink-800 hover:bg-white"
+                          >
+                            <Icon
+                              className="h-4 w-4 shrink-0 text-brand-600"
+                              aria-hidden="true"
+                            />
+                            <span className="truncate">{guide.title}</span>
+                          </Link>
+                        );
+                      })}
+                      <Link
+                        href="/tool"
+                        onClick={() => setMobileOpen(false)}
+                        className="flex items-center gap-1 rounded-xl px-2.5 py-2.5 text-sm font-bold text-brand-700 hover:bg-white"
+                      >
+                        All guides
+                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                      </Link>
                     </div>
                   )}
                 </div>
@@ -346,7 +489,9 @@ export default function Navbar({
                     target={link.target}
                     rel={link.rel}
                     className={`rounded-xl px-3 py-3 text-base font-semibold transition-colors ${
-                      isActive ? "bg-brand-50 text-brand-700" : "text-ink-700 hover:bg-ink-50 hover:text-ink-950"
+                      isActive
+                        ? "bg-brand-50 text-brand-700"
+                        : "text-ink-700 hover:bg-ink-50 hover:text-ink-950"
                     }`}
                     aria-current={isActive ? "page" : undefined}
                     onClick={() => setMobileOpen(false)}
