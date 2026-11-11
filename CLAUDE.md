@@ -11,7 +11,7 @@ The brand is never hardcoded. Read it from `src/lib/site.ts`:
 | `SITE_URL` | `NEXT_PUBLIC_SITE_URL` (normalised to an origin) | `https://photo-govt.com` |
 | `SITE_DOMAIN` | derived from `SITE_URL` | `photo-govt.com` |
 | `SITE_NAME` | `NEXT_PUBLIC_SITE_NAME` | `Photo-Govt` |
-| `SUPPORT_EMAIL` | `NEXT_PUBLIC_CONTACT_EMAIL` | `support@<SITE_DOMAIN>` |
+| `SUPPORT_EMAIL` | set in code (`src/lib/site.ts`) | `photogovt@gmail.com` |
 | `LOGO_PATH` / `LOGO_URL` | — | `/logo-mark.jpg` (file: `public/logo-mark.jpg`, source `public/logo-mark.svg`) |
 | `SITE_DISCLAIMER` | — | "…is an independent photo service and is not affiliated with… any government, passport office, embassy or consulate." |
 

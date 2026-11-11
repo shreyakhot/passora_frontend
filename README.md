@@ -99,7 +99,7 @@ Never commit real values. `NEXT_PUBLIC_*` variables are exposed to the browser. 
 | :--- | :--- |
 | `NEXT_PUBLIC_SITE_URL` | Canonical origin used for metadata, sitemap, robots, emails and invoices (default `https://photo-govt.com`) |
 | `NEXT_PUBLIC_SITE_NAME` | Display/brand name (default `Photo-Govt`) |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | Public support address (default `support@<site domain>`) |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | No longer used. The public support address is set in `src/lib/site.ts` (`SUPPORT_EMAIL`) |
 | `NEXT_PUBLIC_PAYMENT_CURRENCY` | ISO 4217 currency code for checkout (default `USD`) |
 | `NEXT_PUBLIC_PAYMENT_AMOUNT` | Standard plan price in major units (e.g. `4.99`) |
 | `NEXT_PUBLIC_EXPERT_EDIT_AMOUNT` | Expert Edit plan price in major units (e.g. `9.99`) |
