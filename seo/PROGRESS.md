@@ -19,16 +19,16 @@ Five pages a day, in the order below (the strategy's Phase 1 → 4, top to botto
 | 3 | 24 | print-passport-photos | passport photo prints | diy-tools | 2 | done | 2026-11-06 |
 | 3 | 4 | passport-photo-services | passport photo services | core-local | 3 | done | 2026-11-06 |
 | 3 | 6 | passport-photo-cost | passport photo cost | core-local | 3 | done | 2026-11-06 |
-| 4 | 5 | same-day-instant-passport-photos | same day passport photo | core-local | 3 | todo | |
-| 4 | 7 | best-passport-photos | best passport photos | core-local | 3 | todo | |
-| 4 | 18 | passport-photo-at-home | passport photo at home | diy-tools | 3 | todo | |
-| 4 | 19 | take-passport-photo-with-phone | take passport photo with iphone | diy-tools | 3 | todo | |
-| 4 | 20 | digital-passport-photo | digital passport photo | diy-tools | 3 | todo | |
-| 5 | 26 | 2x2-passport-photo | 2x2 passport photo | size-requirements | 3 | todo | |
-| 5 | 27 | 35x45mm-passport-photo | 35mm x 45mm photo | size-requirements | 3 | todo | |
-| 5 | 31 | passport-application-photo | passport renewal photo | size-requirements | 3 | todo | |
-| 5 | 14 | fedex-office-passport-photos | fedex passport photo | retailer-brands | 3 | todo | |
-| 5 | 15 | usps-post-office-passport-photos | usps passport photo | retailer-brands | 3 | todo | |
+| 4 | 5 | same-day-instant-passport-photos | same day passport photo | core-local | 3 | done | 2026-11-06 |
+| 4 | 7 | best-passport-photos | best passport photos | core-local | 3 | done | 2026-11-06 |
+| 4 | 18 | passport-photo-at-home | passport photo at home | diy-tools | 3 | done | 2026-11-06 |
+| 4 | 19 | take-passport-photo-with-phone | take passport photo with iphone | diy-tools | 3 | done | 2026-11-06 |
+| 4 | 20 | digital-passport-photo | digital passport photo | diy-tools | 3 | done | 2026-11-06 |
+| 5 | 26 | 2x2-passport-photo | 2x2 passport photo | size-requirements | 3 | done | 2026-11-11 |
+| 5 | 27 | 35x45mm-passport-photo | 35mm x 45mm photo | size-requirements | 3 | done | 2026-11-11 |
+| 5 | 31 | passport-application-photo | passport renewal photo | size-requirements | 3 | done | 2026-11-11 |
+| 5 | 14 | fedex-office-passport-photos | fedex passport photo | retailer-brands | 3 | done | 2026-11-11 |
+| 5 | 15 | usps-post-office-passport-photos | usps passport photo | retailer-brands | 3 | done | 2026-11-11 |
 | 6 | 34 | visa-photo | visa photo | visa-countries (hub) | 4 | todo | |
 | 6 | 35 | visa-photo-near-me | visa photo near me | visa-countries | 4 | todo | |
 | 6 | 36 | schengen-eu-photo-size | photo size for schengen visa | visa-countries | 4 | todo | |
@@ -75,3 +75,33 @@ After day 8, follow the strategy's maintenance rules (section 11): promote growi
 - State Department infant rules (own-domain snippets; travel.state.gov blocks fetching): infant eyes need not be fully open, all other children must have them open; no other person in the photo; plain white or off-white sheet; covered car seat (wording from the visa FAQ); photo taken in the last 6 months. Online renewal is adults only (age 25+); under-16s apply in person with DS-11.
 - Walgreens: "most" stores; digital copy must be selected at order time, link expires after 30 days; Duane Reade stores appear in Walgreens' passport-photo locator (same price not confirmed).
 - Re-check monthly: all quoted prices, the Walgreens digital copy terms, CVS and Staples prices (open in a browser).
+
+### Day 4 — 2026-11-06
+- Published pages 5, 7, 18, 19, 20 (same-day-instant-passport-photos, best-passport-photos, passport-photo-at-home, take-passport-photo-with-phone, digital-passport-photo). Same calendar day as day 3, at the site owner's request.
+- State Department facts (own-domain search snippets; travel.state.gov and opr.travel.state.gov still return 403):
+  - Online renewal file: JPG/JPEG/PNG/HEIC/HEIF, 54 KB to 10 MB, no pixel size stated; not scanned, not sent by text message, no filters. The photo tool checks it before submitting, staff review it afterwards, and a letter or email asks for a new photo if needed.
+  - Online renewal eligibility: age 25+, passport valid for 10 years, expiring within a year or expired under 5 years, no change of personal details, no travel within 6 weeks, in a US state or territory.
+  - "Low quality vending machine or mobile phone photos" are not acceptable (visa FAQ). Most phones save in an accepted format (upload page).
+  - Expression: neutral, both eyes open, mouth closed, no teeth showing. A natural smile is not clearly allowed, so no page says it is.
+  - Religious head covering needs a signed statement; medical one a doctor's statement.
+  - Urgent agency appointments for travel within 14 days (28 with a visa); separate life-or-death emergency service.
+  - E-passports issued since August 2007; the chip in the back cover holds a digital image of the photo.
+- US visa digital photos (600 x 600 to 1200 x 1200 px, max 240 KB) are kept separate from passport renewal on the digital page.
+- Prices reused from day 3 (fetched 2026-11-06): Walmart $7.64, Walgreens $16.99. CVS and Staples still not quoted.
+- iPhone and Android camera advice (Photo mode not Portrait, 1x/2x lens, beauty and scene enhancement off, flash off, HEIC default) is general guidance, not from an official source; menu names vary by model.
+- Re-check monthly: Walmart and Walgreens prices, store digital-copy options. Re-check quarterly: online renewal eligibility and file rules (open the upload page in a browser; it has never been fetched directly), and whether online renewal is open.
+
+### Day 5 — 2026-11-11
+- Published pages 26, 27, 31, 14, 15 (2x2-passport-photo, 35x45mm-passport-photo, passport-application-photo, fedex-office-passport-photos, usps-post-office-passport-photos).
+- Fetched directly on 2026-11-11 (dated on the pages):
+  - USPS passports page: $15.00 photo fee (if needed), $35.00 acceptance fee; appointments through the online scheduler or a lobby kiosk, limited walk-in hours at some offices; "Most of those locations can also take your passport photo"; hard copy and digital (USB) photos at many post offices.
+  - FedEx Office store page (Houston): $15.95 for two 2x2 prints OR a USB copy; no appointment; international passport photos; "FedEx Office is not a passport acceptance facility"; RushMyPassport partner.
+  - GOV.UK digital photos: at least 600 x 750 px, 50 KB to 10 MB; booth or shop photos more likely to be approved.
+- Own-domain search snippets only (re-check in a browser):
+  - FedEx: available at any FedEx Office location, visa photos from $15.95; Kinko's bought 2004, renamed FedEx Office 2008.
+  - State Department: DS-82 photo stapled with four staples vertically in the corners; do not staple to DS-11; renewal address is a PO box, so no UPS/FedEx/DHL; mail renewal eligibility (issued in last 15 years at 16+, undamaged, not lost/stolen, same name or documented change); DS-11 ID must be a physical government photo ID, no digital IDs, photocopy front and back on 8.5x11 single-sided; visa digital head 50-69% of image height.
+  - UK printed photo 45 x 35 mm, head 29-34 mm chin to crown, plain cream or light grey background. Germany 35 x 45 mm, face 32-36 mm (children 9 and under 22-36 mm). Ireland min 35 x 45, max 38 x 50 mm, face 70-80%, plain light grey, white or cream. Australia 35-40 x 45-50 mm, face 32-36 mm, glossy 200 gsm, no inkjet. India Passport Seva 4.5 x 3.5 cm, white background.
+  - USCIS: I-485 two identical 2x2 colour photos, thin glossy paper, unmounted, unretouched; name and A-Number in pencil on the back (I-765, N-565 instructions).
+- Not stated: an eye-height rule for US photos (a search suggested one; the State Department pages found do not give it).
+- Fixed: `.next/dev/types/routes.d.ts` was corrupted (probably when the temporary dev server was stopped on 2026-11-06) and broke `tsc`. Deleted it so `next dev` regenerates it. If `tsc` reports errors only in `.next/dev/types`, restart `next dev`.
+- Re-check monthly: USPS and FedEx prices. Re-check quarterly: the State Department mail renewal and ID pages, GOV.UK and Irish photo rules.

@@ -18,17 +18,17 @@ const currencySymbols: Record<string, string> = {
 };
 
 const defaultAmounts: Record<string, number> = {
-  GBP: 7.99,
+  GBP: 3.99,
   INR: 1.00, // ₹1.00 for testing Razorpay UPI/Netbanking/Cards
-  USD: 9.99,
-  EUR: 8.99,
+  USD: 4.99,
+  EUR: 4.49,
 };
 
 const defaultExpertAmounts: Record<string, number> = {
-  GBP: 13.99,
+  GBP: 7.99,
   INR: 2.00, // ₹2.00 for testing Razorpay UPI/Netbanking/Cards in INR
-  USD: 16.99,
-  EUR: 15.99,
+  USD: 9.99,
+  EUR: 8.99,
 };
 
 const parsedAmount = process.env.NEXT_PUBLIC_PAYMENT_AMOUNT
@@ -39,7 +39,7 @@ const amount =
   isNaN(parsedAmount) || parsedAmount <= 0 ? (defaultAmounts[currency] ?? defaultAmounts.USD) : parsedAmount;
 const amountInSubunits = Math.round(amount * 100);
 
-// Expert Edit pricing ($16.99 for USD, or ₹2 for test mode)
+// Expert Edit pricing ($9.99 for USD, or ₹2 for test mode)
 const parsedExpertAmount = process.env.NEXT_PUBLIC_EXPERT_EDIT_AMOUNT
   ? parseFloat(process.env.NEXT_PUBLIC_EXPERT_EDIT_AMOUNT)
   : (defaultExpertAmounts[currency] ?? defaultExpertAmounts.USD);
@@ -52,13 +52,13 @@ const expertEditAmount =
 const expertEditAmountInSubunits = Math.round(expertEditAmount * 100);
 
 export const PRICING = {
-  /** Standard Pack amount in standard currency units (e.g. 9.99 USD or 1.00 INR) */
+  /** Standard Pack amount in standard currency units (e.g. 4.99 USD or 1.00 INR) */
   amount,
   /** Amount in smallest currency unit (pence/paise/cents) for Razorpay */
   amountInPence: amountInSubunits,
   amountInSubunits,
 
-  /** Expert Edit amount in standard currency units (e.g. 16.99 USD or 2.00 INR) */
+  /** Expert Edit amount in standard currency units (e.g. 9.99 USD or 2.00 INR) */
   expertEditAmount,
   expertEditAmountInPence: expertEditAmountInSubunits,
   expertEditAmountInSubunits,

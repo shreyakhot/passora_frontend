@@ -101,8 +101,8 @@ Never commit real values. `NEXT_PUBLIC_*` variables are exposed to the browser. 
 | `NEXT_PUBLIC_SITE_NAME` | Display/brand name (default `Photo-Govt`) |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Public support address (default `support@<site domain>`) |
 | `NEXT_PUBLIC_PAYMENT_CURRENCY` | ISO 4217 currency code for checkout (default `USD`) |
-| `NEXT_PUBLIC_PAYMENT_AMOUNT` | Standard plan price in major units (e.g. `9.99`) |
-| `NEXT_PUBLIC_EXPERT_EDIT_AMOUNT` | Expert Edit plan price in major units (e.g. `16.99`) |
+| `NEXT_PUBLIC_PAYMENT_AMOUNT` | Standard plan price in major units (e.g. `4.99`) |
+| `NEXT_PUBLIC_EXPERT_EDIT_AMOUNT` | Expert Edit plan price in major units (e.g. `9.99`) |
 | `PHOTO_API_URL` | Base URL of the photo processing API (default `https://photo-govt.com/api`) |
 | `PHOTO_API_KEY` | API key sent by the server-side proxy; never exposed to the client |
 | `MONGODB_URI` | MongoDB connection string |

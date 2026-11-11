@@ -11,7 +11,7 @@ const CURRENCY_SYMBOLS: Record<string, string> = {
   AUD: "A$",
 };
 
-/** Amount in the smallest currency unit → "$9.99" */
+/** Amount in the smallest currency unit → "$4.99" */
 export function formatMoney(subunits: number | undefined, currency: string | undefined): string {
   const value = (subunits || 0) / 100;
   const code = (currency || "").toUpperCase();
