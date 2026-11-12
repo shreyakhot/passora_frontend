@@ -15,6 +15,7 @@ import {
   MapPin,
   Camera,
   Ruler,
+  Globe,
   type LucideIcon,
 } from "lucide-react";
 import { LOGO_PATH, SITE_NAME } from "@/lib/site";
@@ -81,6 +82,11 @@ export const PHOTO_TOOLS_MENU: {
       title: "Sizes and photo rules",
       href: "/tool/passport-photo-requirements",
       icon: Ruler,
+    },
+    {
+      title: "Visa and country photos",
+      href: "/tool/visa-photo",
+      icon: Globe,
     },
   ],
 };
