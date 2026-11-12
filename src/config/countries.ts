@@ -115,6 +115,20 @@ export const COUNTRIES: CountryPassportConfig[] = [
     dimensions: "630x810",
   },
   {
+    // OCI portal: square, 200x200 to 900x900 px, JPEG max 200 KB, light background (not white).
+    country_code: "IN",
+    country_name: "India (OCI card)",
+    document_type: "oci",
+    dimensions: "600x600",
+  },
+  {
+    // e-Visa / regular visa upload: square JPEG; regular form 350x350 to 1000x1000 px, max 300 KB.
+    country_code: "IN",
+    country_name: "India (visa)",
+    document_type: "visa",
+    dimensions: "600x600",
+  },
+  {
     country_code: "ID",
     country_name: "Indonesia",
     document_type: "passport",
@@ -330,7 +344,8 @@ export const COUNTRIES: CountryPassportConfig[] = [
 export const DEFAULT_COUNTRY_CODE = "US";
 
 export const DEFAULT_COUNTRY: CountryPassportConfig =
-  COUNTRIES.find((c) => c.country_code === DEFAULT_COUNTRY_CODE) || COUNTRIES[0];
+  COUNTRIES.find((c) => c.country_code === DEFAULT_COUNTRY_CODE) ||
+  COUNTRIES[0];
 
 /** Emoji flag for a 2-letter code ("EU" renders the EU flag). */
 export function countryFlag(code: string): string {
@@ -364,6 +379,49 @@ export function getCountryByCode(
   if (!code) return undefined;
   const upperCode = code.trim().toUpperCase();
   return COUNTRIES.find((c) => c.country_code.toUpperCase() === upperCode);
+}
+
+/**
+ * Unique id for one maker option. A country's passport entry uses the bare
+ * code ("IN"); other documents for the same country add the document type
+ * ("IN-OCI", "IN-VISA"), so several options can share a country code.
+ */
+export function countryOptionId(country: CountryPassportConfig): string {
+  const code = country.country_code.toUpperCase();
+  return country.document_type === "passport"
+    ? code
+    : `${code}-${country.document_type.toUpperCase()}`;
+}
+
+/**
+ * Finds a maker option by its id ("IN-OCI"), falling back to the country's
+ * passport entry for a bare code ("IN"). Case-insensitive.
+ */
+export function getCountryOption(
+  id: string
+): CountryPassportConfig | undefined {
+  if (!id) return undefined;
+  const upperId = id.trim().toUpperCase();
+  return (
+    COUNTRIES.find((c) => countryOptionId(c) === upperId) ??
+    getCountryByCode(upperId)
+  );
+}
+
+/** Number of distinct countries and regions (document variants count once). */
+export const COUNTRY_COUNT = new Set(COUNTRIES.map((c) => c.country_code)).size;
+
+/** Short label for the document an option produces, e.g. "OCI photo". */
+export function documentPhotoLabel(country: CountryPassportConfig): string {
+  if (country.country_code === "EU") return "Visa photo";
+  switch (country.document_type) {
+    case "oci":
+      return "OCI photo";
+    case "visa":
+      return "Visa photo";
+    default:
+      return "Passport photo";
+  }
 }
 
 /**

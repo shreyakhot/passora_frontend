@@ -90,7 +90,9 @@ npm run indexnow
 
 ## 5. Country Photo Specifications
 
-Photo sizes are per country. Each `COUNTRIES` entry in `src/config/countries.ts` has `country_code`, `country_name`, `document_type` and `dimensions` (pixel size, `"widthxheight"`, e.g. `"413x531"`). Helpers in the same file: `countryPageSlug`, `countryPagePath`, `getCountryByCode`, `getCountryByPageSlug`, `parseDimensions`, `documentLabel` (the `EU` / Schengen entry is labelled as a visa), `countryFlag`, `detectCountryFromLocales`, `DEFAULT_COUNTRY_CODE` (`US`) and `POPULAR_COUNTRY_CODES`.
+Photo sizes are per country and document. Each `COUNTRIES` entry in `src/config/countries.ts` has `country_code`, `country_name`, `document_type` and `dimensions` (pixel size, `"widthxheight"`, e.g. `"413x531"`). A country can have several entries (India: `passport`, `oci`, `visa`); each maker option is identified by `countryOptionId()` — the bare code for a passport (`IN`), code plus document for the rest (`IN-OCI`, `IN-VISA`). Helpers in the same file: `getCountryByCode` (a country's first/passport entry), `getCountryOption` (by option id), `countryOptionId`, `documentPhotoLabel` (the `EU` / Schengen entry is labelled as a visa), `COUNTRY_COUNT` (distinct countries), `parseDimensions`, `countryFlag`, `detectCountryFromLocales` and `DEFAULT_COUNTRY_CODE` (`US`).
+
+`PhotoMakerStudio` sends the selected option's `country_code` and `document_type` to the photo API, which looks up the backend config `<CODE>_<document_type>` (`backend/config/countries/*.json`). A new document variant therefore needs a backend JSON config deployed **before** the frontend entry goes live. `?country=<option id>` on a page with the maker preselects that option (guides link to it through `maker_presets`).
 
 Do not present any size as an official guarantee. Photo rules change and can differ between online and paper applications, embassies and visa categories. Copy must tell users to confirm the current rules with their issuing authority (`OfficialPhotoNotice.tsx` does this), and must state that the site is independent and not affiliated with any government (`SITE_DISCLAIMER`).
 

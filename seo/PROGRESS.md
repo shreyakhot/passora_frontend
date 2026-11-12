@@ -29,11 +29,11 @@ Five pages a day, in the order below (the strategy's Phase 1 → 4, top to botto
 | 5 | 31 | passport-application-photo | passport renewal photo | size-requirements | 3 | done | 2026-11-11 |
 | 5 | 14 | fedex-office-passport-photos | fedex passport photo | retailer-brands | 3 | done | 2026-11-11 |
 | 5 | 15 | usps-post-office-passport-photos | usps passport photo | retailer-brands | 3 | done | 2026-11-11 |
-| 6 | 34 | visa-photo | visa photo | visa-countries (hub) | 4 | todo | |
-| 6 | 35 | visa-photo-near-me | visa photo near me | visa-countries | 4 | todo | |
-| 6 | 36 | schengen-eu-photo-size | photo size for schengen visa | visa-countries | 4 | todo | |
-| 6 | 37 | canadian-passport-photos | canadian passport photo | visa-countries | 4 | todo | |
-| 6 | 38 | indian-passport-photo-oci-photo | indian passport size photo | visa-countries | 4 | todo | |
+| 6 | 34 | visa-photo | visa photo | visa-countries (hub) | 4 | done | 2026-11-11 |
+| 6 | 35 | visa-photo-near-me | visa photo near me | visa-countries | 4 | done | 2026-11-11 |
+| 6 | 36 | schengen-eu-photo-size | photo size for schengen visa | visa-countries | 4 | done | 2026-11-11 |
+| 6 | 37 | canadian-passport-photos | canadian passport photo | visa-countries | 4 | done | 2026-11-11 |
+| 6 | 38 | indian-passport-photo-oci-photo | indian passport size photo | visa-countries | 4 | done | 2026-11-11 |
 | 7 | 39 | passport-photo-size-by-country | international passport photo size | visa-countries | 4 | todo | |
 | 7 | 40 | uscis-immigration-photos | immigration photo | visa-countries | 4 | todo | |
 | 7 | 12 | costco-passport-photos | costco passport photos | retailer-brands | 4 | todo | |
@@ -105,3 +105,23 @@ After day 8, follow the strategy's maintenance rules (section 11): promote growi
 - Not stated: an eye-height rule for US photos (a search suggested one; the State Department pages found do not give it).
 - Fixed: `.next/dev/types/routes.d.ts` was corrupted (probably when the temporary dev server was stopped on 2026-11-06) and broke `tsc`. Deleted it so `next dev` regenerates it. If `tsc` reports errors only in `.next/dev/types`, restart `next dev`.
 - Re-check monthly: USPS and FedEx prices. Re-check quarterly: the State Department mail renewal and ID pages, GOV.UK and Irish photo rules.
+
+### Day 6 — 2026-11-11
+- Published pages 34, 35, 36, 37, 38 (visa-photo (hub), visa-photo-near-me, schengen-eu-photo-size, canadian-passport-photos, indian-passport-photo-oci-photo). Same calendar day as day 5, at the site owner's request.
+- Fetched directly on 2026-11-11:
+  - Canada passport photos (canada.ca): 50 x 70 mm, head 31-36 mm, 2 identical, commercial photographer, studio name/address and date on back, guarantor statement (not for adult renewals), colour or B&W, 6 months, no edits incl. cropping, clear glasses OK, no tint. Online renewal digital: 3:2 portrait, 1800x1200 to 4500x3000 px, JPEG 200 KB-5 MB, head 45-50% of height.
+  - Canada citizenship grant photos (IRCC): "do not use the same specifications as passport photos". Mail: 2 identical colour, 50 x 70 mm, head 31-36 mm, commercial photographer, back = applicant name + studio name/address + date, 6 months. Online: JPEG, at least 420 x 540 px, about 240 KB, max 4 MB.
+  - Canada visitor visa (TRV) photos: at least 35 x 45 mm, head 31-36 mm, 2 identical, 6 months, clear prescription glasses OK.
+  - India e-Visa: JPEG, 10 KB-1 MB, height = width, plain light or white background, no spectacles, no border.
+  - OCI portal FAQ: square, min 51 x 51 mm, face ~80%, plain light background NOT white, 200x200 to 900x900 px, JPEG max 200 KB (photo and signature).
+  - Netherlands Schengen checklist: 3.5 x 4.5 cm, 6 months, white or light background, no photo needed when using the external service provider.
+- Own-domain search snippets only (re-check in a browser; several of these sites return 403 to the fetcher):
+  - US visa (travel.state.gov): digital square 600-1200 px, JPEG max 240 kB, head 50-69% of height; print 2x2 in; no glasses (medical exception with signed statement); 6 months; white/off-white; DS-160 upload, bring a print if upload fails. The Spanish FAQ still says everyday glasses are OK; the English pages say no.
+  - Schengen: EU guidance 35-40 mm wide, face 70-80%, 6 months, ICAO; Germany 35 x 45, face 32-36 mm (reject only under 27 / over 40; children 9 and under 22-36); France 35-40 mm wide, face 32-36 mm chin to forehead, light background, 3 photos for long-stay. VIS: live photo allowed at fingerprinting; fingerprints reused within 59 months.
+  - India: no photo needed at PSK/POPSK except children under 4 (4.5 x 3.5 cm, white, no computer prints). VFS USA adult re-issue checklist (dated 10.13.26): 35 x 45 mm (630 x 810 px), white, ICAO, uploaded and printed identical; older checklists say 2x2 in. VFS USA visa: 2x2 in glossy, white, glue not staple; online visa upload 10-300 KB, square, 350-1000 px.
+  - Retailers: Walgreens country list (incl. Canada, China, France, Germany, India, Japan, Mexico, Spain, UK); CVS visa photos at select stores; Staples "nearly every country"; Shoppers Drug Mart no appointment, also PR/citizenship/visa photos. Canada stopped citizenship cards in Feb 2012 (existing cards still valid).
+- Prices: only FedEx $15.95 quoted (fetched 2026-11-11, from day 5). Walgreens, CVS, Staples visa prices and all Canadian prices not quoted.
+- Open issues:
+  - Resolved 2026-11-12 (site owner's decision): the Canadian page hides the maker CTA (`maker_cta: false`), because Canadian passport and citizenship photos must come from a commercial photographer.
+  - Resolved 2026-11-12: the maker has two new India options. "India (OCI card)" (`IN-OCI`) is a 600 x 600 JPEG under 200 KB on plain light grey (#E0E0E0), head 70-80% of height. "India (visa)" (`IN-VISA`) is a 600 x 600 JPEG under 300 KB on white, head 50-69%, eyes 56-69% from the bottom. Backend configs: `backend/config/countries/india_oci.json` and `india_visa.json`. The India page CTA links to both (`maker_presets`), and its "Make it online" section has a table with the three India settings.
+- Re-check monthly: VFS USA Indian passport checklist (photo size changed between versions), FedEx price. Re-check quarterly: US visa photo pages, OCI FAQ, Indian visa upload limits (e-Visa 1 MB vs regular 300 KB), IRCC passport, citizenship and TRV photo pages.

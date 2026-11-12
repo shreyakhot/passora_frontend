@@ -108,6 +108,18 @@
     "dimensions": "630x810"
   },
   {
+    "country_code": "IN",
+    "country_name": "India (OCI card)",
+    "document_type": "oci",
+    "dimensions": "600x600"
+  },
+  {
+    "country_code": "IN",
+    "country_name": "India (visa)",
+    "document_type": "visa",
+    "dimensions": "600x600"
+  },
+  {
     "country_code": "ID",
     "country_name": "Indonesia",
     "document_type": "passport",

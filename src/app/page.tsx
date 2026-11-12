@@ -29,7 +29,7 @@ import PhotoMakerStudio from "@/components/PhotoMakerStudio";
 import OfficialPhotoNotice from "@/components/OfficialPhotoNotice";
 import { LOGO_URL, SITE_DISCLAIMER, SITE_NAME, SITE_URL } from "@/lib/site";
 import { PRICING, getPlanPricing } from "@/lib/config/pricing";
-import { COUNTRIES, countryFlag, getCountryByCode } from "@/config/countries";
+import { COUNTRY_COUNT, countryFlag, getCountryByCode } from "@/config/countries";
 
 const standardPlan = getPlanPricing("standard");
 const expertPlan = getPlanPricing("expert_edit");
@@ -82,7 +82,7 @@ const showcaseCountries = SHOWCASE_COUNTRY_CODES.map((code) => getCountryByCode(
 );
 
 const heroStats = [
-  { value: `${COUNTRIES.length}+`, label: "countries & regions" },
+  { value: `${COUNTRY_COUNT}+`, label: "countries & regions" },
   { value: "~10s", label: "to process a photo" },
   { value: standardPlan.amountFormatted, label: "one-off, no subscription" },
 ];
@@ -257,7 +257,7 @@ const faqs = [
   },
   {
     question: "Which countries do you support?",
-    answer: `${SITE_NAME} supports ${COUNTRIES.length} countries and regions, including the US, UK, Canada, Australia, India and the Schengen Area, for passport and visa photos.`,
+    answer: `${SITE_NAME} supports ${COUNTRY_COUNT} countries and regions, including the US, UK, Canada, Australia, India and the Schengen Area, for passport and visa photos.`,
   },
   {
     question: `Is ${SITE_NAME} an official government service?`,
@@ -459,7 +459,7 @@ export default function HomePage() {
                   </li>
                 ))}
                 <li className="inline-flex items-center rounded-full bg-brand-50 px-3 py-1.5 text-xs font-bold text-brand-700">
-                  +{Math.max(COUNTRIES.length - showcaseCountries.length, 0)} more
+                  +{Math.max(COUNTRY_COUNT - showcaseCountries.length, 0)} more
                 </li>
               </ul>
             </div>

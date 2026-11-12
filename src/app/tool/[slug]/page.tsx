@@ -26,7 +26,11 @@ import {
   getToolBySlug,
   type ToolSummary,
 } from "@/lib/tools";
-import { getCountryByCode } from "@/config/countries";
+import {
+  countryOptionId,
+  documentPhotoLabel,
+  getCountryOption,
+} from "@/config/countries";
 import { LOGO_URL, SITE_NAME, SITE_URL } from "@/lib/site";
 
 /** The strategy's money page: every guide's CTA points here. */
@@ -42,7 +46,9 @@ export async function generateStaticParams() {
   return getAllToolSlugs().map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const tool = await getToolBySlug(slug);
   if (!tool) return {};
@@ -100,7 +106,10 @@ function GuideCard({ guide }: { guide: ToolSummary }) {
       </span>
       <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-bold text-brand-700">
         Read guide
-        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+        <ArrowRight
+          className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+          aria-hidden="true"
+        />
       </span>
     </Link>
   );
@@ -112,11 +121,16 @@ export default async function ToolGuidePage({ params }: PageProps) {
   if (!tool) notFound();
 
   const pageUrl = `${SITE_URL}/tool/${slug}`;
-  const cluster = TOOL_CLUSTERS.find((c) => c.id === tool.cluster) ?? TOOL_CLUSTERS[0];
+  const cluster =
+    TOOL_CLUSTERS.find((c) => c.id === tool.cluster) ?? TOOL_CLUSTERS[0];
   const allGuides = getAllToolSummaries();
-  const hubGuide = !tool.hub ? allGuides.find((g) => g.slug === cluster.hub) : undefined;
+  const hubGuide = !tool.hub
+    ? allGuides.find((g) => g.slug === cluster.hub)
+    : undefined;
   const makerPublished = allGuides.some((g) => g.slug === MAKER_SLUG);
-  const countryName = tool.countryCode ? getCountryByCode(tool.countryCode)?.country_name : undefined;
+  const countryName = tool.countryCode
+    ? getCountryOption(tool.countryCode)?.country_name
+    : undefined;
 
   // Hand-picked related guides first, then the cluster hub and the pillar.
   const relatedGuides: ToolSummary[] = [];
@@ -125,17 +139,44 @@ export default async function ToolGuidePage({ params }: PageProps) {
     ...(hubGuide ? [hubGuide] : []),
     ...allGuides.filter((g) => g.slug === "passport-photo"),
   ]) {
-    if (guide.slug !== slug && !relatedGuides.some((g) => g.slug === guide.slug)) {
+    if (
+      guide.slug !== slug &&
+      !relatedGuides.some((g) => g.slug === guide.slug)
+    ) {
       relatedGuides.push(guide);
     }
   }
 
-  const makerHref = makerPublished ? `/tool/${MAKER_SLUG}` : "/passport-size-photo-maker";
+  const makerHref = makerPublished
+    ? `/tool/${MAKER_SLUG}`
+    : "/passport-size-photo-maker";
+
+  // Guide CTAs: hidden with `maker_cta: false`; with `maker_presets`, one button
+  // per maker option, each opening the maker with that option preselected.
+  const showMakerCta = tool.studio || tool.makerCta;
+  const makerLinks = tool.makerPresets.flatMap((preset) => {
+    const option = getCountryOption(preset.id);
+    if (!option) return [];
+    const id = countryOptionId(option);
+    return [
+      {
+        id,
+        href: `${makerHref}?country=${id}`,
+        label: preset.label ?? `Make a ${documentPhotoLabel(option)}`,
+      },
+    ];
+  });
+  const ctaLinks =
+    makerLinks.length > 0
+      ? makerLinks
+      : [{ id: "default", href: makerHref, label: "Start with your photo" }];
 
   const breadcrumbs = [
     { name: "Home", url: SITE_URL },
     { name: "Photo Guides", url: `${SITE_URL}/tool` },
-    ...(hubGuide ? [{ name: hubGuide.title, url: `${SITE_URL}/tool/${hubGuide.slug}` }] : []),
+    ...(hubGuide
+      ? [{ name: hubGuide.title, url: `${SITE_URL}/tool/${hubGuide.slug}` }]
+      : []),
     { name: tool.title, url: pageUrl },
   ];
 
@@ -155,7 +196,11 @@ export default async function ToolGuidePage({ params }: PageProps) {
         dateModified={tool.lastVerified}
         breadcrumbs={breadcrumbs}
         faqItems={tool.faqs}
-        howTo={tool.howToSteps.length > 0 ? { name: tool.title, steps: tool.howToSteps } : undefined}
+        howTo={
+          tool.howToSteps.length > 0
+            ? { name: tool.title, steps: tool.howToSteps }
+            : undefined
+        }
         includeOrganization={false}
         includeWebsite={false}
         includeWebApp={tool.studio}
@@ -163,14 +208,25 @@ export default async function ToolGuidePage({ params }: PageProps) {
 
       <Navbar
         ctaText="Create Photo"
-        ctaHref={tool.studio ? "#studio" : makerPublished ? `/tool/${MAKER_SLUG}` : "/passport-size-photo-maker"}
+        ctaHref={
+          tool.studio
+            ? "#studio"
+            : makerPublished
+              ? `/tool/${MAKER_SLUG}`
+              : "/passport-size-photo-maker"
+        }
       />
 
       <main className="flex-1 bg-white text-ink-950" id="main-content">
-        <section className="relative overflow-hidden border-b border-ink-100" aria-label="Guide overview">
-
+        <section
+          className="relative overflow-hidden border-b border-ink-100"
+          aria-label="Guide overview"
+        >
           <div className="container-narrow relative pb-12 pt-8 sm:pb-16 sm:pt-12">
-            <nav className="text-xs text-ink-500 sm:text-sm" aria-label="Breadcrumb">
+            <nav
+              className="text-xs text-ink-500 sm:text-sm"
+              aria-label="Breadcrumb"
+            >
               <ol className="m-0 flex list-none flex-wrap items-center gap-1.5 p-0">
                 {breadcrumbs.slice(0, -1).map((crumb) => (
                   <li key={crumb.url} className="flex items-center gap-1.5">
@@ -180,7 +236,10 @@ export default async function ToolGuidePage({ params }: PageProps) {
                     >
                       {crumb.name}
                     </Link>
-                    <ChevronRight aria-hidden="true" className="h-3.5 w-3.5 text-ink-300" />
+                    <ChevronRight
+                      aria-hidden="true"
+                      className="h-3.5 w-3.5 text-ink-300"
+                    />
                   </li>
                 ))}
                 <li className="font-semibold text-ink-950" aria-current="page">
@@ -198,14 +257,22 @@ export default async function ToolGuidePage({ params }: PageProps) {
               <h1 className="display-2 mt-5 text-ink-950">{tool.title}</h1>
               <p className="lead mt-5 max-w-3xl">{tool.intro}</p>
 
-              {(tool.lastVerified || countryName || tool.sources.length > 0) && (
+              {(tool.lastVerified ||
+                countryName ||
+                tool.sources.length > 0) && (
                 <ul className="m-0 mt-7 flex list-none flex-wrap gap-2 p-0 text-xs text-ink-700 sm:text-sm">
                   {tool.lastVerified && (
                     <li className="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white px-3.5 py-1.5">
-                      <CalendarCheck className="h-4 w-4 text-brand-600" aria-hidden="true" />
+                      <CalendarCheck
+                        className="h-4 w-4 text-brand-600"
+                        aria-hidden="true"
+                      />
                       <span>
                         Last checked against official sources on{" "}
-                        <time dateTime={tool.lastVerified} className="font-semibold text-ink-950">
+                        <time
+                          dateTime={tool.lastVerified}
+                          className="font-semibold text-ink-950"
+                        >
                           {formatDate(tool.lastVerified)}
                         </time>
                       </span>
@@ -213,14 +280,21 @@ export default async function ToolGuidePage({ params }: PageProps) {
                   )}
                   {countryName && (
                     <li className="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white px-3.5 py-1.5 font-semibold text-ink-950">
-                      <Globe className="h-4 w-4 text-brand-600" aria-hidden="true" />
+                      <Globe
+                        className="h-4 w-4 text-brand-600"
+                        aria-hidden="true"
+                      />
                       {countryName}
                     </li>
                   )}
                   {tool.sources.length > 0 && (
                     <li className="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white px-3.5 py-1.5">
-                      <ShieldCheck className="h-4 w-4 text-brand-600" aria-hidden="true" />
-                      {tool.sources.length} {tool.sources.length === 1 ? "source" : "sources"} cited
+                      <ShieldCheck
+                        className="h-4 w-4 text-brand-600"
+                        aria-hidden="true"
+                      />
+                      {tool.sources.length}{" "}
+                      {tool.sources.length === 1 ? "source" : "sources"} cited
                     </li>
                   )}
                 </ul>
@@ -239,14 +313,21 @@ export default async function ToolGuidePage({ params }: PageProps) {
         </section>
 
         {tool.studio && (
-          <section className="relative border-b border-ink-100 bg-ink-50 section-padding" id="studio" aria-label="Photo maker">
+          <section
+            className="relative border-b border-ink-100 bg-ink-50 section-padding"
+            id="studio"
+            aria-label="Photo maker"
+          >
             <div className="container-narrow">
               <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
                 <div className="lg:col-span-5 lg:pt-6">
                   <span className="eyebrow">Photo studio</span>
-                  <h2 className="display-2 mt-4 text-ink-950">Upload your photo</h2>
+                  <h2 className="display-2 mt-4 text-ink-950">
+                    Upload your photo
+                  </h2>
                   <p className="lead mt-4">
-                    Pick the country and document, then upload a recent photo. You see the result before you pay.
+                    Pick the country and document, then upload a recent photo.
+                    You see the result before you pay.
                   </p>
                   <ul className="m-0 mt-8 list-none space-y-4 p-0 text-sm text-ink-700 sm:text-base">
                     {[
@@ -268,7 +349,10 @@ export default async function ToolGuidePage({ params }: PageProps) {
                 </div>
                 <div className="lg:col-span-7">
                   <PhotoMakerStudio defaultCountryCode={tool.countryCode} />
-                  <OfficialPhotoNotice countryName={countryName} className="mt-5 bg-white" />
+                  <OfficialPhotoNotice
+                    countryName={countryName}
+                    className="mt-5 bg-white"
+                  />
                 </div>
               </div>
             </div>
@@ -279,39 +363,65 @@ export default async function ToolGuidePage({ params }: PageProps) {
           <div className="container-narrow">
             <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_20rem] xl:gap-16">
               <article className="min-w-0 max-w-[72ch]">
-                <div className="markdown-content max-w-none" dangerouslySetInnerHTML={{ __html: tool.contentHtml }} />
+                <div
+                  className="markdown-content max-w-none"
+                  dangerouslySetInnerHTML={{ __html: tool.contentHtml }}
+                />
 
-                {!tool.studio && (
+                {!tool.studio && tool.makerCta && (
                   <aside
                     className="relative mt-14 overflow-hidden rounded-[1.5rem] border border-brand-100 bg-brand-50 p-7 sm:p-9"
                     aria-label="Make your photo online"
                   >
                     <div className="relative">
-                      <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-600 text-white" aria-hidden="true">
+                      <span
+                        className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-600 text-white"
+                        aria-hidden="true"
+                      >
                         <Camera className="h-5 w-5" />
                       </span>
-                      <h2 className="mt-5 text-2xl font-extrabold text-ink-950 sm:text-3xl">Make your photo online</h2>
+                      <h2 className="mt-5 text-2xl font-extrabold text-ink-950 sm:text-3xl">
+                        Make your photo online
+                      </h2>
                       <p className="mt-2 max-w-lg text-sm leading-relaxed text-ink-700 sm:text-base">
-                        Upload a photo taken against a plain, light background. The maker crops and sizes it for the
-                        country you pick, and you preview it before paying.
+                        Upload a photo taken against a plain, light background.
+                        The maker crops and sizes it for the country you pick,
+                        and you preview it before paying.
                       </p>
-                      <Link href={makerHref} className="btn-brand btn-lg mt-6">
-                        <Sparkles className="h-4 w-4" aria-hidden="true" />
-                        Start with your photo
-                      </Link>
+                      <div className="mt-6 flex flex-wrap gap-3">
+                        {ctaLinks.map((cta) => (
+                          <Link
+                            key={cta.id}
+                            href={cta.href}
+                            className="btn-brand btn-lg"
+                          >
+                            <Sparkles className="h-4 w-4" aria-hidden="true" />
+                            {cta.label}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   </aside>
                 )}
 
-                <FaqAccordion faqs={tool.faqs} title={tool.title.toLowerCase()} />
+                <FaqAccordion
+                  faqs={tool.faqs}
+                  title={tool.title.toLowerCase()}
+                />
 
                 {tool.sources.length > 0 && (
-                  <section className="mt-14 border-t border-ink-200 pt-10" aria-labelledby="sources-heading">
+                  <section
+                    className="mt-14 border-t border-ink-200 pt-10"
+                    aria-labelledby="sources-heading"
+                  >
                     <h2
                       id="sources-heading"
                       className="flex scroll-mt-28 items-center gap-2.5 text-xl font-extrabold text-ink-950"
                     >
-                      <ShieldCheck className="h-5 w-5 text-brand-600" aria-hidden="true" />
+                      <ShieldCheck
+                        className="h-5 w-5 text-brand-600"
+                        aria-hidden="true"
+                      />
                       Sources
                     </h2>
                     <ul className="m-0 mt-5 list-none space-y-2.5 p-0 text-sm sm:text-base">
@@ -335,43 +445,70 @@ export default async function ToolGuidePage({ params }: PageProps) {
                   </section>
                 )}
 
-                {!tool.studio && <OfficialPhotoNotice countryName={countryName} className="mt-10" />}
+                {!tool.studio && (
+                  <OfficialPhotoNotice
+                    countryName={countryName}
+                    className="mt-10"
+                  />
+                )}
               </article>
 
               <aside className="hidden lg:block" aria-label="Guide shortcuts">
                 <div className="sticky top-28 space-y-5">
-                  <div className="relative overflow-hidden rounded-[1.5rem] bg-ink-950 p-7 text-white shadow-lift">
-                    <div className="relative">
-                      <span
-                        className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-500/15 text-brand-300 ring-1 ring-brand-400/30"
-                        aria-hidden="true"
-                      >
-                        <Camera className="h-5 w-5" />
-                      </span>
-                      <p className="mt-5 font-display text-xl font-extrabold leading-snug tracking-tight text-white">
-                        Make your photo online
-                      </p>
-                      <p className="mt-2 text-sm leading-relaxed text-ink-300">
-                        Pick your country, upload a recent photo and preview the result before you pay.
-                      </p>
-                      {tool.studio ? (
-                        <a href="#studio" className="btn-brand mt-6 w-full">
-                          Make my photo
-                          <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                        </a>
-                      ) : (
-                        <Link href={makerHref} className="btn-brand mt-6 w-full">
-                          Start with your photo
-                          <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                        </Link>
-                      )}
+                  {showMakerCta && (
+                    <div className="relative overflow-hidden rounded-[1.5rem] bg-ink-950 p-7 text-white shadow-lift">
+                      <div className="relative">
+                        <span
+                          className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-500/15 text-brand-300 ring-1 ring-brand-400/30"
+                          aria-hidden="true"
+                        >
+                          <Camera className="h-5 w-5" />
+                        </span>
+                        <p className="mt-5 font-display text-xl font-extrabold leading-snug tracking-tight text-white">
+                          Make your photo online
+                        </p>
+                        <p className="mt-2 text-sm leading-relaxed text-ink-300">
+                          Pick your country, upload a recent photo and preview
+                          the result before you pay.
+                        </p>
+                        {tool.studio ? (
+                          <a href="#studio" className="btn-brand mt-6 w-full">
+                            Make my photo
+                            <ArrowRight
+                              className="h-4 w-4"
+                              aria-hidden="true"
+                            />
+                          </a>
+                        ) : (
+                          <div className="mt-6 space-y-3">
+                            {ctaLinks.map((cta) => (
+                              <Link
+                                key={cta.id}
+                                href={cta.href}
+                                className="btn-brand w-full"
+                              >
+                                {cta.label}
+                                <ArrowRight
+                                  className="h-4 w-4"
+                                  aria-hidden="true"
+                                />
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <nav className="surface p-6" aria-label="More guides">
-                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">Part of</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink-500">
+                      Part of
+                    </p>
                     <p className="mt-2 flex items-center gap-2 font-display text-base font-extrabold text-ink-950">
-                      <BookOpen className="h-4 w-4 text-brand-600" aria-hidden="true" />
+                      <BookOpen
+                        className="h-4 w-4 text-brand-600"
+                        aria-hidden="true"
+                      />
                       {cluster.name}
                     </p>
                     <ul className="m-0 mt-4 list-none space-y-1 border-t border-ink-100 p-0 pt-4 text-sm">
@@ -381,8 +518,13 @@ export default async function ToolGuidePage({ params }: PageProps) {
                             href={`/tool/${hubGuide.slug}`}
                             className="flex min-h-11 items-center justify-between gap-2 rounded-xl px-3 font-semibold text-ink-700 transition-colors hover:bg-brand-50 hover:text-brand-700"
                           >
-                            <span className="line-clamp-2">{hubGuide.title}</span>
-                            <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+                            <span className="line-clamp-2">
+                              {hubGuide.title}
+                            </span>
+                            <ArrowRight
+                              className="h-4 w-4 shrink-0"
+                              aria-hidden="true"
+                            />
                           </Link>
                         </li>
                       )}
@@ -392,7 +534,10 @@ export default async function ToolGuidePage({ params }: PageProps) {
                           className="flex min-h-11 items-center justify-between gap-2 rounded-xl px-3 font-semibold text-ink-700 transition-colors hover:bg-brand-50 hover:text-brand-700"
                         >
                           <span>All photo guides</span>
-                          <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+                          <ArrowRight
+                            className="h-4 w-4 shrink-0"
+                            aria-hidden="true"
+                          />
                         </Link>
                       </li>
                     </ul>
@@ -404,16 +549,25 @@ export default async function ToolGuidePage({ params }: PageProps) {
         </section>
 
         {relatedGuides.length > 0 && (
-          <section className="border-t border-ink-100 bg-ink-50 section-padding" aria-labelledby="related-heading">
+          <section
+            className="border-t border-ink-100 bg-ink-50 section-padding"
+            aria-labelledby="related-heading"
+          >
             <div className="container-narrow">
               <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
                 <div>
                   <span className="eyebrow">Keep reading</span>
-                  <h2 id="related-heading" className="display-2 mt-4 text-ink-950">
+                  <h2
+                    id="related-heading"
+                    className="display-2 mt-4 text-ink-950"
+                  >
                     Related guides
                   </h2>
                 </div>
-                <Link href="/tool" className="btn-outline-brand shrink-0 self-start sm:self-auto">
+                <Link
+                  href="/tool"
+                  className="btn-outline-brand shrink-0 self-start sm:self-auto"
+                >
                   All photo guides
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>

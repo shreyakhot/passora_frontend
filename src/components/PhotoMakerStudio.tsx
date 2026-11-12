@@ -29,8 +29,10 @@ import {
   DEFAULT_COUNTRY,
   DEFAULT_COUNTRY_CODE,
   countryFlag,
+  countryOptionId,
   detectCountryFromLocales,
-  getCountryByCode,
+  documentPhotoLabel,
+  getCountryOption,
   type CountryPassportConfig,
 } from "@/config/countries";
 import {
@@ -40,7 +42,9 @@ import {
 import type { PassportProcessResult } from "@/lib/passport-api";
 
 interface PhotoMakerStudioProps {
+  /** Maker option to preselect: a country code ("IN") or option id ("IN-OCI"). */
   defaultCountryCode?: string;
+  /** Fallback only; the selected option's own document type is sent. */
   defaultDocumentType?: string;
   badgeText?: string;
   className?: string;
@@ -58,7 +62,9 @@ const PROCESSING_STEPS = [
 ];
 
 const CROP_ONLY_PROCESSING_STEPS = PROCESSING_STEPS.map((step, idx) =>
-  idx === 1 ? { ...step, text: "Checking your background (left unedited)…" } : step
+  idx === 1
+    ? { ...step, text: "Checking your background (left unedited)…" }
+    : step
 );
 
 // Countries whose passport authority rejects digitally altered photos. The
@@ -86,22 +92,46 @@ function getServerLocaleCountryCode(): string | null {
   return null;
 }
 
+// "?country=IN-OCI" preselects a maker option, so guides can link straight to
+// a document variant. Read like the locale guess: no value on the server.
+function subscribeToUrlChanges(onChange: () => void) {
+  window.addEventListener("popstate", onChange);
+  return () => window.removeEventListener("popstate", onChange);
+}
+
+function getQueryOptionId(): string | null {
+  const id = new URLSearchParams(window.location.search).get("country");
+  const option = id ? getCountryOption(id) : undefined;
+  return option ? countryOptionId(option) : null;
+}
+
+function getServerQueryOptionId(): string | null {
+  return null;
+}
+
 export default function PhotoMakerStudio({
   defaultCountryCode,
-  defaultDocumentType = "passport",
+  defaultDocumentType,
   autoProcess = true,
   className = "",
 }: PhotoMakerStudioProps) {
   const router = useRouter();
 
-  // Country selection: the user's pick wins, then the page's default, then the
-  // visitor's browser locale, then DEFAULT_COUNTRY_CODE.
+  // Option selection: the user's pick wins, then a ?country= link, then the
+  // page's default, then the visitor's browser locale, then DEFAULT_COUNTRY_CODE.
   const localeCountryCode = useSyncExternalStore(
     subscribeToLocaleChanges,
     getLocaleCountryCode,
     getServerLocaleCountryCode
   );
-  const [pickedCountryCode, setPickedCountryCode] = useState<string | null>(null);
+  const queryOptionId = useSyncExternalStore(
+    subscribeToUrlChanges,
+    getQueryOptionId,
+    getServerQueryOptionId
+  );
+  const [pickedCountryCode, setPickedCountryCode] = useState<string | null>(
+    null
+  );
   const [prevDefaultCode, setPrevDefaultCode] = useState(defaultCountryCode);
 
   // Prop synchronization: a new page default replaces any earlier pick.
@@ -110,18 +140,27 @@ export default function PhotoMakerStudio({
     setPickedCountryCode(null);
   }
 
-  const selectedCountryCode =
-    pickedCountryCode ?? defaultCountryCode ?? localeCountryCode ?? DEFAULT_COUNTRY_CODE;
+  const selectedOptionId =
+    pickedCountryCode ??
+    queryOptionId ??
+    defaultCountryCode ??
+    localeCountryCode ??
+    DEFAULT_COUNTRY_CODE;
 
   const selectedCountry: CountryPassportConfig =
-    getCountryByCode(selectedCountryCode) || DEFAULT_COUNTRY;
+    getCountryOption(selectedOptionId) || DEFAULT_COUNTRY;
+  const selectedId = countryOptionId(selectedCountry);
 
   // Crop-only (keep the original background) is offered where edited photos
   // are rejected, and is on by default there.
-  const cropOnlyAvailable = CROP_ONLY_COUNTRY_CODES.has(selectedCountry.country_code);
+  const cropOnlyAvailable = CROP_ONLY_COUNTRY_CODES.has(
+    selectedCountry.country_code
+  );
   const [cropOnlyPreferred, setCropOnlyPreferred] = useState(true);
   const cropOnly = cropOnlyAvailable && cropOnlyPreferred;
-  const processingSteps = cropOnly ? CROP_ONLY_PROCESSING_STEPS : PROCESSING_STEPS;
+  const processingSteps = cropOnly
+    ? CROP_ONLY_PROCESSING_STEPS
+    : PROCESSING_STEPS;
 
   // Searchable country dropdown state
   const [isCountryOpen, setIsCountryOpen] = useState(false);
@@ -179,7 +218,8 @@ export default function PhotoMakerStudio({
   const [preview, setPreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [compressionInfo, setCompressionInfo] = useState<CompressionResult | null>(null);
+  const [compressionInfo, setCompressionInfo] =
+    useState<CompressionResult | null>(null);
 
   // 10-Second Processing State
   const [isProcessing, setIsProcessing] = useState(false);
@@ -266,7 +306,7 @@ export default function PhotoMakerStudio({
         formData.append("country_code", selectedCountry.country_code);
         formData.append(
           "document_type",
-          defaultDocumentType || selectedCountry.document_type || "passport"
+          selectedCountry.document_type || defaultDocumentType || "passport"
         );
         formData.append("background_mode", cropOnly ? "keep" : "auto");
 
@@ -311,10 +351,7 @@ export default function PhotoMakerStudio({
               `photogovt_${resultId}`,
               JSON.stringify(payload)
             );
-            sessionStorage.setItem(
-              "photogovt_latest",
-              JSON.stringify(payload)
-            );
+            sessionStorage.setItem("photogovt_latest", JSON.stringify(payload));
             localStorage.setItem(
               `photogovt_${resultId}`,
               JSON.stringify(payload)
@@ -435,9 +472,7 @@ export default function PhotoMakerStudio({
     if (inputRef.current) inputRef.current.value = "";
   }
 
-  const documentTypeLabel = selectedCountry.document_type
-    ? `${selectedCountry.document_type.charAt(0).toUpperCase()}${selectedCountry.document_type.slice(1)} photo`
-    : "Passport photo";
+  const documentTypeLabel = documentPhotoLabel(selectedCountry);
 
   return (
     <div className={`space-y-4 ${className}`}>
@@ -449,7 +484,10 @@ export default function PhotoMakerStudio({
           className="flex items-start justify-between gap-3 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm font-medium text-red-900"
         >
           <div className="flex items-start gap-2.5">
-            <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-700" aria-hidden="true" />
+            <AlertCircle
+              className="mt-0.5 h-5 w-5 shrink-0 text-red-700"
+              aria-hidden="true"
+            />
             <span>{error}</span>
           </div>
           <button
@@ -483,7 +521,10 @@ export default function PhotoMakerStudio({
               htmlFor="country-search-trigger"
               className="mb-2.5 flex items-center gap-2 text-sm font-bold text-ink-950"
             >
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-ink-950 text-[11px] font-bold text-white" aria-hidden="true">
+              <span
+                className="flex h-6 w-6 items-center justify-center rounded-full bg-ink-950 text-[11px] font-bold text-white"
+                aria-hidden="true"
+              >
                 1
               </span>
               Choose your country
@@ -494,9 +535,15 @@ export default function PhotoMakerStudio({
                 id="country-search-trigger"
                 type="button"
                 disabled={isProcessing}
-                onClick={() => (isCountryOpen ? setIsCountryOpen(false) : openCountryDropdown())}
+                onClick={() =>
+                  isCountryOpen
+                    ? setIsCountryOpen(false)
+                    : openCountryDropdown()
+                }
                 className={`flex w-full cursor-pointer items-center justify-between gap-3 rounded-2xl border bg-white px-4 py-3.5 text-left transition-all focus-ring disabled:cursor-not-allowed disabled:opacity-60 ${
-                  isCountryOpen ? "border-brand-500 ring-4 ring-brand-500/15" : "border-ink-200 hover:border-brand-300"
+                  isCountryOpen
+                    ? "border-brand-500 ring-4 ring-brand-500/15"
+                    : "border-ink-200 hover:border-brand-300"
                 }`}
                 aria-haspopup="listbox"
                 aria-expanded={isCountryOpen}
@@ -504,13 +551,18 @@ export default function PhotoMakerStudio({
                 aria-label={`Selected country: ${selectedCountry.country_name}, dimensions ${selectedCountry.dimensions} pixels. Click to change.`}
               >
                 <span className="flex min-w-0 items-center gap-3">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-ink-50 text-2xl leading-none" aria-hidden="true">
+                  <span
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-ink-50 text-2xl leading-none"
+                    aria-hidden="true"
+                  >
                     {countryFlag(selectedCountry.country_code)}
                   </span>
                   <span className="min-w-0">
                     <span className="block truncate text-base font-bold text-ink-950">
                       {selectedCountry.country_name}{" "}
-                      <span className="font-medium text-ink-400">({selectedCountry.country_code})</span>
+                      <span className="font-medium text-ink-400">
+                        ({selectedCountry.country_code})
+                      </span>
                     </span>
                     <span className="block font-mono text-xs font-medium text-ink-500">
                       {selectedCountry.dimensions} px
@@ -532,7 +584,10 @@ export default function PhotoMakerStudio({
                 >
                   <div className="shrink-0 border-b border-ink-100 p-2">
                     <div className="relative">
-                      <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-400" aria-hidden="true" />
+                      <Search
+                        className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-400"
+                        aria-hidden="true"
+                      />
                       <input
                         ref={countrySearchRef}
                         id="country-search-input"
@@ -546,35 +601,51 @@ export default function PhotoMakerStudio({
                     </div>
                   </div>
 
-                  <ul className="m-0 max-h-60 list-none overflow-y-auto p-1.5 sm:max-h-72" role="presentation">
+                  <ul
+                    className="m-0 max-h-60 list-none overflow-y-auto p-1.5 sm:max-h-72"
+                    role="presentation"
+                  >
                     {filteredCountries.length === 0 && (
                       <li className="px-4 py-4 text-center text-sm text-ink-600">
                         No countries match &ldquo;{countryQuery}&rdquo;
                       </li>
                     )}
                     {filteredCountries.map((c) => {
-                      const active = c.country_code === selectedCountry.country_code;
+                      const optionId = countryOptionId(c);
+                      const active = optionId === selectedId;
                       return (
-                        <li key={c.country_code} role="presentation">
+                        <li key={optionId} role="presentation">
                           <button
                             type="button"
                             role="option"
                             aria-selected={active}
-                            id={`country-opt-${c.country_code}`}
-                            onClick={() => selectCountry(c.country_code)}
+                            id={`country-opt-${optionId}`}
+                            onClick={() => selectCountry(optionId)}
                             className={`flex w-full cursor-pointer items-center justify-between gap-2 rounded-xl px-3 py-2.5 text-left text-sm transition-colors ${
-                              active ? "bg-brand-50 font-bold text-brand-800" : "font-medium text-ink-800 hover:bg-ink-50"
+                              active
+                                ? "bg-brand-50 font-bold text-brand-800"
+                                : "font-medium text-ink-800 hover:bg-ink-50"
                             }`}
                           >
                             <span className="flex min-w-0 items-center gap-2.5">
-                              <span className="shrink-0 text-base leading-none" aria-hidden="true">
+                              <span
+                                className="shrink-0 text-base leading-none"
+                                aria-hidden="true"
+                              >
                                 {countryFlag(c.country_code)}
                               </span>
                               <span className="truncate">{c.country_name}</span>
                             </span>
                             <span className="flex shrink-0 items-center gap-2">
-                              <span className="font-mono text-xs text-ink-500">{c.dimensions}px</span>
-                              {active && <Check className="h-4 w-4 text-brand-600" aria-hidden="true" />}
+                              <span className="font-mono text-xs text-ink-500">
+                                {c.dimensions}px
+                              </span>
+                              {active && (
+                                <Check
+                                  className="h-4 w-4 text-brand-600"
+                                  aria-hidden="true"
+                                />
+                              )}
                             </span>
                           </button>
                         </li>
@@ -586,11 +657,22 @@ export default function PhotoMakerStudio({
             </div>
 
             <p className="mt-2 flex items-center gap-1.5 text-xs font-medium text-ink-500">
-              <Globe className="h-3.5 w-3.5 shrink-0 text-ink-400" aria-hidden="true" />
+              <Globe
+                className="h-3.5 w-3.5 shrink-0 text-ink-400"
+                aria-hidden="true"
+              />
               <span>
-                {documentTypeLabel} sized to {selectedCountry.dimensions} px for {selectedCountry.country_name}
+                {documentTypeLabel} sized to {selectedCountry.dimensions} px for{" "}
+                {selectedCountry.country_name}
               </span>
             </p>
+
+            {selectedCountry.document_type === "oci" && (
+              <p className="mt-2 text-xs font-medium leading-relaxed text-ink-600">
+                Square JPEG under 200 KB with a plain light grey background: the
+                OCI portal asks for a light background that is not white.
+              </p>
+            )}
 
             {cropOnlyAvailable && (
               <div className="mt-3 rounded-2xl border border-ink-200 bg-ink-50/60 p-4">
@@ -610,7 +692,10 @@ export default function PhotoMakerStudio({
                     </span>
                   </span>
                 </label>
-                <p id="crop-only-help" className="mt-2 pl-7 text-xs font-medium leading-relaxed text-ink-600">
+                <p
+                  id="crop-only-help"
+                  className="mt-2 pl-7 text-xs font-medium leading-relaxed text-ink-600"
+                >
                   {cropOnly
                     ? `The ${selectedCountry.country_name} passport office rejects photos changed with software, so we only crop and size your photo. Take it against a plain white or off-white wall in even light.`
                     : `We will replace the background if it is not plain. The ${selectedCountry.country_name} passport office says not to change photos with software, so an edited background can be rejected.`}
@@ -621,8 +706,14 @@ export default function PhotoMakerStudio({
 
           {/* STEP 2 — Upload */}
           <div>
-            <label htmlFor="photo-file-input" className="mb-2.5 flex items-center gap-2 text-sm font-bold text-ink-950">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-ink-950 text-[11px] font-bold text-white" aria-hidden="true">
+            <label
+              htmlFor="photo-file-input"
+              className="mb-2.5 flex items-center gap-2 text-sm font-bold text-ink-950"
+            >
+              <span
+                className="flex h-6 w-6 items-center justify-center rounded-full bg-ink-950 text-[11px] font-bold text-white"
+                aria-hidden="true"
+              >
                 2
               </span>
               Upload or take your photo
@@ -656,10 +747,14 @@ export default function PhotoMakerStudio({
                   <ImagePlus className="h-7 w-7" />
                 </div>
                 <p className="font-display text-base font-extrabold text-ink-950 sm:text-lg">
-                  Drop your photo here, or <span className="text-brand-600 underline decoration-brand-300 decoration-2 underline-offset-4">browse</span>
+                  Drop your photo here, or{" "}
+                  <span className="text-brand-600 underline decoration-brand-300 decoration-2 underline-offset-4">
+                    browse
+                  </span>
                 </p>
                 <p className="mt-1.5 text-xs font-medium text-ink-500 sm:text-sm">
-                  JPEG, PNG or WebP · up to 20 MB · tap to use your camera on mobile
+                  JPEG, PNG or WebP · up to 20 MB · tap to use your camera on
+                  mobile
                 </p>
               </div>
             ) : (
@@ -676,7 +771,10 @@ export default function PhotoMakerStudio({
                 {compressionInfo && compressionInfo.compressed && (
                   <div className="mt-3 flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800">
                     <Check className="h-3.5 w-3.5" aria-hidden="true" />
-                    <span>Pre-compressed for upload ({compressionInfo.finalSizeKB} KB)</span>
+                    <span>
+                      Pre-compressed for upload ({compressionInfo.finalSizeKB}{" "}
+                      KB)
+                    </span>
                   </div>
                 )}
 
@@ -717,9 +815,14 @@ export default function PhotoMakerStudio({
           {/* Action CTA Button */}
           {file && !isProcessing && (
             <div ref={processBtnRef}>
-              <button className="btn-brand btn-lg w-full" onClick={() => processPhoto()}>
+              <button
+                className="btn-brand btn-lg w-full"
+                onClick={() => processPhoto()}
+              >
                 <Zap className="h-5 w-5 shrink-0" aria-hidden="true" />
-                <span className="truncate">Process for {selectedCountry.country_name}</span>
+                <span className="truncate">
+                  Process for {selectedCountry.country_name}
+                </span>
                 <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
               </button>
               <p className="mt-2.5 text-center text-xs font-medium text-ink-500">
@@ -730,7 +833,9 @@ export default function PhotoMakerStudio({
 
           {/* Quick tips */}
           <div className="rounded-2xl bg-ink-50 p-4">
-            <p className="mb-2.5 text-xs font-bold uppercase tracking-wider text-ink-500">Quick tips</p>
+            <p className="mb-2.5 text-xs font-bold uppercase tracking-wider text-ink-500">
+              Quick tips
+            </p>
             <ul className="m-0 grid list-none grid-cols-1 gap-2 p-0 text-xs text-ink-700 sm:grid-cols-2 sm:text-sm">
               {[
                 "Look straight at the camera, neutral face",
@@ -741,7 +846,10 @@ export default function PhotoMakerStudio({
                   : "Plain background (we clean it up)",
               ].map((tip) => (
                 <li key={tip} className="flex items-start gap-2">
-                  <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand-600 text-white" aria-hidden="true">
+                  <span
+                    className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand-600 text-white"
+                    aria-hidden="true"
+                  >
                     <Check className="h-2.5 w-2.5" strokeWidth={3} />
                   </span>
                   <span>{tip}</span>
@@ -764,12 +872,16 @@ export default function PhotoMakerStudio({
           <div className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-3xl border border-ink-200 bg-white p-6 text-center shadow-2xl sm:p-8">
             {/* Screen reader live status announcement */}
             <div aria-live="polite" className="sr-only">
-              Processing passport photo: {processingSteps[processingStepIndex].text} {processingProgress}% completed,{" "}
-              {countdown} seconds remaining.
+              Processing passport photo:{" "}
+              {processingSteps[processingStepIndex].text} {processingProgress}%
+              completed, {countdown} seconds remaining.
             </div>
 
             {/* Scanning visual */}
-            <div className="relative mx-auto mb-5 h-24 w-20 overflow-hidden rounded-2xl border border-brand-200 bg-brand-50" aria-hidden="true">
+            <div
+              className="relative mx-auto mb-5 h-24 w-20 overflow-hidden rounded-2xl border border-brand-200 bg-brand-50"
+              aria-hidden="true"
+            >
               <Camera className="absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 text-brand-600" />
               <span className="absolute left-0 right-0 h-0.5 bg-brand-500 animate-scan" />
               <span className="absolute -bottom-0 right-0 rounded-tl-lg bg-brand-600 px-1.5 py-0.5 font-mono text-[11px] font-bold text-white">
@@ -777,10 +889,16 @@ export default function PhotoMakerStudio({
               </span>
             </div>
 
-            <h2 id="processing-modal-title" className="text-xl font-extrabold text-ink-950 sm:text-2xl">
+            <h2
+              id="processing-modal-title"
+              className="text-xl font-extrabold text-ink-950 sm:text-2xl"
+            >
               Making your photo
             </h2>
-            <p id="processing-modal-desc" className="mb-6 mt-1 font-mono text-xs font-semibold text-ink-500">
+            <p
+              id="processing-modal-desc"
+              className="mb-6 mt-1 font-mono text-xs font-semibold text-ink-500"
+            >
               {selectedCountry.country_name} · {selectedCountry.dimensions} px
             </p>
 
@@ -815,15 +933,28 @@ export default function PhotoMakerStudio({
                   <li
                     key={idx}
                     className={`flex items-center gap-2.5 transition-colors ${
-                      isDone ? "font-semibold text-ink-900" : isCurrent ? "font-bold text-brand-700" : "font-medium text-ink-400"
+                      isDone
+                        ? "font-semibold text-ink-900"
+                        : isCurrent
+                          ? "font-bold text-brand-700"
+                          : "font-medium text-ink-400"
                     }`}
                   >
                     {isDone ? (
-                      <CheckCircle className="h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
+                      <CheckCircle
+                        className="h-4 w-4 shrink-0 text-emerald-600"
+                        aria-hidden="true"
+                      />
                     ) : isCurrent ? (
-                      <span className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-brand-600 border-t-transparent" aria-hidden="true" />
+                      <span
+                        className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-brand-600 border-t-transparent"
+                        aria-hidden="true"
+                      />
                     ) : (
-                      <span className="h-4 w-4 shrink-0 rounded-full border border-ink-300" aria-hidden="true" />
+                      <span
+                        className="h-4 w-4 shrink-0 rounded-full border border-ink-300"
+                        aria-hidden="true"
+                      />
                     )}
                     <span>{step.text}</span>
                   </li>

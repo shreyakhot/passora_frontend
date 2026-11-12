@@ -17,30 +17,39 @@ export type ToolCluster =
   | "visa-countries";
 
 /** Cluster names and their hub slugs, in the order the strategy lists them. */
-export const TOOL_CLUSTERS: { id: ToolCluster; name: string; hub: string; intro: string }[] = [
+export const TOOL_CLUSTERS: {
+  id: ToolCluster;
+  name: string;
+  hub: string;
+  intro: string;
+}[] = [
   {
     id: "core-local",
     name: "Passport Photo Basics",
     hub: "passport-photo",
-    intro: "What a passport photo is, where to get one, what it costs and how fast you can have it.",
+    intro:
+      "What a passport photo is, where to get one, what it costs and how fast you can have it.",
   },
   {
     id: "retailer-brands",
     name: "Where to Get Passport Photos",
     hub: "passport-photos-near-me",
-    intro: "Pharmacies, post offices and print shops that take passport photos, and what to expect at each.",
+    intro:
+      "Pharmacies, post offices and print shops that take passport photos, and what to expect at each.",
   },
   {
     id: "diy-tools",
     name: "Online & DIY Passport Photos",
     hub: "online-passport-photo-maker",
-    intro: "Make, check and print a passport photo yourself with a phone, a computer or an online tool.",
+    intro:
+      "Make, check and print a passport photo yourself with a phone, a computer or an online tool.",
   },
   {
     id: "size-requirements",
     name: "Photo Size & Requirements",
     hub: "passport-photo-requirements",
-    intro: "Sizes, formats and the rules a photo must meet before an authority accepts it.",
+    intro:
+      "Sizes, formats and the rules a photo must meet before an authority accepts it.",
   },
   {
     id: "visa-countries",
@@ -77,6 +86,13 @@ export interface ToolPageData extends ToolSummary {
   pageType: string;
   countryCode?: string;
   studio: boolean;
+  /** false hides the maker CTA (frontmatter `maker_cta: false`), e.g. where photos must come from a photographer. */
+  makerCta: boolean;
+  /**
+   * Maker options the CTA links to (frontmatter `maker_presets`), each an
+   * option id with an optional button label: `- { id: IN-OCI, label: "Make an OCI photo" }`.
+   */
+  makerPresets: MakerPreset[];
   published?: string;
   lastVerified?: string;
   sources: ToolSource[];
@@ -86,10 +102,36 @@ export interface ToolPageData extends ToolSummary {
   howToSteps: string[];
 }
 
+export interface MakerPreset {
+  id: string;
+  label?: string;
+}
+
+function toMakerPreset(value: unknown): MakerPreset | null {
+  if (typeof value === "string" && value.trim()) return { id: value.trim() };
+  if (value && typeof value === "object" && "id" in value) {
+    const { id, label } = value as { id: unknown; label?: unknown };
+    if (typeof id === "string" && id.trim()) {
+      return {
+        id: id.trim(),
+        label:
+          typeof label === "string" && label.trim() ? label.trim() : undefined,
+      };
+    }
+  }
+  return null;
+}
+
+function isMakerPreset(value: MakerPreset | null): value is MakerPreset {
+  return value !== null;
+}
+
 const CLUSTER_IDS = new Set(TOOL_CLUSTERS.map((c) => c.id));
 
 function toCluster(value: unknown): ToolCluster {
-  return CLUSTER_IDS.has(value as ToolCluster) ? (value as ToolCluster) : "core-local";
+  return CLUSTER_IDS.has(value as ToolCluster)
+    ? (value as ToolCluster)
+    : "core-local";
 }
 
 /** gray-matter parses YAML dates into Date objects; keep them as YYYY-MM-DD. */
@@ -147,7 +189,10 @@ export function getAllToolSummaries(): ToolSummary[] {
 }
 
 async function markdownToHtml(markdown: string): Promise<string> {
-  const processed = await remark().use(remarkGfm).use(html, { sanitize: false }).process(markdown);
+  const processed = await remark()
+    .use(remarkGfm)
+    .use(html, { sanitize: false })
+    .process(markdown);
   return processed.toString();
 }
 
@@ -155,7 +200,10 @@ async function markdownToHtml(markdown: string): Promise<string> {
  * Links to guides that are not published yet render as plain text, so writers
  * can link ahead and the links go live when the target page ships.
  */
-function unlinkUnpublishedGuides(htmlContent: string, published: Set<string>): string {
+function unlinkUnpublishedGuides(
+  htmlContent: string,
+  published: Set<string>
+): string {
   return htmlContent.replace(
     /<a href="\/tool\/([a-z0-9-]+)\/?(?:#[^"]*)?">([\s\S]*?)<\/a>/g,
     (link, slug: string, text: string) => (published.has(slug) ? link : text)
@@ -167,13 +215,17 @@ async function extractFaqs(
   rawContent: string,
   published: Set<string>
 ): Promise<{ cleanedContent: string; faqs: FaqItem[] }> {
-  const match = rawContent.match(/(?:^|\n)##\s+[^\n]*\b(?:Frequently Asked Questions|FAQs?)\b[^\n]*/i);
-  if (!match || match.index === undefined) return { cleanedContent: rawContent, faqs: [] };
+  const match = rawContent.match(
+    /(?:^|\n)##\s+[^\n]*\b(?:Frequently Asked Questions|FAQs?)\b[^\n]*/i
+  );
+  if (!match || match.index === undefined)
+    return { cleanedContent: rawContent, faqs: [] };
 
   const startIndex = match.index;
   const rest = rawContent.slice(startIndex + match[0].length);
   const nextH2 = rest.match(/\n##\s+[^\n]+/);
-  const faqBlock = nextH2?.index !== undefined ? rest.slice(0, nextH2.index) : rest;
+  const faqBlock =
+    nextH2?.index !== undefined ? rest.slice(0, nextH2.index) : rest;
   const after = nextH2?.index !== undefined ? rest.slice(nextH2.index) : "";
   const cleanedContent = `${rawContent.slice(0, startIndex).trimEnd()}\n\n${after.trimStart()}`;
 
@@ -188,8 +240,13 @@ async function extractFaqs(
     faqs.push({
       question,
       // Plain text for FAQPage schema: drop link markup and emphasis.
-      answer: answer.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/\*\*([^*]+)\*\*/g, "$1"),
-      answerHtml: unlinkUnpublishedGuides((await markdownToHtml(answer)).trim(), published),
+      answer: answer
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+        .replace(/\*\*([^*]+)\*\*/g, "$1"),
+      answerHtml: unlinkUnpublishedGuides(
+        (await markdownToHtml(answer)).trim(),
+        published
+      ),
     });
   }
   return { cleanedContent, faqs };
@@ -197,7 +254,9 @@ async function extractFaqs(
 
 /** Steps of the first ordered list under a "## How to ..." heading, for HowTo schema. */
 function extractHowToSteps(content: string): string[] {
-  const section = content.match(/(?:^|\n)##\s+How to[^\n]*\n([\s\S]*?)(?=\n##\s|$)/i);
+  const section = content.match(
+    /(?:^|\n)##\s+How to[^\n]*\n([\s\S]*?)(?=\n##\s|$)/i
+  );
   if (!section) return [];
   return section[1]
     .split("\n")
@@ -211,16 +270,23 @@ function extractHowToSteps(content: string): string[] {
     );
 }
 
-export async function getToolBySlug(slug: string): Promise<ToolPageData | null> {
+export async function getToolBySlug(
+  slug: string
+): Promise<ToolPageData | null> {
   const file = readToolFile(slug);
   if (!file) return null;
   const { data, content } = file;
   const published = new Set(getAllToolSlugs());
 
   const { cleanedContent, faqs } = await extractFaqs(content, published);
-  const contentHtml = unlinkUnpublishedGuides(await markdownToHtml(cleanedContent), published);
+  const contentHtml = unlinkUnpublishedGuides(
+    await markdownToHtml(cleanedContent),
+    published
+  );
 
-  const relatedSlugs: string[] = Array.isArray(data.related) ? data.related.map(String) : [];
+  const relatedSlugs: string[] = Array.isArray(data.related)
+    ? data.related.map(String)
+    : [];
   const related = relatedSlugs
     .filter((s) => s !== slug && published.has(s))
     .map((s) => {
@@ -231,7 +297,9 @@ export async function getToolBySlug(slug: string): Promise<ToolPageData | null> 
 
   const sources: ToolSource[] = Array.isArray(data.sources)
     ? data.sources
-        .filter((s: unknown): s is ToolSource => Boolean((s as ToolSource)?.name && (s as ToolSource)?.url))
+        .filter((s: unknown): s is ToolSource =>
+          Boolean((s as ToolSource)?.name && (s as ToolSource)?.url)
+        )
         .map((s: ToolSource) => ({ name: String(s.name), url: String(s.url) }))
     : [];
 
@@ -244,6 +312,10 @@ export async function getToolBySlug(slug: string): Promise<ToolPageData | null> 
     pageType: String(data.page_type || ""),
     countryCode: data.country_code ? String(data.country_code) : undefined,
     studio: data.studio === true,
+    makerCta: data.maker_cta !== false,
+    makerPresets: Array.isArray(data.maker_presets)
+      ? data.maker_presets.map(toMakerPreset).filter(isMakerPreset)
+      : [],
     published: toDateString(data.published),
     lastVerified: toDateString(data.last_verified),
     sources,

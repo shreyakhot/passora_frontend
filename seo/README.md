@@ -42,6 +42,10 @@ intro: "First paragraph shown under the H1. Contains the primary keyword."
 country_code: US          # optional; default country for the studio and notice
 studio: false             # true only on the money page (embeds the photo maker)
 howto: false              # true on DIY guides; emits HowTo schema from the first ordered list under "## How to"
+maker_cta: true           # optional; false hides the maker CTA (e.g. Canada, where a commercial photographer is required)
+maker_presets:            # optional; one CTA button per maker option, opening /tool/online-passport-photo-maker?country=<id>
+  - id: IN-OCI            # option id: country code, plus "-<DOCUMENT>" for non-passport documents
+    label: "Make an OCI photo"
 published: 2026-10-16
 last_verified: 2026-10-16
 sources:
