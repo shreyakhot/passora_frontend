@@ -64,7 +64,7 @@ Pixels for printing follow one formula: pixels = millimetres ÷ 25.4 × dpi. Onl
 | :--- | :--- | :--- | :--- |
 | UK passport | 35 × 45 mm | 29–34 mm, chin to crown | Plain cream or light grey |
 | Germany and other Schengen visas | 35 × 45 mm | 32–36 mm (face fills 70–80% of the photo) | Plain and light; see the embassy |
-| Ireland passport | 35 × 45 mm minimum, 38 × 50 mm maximum | Face fills 70–80% of the photo | Plain light grey, white or cream |
+| Ireland passport | 35 × 45 mm minimum, 38 × 50 mm maximum | Head to mid-torso, with space around the head | Plain light grey, white or cream |
 | India passport | 3.5 × 4.5 cm | Full face, centred | Plain white |
 | Australia passport | 35–40 mm wide × 45–50 mm high | 32–36 mm, chin to crown | Plain white or light grey |
 

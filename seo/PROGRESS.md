@@ -34,18 +34,31 @@ Five pages a day, in the order below (the strategy's Phase 1 → 4, top to botto
 | 6 | 36 | schengen-eu-photo-size | photo size for schengen visa | visa-countries | 4 | done | 2026-11-11 |
 | 6 | 37 | canadian-passport-photos | canadian passport photo | visa-countries | 4 | done | 2026-11-11 |
 | 6 | 38 | indian-passport-photo-oci-photo | indian passport size photo | visa-countries | 4 | done | 2026-11-11 |
-| 7 | 39 | passport-photo-size-by-country | international passport photo size | visa-countries | 4 | todo | |
-| 7 | 40 | uscis-immigration-photos | immigration photo | visa-countries | 4 | todo | |
-| 7 | 12 | costco-passport-photos | costco passport photos | retailer-brands | 4 | todo | |
-| 7 | 16 | rite-aid-passport-photos | rite aid passport photo | retailer-brands | 4 | todo | |
-| 7 | 17 | other-stores-that-take-passport-photos | target passport photos | retailer-brands | 4 | todo | |
-| 8 | 22 | passport-photo-editing-photoshop-word | photoshop passport photo | diy-tools | 4 | todo | |
-| 8 | 23 | best-online-passport-photo-services | epassportphoto | diy-tools | 4 | todo | |
-| 8 | 28 | biometric-passport-photo | biometric photo | size-requirements | 4 | todo | |
-| 8 | 30 | how-to-take-a-good-passport-photo | good passport photo | size-requirements | 4 | todo | |
-| 8 | 33 | id-photo | id photos | size-requirements | 4 | todo | |
+| 7 | 39 | passport-photo-size-by-country | international passport photo size | visa-countries | 4 | done | 2026-11-16 |
+| 7 | 40 | uscis-immigration-photos | immigration photo | visa-countries | 4 | done | 2026-11-16 |
+| 7 | 12 | costco-passport-photos | costco passport photos | retailer-brands | 4 | done | 2026-11-16 |
+| 7 | 16 | rite-aid-passport-photos | rite aid passport photo | retailer-brands | 4 | done | 2026-11-16 |
+| 7 | 17 | other-stores-that-take-passport-photos | target passport photos | retailer-brands | 4 | done | 2026-11-16 |
+| 8 | 22 | passport-photo-editing-photoshop-word | photoshop passport photo | diy-tools | 4 | done | 2026-11-16 |
+| 8 | 23 | best-online-passport-photo-services | epassportphoto | diy-tools | 4 | done | 2026-11-16 |
+| 8 | 28 | biometric-passport-photo | biometric photo | size-requirements | 4 | done | 2026-11-16 |
+| 8 | 30 | how-to-take-a-good-passport-photo | good passport photo | size-requirements | 4 | done | 2026-11-16 |
+| 8 | 33 | id-photo | id photos | size-requirements | 4 | done | 2026-11-16 |
 
-After day 8, follow the strategy's maintenance rules (section 11): promote growing sections to their own pages, extend the near-me page into city pages, re-verify facts quarterly.
+All 40 pages are published (day 8, 2026-11-16). From now on, follow the strategy's maintenance rules (section 11): promote growing sections to their own pages, extend the near-me page into city pages, re-verify facts quarterly.
+
+## Maintenance schedule
+
+The promotion and city-page rules need Search Console or rank-tracker data, which only the site owner has. The fact checks can run without it.
+
+| Check | Pages | Next due |
+| :--- | :--- | :--- |
+| Monthly price re-check | Walmart (11, 7, 12), AAA (17), FedEx (14), competitor prices on page 23 | 2026-12-11 |
+| Monthly: VFS USA Indian passport checklist | 38 | 2026-12-11 |
+| Quarterly fact check, day 1-4 pages | 21, 1, 2, 25, 29, 3, 8, 9, 11, 13, 10, 32, 24, 4, 6, 5, 7, 18, 19, 20 | 2027-01-16 |
+| Quarterly fact check, day 5-8 pages | 26, 27, 31, 14, 15, 34-40, 12, 16, 17, 22, 23, 28, 30, 33 | 2027-02-11 |
+| Monthly, needs owner data | Search Console clicks and impressions, cannibalization (two URLs for one query), rank for each primary keyword | Owner to supply |
+| When volume justifies it | Promote a page-17 brand or a page-39 country to its own page; city/state pages from the near-me hub; re-evaluate Rite Aid (16) | Owner to supply data |
 
 ## Daily log
 
@@ -125,3 +138,38 @@ After day 8, follow the strategy's maintenance rules (section 11): promote growi
   - Resolved 2026-11-12 (site owner's decision): the Canadian page hides the maker CTA (`maker_cta: false`), because Canadian passport and citizenship photos must come from a commercial photographer.
   - Resolved 2026-11-12: the maker has two new India options. "India (OCI card)" (`IN-OCI`) is a 600 x 600 JPEG under 200 KB on plain light grey (#E0E0E0), head 70-80% of height. "India (visa)" (`IN-VISA`) is a 600 x 600 JPEG under 300 KB on white, head 50-69%, eyes 56-69% from the bottom. Backend configs: `backend/config/countries/india_oci.json` and `india_visa.json`. The India page CTA links to both (`maker_presets`), and its "Make it online" section has a table with the three India settings.
 - Re-check monthly: VFS USA Indian passport checklist (photo size changed between versions), FedEx price. Re-check quarterly: US visa photo pages, OCI FAQ, Indian visa upload limits (e-Visa 1 MB vs regular 300 KB), IRCC passport, citizenship and TRV photo pages.
+
+### Day 7 — 2026-11-16
+- Published pages 39, 40, 12, 16, 17 (passport-photo-size-by-country, uscis-immigration-photos, costco-passport-photos, rite-aid-passport-photos, other-stores-that-take-passport-photos).
+- Page 39 title starts "International Passport Photo Size by Country" so the primary keyword is in the H1 (the sheet's H1 lacked it). Dropped as outside target markets: "passport photo orchard" (Singapore), "passports photos new plymouth" (NZ), "rimowa passport photos" (luggage brand, page 17).
+- Fetched directly on 2026-11-16:
+  - USCIS I-485 instructions (edition 09/18/26) and I-765 instructions (08/21/25): 2 identical colour photos, 2x2 in, head 1 to 1 3/8 in (hair to chin), eye height 1 1/8 to 1 3/8 in from the bottom, white to off-white, thin glossy paper, unmounted, unretouched, name and A-Number in pencil or felt pen on the back. Policy Manual vol. 7 part A ch. 4: I-485 photos taken within 30 days of filing.
+  - USCIS policy alert PA-2025-29 (Dec 12, 2025): biometrics photo reuse only if no more than 36 months old at filing; N-400, N-600, I-90 and I-485 always need a new photo.
+  - Costco Canada photo centre notice: all photo departments closed Feb 14, 2021; passport photos no longer available. costco.com/photo.html now promotes Shutterfly (51% member discount).
+  - AAA Club Alliance: Premier free (and dependents under driving age), Plus $8.99, Classic $11.99, non-member $14.99; no appointment; digital renewal photo at most locations; RushMyPassport partner.
+  - Walmart photo site: passport photo $7.64 (re-checked, unchanged from 2026-11-05).
+- Snippet or news only (re-check in a browser): N-400 photos only for certain applicants living abroad; I-765 online OPT upload of one JPEG/PNG photo (old webinar); Diversity Visa 600x600 JPEG max 240 kB, 6 months, head 50-69%; Rite Aid closure (news, Oct 2025: last stores late Sept 2025, "All Rite Aid stores have now closed"); CVS inside Target stores listing passport photos (Hillsboro OR, Grand Junction CO store pages); Kodak Passport and ID Photo System (verification certificate).
+- Country facts for page 39 came from three research passes limited to official government and consulate domains (no commercial photo sites). Fetched: UK, France (white background forbidden), Italy, Poland, Greece (40x60, grey, digital-only in Greece since Feb 2026), China (US embassy, 33x48), Korea, Lebanon (in-person biometric renewals at the US embassy from Oct 1, 2026), Syria (4x4 cm), Nepal (photo taken at the appointment), Turkey (50x60; LA accepts 2x2), Nigeria, Egypt, South Africa (Feb 2026 checklist, VFS only from Mar 1, 2026), Brazil. Snippet-only: Ireland, Germany (paper photos not accepted in Germany since May 1, 2025), Spain (26x32 mm), Japan, Israel, Iran, Saudi Arabia, Ethiopia.
+- Unresolved conflicts, written as "check with the consulate": Egypt (4 x 4x6 cm vs 3 x 2x2 in), South Africa (35x45 vs 2x2 in), Iran (3x4 vs 4x6 cm), Greece recency (6 months vs 1 month at the US embassy), Italy number of photos (1 vs 2 in New York) and glasses, Turkey glasses (NY vs LA). Ethiopia passport print size not published on the pages checked.
+- Correction: the 35x45mm page claimed the Irish passport face must fill 70-80%. That figure is only on Irish visa pages; the passport page says head to mid-torso with space around the head. Fixed the table row.
+- Re-check monthly: AAA and Walmart prices. Re-check quarterly: every page-39 country (consulate checklists change often, especially Germany's US missions, Lebanon, South Africa, Greece), USCIS form editions (an I-765 preview edition dated 09/15/26 exists), Costco photo status.
+
+### Day 8 — 2026-11-16
+- Published pages 22, 23, 28, 30, 33 (passport-photo-editing-photoshop-word, best-online-passport-photo-services, biometric-passport-photo, how-to-take-a-good-passport-photo, id-photo). All 40 pages in the plan are now published.
+- H1 changes so the primary keyword is in the H1: page 22 "Photoshop Passport Photo: Size, Settings & Templates (Plus GIMP and Word)"; page 28 "Biometric Photo for Passports: ...". Page 23 uses each company's own spelling (PhotoAiD, AiPassportPhotos, 123PassportPhoto).
+- Dropped keywords: "passport photo reddit" (page 30). Reddit was blocked to search and fetch, so no Reddit advice could be verified; the section is "Popular online tips, checked against the rules" instead. "123 passport size photo", "123passport", "photo me digital photo upload" and "photo size 35mm x 45mm" were not added to page 23's frontmatter (the first three are spelling variants; the last belongs with page 27's topic).
+- Page 23 (competitor comparison) needs the site owner's review before it goes live (strategy section 10). Facts fetched from each company's own site on 2026-11-16:
+  - ePassportPhoto: $13.95 digital template (2 photos); US print delivery "for an additional $3" (Walmart page); "200% of fee refunded if authorities reject your photo", terms require a document confirming the rejection; expert verification; "AI fine-tunes your photo by adapting the background". Operator Biometric Photo International Sp. z o.o., Warsaw.
+  - PhotoAiD: $13.95 digital, $16.95 for two printed copies (California page); 200% refund plus delivery costs, within 30 days of the rejection, proof required, extra 100% by PayPal, photos edited after download excluded; human expert review; removes background; iOS and Android apps; photos kept up to 14 days (no purchase) or 6 months (purchase). PhotoAiD S.A., Bialystok.
+  - 123PassportPhoto: no price listed; terms: "we do not guarantee the passport photos generated using the service are acceptable"; refund only on print and delivery; automatic background replacement; photos deleted within 1 hour; homepage says 50+ countries, US page says 70+ (not quoted).
+  - AiPassportPhotos: no price listed (pricing link broken); terms describe auto-renewing paid plans; refund page reviews rejection evidence, no amount; "Our biometric photo experts will check all details"; 32 countries in its list; photos kept 1 hour after last edit; Able Profit Enterprise Limited.
+  - iVisa: no stand-alone passport photo product found (old photo pages return 404); visa photos reviewed by "fulfillment experts"; background adjusted.
+  - Photo-Me / ME Group (UK): digital photo code printed by the booth, entered on GOV.UK; GBP 10; allow up to 72 hours; valid 30 days, then deleted; UK passport via GOV.UK only (separate Irish option), not driving licences or visas. photo-me.co.uk fails (SSL); facts from megroup.uk.
+- Snippet only (official domains returned 403; re-check in a browser):
+  - ICAO Portrait Quality TR (2018): chin-to-crown 60-90% of image height, head width 50-75% of width, pose within 5 degrees (roll 8), at least 90 px between eye centres (120 best practice), uniform background, no extreme shadow, no red eye. Doc 9303 Part 3: submitted portraits "should be 45.0 mm x 35.0 mm", at least 10 mm between eyes. Doc 9303 Part 9: facial image required on eMRTDs; move to ISO/IEC 39794-5 by 1 Jan 2030. EU Regulation 2252/2004 (facial image and fingerprints).
+  - Germany: paper photos not accepted for documents applied for in Germany since May 1, 2025; missions abroad still accept 45 x 35 mm paper photos until they have their own equipment.
+  - State Department: online renewal allows "a neutral facial expression or natural smile", "Have someone else take your photo. No selfies."; unusual expressions and squinting refused; hair may extend past the edges if the whole head is shown. No makeup rule found.
+  - Adobe Photoshop help (crop tool "W x H x Resolution", Delete Cropped Pixels, Image Size Resample, Canvas Size, Print dialog "Scale to Fit Media"). Word's 1:1 crop ratio and its picture-compression setting are from product knowledge, not a fetched page.
+  - Global Entry interview collects fingerprints and photo (CBP country pages); Texas DL-16P asks for a 2x2 photo for out-of-state renewal (not quoted by name).
+- Fetched: GIMP 3.0 docs (crop Fixed aspect ratio, Scale Image, Print Size), Microsoft crop and resize articles, Rutgers selfie study (12 in vs 5 ft: nasal base about 30% wider), GOV.UK photo rules and photographer guidance ("All UK passports use facial biometrics"), CBP 2016 release (chip stores the passport photo since 2007), DS-11 ("Attach one photo, 2x2 inches"), California and New York DMV photo pages, TSA PreCheck and TWIC enrollment, USCIS biometrics page.
+- Re-check monthly: page 23 prices and guarantee terms (ePassportPhoto, PhotoAiD, Photo-Me), and whether 123PassportPhoto or AiPassportPhotos now publish prices. Re-check quarterly: ICAO and German rules, State Department expression and selfie wording.
