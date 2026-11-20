@@ -30,7 +30,7 @@ The URL is `/tool/<slug>`, where `<slug>` is the strategy slug without slashes (
 ```yaml
 ---
 title: "H1 of the page; contains the primary keyword"
-meta_title: "Title tag, about 50-60 characters, contains the primary keyword"
+meta_title: "Title tag, at most 47 characters (the template appends the site name; Google cuts titles at about 60), contains the primary keyword"
 meta_description: "About 140-160 characters"
 primary_keyword: "exactly as in the strategy"
 supporting_keywords: ["...", "..."]

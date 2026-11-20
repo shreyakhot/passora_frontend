@@ -1,7 +1,7 @@
 ---
 title: "Walgreens Passport Photos: Price, Free Digital Copy, Hours & Alternatives"
-meta_title: "Walgreens Passport Photo: Price, Digital Copy & Hours"
-meta_description: "How the Walgreens passport photo service works: the in-store price, the free emailed digital copy, no appointment, other countries, and Duane Reade stores."
+meta_title: "Walgreens Passport Photo: Price & Digital Copy"
+meta_description: "Walgreens passport photos: $16.99 with a free emailed digital copy (Nov 20, 2026), no appointment. Plus returns, prints of your own photo and passport applications."
 primary_keyword: "walgreens passport photo"
 supporting_keywords:
   - "passport picture walgreens"
@@ -17,7 +17,7 @@ hub: false
 country_code: US
 intro: "A Walgreens passport photo is taken at the store's photo counter with no appointment, and the prints are usually ready in a few minutes. What sets it apart from most store options is that a digital copy is emailed to you free with your purchase, which is handy if you renew online. This guide covers the price, how the digital copy works, how to find a store that offers photos, Duane Reade locations, and when to go elsewhere."
 published: 2026-11-06
-last_verified: 2026-11-06
+last_verified: 2026-11-20
 sources:
   - name: "Walgreens Photo: Passport Photos"
     url: "https://photo.walgreens.com/store/passport-photos"
@@ -44,7 +44,7 @@ Walgreens takes photos for all ages, including babies, and lists passport and vi
 
 ## Walgreens passport photo price
 
-On **November 6, 2026**, Walgreens' [passport photos page](https://photo.walgreens.com/store/passport-photos) listed **$16.99** for two 2 × 2 inch printed photos. Prices can change, so check the page or ask in store.
+On **November 20, 2026**, Walgreens' [passport photos page](https://photo.walgreens.com/store/passport-photos) listed **$16.99** for two 2 × 2 inch printed photos. Prices can change, so check the page or ask in store.
 
 That price includes a free digital copy by email. A copy on a USB drive costs extra; Walgreens does not list that price online.
 
@@ -130,6 +130,10 @@ Yes, use the emailed digital copy. Upload it unedited, and check that it was tak
 
 Walgreens takes passport photos for all ages, including babies. A busy counter can be hard with a newborn; our [guide to baby and newborn photos](/tool/infant-newborn-passport-photo) has tips and alternatives.
 
-### Does Walgreens accept passport applications?
+### Can you get a passport at Walgreens?
 
-Walgreens' service covers the photo only. To apply in person, use the State Department's [Passport Acceptance Facility Locator](https://iafdb.travel.state.gov/).
+No. Walgreens' service covers the photo only; passports are issued by the State Department. To apply in person, use the State Department's [Passport Acceptance Facility Locator](https://iafdb.travel.state.gov/).
+
+### Can I return passport photos to Walgreens?
+
+Walgreens' passport photo page and its passport policy page do not say whether passport photos can be returned or refunded. Look at the photos at the counter before you pay, ask for a retake there if something is wrong, and ask the store about a refund if you are not happy with them.

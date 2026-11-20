@@ -1,7 +1,7 @@
 ---
 title: "Passport Photo Cost: What You Will Pay and Where to Get Them Cheapest"
-meta_title: "Passport Photo Cost: Prices Compared & Cheapest Options"
-meta_description: "Passport photo cost compared: store, post office, studio and DIY prices, the cheapest ways to get a compliant photo, and when a cheap photo is a false saving."
+meta_title: "Passport Photo Cost: How Much Stores Charge"
+meta_description: "How much is a passport photo? Walmart $7.64, USPS $15 and Walgreens $16.99 (checked Nov 20, 2026), plus FedEx, CVS, Staples, studios, DIY and the cheapest options."
 primary_keyword: "passport photo cost"
 supporting_keywords:
   - "cheap passport photos"
@@ -19,7 +19,7 @@ hub: false
 country_code: US
 intro: "Passport photo cost in the US ranges from the price of a single photo print, if you take the photo yourself, to well over the cost of a store photo at a studio. Most stores charge somewhere in the mid-teens of dollars for two prints, with digital copies sometimes included and sometimes extra. This guide compares prices by type of place, using figures from each company's own website with the date we checked them, and explains the cheapest ways to get a photo that will still be accepted."
 published: 2026-11-06
-last_verified: 2026-11-06
+last_verified: 2026-11-20
 sources:
   - name: "Walmart Photo: Passport Photos"
     url: "https://photos3.walmart.com/category/83-passport-photos"
@@ -44,9 +44,13 @@ related:
   - online-passport-photo-maker
 ---
 
+## How much is a passport photo?
+
+In the US, a store passport photo costs roughly $8 to $17 for two 2 × 2 inch prints. Of the prices we confirmed on November 20, 2026, Walmart was lowest at $7.64, the post office charges $15.00, and Walgreens charges $16.99 with a free emailed digital copy. Studios usually charge more, and taking the photo yourself costs about the price of one 4 × 6 print.
+
 ## Passport photo prices by location
 
-We checked these prices on each company's own website on **November 6, 2026**. Prices change and can vary by store, so treat them as a guide and confirm before you go.
+We checked these prices on each company's own website: Walmart, USPS and Walgreens on **November 20, 2026**, and FedEx Office on November 11, 2026. Prices change and can vary by store, so treat them as a guide and confirm before you go.
 
 | Where | Price we found | What you get |
 | :--- | :--- | :--- |
@@ -133,11 +137,11 @@ Most stores charge the same for a child as for an adult. Babies are where costs 
 
 ### How much is a passport photo at the post office?
 
-USPS lists a $15.00 photo fee at post offices that take photos (checked November 6, 2026). Not every post office takes photos, and many need an appointment.
+USPS lists a $15.00 photo fee at post offices that take photos (checked November 20, 2026). Not every post office takes photos, and many need an appointment.
 
 ### What is the cheapest place to get a passport photo?
 
-Taking the photo yourself and printing it at a photo kiosk is usually cheapest. Among stores, Walmart had the lowest listed price we found, at $7.64 on November 6, 2026.
+Taking the photo yourself and printing it at a photo kiosk is usually cheapest. Among stores, Walmart had the lowest listed price we found, at $7.64 on November 20, 2026.
 
 ### Are passport photo fees included in the passport fee?
 

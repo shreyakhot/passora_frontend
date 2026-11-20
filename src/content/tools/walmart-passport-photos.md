@@ -1,7 +1,7 @@
 ---
 title: "Walmart Passport Photos: Cost, Photo Center Locations & How It Works"
-meta_title: "Walmart Passport Photo: Cost, Locations & How It Works"
-meta_description: "How the Walmart passport photo service works: walk-in Photo Center visits, the listed price, 2x2 prints, USB copies and what Walmart cannot do."
+meta_title: "Walmart Passport Photo: Cost & How It Works"
+meta_description: "Does Walmart take passport photos? Yes, at stores with a Photo Center: walk in and pay $7.64 (Nov 20, 2026). What you get, USB copies and passport applications."
 primary_keyword: "walmart passport photo"
 supporting_keywords:
   - "passport pictures walmart"
@@ -17,7 +17,7 @@ hub: false
 country_code: US
 intro: "A Walmart passport photo is taken in store at the Photo Center, with no appointment, and printed as 2 × 2 inch prints while you wait. It is one of the lower-cost store options, but it is in store only, it is only available at Walmart stores with a Photo Center, and prints come in one size. This guide covers the price, how to find a Photo Center, what you get and when to go elsewhere."
 published: 2026-11-05
-last_verified: 2026-11-05
+last_verified: 2026-11-20
 sources:
   - name: "Walmart Photo: Same Day Passport Photos"
     url: "https://photos3.walmart.com/category/1938-same-day-passport-photos"
@@ -44,7 +44,7 @@ Walmart says your photo "is taken and reviewed in store to meet all government r
 
 ## Walmart passport photo cost
 
-On **November 5, 2026**, Walmart's [passport photos page](https://photos3.walmart.com/category/83-passport-photos) listed "Passport Photos - Full Photo" at **$7.64**. Prices can change and may vary by store, so check the page or ask at the Photo Center.
+On **November 20, 2026**, Walmart's [passport photos page](https://photos3.walmart.com/category/83-passport-photos) listed passport photos at **$7.64**. Prices can change and may vary by store, so check the page or ask at the Photo Center.
 
 An optional USB drive with your images, for online renewals, is also offered. Walmart does not show a price for it on that page, so ask in store.
 
@@ -76,9 +76,9 @@ You cannot order a Walmart passport photo online. Walmart's photo site lists pas
 
 Some "2x2 passport photo" listings on walmart.com are sold by marketplace sellers, not by Walmart's Photo Center. Read who the seller is before you order.
 
-## Walmart does not accept passport applications
+## Can you get a passport at Walmart?
 
-Walmart says it is not an acceptance facility for passport applications. If you are applying in person, take your photo with you to a post office or other facility listed on the State Department's [Passport Acceptance Facility Locator](https://iafdb.travel.state.gov/).
+No. Walmart says it is not an acceptance facility for passport applications. If you are applying in person, take your photo with you to a post office or other facility listed on the State Department's [Passport Acceptance Facility Locator](https://iafdb.travel.state.gov/).
 
 ## Pros, cons and alternatives
 

@@ -1,7 +1,7 @@
 ---
 title: "USPS Passport Photo: Post Office Cost, Locations & Appointments"
-meta_title: "USPS Passport Photo: Post Office Cost & Appointments"
-meta_description: "How the USPS passport photo service works: the post office photo fee, which post offices take photos, booking an appointment, digital copies and the acceptance fee."
+meta_title: "USPS Passport Photo: Post Office Cost ($15)"
+meta_description: "Many post offices take passport photos: USPS lists a $15 photo fee and a separate $35 acceptance fee (Nov 20, 2026). Which offices offer it, booking and digital copies."
 primary_keyword: "usps passport photo"
 supporting_keywords:
   - "post office passport photos"
@@ -19,9 +19,9 @@ cluster: retailer-brands
 page_type: "Brand / retailer page"
 hub: false
 country_code: US
-intro: "A USPS passport photo is taken at a post office that offers passport services, usually during the same appointment as your passport application. Not every post office does passport work, most of those that do can take the photo, and you usually need to book ahead. This guide covers the photo fee, how to find a post office that takes photos, how appointments work, digital copies, and the difference between having a photo taken and having your application accepted."
+intro: "A USPS passport photo is taken at a post office that offers passport services, usually during the same appointment as your passport application, for a $15.00 photo fee (the fee USPS listed on November 20, 2026). Not every post office does passport work, most of those that do can take the photo, and you usually need to book ahead. This guide covers the photo fee, how to find a post office that takes photos, how appointments work, digital copies, and the difference between having a photo taken and having your application accepted."
 published: 2026-11-11
-last_verified: 2026-11-11
+last_verified: 2026-11-20
 sources:
   - name: "USPS: Passports"
     url: "https://www.usps.com/international/passports.htm"
@@ -48,7 +48,7 @@ The photo is a service for passport applicants. It is easiest when you are apply
 
 ## USPS passport photo cost
 
-On **November 11, 2026**, the USPS listed:
+On **November 20, 2026**, the USPS listed:
 
 | Fee | Amount | Paid to |
 | :--- | :--- | :--- |
@@ -120,7 +120,7 @@ Every option near you is compared in our guide to [nearby places that take passp
 
 ### How much does the post office charge for passport photos?
 
-The USPS listed a $15.00 photo fee on November 11, 2026. If the post office also accepts your application, the $35.00 acceptance fee is separate.
+The USPS listed a $15.00 photo fee on November 20, 2026. If the post office also accepts your application, the $35.00 acceptance fee is separate.
 
 ### Do I need an appointment for a passport photo at the post office?
 
@@ -133,3 +133,7 @@ Many post offices offer digital photos on a USB drive, for online renewal. Ask w
 ### Can I get just a photo at the post office without applying?
 
 Often yes, at post offices with photo service. Phone first or book the photo service in the scheduler.
+
+### What are the passport fees at the post office?
+
+If a post office accepts your passport application, it charges a $35.00 acceptance fee, plus $15.00 if it also takes your photo (USPS, November 20, 2026). The passport application fee itself is paid separately to the U.S. Department of State.

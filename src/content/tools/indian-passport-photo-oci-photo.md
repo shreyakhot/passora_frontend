@@ -1,7 +1,7 @@
 ---
 title: "Indian Passport Size Photo & OCI Photo: Size, Requirements & Upload Guide"
-meta_title: "Indian Passport Size Photo & OCI Photo: Size & Upload"
-meta_description: "Indian passport size photo rules: 3.5 x 4.5 cm on white. Plus Indian visa and OCI photo sizes, upload limits in pixels and KB, and what PP size means."
+meta_title: "Indian Passport Size Photo: 3.5 x 4.5 cm & OCI"
+meta_description: "Indian passport size photo: 3.5 x 4.5 cm (35 x 45 mm) on a plain white background. Plus OCI and Indian visa photo sizes in pixels and KB, and what PP size means."
 primary_keyword: "indian passport size photo"
 supporting_keywords:
   - "passport size photo for indian passport"
@@ -136,9 +136,9 @@ For printed photos, use the [print sheet tool](/passport-photo-print-template-ge
 
 ## Frequently Asked Questions
 
-### What is the Indian passport size photo size?
+### What is the Indian passport photo size in cm?
 
-3.5 × 4.5 cm (35 × 45 mm), in colour, on a plain white background, with the face filling most of the frame.
+3.5 × 4.5 cm (35 × 45 mm, about 1.38 × 1.77 inches), in colour, on a plain white background, with the face filling most of the frame. At 300 dpi that is 413 × 531 pixels.
 
 ### Do I need to bring photos to the Passport Seva Kendra?
 

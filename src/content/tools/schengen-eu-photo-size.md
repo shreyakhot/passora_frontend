@@ -1,7 +1,7 @@
 ---
 title: "Schengen Visa Photo Size & Requirements (35x45 mm)"
-meta_title: "Photo Size for Schengen Visa: 35x45 mm Rules"
-meta_description: "The photo size for a Schengen visa is 35 x 45 mm, with the face filling 70-80% of the photo. Head size, background, ICAO rules, visa centres and a Spanish summary."
+meta_title: "Schengen Visa Photo Size: 35x45 mm & VFS Rules"
+meta_description: "Schengen visa photo size: 35 x 45 mm (3.5 x 4.5 cm), with the face filling 70-80% of the photo. Background, VFS and consulate rules, and when the centre takes your photo."
 primary_keyword: "photo size for schengen visa"
 supporting_keywords:
   - "photo for schengen visa"
@@ -101,7 +101,7 @@ Most EU countries use the same **35 × 45 mm** format for their own passports. T
 
 For a citizen's passport, follow that country's own passport rules rather than the visa rules above. Our [list of photo sizes for every country](/tool/passport-photo-size-by-country) covers more countries.
 
-## VFS and embassy rules
+## Schengen visa photo rules at VFS and embassies
 
 You apply for a Schengen visa at the consulate or through an external service provider, such as VFS Global, that it works with. Either way:
 

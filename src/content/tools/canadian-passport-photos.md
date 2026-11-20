@@ -1,7 +1,7 @@
 ---
 title: "Canadian Passport Photos: Size, Requirements & Where to Get Them"
-meta_title: "Canadian Passport Photo: Size, Rules & Where to Go"
-meta_description: "Canadian passport photo rules: 50 x 70 mm, head 31-36 mm, taken by a commercial photographer with details on the back. Plus citizenship and visa photos and where to go."
+meta_title: "Canadian Passport Photo Size: 50 x 70 mm Rules"
+meta_description: "Canadian passport photo size: 50 x 70 mm (2 x 2.75 in), head 31-36 mm, from a commercial photographer. Plus baby photos, visitor visa and citizenship photo rules."
 primary_keyword: "canadian passport photo"
 supporting_keywords:
   - "canadian passport photo size"
@@ -83,6 +83,10 @@ If you renew online, you upload a digital photo instead. It must also be taken b
 
 You also enter the studio's name and address and the date the photo was taken. Ask the photographer for a digital file and prints at the same visit, in case you cannot renew online.
 
+### Photos of babies and young children
+
+The same size and photographer rules apply, with some leeway on expression. The Government of Canada says "Newborns may have a range of facial expressions" and "We do allow some range for infant facial expressions." The photo must still show your child's face and shoulders centred and squared to the camera, not tilted in any direction, and it must not show your hands or your child's hands. For a newborn photographed in a car seat, a white blanket is placed over the seat behind the child's head. Our [guide to baby and newborn photos](/tool/infant-newborn-passport-photo) has more tips for photographing babies.
+
 ## Photographer requirements
 
 Canada is one of the few countries that requires a **commercial photographer or photo studio**. On the back of each printed photo:
@@ -133,7 +137,7 @@ The colour requirement is one difference: passport photos may be black and white
 
 Canada stopped issuing citizenship cards, which had a photo, in February 2012. A card you already have is still valid proof of citizenship. Proof of citizenship is now a citizenship certificate, which does not show a photo. The application for a certificate still asks for photos, though, with its own IRCC specifications, so follow the instructions for that application.
 
-## Canadian visa photo size
+## Canada visitor visa photo requirements
 
 Visitors to Canada use a different, smaller photo.
 

@@ -1,7 +1,7 @@
 ---
 title: "Same Day Passport Photo: The Fastest Ways to Get Yours in Minutes"
-meta_title: "Same Day Passport Photo: Fastest Instant Options Ranked"
-meta_description: "Need a same day passport photo? The fastest options ranked by speed, what 'instant' really means for prints and digital files, and a checklist for urgent trips."
+meta_title: "Same Day Passport Photo: Instant & 24-Hour"
+meta_description: "Quick, instant and 24-hour passport photo options ranked by speed: walk-in counters, booths, studios and a photo at home, plus what to do when you travel soon."
 primary_keyword: "same day passport photo"
 supporting_keywords:
   - "instant passport"
@@ -68,6 +68,10 @@ The counter has to be staffed, and photo hours can be shorter than store hours. 
 ### Studio appointment
 
 A studio is rarely the fastest, but many can fit you in the same day. It is the better choice for a baby or anyone who needs time and care. See our guide to [choosing a professional photographer](/tool/passport-photographer-near-me).
+
+## 24-hour passport photos
+
+A store that is open 24 hours does not always have its photo counter staffed all night, so check the photo counter's own hours on the store's website before you go. Late at night, the quickest option is usually a photo at home: take it against a plain white or off-white wall, crop it to size, and print it at a kiosk or upload it when you are ready.
 
 ## What "instant" means: prints vs digital files
 

@@ -1,7 +1,7 @@
 ---
 title: "Staples Passport Photos: Options, Guarantee & What Staples Passport Renewal Means"
-meta_title: "Staples Passport Photo: Options, Guarantee & Renewal"
-meta_description: "How the Staples passport photo service works: print and digital options, the free retake guarantee, visa photos, and what Staples passport renewal includes."
+meta_title: "Staples Passport Photo: Options & Guarantee"
+meta_description: "Does Staples do passport photos? Yes: Staples says every store offers them, with no appointment. Prints or a digital file, the free retake guarantee and passport renewal."
 primary_keyword: "staples passport photo"
 supporting_keywords:
   - "staples passport pictures"
@@ -37,7 +37,7 @@ related:
   - online-passport-photo-maker
 ---
 
-## Does Staples take passport photos?
+## Does Staples do passport photos?
 
 Yes. Staples says passport photo services "are offered at every Staples location, no appointment needed." Its store pages say photos are usually ready in about 10 minutes.
 

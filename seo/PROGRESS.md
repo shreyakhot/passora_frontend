@@ -45,7 +45,7 @@ Five pages a day, in the order below (the strategy's Phase 1 → 4, top to botto
 | 8 | 30 | how-to-take-a-good-passport-photo | good passport photo | size-requirements | 4 | done | 2026-11-16 |
 | 8 | 33 | id-photo | id photos | size-requirements | 4 | done | 2026-11-16 |
 
-All 40 pages are published (day 8, 2026-11-16). From now on, follow the strategy's maintenance rules (section 11): promote growing sections to their own pages, extend the near-me page into city pages, re-verify facts quarterly.
+All 40 pages are published (day 8, 2026-11-16). From now on, follow the strategy's maintenance rules (section 11): promote growing sections to their own pages, extend the near-me page into city pages, re-verify facts quarterly. Since 2026-11-20 the daily run optimizes 10 existing guides against their Search Console queries; see [OPTIMIZATION.md](OPTIMIZATION.md).
 
 ## Maintenance schedule
 
@@ -184,3 +184,4 @@ The promotion and city-page rules need Search Console or rank-tracker data, whic
   - New pages got inbound links: Photoshop/Word (from 18, 24), online services comparison (from 19, alongside 7), biometric (from 20), ID photos (from 1, 26).
   - Visa-photo-near-me links to the 2x2 and 35x45 format pages; by-country links to the visa hub.
 - Left as is on purpose: Canada (37) has no maker link (`maker_cta: false`) and no matching format page (50 x 70 mm); size guide (25) and baby guide (32) do not link to the styling tips page.
+- Index check (2026-11-20, URL Inspection API via the indexing service account): 37 of 50 sitemap URLs indexed. Unknown to Google: passport-photo, passport-photos-near-me, costco, fedex-office, other-stores, passport-photo-editing-photoshop-word, how-to-take-a-good-passport-photo, uscis-immigration-photos. Discovered, not indexed: rite-aid, best-online-passport-photo-services, biometric-passport-photo, id-photo, passport-photo-size-by-country. All 13 return 200 with index,follow and a self canonical. Resubmitted sitemap.xml to Search Console and all 50 URLs to IndexNow (both accepted). Re-check these 13 around 2026-12-04.

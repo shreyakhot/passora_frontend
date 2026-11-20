@@ -1,7 +1,7 @@
 ---
 title: "Digital Passport Photo: How to Get One & Upload It to Your Application"
-meta_title: "Digital Passport Photo: File Rules, Where to Get One & Upload"
-meta_description: "What a digital passport photo is, the file types and sizes the US online renewal accepts, where to get a digital copy, and how to upload it without rejection."
+meta_title: "Digital Passport Photo: Digital Copy & Upload"
+meta_description: "How to get a digital passport photo or a digital copy of one, the file rules for US online renewal, why a scanned print is refused, and how to upload it."
 primary_keyword: "digital passport photo"
 supporting_keywords:
   - "digital passport photos near me"
@@ -80,7 +80,7 @@ The 600 × 600 to 1200 × 1200 pixel size and 240 KB limit often seen online bel
 
 Between 54 KB and 10 MB. A photo straight from a phone is usually inside this range. Problems come from compressing it: sending a photo by text message lowers the quality, and the State Department advises against it. Move the file by cable, AirDrop, email attachment or a cloud folder instead.
 
-## Where to get a digital passport photo
+## How to get a digital passport photo or digital copy
 
 ### Online
 
@@ -104,6 +104,15 @@ Ask for the digital copy before the photo is taken. Walgreens, for example, says
 
 Any nearby store or studio that takes passport photos may offer a file. Phone first and ask three things: whether you get a digital copy, whether it is emailed or on a USB drive, and whether it is the original unedited image. Our guide to [nearby places that take passport photos](/tool/passport-photos-near-me) lists the options by type.
 
+## Can you convert a printed passport photo to digital?
+
+Not for a US online renewal. The State Department's upload rules say the file must not be a scan or a photo of a printed photo, so scanning or photographing prints you already have does not work. Instead:
+
+- **Ask for the digital copy when you buy.** Walgreens emails a free digital copy with its passport photos. Other stores may charge extra or put the file on a USB drive, usually only if you ask at the time.
+- **Take a new photo.** A photo taken at home against a plain white or off-white wall gives you the original file the upload needs.
+
+Some other forms do accept a scan. Check the rules of the form you are filling in before you scan a print.
+
 ## Upload your digital photo for online renewal
 
 1. **Start your online renewal** on the State Department's website and reach the photo step.
@@ -125,7 +134,7 @@ If you cannot get a photo that passes, or you do not meet the online renewal con
 
 You can make a print from a correctly cropped digital file, but not the other way round: a scan or photo of a printed photo is not accepted online. Our guide to [printing passport photos at home or in store](/tool/print-passport-photos) shows how to lay out a print sheet.
 
-## Electronic and e-passport photo notes
+## Electronic passport photos and e-passports
 
 Every US passport issued by domestic passport agencies since August 2007 is an electronic passport, or e-passport. A chip in the back cover stores the information on the data page, including a digital image of your passport photo. The State Department makes that image from the photo you submit, printed or digital, so you do not need a special "e-passport photo". Our [guide to biometric photo standards](/tool/biometric-passport-photo) explains what the chip photo is used for. A sharp, unedited photo that meets the normal rules is what it needs.
 

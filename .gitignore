@@ -74,3 +74,6 @@ Thumbs.db
 .cache/
 .eslintcache
 .turbo/
+
+# Google service-account keys and indexing state (never commit)
+scripts/*.json
