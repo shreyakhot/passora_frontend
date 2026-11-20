@@ -113,7 +113,7 @@ It depends on the form. A US passport application needs one photo, many visa app
 
 ### Can I get passport size photos printed from a photo on my phone?
 
-Yes, if the photo meets the rules for your document: recent, sharp, facing the camera, against a plain light background and not edited. Crop and lay it out at the right size, then print it at any photo kiosk or print shop.
+Yes, if the photo meets the rules for your document: recent, sharp, facing the camera, against a plain light background and not edited. Crop and lay it out at the right size, then print it at any photo kiosk or print shop. Our [guide to what a passport photo has to show](/tool/passport-photo) covers the basics.
 
 ### Is a passport size photo the same as a 2 × 2 inch photo?
 

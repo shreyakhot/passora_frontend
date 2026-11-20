@@ -68,7 +68,7 @@ ICAO publishes the rules for travel documents in Doc 9303, and it set out detail
 
 ### Expression
 
-ICAO's guidance asks for a neutral expression, both eyes open and the mouth closed. Some countries are a little more relaxed: the US State Department's online renewal guidance allows "a neutral facial expression or natural smile," though not unusual expressions or squinting. When in doubt, keep a neutral face with your mouth closed.
+ICAO's guidance asks for a neutral expression, both eyes open and the mouth closed. Some countries are a little more relaxed: the US State Department's online renewal guidance allows "a neutral facial expression or natural smile," though not unusual expressions or squinting. When in doubt, keep a neutral face with your mouth closed. Our [tips for a relaxed, natural expression](/tool/how-to-take-a-good-passport-photo) help it still look like you.
 
 ### Lighting and background
 
@@ -111,7 +111,7 @@ Germany shows where things are heading. Since May 1, 2025, paper photos are no l
 
 ## Biometric photo near me
 
-Anywhere that takes passport photos takes biometric photos: pharmacies, post offices, shipping stores, photo studios and, in some countries, photo booths. Ask for the photo for your country and document by name, for example "a UK passport photo" or "a Schengen visa photo", rather than just "a biometric photo", so you get the right size. Our [guide to places that take passport photos](/tool/passport-photos-near-me) lists the main options, and our [guide to visa photo services nearby](/tool/visa-photo-near-me) covers visa sizes.
+Anywhere that takes passport photos takes biometric photos: pharmacies, post offices, shipping stores, photo studios and, in some countries, photo booths. Ask for the photo for your country and document by name, for example "a UK passport photo" or "a Schengen visa photo", rather than just "a biometric photo", so you get the right size. Where your country accepts photos you take yourself, you can also take one at home and crop it with the [online photo maker](/tool/online-passport-photo-maker). Our [guide to places that take passport photos](/tool/passport-photos-near-me) lists the main options, and our [guide to visa photo services nearby](/tool/visa-photo-near-me) covers visa sizes.
 
 A **biometrics appointment** is something different. If US Citizenship and Immigration Services asks you to attend one, it takes your photo and fingerprints there; you do not bring a biometric photo. Our [guide to USCIS photo rules](/tool/uscis-immigration-photos) explains which forms still need printed photos.
 

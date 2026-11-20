@@ -93,6 +93,7 @@ Walmart says it is not an acceptance facility for passport applications. If you 
 
 - [CVS passport photos](/tool/cvs-passport-photos): walk-in at select pharmacies, with an emailed digital copy at some stores.
 - [Staples passport photos](/tool/staples-passport-photos): available at every store, with visa photos for many countries.
+- **Other places nearby:** our [guide to finding passport photos nearby](/tool/passport-photos-near-me) covers pharmacies, post offices and shipping stores.
 - **No trip:** take the photo at home against a plain white or off-white wall and use the [online photo maker](/tool/online-passport-photo-maker) to crop it and get a print sheet and a digital file.
 
 ## Frequently Asked Questions

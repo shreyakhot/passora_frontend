@@ -127,7 +127,7 @@ You can make a print from a correctly cropped digital file, but not the other wa
 
 ## Electronic and e-passport photo notes
 
-Every US passport issued by domestic passport agencies since August 2007 is an electronic passport, or e-passport. A chip in the back cover stores the information on the data page, including a digital image of your passport photo. The State Department makes that image from the photo you submit, printed or digital, so you do not need a special "e-passport photo". A sharp, unedited photo that meets the normal rules is what it needs.
+Every US passport issued by domestic passport agencies since August 2007 is an electronic passport, or e-passport. A chip in the back cover stores the information on the data page, including a digital image of your passport photo. The State Department makes that image from the photo you submit, printed or digital, so you do not need a special "e-passport photo". Our [guide to biometric photo standards](/tool/biometric-passport-photo) explains what the chip photo is used for. A sharp, unedited photo that meets the normal rules is what it needs.
 
 ## Frequently Asked Questions
 

@@ -118,7 +118,7 @@ The State Department says: "Do not change your photo using computer software, ph
 - Removing or replacing the background with an app or AI tool
 - Colour filters and heavy retouching
 
-Cropping the photo to the correct size is part of producing a passport photo. Changing how you or the background look is not. If your background is wrong, take the photo again against a plain wall rather than editing it.
+Cropping the photo to the correct size is part of producing a passport photo. Changing how you or the background look is not. That is why the [online photo maker](/tool/online-passport-photo-maker) only crops and sizes a US passport photo. If your background is wrong, take the photo again against a plain wall rather than editing it.
 
 ## Children and babies
 

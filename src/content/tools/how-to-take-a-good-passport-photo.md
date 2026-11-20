@@ -83,7 +83,7 @@ Light makes the biggest difference to how a passport photo looks:
 - **Avoid a single overhead light**, which casts shadows under your eyes, nose and chin.
 - **Stand about 2 feet (60 cm) from the wall**, so your shadow falls behind you and not on the background.
 
-Then set the distance. The camera should be at eye level and about 4 to 5 feet (1.2 to 1.5 m) away, using the normal lens or a 2x zoom rather than moving closer. The photo can be cropped to size afterwards. Have someone else take it: for an online renewal, the State Department says "Have someone else take your photo. No selfies." Our guide to [taking a passport photo with a phone](/tool/take-passport-photo-with-phone) covers the camera settings.
+Then set the distance. The camera should be at eye level and about 4 to 5 feet (1.2 to 1.5 m) away, using the normal lens or a 2x zoom rather than moving closer. The photo can be cropped to size afterwards, by hand or with the [online photo maker](/tool/online-passport-photo-maker). Have someone else take it: for an online renewal, the State Department says "Have someone else take your photo. No selfies." Our guide to [taking a passport photo with a phone](/tool/take-passport-photo-with-phone) covers the camera settings.
 
 ## Funny, bad and ugly passport photos: what to avoid
 

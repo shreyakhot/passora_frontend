@@ -173,3 +173,14 @@ The promotion and city-page rules need Search Console or rank-tracker data, whic
   - Global Entry interview collects fingerprints and photo (CBP country pages); Texas DL-16P asks for a 2x2 photo for out-of-state renewal (not quoted by name).
 - Fetched: GIMP 3.0 docs (crop Fixed aspect ratio, Scale Image, Print Size), Microsoft crop and resize articles, Rutgers selfie study (12 in vs 5 ft: nasal base about 30% wider), GOV.UK photo rules and photographer guidance ("All UK passports use facial biometrics"), CBP 2016 release (chip stores the passport photo since 2007), DS-11 ("Attach one photo, 2x2 inches"), California and New York DMV photo pages, TSA PreCheck and TWIC enrollment, USCIS biometrics page.
 - Re-check monthly: page 23 prices and guarantee terms (ePassportPhoto, PhotoAiD, Photo-Me), and whether 123PassportPhoto or AiPassportPhotos now publish prices. Re-check quarterly: ICAO and German rules, State Department expression and selfie wording.
+
+### Maintenance — 2026-11-20 (internal link audit)
+- Nothing on the maintenance schedule was due (first monthly price check 2026-12-11). Days 7 and 8 confirmed live (commit cc4ab19).
+- Audited every page's body links against strategy section 7 (related cards not counted). Added 36 descriptive links in 27 files; no new facts, no anchor uses another page's primary keyword (327 links, 0 issues).
+  - Pillar (/tool/passport-photo) had no in-text inbound links: pages 3-8 now link up to it; the pillar now links down to id-photo and best-passport-photos.
+  - Walmart and Staples now link up to the locator (passport-photos-near-me); other-stores links to the maker as the no-trip option.
+  - Size and requirements pages 25, 27, 32, 33 link up to passport-photo-requirements; 26, 27, 28, 31, 33 link once to the good-photo tips page.
+  - Maker links added on pages 3, 5, 17, 23, 28, 29, 30, 31, 36 (descriptive, not CTAs).
+  - New pages got inbound links: Photoshop/Word (from 18, 24), online services comparison (from 19, alongside 7), biometric (from 20), ID photos (from 1, 26).
+  - Visa-photo-near-me links to the 2x2 and 35x45 format pages; by-country links to the visa hub.
+- Left as is on purpose: Canada (37) has no maker link (`maker_cta: false`) and no matching format page (50 x 70 mm); size guide (25) and baby guide (32) do not link to the styling tips page.

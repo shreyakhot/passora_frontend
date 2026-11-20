@@ -56,6 +56,8 @@ Two inches is 50.8 mm, which official guidance rounds to **51 mm**. In centimetr
 | USCIS forms, such as the green card application (Form I-485) | Usually two identical 2 × 2 inch passport-style prints |
 | Some other countries' visas and ID documents | Check the issuing authority; many use 35 × 45 mm instead |
 
+Driver's licences, state ID cards and trusted traveller cards are usually photographed at the office instead; our [guide to ID photos for licences, cards and badges](/tool/id-photo) explains which documents need a photo from you.
+
 USCIS form instructions set their own details. Form I-485, for example, asks for two identical colour photos on thin glossy paper, unmounted and unretouched, and several USCIS form instructions ask you to write your name and A-Number lightly in pencil or felt pen on the back. Always follow the instructions for the form you are filing.
 
 ## 2x2 size in pixels, cm and mm
@@ -98,7 +100,7 @@ Our guide to [nearby places that take passport photos](/tool/passport-photos-nea
 
 You can also take the photo yourself and crop it to 2 × 2 inches:
 
-1. Take the photo against a plain white or off-white wall, in even light, with someone else holding the camera.
+1. Take the photo against a plain white or off-white wall, in even light, with someone else holding the camera. Our [tips on light, pose and clothing](/tool/how-to-take-a-good-passport-photo) help it look its best.
 2. Crop it to a square, so the head measures 1 to 1 3/8 inches in the finished 2-inch photo.
 3. Save it at 600 × 600 pixels or more, and print it on a 4 × 6 inch sheet on photo paper.
 

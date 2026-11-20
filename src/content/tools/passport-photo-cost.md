@@ -123,7 +123,7 @@ A photo that is rejected can cost far more than the photo itself: a delayed appl
 - Eyes open, neutral expression, no glasses
 - Sharp, on photo paper, unedited
 
-A cheap photo that meets every rule is just as good as an expensive one. Our [checklist of passport photo rules](/tool/passport-photo-requirements) has the full list.
+A cheap photo that meets every rule is just as good as an expensive one. Our [checklist of passport photo rules](/tool/passport-photo-requirements) has the full list, and our [overview of passport photos and how to get one](/tool/passport-photo) covers every way to get one.
 
 ## Passport photo cost for kids and babies
 

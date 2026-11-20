@@ -78,7 +78,7 @@ The head size is where 35 × 45 mm photos most often go wrong. A UK photo with a
 - Leave space above the head and on both sides.
 - Keep the head straight and centred, facing the camera.
 
-German guidance gives a safe target of 32–36 mm for adults and a wider range of 22–36 mm for children aged 9 and under. For a Schengen visa, our guide to the [photo size for a Schengen visa](/tool/schengen-eu-photo-size) goes into more detail.
+German guidance gives a safe target of 32–36 mm for adults and a wider range of 22–36 mm for children aged 9 and under. For a Schengen visa, our guide to the [photo size for a Schengen visa](/tool/schengen-eu-photo-size) goes into more detail. The other rules, such as background, expression and glasses, are in our [passport photo rules checklist](/tool/passport-photo-requirements).
 
 ## Passport size in mm: quick reference
 
@@ -104,7 +104,7 @@ You cannot trim a 2 × 2 inch photo down to 35 × 45 mm: the head ends up the wr
 
 ## Make a 35 × 45 photo online
 
-1. Take a photo against a plain, light wall in even light, with someone else holding the camera. Check whether your country wants white, cream or light grey.
+1. Take a photo against a plain, light wall in even light, with someone else holding the camera. Check whether your country wants white, cream or light grey. Our [advice on looking your best within the rules](/tool/how-to-take-a-good-passport-photo) covers light, pose and clothing.
 2. Crop it to 7:9 so the head is the size your country asks for.
 3. Save it at 413 × 531 pixels or more for printing, or at the size the online application asks for.
 4. Print it on photo paper. With cutting margins, six 35 × 45 mm photos fit on one 6 × 4 inch sheet.

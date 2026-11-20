@@ -104,7 +104,7 @@ For online renewal, you upload a digital photo instead of mailing a print:
 - Taken in the last six months, in colour, sharp and unedited
 - Not a scan or a photo of a printed photo, and not sent to yourself by text message
 
-The upload tool checks the photo and tells you what to change before you submit. A State Department employee reviews it again later, and asks for a new photo by letter or email if there is a problem. Our guide to [getting a digital photo for your application](/tool/digital-passport-photo) explains where to get one and how the upload works.
+The upload tool checks the photo and tells you what to change before you submit. A State Department employee reviews it again later, and asks for a new photo by letter or email if there is a problem. Our guide to [getting a digital photo for your application](/tool/digital-passport-photo) explains where to get one and how the upload works. If you take it yourself, our [tips for a photo you will be happy with](/tool/how-to-take-a-good-passport-photo) help with light and pose, and the [online photo maker](/tool/online-passport-photo-maker) crops it to size without changing the background.
 
 ## Frequently Asked Questions
 

@@ -120,7 +120,7 @@ Photo shops, pharmacies and print shops that make 35 × 45 mm photos can make a 
 2. The background colour your consulate asks for (white or light-coloured)
 3. Two prints, or more if your checklist says so
 
-In the US, several chains say they make photos for European countries; see our guide to [places that take visa photos](/tool/visa-photo-near-me). If the centre takes the photo at your appointment, you may not need one at all.
+In the US, several chains say they make photos for European countries; see our guide to [places that take visa photos](/tool/visa-photo-near-me). If the centre takes the photo at your appointment, you may not need one at all. To make one yourself, take it against a plain light wall and crop it to 35 × 45 mm with the [online photo maker](/tool/online-passport-photo-maker).
 
 ## Foto para visa Schengen (Spanish)
 

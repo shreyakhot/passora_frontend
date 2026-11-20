@@ -100,7 +100,7 @@ Before you drive to any store:
 4. **Ask about the format.** Do you get prints, a digital file or both, and at what price?
 5. **Ask about retakes.** Will they retake the photo if it is rejected?
 
-Then check the photo yourself before you leave: plain white or off-white background, no shadows, eyes open, neutral expression, no glasses. Our [checklist of passport photo rules](/tool/passport-photo-requirements) has the full list.
+Then check the photo yourself before you leave: plain white or off-white background, no shadows, eyes open, neutral expression, no glasses. Our [checklist of passport photo rules](/tool/passport-photo-requirements) has the full list. No store nearby? Take the photo at home against a plain white wall and crop it with the [online photo maker](/tool/online-passport-photo-maker).
 
 ## Bigger chains with their own guides
 

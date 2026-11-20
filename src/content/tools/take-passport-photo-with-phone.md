@@ -91,7 +91,7 @@ For the backdrop and lighting in more detail, see our guide to [setting up the p
 
 ## Apps and tools to crop and check
 
-The photo from your phone still needs to be cropped to the passport size: 2 × 2 inches for a US passport, with the head 1 to 1 3/8 inches (25–35 mm) from chin to top of hair. You can crop it yourself, or use an app or website.
+The photo from your phone still needs to be cropped to the passport size: 2 × 2 inches for a US passport, with the head 1 to 1 3/8 inches (25–35 mm) from chin to top of hair. You can crop it yourself, or use an app or website; our [comparison of online passport photo websites](/tool/best-online-passport-photo-services) sets out what each one offers.
 
 For a US passport, choose a tool that only crops and sizes the photo. Apps that smooth skin, reshape faces or replace the background change the photo, and the State Department checks for that, including changes made with AI. The [online photo maker](/tool/online-passport-photo-maker) uses crop-only mode for US passports: it measures and crops your photo and leaves the background as you took it.
 

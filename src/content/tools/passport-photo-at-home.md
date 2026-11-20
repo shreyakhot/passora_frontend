@@ -81,7 +81,7 @@ Ask someone to take the photo. The State Department's guidance assumes someone e
 
 A US passport photo is **2 × 2 inches (51 × 51 mm)**, with the head **1 to 1 3/8 inches (25–35 mm)** from the chin to the top of the hair. Resizing the whole photo is not enough: it has to be cropped so the head fills the right part of the square.
 
-You can crop by hand in a photo editor, using a 1:1 ratio and measuring the head, or use the [online photo maker](/tool/online-passport-photo-maker). For a US passport it measures, crops and sizes your photo without changing your face or background. That is why a clean wall and good light matter: the photo is used as you took it.
+You can crop by hand in a photo editor, using a 1:1 ratio and measuring the head (our [settings for Photoshop, GIMP and Word](/tool/passport-photo-editing-photoshop-word) show how), or use the [online photo maker](/tool/online-passport-photo-maker). For a US passport it measures, crops and sizes your photo without changing your face or background. That is why a clean wall and good light matter: the photo is used as you took it.
 
 Cropping is allowed. Changing what the photo shows is not: no smoothing skin, removing shadows, whitening the background or editing out stray hair.
 

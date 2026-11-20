@@ -38,7 +38,7 @@ related:
 
 ## Rules for baby passport photos (US)
 
-A baby's US passport photo must meet the same rules as anyone's, with one main exception: the eyes.
+A baby's US passport photo must meet the same [rules as anyone's passport photo](/tool/passport-photo-requirements), with one main exception: the eyes.
 
 | Rule | What it means for a baby |
 | :--- | :--- |

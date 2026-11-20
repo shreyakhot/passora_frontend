@@ -63,7 +63,7 @@ The frame size is only half the rule. Each country also sets how much of the pho
 
 ![Diagram of a US passport photo: a 2 by 2 inch frame with the head measuring 25 to 35 mm from chin to top of hair](/images/guides/us-passport-photo-size-diagram.svg)
 
-A head that is too small or too large is one of the most common reasons for rejection. It usually happens when a photo is cropped by eye or stretched to fit. Photo makers and studios measure this for you, but it is worth checking with a ruler on the print.
+A head that is too small or too large is one of the most common reasons for rejection. It usually happens when a photo is cropped by eye or stretched to fit. Photo makers and studios measure this for you, but it is worth checking with a ruler on the print. The other rules a photo must meet, such as background and expression, are in our [passport photo rules checklist](/tool/passport-photo-requirements).
 
 ## Print size vs digital size
 

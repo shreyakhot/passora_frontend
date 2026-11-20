@@ -59,7 +59,7 @@ The person taking the photo needs to know three things: **the country, the docum
 
 ### US visa
 
-- Ask for a **2 × 2 inch** photo on a **white** background, with **no glasses**.
+- Ask for a **2 × 2 inch** photo on a **white** background, with **no glasses**. Our [guide to the 2 × 2 inch format](/tool/2x2-passport-photo) explains the size.
 - Ask for a **digital copy** too. Most applicants upload the photo with the DS-160 form; it must be square, 600 × 600 to 1200 × 1200 pixels, JPEG and no more than 240 kB.
 - Bring the printed photo to your interview if the upload failed.
 
@@ -67,7 +67,7 @@ Our [guide to visa photo rules](/tool/visa-photo) has the full US list.
 
 ### Schengen
 
-- Ask for **35 × 45 mm** prints with the face filling 70–80% of the photo (32–36 mm from chin to crown).
+- Ask for **35 × 45 mm** prints with the face filling 70–80% of the photo (32–36 mm from chin to crown). Our [guide to the 35 × 45 mm format](/tool/35x45mm-passport-photo) has the conversions.
 - Check the background colour with the consulate or visa centre: most ask for white or light-coloured.
 - Many visa centres take your photo when you give your fingerprints, so check before paying for prints.
 

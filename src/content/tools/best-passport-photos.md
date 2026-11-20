@@ -48,7 +48,7 @@ We compared each option on five things, using each company's own website and the
 | **Digital copy** | Whether you get a file for online renewal, and how |
 | **Convenience** | How many locations, and whether you can do it without going anywhere |
 
-No option can promise that the State Department will accept a photo. Only the passport office decides, so check any photo yourself before you send it.
+No option can promise that the State Department will accept a photo. Only the passport office decides, so check any photo yourself before you send it. Our [overview of passport photos and how to get one](/tool/passport-photo) explains what every photo must show.
 
 ## Best passport photo options by need
 

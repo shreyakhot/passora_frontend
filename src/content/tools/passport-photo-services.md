@@ -46,6 +46,8 @@ related:
 | **Online photo check and formatting** | Your own photo cropped to size, a digital file and a print sheet | Online photo tools | You can take a good photo at home and want no trip |
 | **Expedited passport services** | A private company submits your application or picks up your passport | Courier and expediting companies, some in retail partnerships | You have urgent travel and cannot get to a passport agency |
 
+Whichever type you choose, the photo itself has to meet the same rules; our [guide to what a passport photo has to show](/tool/passport-photo) sets them out.
+
 ### Photo only
 
 Most people get their passport photo this way. Pharmacies such as [CVS](/tool/cvs-passport-photos) and [Walgreens](/tool/walgreens-passport-photos), big-box stores such as [Walmart](/tool/walmart-passport-photos) and print chains such as [Staples](/tool/staples-passport-photos) take the photo while you wait. A studio takes more care, which matters for babies and special cases; see our guide to [choosing a professional photographer](/tool/passport-photographer-near-me).

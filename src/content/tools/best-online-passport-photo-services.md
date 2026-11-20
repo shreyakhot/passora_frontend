@@ -58,7 +58,7 @@ What each service published on its own website on November 16, 2026. Prices are 
 | iVisa | No stand-alone passport photo found | Not stated | Yes (visa photos) |
 | Photo-Me (UK booths) | £10 digital code | Not stated | Booth photo |
 
-This site runs its own online photo maker, so we compete with these services. We have kept to facts each company states itself, and left out anything we could not confirm. Prices and terms change, so check the company's site before you pay.
+This site runs its own [online photo maker](/tool/online-passport-photo-maker), so we compete with these services. We have kept to facts each company states itself, and left out anything we could not confirm. Prices and terms change, so check the company's site before you pay.
 
 ## Service reviews
 

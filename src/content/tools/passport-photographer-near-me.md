@@ -41,7 +41,7 @@ related:
 
 ## When a professional photographer is worth it
 
-For most adults applying for a US passport, a store photo counter or a photo taken at home works fine. A studio earns its higher price when getting it wrong would cost you time or another trip:
+For most adults applying for a US passport, a store photo counter or a photo taken at home works fine, as our [overview of passport photos and how to get one](/tool/passport-photo) explains. A studio earns its higher price when getting it wrong would cost you time or another trip:
 
 | Situation | Why a studio helps |
 | :--- | :--- |
@@ -132,7 +132,7 @@ Studio prices vary a lot by city and by what is included, so we do not list them
 
 ### Do I need a professional photographer for a US passport photo?
 
-No. The US State Department accepts photos taken anywhere as long as they meet every rule, including size, background, lighting and no digital alteration. A professional is a convenience, not a requirement.
+No. The US State Department accepts photos taken anywhere as long as they meet every rule, including size, background, lighting and no digital alteration. A professional is a convenience, not a requirement. You can also take the photo at home and crop it with the [online photo maker](/tool/online-passport-photo-maker).
 
 ### Can a photographer edit my passport photo to make me look better?
 

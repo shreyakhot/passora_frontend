@@ -298,6 +298,8 @@ If you are applying for your own country's passport from the US:
 3. **Ask a store or studio for the size by name**, in millimetres, and bring the checklist. Many US store counters print only 2 × 2 inch photos by default. Our guide to [places that take visa photos](/tool/visa-photo-near-me) lists chains that make photos for other countries.
 4. **Watch the background colour.** France forbids white, Greece wants grey, and the UK wants cream or light grey, while most others want white.
 
+For visas rather than passports, our [guide to visa photos by destination](/tool/visa-photo) covers the main destinations.
+
 You can also take the photo at home against a plain wall in the right colour and use the [online photo maker](/tool/online-passport-photo-maker), which crops it to the size for the country you choose. Check first that your country accepts photos you take yourself: France requires a photo from an approved professional or photo booth, and inside Germany and Greece the photo must come from the passport office or a registered photographer.
 
 ## Frequently Asked Questions

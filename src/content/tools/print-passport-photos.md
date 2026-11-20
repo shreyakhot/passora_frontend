@@ -62,7 +62,7 @@ Ordinary office paper, home laminating and printing on the back of a photo do no
 ## How to print passport photos on a 4×6 sheet
 
 1. **Start with a correctly sized photo.** Crop it so the head fills the right part of the frame. A photo that is only resized, not cropped, will have the wrong head size.
-2. **Lay it out on a 6 × 4 inch canvas at 300 dpi.** That is 1800 × 1200 pixels. Each 2 × 2 inch photo is 600 × 600 pixels. The free [passport photo sheet maker](/passport-photo-print-template-generator) does this for you.
+2. **Lay it out on a 6 × 4 inch canvas at 300 dpi.** That is 1800 × 1200 pixels. Each 2 × 2 inch photo is 600 × 600 pixels. The free [passport photo sheet maker](/passport-photo-print-template-generator) does this for you, or see our [layout steps for Photoshop, GIMP and Word](/tool/passport-photo-editing-photoshop-word).
 3. **Leave space to cut.** A layout with a margin and small gaps fits two US 2 × 2 inch photos on one 6 × 4 sheet, or six 35 × 45 mm photos. Six 2 × 2 photos only fit edge to edge with no margin, and kiosks often trim the edges.
 4. **Save as a high-quality JPEG** at the full 1800 × 1200 pixels. Do not send a screenshot.
 5. **Print at 100% scale.** At home, choose the 4 × 6 in (10 × 15 cm) paper size, "actual size" and borderless off. At a kiosk, turn off auto-crop, auto-enhance and "fit to print".

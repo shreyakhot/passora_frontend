@@ -76,6 +76,8 @@ Your head must also fit a set range inside the frame. For a US passport that is 
 | **Professional photographer** | Babies, special requirements, or when you want a retake on the spot | Usually the most expensive option |
 | **Online, from your own photo** | Saving a trip and choosing from several shots | You take the photo; the tool sizes it and you print the sheet or upload the file |
 
+For a side-by-side look at stores, studios, booths and apps, see our [comparison of passport photo options by need](/tool/best-passport-photos).
+
 ### In a store or post office
 
 In the US, many pharmacies, shipping and print stores, and post offices that accept passport applications take passport photos while you wait. Our [guide to finding passport photos nearby](/tool/passport-photos-near-me) explains which types of places offer them and what to check before you go. If you are applying in person at an acceptance facility, ask whether it takes photos too, so you can do both in one visit.
@@ -106,7 +108,7 @@ Most of these are easy to avoid if you check the photo against your country's ru
 
 ## Visa, ID and other photos
 
-Visa, residence permit, driving licence and ID card photos follow similar rules but not always the same size. A Schengen visa, for example, usually uses 35 × 45 mm, while a US visa uses 2 × 2 inches. Our [guide to visa photos by destination](/tool/visa-photo) explains how they differ.
+Visa, residence permit, driving licence and ID card photos follow similar rules but not always the same size. A Schengen visa, for example, usually uses 35 × 45 mm, while a US visa uses 2 × 2 inches. Our [guide to visa photos by destination](/tool/visa-photo) explains how they differ, and our [guide to ID photos for licences, cards and badges](/tool/id-photo) explains which IDs need a photo from you.
 
 ## Frequently Asked Questions
 

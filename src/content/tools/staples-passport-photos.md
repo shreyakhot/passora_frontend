@@ -81,6 +81,8 @@ If you need to apply in person, for a first passport or a child's passport, use 
 2. Open your store's page and look under **Travel Services** for passport photos.
 3. Phone ahead if you need an unusual size, a photo for a baby, or the digital file, so the staff can be ready.
 
+For other places that take passport photos, see our [guide to finding passport photos nearby](/tool/passport-photos-near-me).
+
 ## Pros, cons and alternatives
 
 | Pros | Cons |

@@ -49,7 +49,7 @@ Travel time and queues decide the real winner. A store five minutes away with no
 
 ### Online tool
 
-If you can stand in front of a plain white or off-white wall with someone to take the photo, an online tool is the fastest route to a digital file: it measures, crops and sizes the photo in seconds. You still need a print for a paper application, which means printing a 4 × 6 inch sheet at a photo kiosk or at home. Our guide to [setting up the photo at home](/tool/passport-photo-at-home) covers the wall, light and camera position.
+If you can stand in front of a plain white or off-white wall with someone to take the photo, an online tool such as the [online photo maker](/tool/online-passport-photo-maker) is the fastest route to a digital file: it measures, crops and sizes the photo in seconds. You still need a print for a paper application, which means printing a 4 × 6 inch sheet at a photo kiosk or at home. Our guide to [setting up the photo at home](/tool/passport-photo-at-home) covers the wall, light and camera position.
 
 ### Photo booth or kiosk
 
@@ -108,7 +108,7 @@ Yes, if they meet the same rules as any other photo. Speed does not change the r
 - Sharp, in colour, on photo paper, with no visible printer dots
 - Unedited: "Do not change your photo using computer software, phone apps or filters"
 
-A quick photo that fails one of these slows you down far more than a slow one that passes. Our [checklist of passport photo rules](/tool/passport-photo-requirements) has the full list.
+A quick photo that fails one of these slows you down far more than a slow one that passes. Our [checklist of passport photo rules](/tool/passport-photo-requirements) has the full list, and our [guide to what a passport photo has to show](/tool/passport-photo) explains why the rules are so strict.
 
 ## Frequently Asked Questions
 

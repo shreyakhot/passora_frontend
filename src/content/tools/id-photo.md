@@ -72,7 +72,7 @@ Check which kind your document is before you pay for photos.
 | Rules | Strict: background, head size, expression, no glasses for the US | Similar in spirit, sometimes less strict |
 | Editing | Not allowed | Usually not allowed for government IDs |
 
-A passport photo meets the strictest version of the rules, so a spare US passport photo often works for another document that asks for a 2 × 2 inch "passport-style" photo. It does not work the other way round: a photo made for a student card or work badge is rarely good enough for a passport.
+A passport photo meets the strictest version of the rules, so a spare US passport photo often works for another document that asks for a 2 × 2 inch "passport-style" photo. It does not work the other way round: a photo made for a student card or work badge is rarely good enough for a passport. Our [passport photo rules checklist](/tool/passport-photo-requirements) lists every rule.
 
 ## Common ID photo sizes
 
@@ -127,7 +127,7 @@ For a document that accepts a photo you supply, you can take it at home:
 4. Crop the photo to the size the document asks for, without editing your face or the background.
 5. Print it on photo paper at 100% scale, or upload the file if the form allows it.
 
-Our [step-by-step guide to a photo at home](/tool/passport-photo-at-home) covers the setup in detail, and the [online photo maker](/tool/online-passport-photo-maker) crops to passport and visa sizes for many countries.
+Our [step-by-step guide to a photo at home](/tool/passport-photo-at-home) covers the setup in detail, our [tips for looking good within the rules](/tool/how-to-take-a-good-passport-photo) cover light and pose, and the [online photo maker](/tool/online-passport-photo-maker) crops to passport and visa sizes for many countries.
 
 ## Frequently Asked Questions
 
