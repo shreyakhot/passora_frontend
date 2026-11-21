@@ -1,7 +1,7 @@
 ---
 title: "Passport Renewal Photo: Requirements & How to Submit With Your Application"
-meta_title: "Passport Renewal Photo: Rules & How to Attach or Upload It"
-meta_description: "Passport renewal photo rules for the US: why you need a new photo, the size for each form, how to staple or hand it in, ID for new passports, and online uploads."
+meta_title: "Passport Renewal Photo: Rules, Attach & Upload"
+meta_description: "Do you need a new picture to renew a passport? Yes: one taken in the last 6 months. Photo size for each form, how to attach it, and how to upload it for online renewal."
 primary_keyword: "passport renewal photo"
 supporting_keywords:
   - "passport photo application"
@@ -39,7 +39,7 @@ related:
   - online-passport-photo-maker
 ---
 
-## Do you need a new photo to renew?
+## Do you need a new picture to renew your passport?
 
 Yes. Every US passport application, including a renewal, needs **one colour photo taken in the last six months**. You cannot reuse the photo from your current passport, a copy of it, or a scan of an old print. For online renewal, a photo of a printed photo or a scan is not accepted either.
 
@@ -96,7 +96,7 @@ When you apply in person with Form DS-11, you show an ID and hand in a photocopy
 
 You also need proof of US citizenship, such as a birth certificate, with its own photocopy. The State Department's photo ID page lists every accepted document and what to do if your ID is from another state. A renewal by mail uses your most recent passport instead, which you send in with the form.
 
-## Online renewal photo upload
+## How to upload your photo for online renewal
 
 For online renewal, you upload a digital photo instead of mailing a print:
 

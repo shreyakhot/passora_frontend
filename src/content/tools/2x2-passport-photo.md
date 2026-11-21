@@ -1,7 +1,7 @@
 ---
 title: "2x2 Photo: Size, Requirements & Where to Get a 2x2 Passport Photo"
-meta_title: "2x2 Passport Photo: Size in Pixels, cm & Requirements"
-meta_description: "Everything about the 2x2 passport photo: 2 × 2 inches in mm, cm and pixels, which documents use it, where the head goes, and where to get or make one."
+meta_title: "2x2 Passport Photo: Size in cm, mm & Pixels"
+meta_description: "A 2x2 passport photo is 2 × 2 inches: 5.1 × 5.1 cm, 51 × 51 mm, or 600 × 600 pixels at 300 dpi. Which documents use it, where the head goes and where to get one."
 primary_keyword: "2x2 passport photo"
 supporting_keywords:
   - "2x2 photo"

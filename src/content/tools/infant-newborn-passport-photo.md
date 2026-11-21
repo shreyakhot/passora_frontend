@@ -1,7 +1,7 @@
 ---
 title: "Infant Passport Photo: Rules, Tips & How to Photograph a Newborn"
-meta_title: "Infant Passport Photo: Rules & Newborn Photo Tips"
-meta_description: "How to take an infant passport photo that is accepted: the rules for babies' eyes and support, the white-sheet and car-seat methods, and where to get one."
+meta_title: "Infant Passport Photo: Newborn Rules & Tips"
+meta_description: "How to take an infant or newborn passport photo that is accepted: the rules for eyes and support, the white-sheet and car-seat methods, and where to get one."
 primary_keyword: "infant passport photo"
 supporting_keywords:
   - "newborn passport photo"

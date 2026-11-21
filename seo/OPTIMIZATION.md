@@ -36,8 +36,10 @@ Data: Search Console, 2026-10-21 to 2026-11-19. 2 clicks, 1,487 impressions, ave
 
 ## Order for the next runs (by impressions, 2026-11-20 data)
 
-- **Day 2:** best-passport-photos, 2x2-passport-photo, passport-application-photo, take-passport-photo-with-phone, visa-photo-near-me, visa-photo, 35x45mm-passport-photo, infant-newborn-passport-photo, passport-photo-services, passport-photo-size.
-- **Later:** the 20 guides with no impressions yet. Several are not indexed. For these, fix titles (at most 47 characters) and answer-first intros, then re-rank with fresh data. Day 1 pages become eligible again from 2026-12-04.
+- **Day 2 (done 2026-11-21):** best-passport-photos, 2x2-passport-photo, passport-application-photo, take-passport-photo-with-phone, visa-photo-near-me, visa-photo, 35x45mm-passport-photo, infant-newborn-passport-photo, passport-photo-services, passport-photo-size.
+- **Day 3:** the hubs and core pages first, since none has impressions yet: passport-photo, passport-photos-near-me, passport-photo-requirements, online-passport-photo-maker, passport-photographer-near-me, passport-size-photo-near-me, cvs-passport-photos, fedex-office-passport-photos, print-passport-photos, passport-photo-at-home.
+- **Day 4:** best-online-passport-photo-services, biometric-passport-photo, costco-passport-photos, how-to-take-a-good-passport-photo, id-photo, other-stores-that-take-passport-photos, passport-photo-editing-photoshop-word, passport-photo-size-by-country, rite-aid-passport-photos, uscis-immigration-photos.
+- 19 of these 20 have titles over 47 characters. Re-pull data before each run; any page that gains impressions moves up. Day 1 pages become eligible again from 2026-12-04, day 2 pages from 2026-12-05.
 
 ## Daily log
 
@@ -66,3 +68,23 @@ Pages, with starting impressions / average position (2026-10-21 to 2026-11-19) a
   - canada.ca child photo rules.
 - **Not re-verified:** FedEx Office (header overflow error), so the cost page keeps the 2026-11-11 FedEx price with its date.
 - **Measure on or after 2026-12-04:** compare each page's impressions and position with the starting figures above.
+
+### Day 2 — 2026-11-21
+
+Data: 2026-10-22 to 2026-11-20. Site: 2 clicks, 1,550 impressions, average position 32.7, 441 queries. That is almost unchanged; day 1 edits had been live less than a day. All titles were cut to at most 47 characters (51-59 with the site name).
+
+| Page | Start | Changes |
+| :--- | :--- | :--- |
+| best-passport-photos | 23 / 36.0 | Title: "Best Places & Prices". FAQ renamed "Which passport photo services guarantee compliance?" (the query sits at position 5-10). It now covers online refund promises (no specifics; links to the comparison) and notes no service can guarantee acceptance. |
+| 2x2-passport-photo | 10 / 39.1 | Title and meta lead with the size in cm, mm and pixels. The cm queries already rank 9-13.5. |
+| passport-application-photo | 5 / 56.4 | H2 renamed "Do you need a new picture to renew your passport?" (query at position 11). The online upload H2 is now a how-to. |
+| take-passport-photo-with-phone | 5 / 74.8 | Title is now exactly the primary phrase. H2 renamed "Can you take a passport photo with your phone?" Meta answers yes. |
+| visa-photo-near-me | 3 / 10.3 | New H3 "Indian visa" (e-Visa square JPEG 10 KB-1 MB; VFS USA print 2 × 2 in glossy, white; facts from the India guide). FAQ renamed "Where can I get US visa photos taken?" (query at position 12). |
+| visa-photo | 3 / 59.7 | Title and meta lead with the US visa photo size (2 × 2 in; DS-160 JPEG 600-1200 px, up to 240 kB). |
+| 35x45mm-passport-photo | 2 / 41.5 | Meta answers cm, inches and pixels. |
+| infant-newborn-passport-photo | 2 / 81.0 | Title: "Newborn Rules & Tips". |
+| passport-photo-services | 1 / 100.0 | Title shortened only. Its one query, "does the dmv take passport photos", was not answered because there is no official source checked. |
+| passport-photo-size | 1 / 31.0 | Meta answers the common sizes in mm and pixels. |
+
+- No new facts or prices. Everything added comes from pages already sourced on the site.
+- Low positions on this batch: very few impressions, because the pages are new and the site has little authority (audit items 1-2). The near-me visa queries (positions 7-12) are the closest to page one.

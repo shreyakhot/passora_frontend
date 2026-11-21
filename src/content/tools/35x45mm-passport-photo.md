@@ -1,7 +1,7 @@
 ---
 title: "35mm x 45mm Photo: Passport Photo Size, Countries & Requirements"
-meta_title: "35mm x 45mm Photo: Size in cm, Pixels & Countries"
-meta_description: "The 35mm x 45mm photo explained: the size in cm, inches and pixels, which countries use it, how big the head must be, and how it compares with a 2x2 photo."
+meta_title: "35mm x 45mm Photo: Size in cm & Pixels"
+meta_description: "A 35mm x 45mm photo is 3.5 × 4.5 cm, about 1.38 × 1.77 inches, or 413 × 531 pixels at 300 dpi. Which countries use it, the head size, and how it compares with 2x2."
 primary_keyword: "35mm x 45mm photo"
 supporting_keywords:
   - "35 x 45 mm photo"

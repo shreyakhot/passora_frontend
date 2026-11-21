@@ -73,9 +73,15 @@ Our [guide to visa photo rules](/tool/visa-photo) has the full US list.
 
 See the [photo size for a Schengen visa](/tool/schengen-eu-photo-size) for each step.
 
+### Indian visa
+
+- For an **e-Visa**, you upload a square JPEG between 10 KB and 1 MB; no print is needed.
+- For a **regular visa applied for through VFS Global in the US**, ask for a **2 × 2 inch** photo on glossy paper with a **white** background, and keep a digital copy for the online form.
+
+Our [guide to Indian visa and OCI photos](/tool/indian-passport-photo-oci-photo) has the full rules.
+
 ### Other countries
 
-- **India:** the e-Visa needs only a square digital file. Paper applications through the visa centre have their own size; see our [guide to Indian visa and OCI photos](/tool/indian-passport-photo-oci-photo).
 - **Canada:** a visitor visa photo must be at least 35 × 45 mm. Canadian passports and citizenship need a 50 × 70 mm photo with the studio's details on the back; see our [guide to Canadian photo rules](/tool/canadian-passport-photos).
 - **Anywhere else:** bring the embassy's photo rules on your phone. Our [list of photo sizes for every country](/tool/passport-photo-size-by-country) is a starting point.
 
@@ -118,6 +124,6 @@ Not at Walgreens, Staples or FedEx Office, which say no appointment is needed. S
 
 Walgreens emails a digital copy, and Staples and FedEx Office offer one on a USB drive. Make sure the file meets your destination's upload rules.
 
-### Is a passport photo from a store accepted for a US visa?
+### Where can I get US visa photos taken?
 
-Only if it meets the visa rules: taken in the last 6 months, no glasses, white or off-white background. Tell the store it is for a US visa.
+Most US stores that take passport photos can take one, because a US visa photo uses the same 2 × 2 inch size and white or off-white background. Tell the store it is for a US visa: it must be taken in the last 6 months, with no glasses. Ask for a digital copy too, for the DS-160 upload.

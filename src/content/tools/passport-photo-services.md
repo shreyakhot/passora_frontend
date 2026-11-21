@@ -1,6 +1,6 @@
 ---
 title: "Passport Photo Services: Which Kind You Need and Where to Get Your Photo Taken"
-meta_title: "Passport Photo Services: Types Compared & Where to Go"
+meta_title: "Passport Photo Services: Types & Where to Go"
 meta_description: "Passport photo services compared: photo-only counters, post offices, online photo tools and expediting companies. What each includes and which suits you."
 primary_keyword: "passport photo services"
 supporting_keywords:

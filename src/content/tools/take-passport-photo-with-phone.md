@@ -1,7 +1,7 @@
 ---
 title: "How to Take a Passport Photo With Your iPhone or Android"
-meta_title: "Take a Passport Photo With iPhone or Android: Settings & Tips"
-meta_description: "How to take a passport photo with iPhone or Android: the camera settings to change, selfie vs helper, avoiding distortion and shadows, and cropping it to size."
+meta_title: "Take a Passport Photo With iPhone or Android"
+meta_description: "Yes, you can take a passport photo with your phone. How to do it on iPhone or Android: camera settings, who holds the phone, avoiding distortion, and cropping to size."
 primary_keyword: "take passport photo with iphone"
 supporting_keywords:
   - "passport photo on iphone"
@@ -39,7 +39,7 @@ related:
   - same-day-instant-passport-photos
 ---
 
-## Is a phone photo accepted for a passport?
+## Can you take a passport photo with your phone?
 
 Yes, if it meets the rules. The State Department's online renewal guidance says most phones take photos in an acceptable size and format. What it rejects is a poor phone photo: its photo FAQ lists "low quality vending machine or mobile phone photos" among those that are not acceptable, and its passport rules say not to change a photo "using computer software, phone apps or filters."
 

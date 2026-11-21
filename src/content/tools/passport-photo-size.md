@@ -1,7 +1,7 @@
 ---
 title: "Passport Size Photo: Dimensions in Inches, mm and Pixels"
-meta_title: "Passport Size Photo: Size in Inches, mm & Pixels"
-meta_description: "What size is a passport size photo? Common sizes in inches, millimetres and pixels, how much of the frame your head should fill, and how to check a photo."
+meta_title: "Passport Size Photo: Inches, mm & Pixels"
+meta_description: "What size is a passport size photo? 2 × 2 in (51 × 51 mm, 600 × 600 px) in the US; 35 × 45 mm (413 × 531 px) in the UK, Europe and India. Head size and how to check."
 primary_keyword: "passport size photo"
 supporting_keywords:
   - "passport photo size"

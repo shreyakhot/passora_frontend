@@ -1,7 +1,7 @@
 ---
 title: "Best Passport Photos: Stores, Studios & Apps Compared"
-meta_title: "Best Passport Photos: Stores, Studios & Apps Compared"
-meta_description: "Where to get the best passport photos for your needs: the fastest, cheapest, best for babies, best digital copy and best guarantee, compared side by side."
+meta_title: "Best Passport Photos: Best Places & Prices"
+meta_description: "Where is the best place to get passport photos? The fastest, cheapest, best for babies and best digital copy, plus which services guarantee your photo, side by side."
 primary_keyword: "best passport photos"
 supporting_keywords:
   - "best passport pictures"
@@ -124,6 +124,6 @@ Of the prices we could confirm on November 6, 2026, Walmart was lowest at $7.64.
 
 They can, as long as the photo itself meets the rules and the app does not edit your face or replace the background. The State Department rejects photos changed with apps, filters or AI.
 
-### Which passport photo service has a guarantee?
+### Which passport photo services guarantee compliance?
 
-Staples offers a free retake if your photo is not accepted, but no refund. Other stores do not publish retake terms, so ask before you pay.
+Among stores, Staples offers a free retake if your photo is not accepted, but no refund. Other stores do not publish retake terms, so ask before you pay. Some online services promise a refund if an authority rejects your photo, usually only with proof of the rejection; our [comparison of online passport photo websites](/tool/best-online-passport-photo-services) sets out their terms. No service can guarantee acceptance: only the passport office decides.

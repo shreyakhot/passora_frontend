@@ -1,7 +1,7 @@
 ---
 title: "Visa Photo Requirements: Size, Background & Rules (US Visa Photo Guide)"
-meta_title: "Visa Photo Requirements: US Visa Photo Size & Rules"
-meta_description: "Visa photo rules explained: the US visa photo size, digital file specs for the DS-160, background, glasses, and a table of visa photo sizes for other destinations."
+meta_title: "Visa Photo Requirements: US Visa Photo Size"
+meta_description: "US visa photo size: a 2 × 2 inch print, or a square JPEG of 600 to 1200 pixels and up to 240 kB for the DS-160. Background, glasses, and sizes for other visas."
 primary_keyword: "visa photo"
 supporting_keywords:
   - "us visa photo"
