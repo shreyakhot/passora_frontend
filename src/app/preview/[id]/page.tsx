@@ -21,16 +21,21 @@ import {
   Eye,
   Mail,
   Clock,
+  LoaderCircle,
+  Sparkles,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import type { PassportProcessResult } from "@/lib/passport-api";
 import { PRICING, getPlanPricing, type PlanType } from "@/lib/config/pricing";
 import { resultImageUrl } from "@/lib/storage/result-urls";
+import { compressImageTo3MB } from "@/lib/image-compress";
 import { LOGO_URL, SUPPORT_EMAIL } from "@/lib/site";
 import {
+  COUNTRIES,
   DEFAULT_COUNTRY,
   countryFlag,
+  countryOptionId,
   getCountryByCode,
   getCountryByName,
 } from "@/config/countries";
@@ -105,6 +110,43 @@ function saveStoredPayment(resultId: string, info: StoredPaymentInfo) {
     localStorage.setItem(`photogovt_paid_${resultId}`, json);
   } catch (e) {
     console.error("Failed to save payment info locally:", e);
+  }
+}
+
+/** Turns the stored original photo (a data URL) back into a File for re-processing. */
+function dataUrlToFile(dataUrl: string, fileName: string): File {
+  const [header, base64 = ""] = dataUrl.split(",");
+  const mimeType = /data:([^;]+)/.exec(header)?.[1] || "image/jpeg";
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return new File([bytes], fileName, { type: mimeType });
+}
+
+/**
+ * Saves a processing result the way the photo maker does, so /preview/[id] can
+ * load it. If the browser's storage is full, it saves the result without the
+ * original photo instead.
+ */
+function saveStoredResult(result: StoredPassportResult) {
+  const id = result.result_id;
+  if (!id) return;
+  const withoutOriginal = { ...result, original_preview: undefined }; // dropped by JSON.stringify
+  for (const payload of [result, withoutOriginal]) {
+    const json = JSON.stringify(payload);
+    try {
+      sessionStorage.setItem(`photogovt_${id}`, json);
+      sessionStorage.setItem("photogovt_latest", json);
+      try {
+        localStorage.setItem(`photogovt_${id}`, json);
+        localStorage.setItem("photogovt_latest", json);
+      } catch {
+        // sessionStorage is enough for this visit
+      }
+      return;
+    } catch {
+      // Storage full: retry without the original photo
+    }
   }
 }
 
@@ -284,6 +326,60 @@ export default function PassportPhotoPreviewPage() {
     DEFAULT_COUNTRY.dimensions;
   const originalPreview = data?.original_preview;
   const flag = getCountryFlag(countryCode, countryName);
+
+  // Crop-only photo whose background failed the check: offer a retake or a
+  // re-process with the background replaced.
+  const documentType = data?.document_type || "passport";
+  const makerOption = COUNTRIES.find(
+    (c) => c.country_code === countryCode && c.document_type === documentType
+  );
+  const retakeHref = makerOption
+    ? `/passport-size-photo-maker?country=${countryOptionId(makerOption)}`
+    : "/passport-size-photo-maker";
+  const [isReplacingBackground, setIsReplacingBackground] = useState(false);
+  const [replaceBackgroundError, setReplaceBackgroundError] = useState("");
+
+  async function handleMakeBackgroundWhite() {
+    if (!data || !originalPreview) return;
+    setIsReplacingBackground(true);
+    setReplaceBackgroundError("");
+    try {
+      const timestamp = Date.now();
+      let file = dataUrlToFile(originalPreview, `upload_${timestamp}.jpg`);
+      try {
+        file = (await compressImageTo3MB(file)).file;
+      } catch {
+        // send the original if compression fails
+      }
+
+      const formData = new FormData();
+      formData.append("image", file);
+      formData.append("country_code", countryCode);
+      formData.append("document_type", documentType);
+      formData.append("background_mode", "auto");
+
+      const res = await fetch("/api/passport-photo", { method: "POST", body: formData });
+      const result: PassportProcessResult = await res.json();
+      if (!res.ok || result.status === "error" || result.error) {
+        throw new Error(result.error || "We could not replace the background. Please try again.");
+      }
+
+      const newId = result.result_id || `${resultId}_bg_${timestamp}`;
+      saveStoredResult({
+        ...data,
+        ...result,
+        result_id: newId,
+        background_mode: "auto",
+        timestamp,
+      });
+      router.push(`/preview/${newId}`);
+    } catch (err: unknown) {
+      setReplaceBackgroundError(
+        err instanceof Error ? err.message : "We could not replace the background. Please try again."
+      );
+      setIsReplacingBackground(false);
+    }
+  }
 
   // Full-res clean image (unlocked only after payment)
   const fullImageUrl =
@@ -650,19 +746,53 @@ export default function PassportPhotoPreviewPage() {
                 </div>
               </div>
 
-              {/* Crop-only uploads keep the original background; warn when it did not pass the check */}
-              {data?.background_mode === "keep" && data.metrics?.background_valid === false && (
+              {/* Crop-only uploads keep the original background. When it failed the check,
+                  offer a retake or a re-process with the background replaced. */}
+              {data?.background_mode === "keep" && data.metrics?.background_valid === false && !isPaid && (
                 <div
                   role="status"
-                  className="mb-6 flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"
+                  className="mb-6 flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900 sm:p-5"
                 >
                   <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" aria-hidden="true" />
-                  <p className="m-0">
-                    <span className="font-bold">Check your background before you buy.</span>{" "}
-                    We only cropped and sized this photo and left the background as you took it. Our check
-                    found it may not be plain white or off-white. If it looks grey, shadowed or patterned,
-                    retake the photo against a plain white or off-white wall in even light.
-                  </p>
+                  <div className="min-w-0 flex-1">
+                    <p className="m-0 font-bold">Your background may not be plain white or off-white</p>
+                    <p className="mt-1 mb-0">
+                      We only cropped and sized this photo. For the best chance of acceptance, retake it
+                      against a plain white or off-white wall in even light.
+                    </p>
+                    <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+                      <Link href={retakeHref} className="btn-brand btn-sm focus-ring">
+                        <Camera className="h-4 w-4" aria-hidden="true" />
+                        <span>Retake photo</span>
+                      </Link>
+                      {originalPreview && (
+                        <button
+                          type="button"
+                          onClick={handleMakeBackgroundWhite}
+                          disabled={isReplacingBackground}
+                          className="btn-outline-brand btn-sm focus-ring"
+                        >
+                          {isReplacingBackground ? (
+                            <LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" />
+                          ) : (
+                            <Sparkles className="h-4 w-4" aria-hidden="true" />
+                          )}
+                          <span>{isReplacingBackground ? "Replacing background…" : "Make background white"}</span>
+                        </button>
+                      )}
+                    </div>
+                    {originalPreview && (
+                      <p className="mt-2 mb-0 text-xs text-amber-800">
+                        The {countryName} passport office says not to change photos with software, so a
+                        replaced background can be rejected.
+                      </p>
+                    )}
+                    {replaceBackgroundError && (
+                      <p role="alert" className="mt-2 mb-0 text-xs font-semibold text-red-700">
+                        {replaceBackgroundError}
+                      </p>
+                    )}
+                  </div>
                 </div>
               )}
 
