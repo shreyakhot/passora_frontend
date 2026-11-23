@@ -1,6 +1,6 @@
 ---
 title: "Photoshop Passport Photo: Size, Settings & Templates (Plus GIMP and Word)"
-meta_title: "Photoshop Passport Photo: Size, Settings, GIMP & Word"
+meta_title: "Photoshop Passport Photo: Size, GIMP & Word"
 meta_description: "Make a passport photo in Photoshop, GIMP or Word: the crop size and resolution, how to put several copies on a 6 × 4 sheet, and the edits passport offices reject."
 primary_keyword: "photoshop passport photo"
 supporting_keywords:

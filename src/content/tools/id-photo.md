@@ -1,7 +1,7 @@
 ---
 title: "ID Photos: Size, Requirements & Where to Get ID Pictures Near You"
-meta_title: "ID Photos: Sizes, Rules & Where to Get Them Near You"
-meta_description: "ID photos explained: which IDs need a photo from you and which take it on the spot, common ID photo sizes, how they differ from passport photos, and where to get them."
+meta_title: "ID Photo Requirements, Size & Where to Get One"
+meta_description: "ID photo requirements and sizes: 2 × 2 in for US passports, visas and USCIS forms; 35 × 45 mm in the UK and Europe. Which IDs need your photo and how to take one."
 primary_keyword: "id photos"
 supporting_keywords:
   - "id photo near me"
@@ -74,7 +74,19 @@ Check which kind your document is before you pay for photos.
 
 A passport photo meets the strictest version of the rules, so a spare US passport photo often works for another document that asks for a 2 × 2 inch "passport-style" photo. It does not work the other way round: a photo made for a student card or work badge is rarely good enough for a passport. Our [passport photo rules checklist](/tool/passport-photo-requirements) lists every rule.
 
-## Common ID photo sizes
+## ID photo requirements
+
+When a document asks you to supply the photo, its rules are usually close to passport rules. For a US passport, the State Department asks for a photo:
+
+- taken in the last 6 months
+- against a plain white or off-white background, without shadows
+- showing your full face, facing the camera, with a neutral expression and both eyes open
+- without glasses, and without a hat or head covering unless you wear it daily for religious or medical reasons
+- not changed with software, phone apps or filters
+
+Other documents set their own size and can differ on details. USCIS green card photos, for example, must be taken within 30 days of filing. Always read the instructions for your document.
+
+## ID photo size by document
 
 | Document | Photo size |
 | :--- | :--- |
@@ -117,7 +129,7 @@ Most places that take passport photos also take other ID photos:
 
 Ask for the document by name, such as "a US visa photo" or "two 35 × 45 mm photos", rather than "an ID photo". Many store services are set up for US passport photos, so ask whether they can do another size before you pay. Our [guide to places that take passport photos](/tool/passport-photos-near-me) lists the main chains and how to find a location.
 
-## Take an ID photo yourself
+## How to take an ID photo
 
 For a document that accepts a photo you supply, you can take it at home:
 

@@ -17,6 +17,7 @@ All 40 guides are published (see [PROGRESS.md](PROGRESS.md)). From 2026-11-20 th
    - Run `npx tsc --noEmit`.
    - Render each changed page and confirm its title and FAQ schema.
 8. **Log the day below** with each page's starting impressions and position, so the effect can be measured 2-4 weeks later.
+9. **Ask Google to recrawl after the push.** In Search Console, use URL Inspection, then **Request indexing**, for each page changed that day; the API cannot do this. The sitemap has no `lastmod` by design, so Google gets no other signal that a page changed. Measure each page from its next crawl date (the "last crawl" in URL Inspection), not from the edit date.
 
 ## Audit: why the guides rank low (2026-11-20)
 
@@ -34,12 +35,25 @@ Data: Search Console, 2026-10-21 to 2026-11-19. 2 clicks, 1,487 impressions, ave
 | 8 | **Overlap on post office price queries** | "post office passport photo cost" shows both the USPS page (position about 24-35) and the cost page (about 70). | Acceptable: the brand page leads, as the strategy intends. Watch it. |
 | 9 | **Page speed unknown** | The PageSpeed Insights API quota was exhausted on 2026-11-20. | Check the Core Web Vitals report or PageSpeed Insights by hand. |
 
+### Audit update (2026-11-23)
+
+Data: Search Console, 2026-10-24 to 2026-11-22. 2 clicks, 2,001 impressions, average position 33.9, 541 queries. Impressions rose from about 60 a day in early November to 181 on 2026-11-21 and 239 on 2026-11-22.
+
+| # | Finding | Evidence | Status |
+| :-- | :--- | :--- | :--- |
+| 1 | **Indexing mostly fixed** | 11 of the 13 unindexed URLs were crawled on 2026-11-20 and 2026-11-21, after the sitemap was resubmitted, and are now indexed. 48 of 50 sitemap URLs are indexed. | Still "Discovered - currently not indexed": `/tool/passport-photos-near-me` and `/tool/fedex-office-passport-photos`. Request indexing for both. |
+| 2 | **Edited pages not recrawled yet** | None of the 20 pages edited on day 1 and day 2 has been crawled since. Their last crawls are 2026-11-02 to 2026-11-15. Google is still ranking the old titles and text. | Request indexing for each edited page (step 9 of the process). Day 1 pages first: they carry the most impressions. |
+| 3 | **Three pages rising on their own** | Last 7 days against the 7 before: USPS 88 to 309 impressions (position 52.0 to 29.4), digital 19 to 148 (58.7 to 33.2), same-day 19 to 134 (47.2 to 30.4). The pages had not been recrawled, so this is Google settling new pages, not the edits. | Watch. Their day 1 starting figures still stand as the baseline. |
+| 4 | **Four brand and price pages dropped to zero** | Staples (56 impressions at about position 14 in the week of 2026-11-09), Walmart, Walgreens and the cost page have had no impressions since 2026-11-10 or 2026-11-11. All four are still indexed, with the right canonical and no crawl errors. | Not a technical fault. New pages often get a short trial in results, then drop while Google gathers signals, and these queries are dominated by the brands' own sites (audit item 2). The day 1 edits have not been crawled yet; request indexing and re-check on 2026-12-04. |
+| 5 | **Old country URLs fading** | Week on week, Portugal fell from 28 impressions to 0 and Romania from 28 to 7. Their URLs redirect to the photo maker. | As predicted in audit item 6. **Owner decision still pending.** |
+| 6 | **Most remaining pages have no named queries** | 4 of today's 10 pages had impressions only from anonymized queries, which Search Console does not list. | For these, fix the title length and the description only. |
+
 ## Order for the next runs (by impressions, 2026-11-20 data)
 
 - **Day 2 (done 2026-11-21):** best-passport-photos, 2x2-passport-photo, passport-application-photo, take-passport-photo-with-phone, visa-photo-near-me, visa-photo, 35x45mm-passport-photo, infant-newborn-passport-photo, passport-photo-services, passport-photo-size.
-- **Day 3:** the hubs and core pages first, since none has impressions yet: passport-photo, passport-photos-near-me, passport-photo-requirements, online-passport-photo-maker, passport-photographer-near-me, passport-size-photo-near-me, cvs-passport-photos, fedex-office-passport-photos, print-passport-photos, passport-photo-at-home.
-- **Day 4:** best-online-passport-photo-services, biometric-passport-photo, costco-passport-photos, how-to-take-a-good-passport-photo, id-photo, other-stores-that-take-passport-photos, passport-photo-editing-photoshop-word, passport-photo-size-by-country, rite-aid-passport-photos, uscis-immigration-photos.
-- 19 of these 20 have titles over 47 characters. Re-pull data before each run; any page that gains impressions moves up. Day 1 pages become eligible again from 2026-12-04, day 2 pages from 2026-12-05.
+- **Day 3 (done 2026-11-23):** the 2026-11-23 data moved the newer guides up, because they started getting impressions: other-stores-that-take-passport-photos, rite-aid-passport-photos, id-photo, uscis-immigration-photos, best-online-passport-photo-services, costco-passport-photos, passport-size-photo-near-me, print-passport-photos, passport-photo-editing-photoshop-word, biometric-passport-photo.
+- **Day 4:** the last 10 guides not yet optimized. All 10 have titles over 47 characters: passport-photo, passport-photos-near-me, passport-photo-requirements, online-passport-photo-maker, passport-photographer-near-me, cvs-passport-photos, fedex-office-passport-photos, passport-photo-at-home, how-to-take-a-good-passport-photo, passport-photo-size-by-country.
+- **After day 4:** no page qualifies until the 14-day wait ends. Day 1 pages are eligible again from 2026-12-04, day 2 from 2026-12-05 and day 3 from 2026-12-07. Until then, a daily run only pulls the data, checks indexing and recrawls, and logs findings; it changes no pages.
 
 ## Daily log
 
@@ -88,3 +102,24 @@ Data: 2026-10-22 to 2026-11-20. Site: 2 clicks, 1,550 impressions, average posit
 
 - No new facts or prices. Everything added comes from pages already sourced on the site.
 - Low positions on this batch: very few impressions, because the pages are new and the site has little authority (audit items 1-2). The near-me visa queries (positions 7-12) are the closest to page one.
+
+### Day 3 — 2026-11-23
+
+Data: 2026-10-24 to 2026-11-22 (see the audit update above). Starting figures are page totals, which include anonymized queries. All titles were cut to at most 47 characters (54-60 with the site name).
+
+| Page | Start | Changes |
+| :--- | :--- | :--- |
+| other-stores-that-take-passport-photos | 31 / 43.3 | Title: "Target Passport Photos, AAA Prices & Kodak". Most queries are AAA prices (positions 38-68). Meta answers "does Target do passport photos" and gives the AAA price range. H2 renamed "Does AAA take passport photos?", with "Yes" first. H3s renamed "AAA passport photo prices" and "AAA passport photo cost at other clubs". AAA Club Alliance prices re-fetched 2026-11-23, unchanged, and re-dated. |
+| rite-aid-passport-photos | 20 / 28.9 | Queries ask for hours (position 8), locations, price and "rite aid print photo". New FAQ "Are there Rite Aid passport photo hours or locations?" H2 renamed "What happened to Rite Aid photo printing?", now linking the print guide. Meta names prices, hours and locations. |
+| id-photo | 14 / 42.2 | Title: "ID Photo Requirements, Size & Where to Get One". New H2 "ID photo requirements", using the US rules already sourced on the requirements checklist. H2s renamed "ID photo size by document" and "How to take an ID photo" (query "how to take a id photo"). |
+| uscis-immigration-photos | 10 / 57.7 | Title: "USCIS Photo Requirements: Green Card, EAD & OPT" (the searched wording). H3 renamed "EAD, OPT and STEM OPT photo requirements"; the I-765 instructions confirm the STEM extension uses that form. |
+| best-online-passport-photo-services | 6 / 32.7 | Title: "Best Online Passport Photo Services Compared" (queries: "best online passport photo service"). H2 renamed "Can you do passport photos online?" Meta answers it. |
+| costco-passport-photos | 5 / 25.4 | Title: "Costco Passport Photos: Photo Centers Closed". H2 renamed "Is there a Costco Photo Center near me?" (query "costco passport photo center"). Meta answers "does Costco do passport photos". |
+| passport-size-photo-near-me | 5 / 8.8 | Title shortened. Meta names the sizes to ask for. Closest page to page one, with anonymized queries only. |
+| print-passport-photos | 5 / 57.6 | Title shortened only (anonymized queries, none since 2026-11-10). |
+| passport-photo-editing-photoshop-word | 4 / 15.0 | Title shortened only (anonymized queries). |
+| biometric-passport-photo | 3 / 33.3 | Title shortened only (anonymized queries). |
+
+- Facts fetched 2026-11-23: AAA Club Alliance passport photos: Premier free, Plus $8.99, Classic $11.99, non-members $14.99; no appointment; a digital photo is available at most locations.
+- Not fetched: riteaid.com returns 403. The Rite Aid page added no new facts; the new answers restate the sourced closure.
+- `last_verified` is unchanged on all 10 pages: only the AAA prices were re-checked, not each page's other key facts.

@@ -1,7 +1,7 @@
 ---
 title: "Costco Passport Photos: Availability, Cost & Costco Canada Options"
-meta_title: "Costco Passport Photos: Do Warehouses Still Take Them?"
-meta_description: "Costco passport photos ended when Costco closed its photo centres in the US and Canada in 2021. What changed, what Costco Photo still offers, and where to go instead."
+meta_title: "Costco Passport Photos: Photo Centers Closed"
+meta_description: "Does Costco do passport photos? No: Costco closed its photo centres in the US and Canada on February 14, 2021. What Costco still offers and where to go instead."
 primary_keyword: "costco passport photos"
 supporting_keywords:
   - "costco passport"
@@ -58,9 +58,9 @@ Costco Canada closed its photo centres on the **same day, February 14, 2021**, a
 
 For a Canadian passport, this matters more than in the US: the photo must be taken by a commercial photographer or studio, who writes the studio's name, address and the date on the back. Pharmacies and photo studios do this. Shoppers Drug Mart, for example, says its stores take passport photos without an appointment, as well as citizenship, PR card and visa photos. Our [guide to Canadian photo rules](/tool/canadian-passport-photos) covers the size (50 × 70 mm) and what to check before you pay.
 
-## Finding a warehouse with photo service
+## Is there a Costco Photo Center near me?
 
-You will not find one. No Costco warehouse in the US or Canada takes passport photos today. If a store locator or map listing still shows a photo centre, it is out of date.
+No. Costco closed the photo department in every US and Canadian warehouse on February 14, 2021, so no warehouse takes passport photos today. If a store locator or map listing still shows a photo centre, it is out of date.
 
 ## Alternatives to Costco
 

@@ -1,7 +1,7 @@
 ---
 title: "Online Passport Photo Services Compared: ePassportPhoto, PhotoAiD, 123PassportPhoto, iVisa & More"
-meta_title: "ePassportPhoto vs PhotoAiD, 123PassportPhoto & More"
-meta_description: "ePassportPhoto, PhotoAiD, 123PassportPhoto, AiPassportPhotos, iVisa and Photo-Me compared on price, refund terms, expert checks, editing and privacy."
+meta_title: "Best Online Passport Photo Services Compared"
+meta_description: "Can you do passport photos online? Yes, if it meets the rules. ePassportPhoto, PhotoAiD, 123PassportPhoto, iVisa and more compared on price, refunds and editing."
 primary_keyword: "epassportphoto"
 supporting_keywords:
   - "123 passport photo"
@@ -117,7 +117,7 @@ Photo-Me runs photo booths in the UK. Choose "Digital UK Passport" in a booth an
 - **Check privacy.** Look for how long your photo is kept and whether it is used for anything else.
 - **Check your document.** Make sure the service lists your country and document: a 2 × 2 inch photo for the US, a 35 × 45 mm photo for many other countries, or a code for an online application.
 
-## Are online passport photos accepted?
+## Can you do passport photos online?
 
 For a US passport, yes, if the photo meets every rule. The State Department accepts a photo taken by "a friend or family member." What it checks closely is editing: it says "Do not change your photo using computer software, phone apps or filters," and it looks for digital changes, including AI. Most of the services above can replace or adjust the background, so take your photo against a plain white or off-white wall in even light. Then little or nothing needs changing, whichever service you use.
 

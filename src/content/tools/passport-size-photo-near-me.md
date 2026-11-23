@@ -1,7 +1,7 @@
 ---
 title: "Passport Size Photo Near Me: Studios, Print Shops & Photo Sets"
-meta_title: "Passport Size Photo Near Me: Where to Get Prints"
-meta_description: "Need a passport size photo near you? Where to get sets of 4, 6 or 8 prints, which size to ask for, and how to print your own from a digital file."
+meta_title: "Passport Size Photo Near Me: Where to Get One"
+meta_description: "Where to get a passport size photo near you: studios, print shops, photo counters and booths. Which size to ask for (2 × 2 in or 35 × 45 mm) and sets of 4, 6 or 8."
 primary_keyword: "passport size photo near me"
 supporting_keywords:
   - "passport size photo studio"

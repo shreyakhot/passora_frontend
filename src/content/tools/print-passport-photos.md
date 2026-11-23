@@ -1,6 +1,6 @@
 ---
 title: "Passport Photo Prints: How to Print 2×2 Photos at Home or In Store"
-meta_title: "Passport Photo Prints: Print 2x2 Photos at Home or In Store"
+meta_title: "Passport Photo Prints: 2x2 at Home or In Store"
 meta_description: "How to get passport photo prints right: lay out a 4×6 sheet, choose paper and printer settings, print at a kiosk, and check the print before you send it."
 primary_keyword: "passport photo prints"
 supporting_keywords:

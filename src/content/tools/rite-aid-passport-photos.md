@@ -1,7 +1,7 @@
 ---
 title: "Rite Aid Passport Photos: Stores Have Closed - Where to Go Instead"
-meta_title: "Rite Aid Passport Photo: Stores Closed, Where to Go Now"
-meta_description: "Rite Aid passport photos are gone: every Rite Aid store closed in 2025. Where to get a passport photo instead, from pharmacies and shipping stores to doing it online."
+meta_title: "Rite Aid Passport Photo: Closed, Where to Go"
+meta_description: "Rite Aid passport photo prices, hours and locations no longer exist: every Rite Aid store closed in 2025. Where to get a passport photo or photo prints instead."
 primary_keyword: "rite aid passport photo"
 supporting_keywords:
   - "rite aid passport"
@@ -77,9 +77,9 @@ Take the photo at home against a plain white or off-white wall, then use the [on
 
 To compare prices across all of these, see our [guide to what passport photos cost](/tool/passport-photo-cost). For a map-style overview of options near you, see our guide to [nearby places that take passport photos](/tool/passport-photos-near-me).
 
-## What happened to Rite Aid photo services?
+## What happened to Rite Aid photo printing?
 
-Rite Aid photo services, including passport photos, ended when the stores closed. A Rite Aid photo counter cannot retake, reprint or replace a photo any more.
+Rite Aid's in-store photo services, including passport photos and photo prints, ended when the stores closed. A Rite Aid photo counter cannot retake, reprint or replace a photo any more. To print a passport photo you already have, see our guide to [printing passport photos at home or in a store](/tool/print-passport-photos).
 
 Any passport photo taken at Rite Aid is now too old for a US passport anyway: the State Department asks for a photo taken in the last 6 months.
 
@@ -88,6 +88,10 @@ Any passport photo taken at Rite Aid is now too old for a US passport anyway: th
 ### Are any Rite Aid stores still open?
 
 No. Rite Aid closed its last stores in late September 2025.
+
+### Are there Rite Aid passport photo hours or locations?
+
+No. With every store closed, there are no Rite Aid passport photo hours or locations. Listings that still show them are out of date.
 
 ### How much did a Rite Aid passport photo cost?
 

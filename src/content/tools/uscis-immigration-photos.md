@@ -1,7 +1,7 @@
 ---
 title: "Immigration Photos: Green Card, Citizenship, EAD & OPT Photo Requirements"
-meta_title: "Immigration Photo Rules: Green Card, EAD, OPT & N-400"
-meta_description: "Immigration photo rules for USCIS forms: the 2x2 size, head and eye height, glossy paper, name and A-Number on the back, and which forms need photos at all."
+meta_title: "USCIS Photo Requirements: Green Card, EAD & OPT"
+meta_description: "USCIS photo requirements for green card (I-485), EAD and OPT (I-765) forms: two 2 × 2 in glossy photos, head 1 to 1 3/8 in, name and A-Number on the back."
 primary_keyword: "immigration photo"
 supporting_keywords:
   - "uscis passport photo"
@@ -81,9 +81,9 @@ Forms N-400 and N-600 (certificate of citizenship) always require new biometrics
 
 Looking for Canadian citizenship photos instead? Those use a different size; see our [guide to Canadian photo rules](/tool/canadian-passport-photos).
 
-### EAD and OPT photos
+### EAD, OPT and STEM OPT photo requirements
 
-**Form I-765** (application for employment authorization, the EAD or work permit) asks for the same two photos, with your name and A-Number on the back. That includes F-1 students applying for OPT on paper.
+**Form I-765** (application for employment authorization, the EAD or work permit) asks for the same two photos, with your name and A-Number on the back. That includes F-1 students applying on paper for OPT or for the 24-month STEM OPT extension, which also uses Form I-765.
 
 If you file online, the form asks you to upload a photo instead of mailing prints. USCIS's online filing guidance for OPT asked for one passport-style photo in JPEG or PNG that meets the State Department's passport photo rules. Follow the instructions in your online account.
 

@@ -1,7 +1,7 @@
 ---
 title: "Other Places That Take Passport Photos: Target, AAA, Kodak & More"
-meta_title: "Target Passport Photos, AAA, Kodak & Other Stores"
-meta_description: "Target passport photos, AAA member prices, Kodak photo kiosks and other places that take passport photos, plus a checklist to find out whether a store near you does."
+meta_title: "Target Passport Photos, AAA Prices & Kodak"
+meta_description: "Does Target do passport photos? Not directly, but some have a CVS inside that does. AAA passport photo prices by membership, free to $14.99 on November 23, 2026."
 primary_keyword: "target passport photos"
 supporting_keywords:
   - "aaa passport photos"
@@ -49,13 +49,13 @@ To find out whether your Target can help:
 
 If it does, you get the CVS service: two 2 × 2 inch prints, no appointment, taken by a pharmacy team member. Our [guide to the CVS photo service](/tool/cvs-passport-photos) covers what you get and what to check.
 
-## AAA passport photos and services
+## Does AAA take passport photos?
 
-Many AAA clubs take passport photos at their branches, often at a discount for members. Non-members can usually use the service too, at a higher price. Each regional club sets its own prices and services.
+Yes, many AAA clubs take passport photos at their branches, often at a discount for members. Non-members can usually use the service too, at a higher price. Each regional club sets its own prices and services.
 
-### Member pricing
+### AAA passport photo prices
 
-On **November 16, 2026**, AAA Club Alliance listed these passport photo prices:
+On **November 23, 2026**, AAA Club Alliance listed these passport photo prices:
 
 | Membership | Price |
 | :--- | :--- |
@@ -66,7 +66,7 @@ On **November 16, 2026**, AAA Club Alliance listed these passport photo prices:
 
 AAA Club Alliance says no appointment is needed and that a digital photo for online renewal is available at most of its locations. It also offers expedited passport and visa help through a partner company, RushMyPassport, at a member discount.
 
-### AAA passport photo cost
+### AAA passport photo cost at other clubs
 
 Other AAA clubs set their own prices, and they differ, especially for non-members. Before you go:
 
@@ -126,7 +126,7 @@ Target does not advertise a passport photo service of its own. Some Target store
 
 ### Does AAA do passport photos for non-members?
 
-Usually, at a higher price than members pay. AAA Club Alliance, for example, listed $14.99 for non-members on November 16, 2026. Check your local club.
+Usually, at a higher price than members pay. AAA Club Alliance, for example, listed $14.99 for non-members on November 23, 2026. Check your local club.
 
 ### Are AAA passport photos free?
 

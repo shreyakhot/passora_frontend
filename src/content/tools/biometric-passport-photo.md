@@ -1,6 +1,6 @@
 ---
 title: "Biometric Photo for Passports: ICAO Standards, Requirements & Where to Get One"
-meta_title: "Biometric Photo: ICAO Standard, Size & Where to Get One"
+meta_title: "Biometric Photo: ICAO Requirements & Size"
 meta_description: "What a biometric photo is, what the ICAO standard asks for (face position, expression, light, background), its size, and where to get a biometric passport photo."
 primary_keyword: "biometric photo"
 supporting_keywords:
