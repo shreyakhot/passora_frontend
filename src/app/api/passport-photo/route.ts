@@ -56,11 +56,13 @@ export async function POST(req: NextRequest) {
     }, mimeType);
 
     // Crop-only must never return an edited photo. A photo API that predates
-    // background_mode ignores the field and may still replace the background.
+    // background_mode ignores the field and replaces any background that fails
+    // validation, so a corrected background means the original was not plain
+    // white or off-white.
     if (backgroundMode === "keep" && result.metrics?.background_corrected) {
       result.status = "error";
       result.error =
-        "Crop-only mode is not available right now. Please try again later, or take your photo against a plain white or off-white wall.";
+        "The background of this photo is not plain white or off-white, and it cannot be replaced without editing the photo. Retake it against a plain white or off-white wall in even light.";
     }
 
     // Record the upload for the admin user-journey view (after the response is sent).
