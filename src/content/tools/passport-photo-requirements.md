@@ -1,6 +1,6 @@
 ---
 title: "Photo Required for Passport: The Complete Requirements Checklist"
-meta_title: "Photo Required for Passport: Requirements Checklist"
+meta_title: "Passport Photo Requirements: Full Checklist"
 meta_description: "A checklist of every rule your passport photo must meet: size, head height, background, expression, glasses, head coverings, print quality and digital edits."
 primary_keyword: "photo required for passport"
 supporting_keywords:

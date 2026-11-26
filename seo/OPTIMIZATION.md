@@ -48,12 +48,25 @@ Data: Search Console, 2026-10-24 to 2026-11-22. 2 clicks, 2,001 impressions, ave
 | 5 | **Old country URLs fading** | Week on week, Portugal fell from 28 impressions to 0 and Romania from 28 to 7. Their URLs redirect to the photo maker. | As predicted in audit item 6. **Owner decision still pending.** |
 | 6 | **Most remaining pages have no named queries** | 4 of today's 10 pages had impressions only from anonymized queries, which Search Console does not list. | For these, fix the title length and the description only. |
 
+### Audit update (2026-11-26)
+
+Data: Search Console, 2026-10-27 to 2026-11-25. 3 clicks, 2,630 impressions, average position 31.8, 655 queries. Daily average position improved from about 35 to 27.5 on 2026-11-23, 26.2 on 2026-11-24 and 19.4 on 2026-11-25. All 3 clicks came from anonymized queries.
+
+| # | Finding | Evidence | Status |
+| :-- | :--- | :--- | :--- |
+| 1 | **All guides indexed** | URL Inspection on 2026-11-26: all 40 guides "Submitted and indexed". The last two, FedEx and passport-photos-near-me, were crawled on 2026-11-23. | Done. |
+| 2 | **Edits still not recrawled** | Of the 30 pages edited on days 1-3, only `passport-size-photo-near-me` has been crawled since its edit (2026-11-24). Day 1 and 2 pages were last crawled 2026-11-02 to 2026-11-15; day 3 pages on 2026-11-20, before their edits. | **Owner action:** Request indexing in URL Inspection (step 9). About 10 a day; order below. Measure each page from its next crawl. |
+| 3 | **Newly indexed guides rising fast** | Last 7 days, pages with no impressions the week before: FedEx 72 (position 8.9), ID photo 64 (24.2), other stores 49 (33.6), Rite Aid 41 (23.1), USCIS 38 (65.4), biometric 25 (47.2), Costco 20 (20.9). USPS (318, 29.3), digital (157, 27.7) and same-day (150, 28.6) kept rising. | Being indexed matters more than anything else so far. FedEx is the first guide close to page one. |
+| 4 | **Big-chain brand pages still at zero** | Staples, Walmart, Walgreens and the cost page: no impressions for 15 days, still indexed. CVS has never had any. Smaller-brand pages (FedEx, Costco, Rite Aid) do rank. | Queries for the biggest chains are taken by the chains' own sites and large publishers. Content changes alone will not fix this; it needs authority (links). Re-check on 2026-12-04 after a recrawl. |
+| 5 | **Old country URLs are still the best-ranking pages** | 30-day positions: Romania 1.3, Portugal 1.2-2.8, France 1.0, Latvia 1.8, Malawi 1.5, Bhutan 2.6-3.3, Malta 5.3, Luxembourg 8.0. Impressions keep falling as Google follows the redirects to the photo maker. | **Owner decision still pending.** Pointing these URLs to matching country content is the biggest quick win available. |
+
 ## Order for the next runs (by impressions, 2026-11-20 data)
 
 - **Day 2 (done 2026-11-21):** best-passport-photos, 2x2-passport-photo, passport-application-photo, take-passport-photo-with-phone, visa-photo-near-me, visa-photo, 35x45mm-passport-photo, infant-newborn-passport-photo, passport-photo-services, passport-photo-size.
 - **Day 3 (done 2026-11-23):** the 2026-11-23 data moved the newer guides up, because they started getting impressions: other-stores-that-take-passport-photos, rite-aid-passport-photos, id-photo, uscis-immigration-photos, best-online-passport-photo-services, costco-passport-photos, passport-size-photo-near-me, print-passport-photos, passport-photo-editing-photoshop-word, biometric-passport-photo.
-- **Day 4:** the last 10 guides not yet optimized. All 10 have titles over 47 characters: passport-photo, passport-photos-near-me, passport-photo-requirements, online-passport-photo-maker, passport-photographer-near-me, cvs-passport-photos, fedex-office-passport-photos, passport-photo-at-home, how-to-take-a-good-passport-photo, passport-photo-size-by-country.
-- **After day 4:** no page qualifies until the 14-day wait ends. Day 1 pages are eligible again from 2026-12-04, day 2 from 2026-12-05 and day 3 from 2026-12-07. Until then, a daily run only pulls the data, checks indexing and recrawls, and logs findings; it changes no pages.
+- **Day 4 (done 2026-11-26):** passport-photo, passport-photos-near-me, passport-photo-requirements, online-passport-photo-maker, passport-photographer-near-me, cvs-passport-photos, fedex-office-passport-photos, passport-photo-at-home (checked, no change), how-to-take-a-good-passport-photo, passport-photo-size-by-country. All 40 guides have now been optimized once.
+- **Next:** no page qualifies until the 14-day wait ends. Day 1 pages are eligible again from 2026-12-04, day 2 from 2026-12-05, day 3 from 2026-12-07 and day 4 from 2026-12-10. Until then, a daily run only pulls the data, checks indexing and recrawls, and logs findings; it changes no pages. The second round starts with the pages whose edits have been recrawled, measured against their starting figures.
+- **Request indexing order (owner, about 10 a day):** day 1 pages (USPS, digital, same-day, Canada, Walgreens, cost, Staples, Walmart, India, Schengen), then day 4 (FedEx first), day 3, day 2.
 
 ## Daily log
 
@@ -123,3 +136,23 @@ Data: 2026-10-24 to 2026-11-22 (see the audit update above). Starting figures ar
 - Facts fetched 2026-11-23: AAA Club Alliance passport photos: Premier free, Plus $8.99, Classic $11.99, non-members $14.99; no appointment; a digital photo is available at most locations.
 - Not fetched: riteaid.com returns 403. The Rite Aid page added no new facts; the new answers restate the sourced closure.
 - `last_verified` is unchanged on all 10 pages: only the AAA prices were re-checked, not each page's other key facts.
+
+### Day 4 — 2026-11-26
+
+Data: 2026-10-27 to 2026-11-25 (see the audit update above). Starting figures are page totals, including anonymized queries. All titles are now at most 47 characters (56-60 with the site name).
+
+| Page | Start | Changes |
+| :--- | :--- | :--- |
+| fedex-office-passport-photos | 72 / 8.9 | Indexed 2026-11-23; queries rank 6.5-12 (price, cost, "does FedEx (Kinko's) do passport photos"). Title: "FedEx Passport Photo: $15.95 at FedEx Office". Meta answers yes and gives the price and date. H2 renamed "Does FedEx Kinko's do passport photos?" with a direct answer. Price re-fetched and re-dated; `last_verified` 2026-11-26. |
+| passport-photos-near-me | 13 / 32.5 | Indexed 2026-11-23. Queries: "where to get a passport photo taken near me", "passport photo locations". Title: "Where to Get One Taken". First H2 renamed "Where to get a passport photo taken near you". |
+| passport-photo | 7 / 57.0 | Title shortened. Meta now answers the size query (2 × 2 in US; 35 × 45 mm UK, Europe, India). |
+| passport-photo-size-by-country | 9 / 49.7 | Title: "International Passport Photo Size by Country". Meta and first H2 use "list" (query "all country visa photo size list"). |
+| how-to-take-a-good-passport-photo | 4 / 26.5 | Title: "How to Look Good in One" (queries "how to look good on/for passport photo"). FAQ renamed "How do I look good in my passport photo?" |
+| passport-photo-requirements | 0 / - | Title: "Passport Photo Requirements: Full Checklist". This is the searched phrase; the pillar was showing for "+passport photo requirements". |
+| online-passport-photo-maker | 1 / 1.0 | Title shortened only. |
+| passport-photographer-near-me | 0 / - | Title: "How to Choose". |
+| cvs-passport-photos | 0 / - | Title shortened only. Has never had an impression (audit update item 4). cvs.com returns 403, so no price was added. |
+| passport-photo-at-home | 1 / 1.0 | Checked; title already 46 characters and no named queries. No change. |
+
+- Facts fetched 2026-11-26: FedEx Office store page: "For $15.95, choose between two 2" x 2" printed photos or a digital copy provided on a convenient USB drive"; no appointment; available at any FedEx Office location nationwide. The FedEx passport services page lists visa photos "starting at $15.95".
+- Not fetched: cvs.com (403).

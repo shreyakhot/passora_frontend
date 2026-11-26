@@ -1,7 +1,7 @@
 ---
 title: "International Passport Photo Size by Country: UK, Germany, China, Japan & More"
-meta_title: "International Passport Photo Size: Country-by-Country List"
-meta_description: "International passport photo size for 23 countries, from the UK, Germany and France to China, Japan, Turkey, Nigeria and Brazil: size, head size, background and where to apply."
+meta_title: "International Passport Photo Size by Country"
+meta_description: "International passport photo size list for 23 countries, from the UK, Germany and France to China, Japan, Turkey, Nigeria and Brazil: size, head size and background."
 primary_keyword: "international passport photo size"
 supporting_keywords:
   - "international passport size"
@@ -89,7 +89,7 @@ related:
   - indian-passport-photo-oci-photo
 ---
 
-## Quick reference table
+## Passport photo size list
 
 Sizes are width × height. "Taken on site" means the passport office or consulate photographs you, so you may not need a print.
 

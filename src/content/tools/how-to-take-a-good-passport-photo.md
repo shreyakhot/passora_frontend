@@ -1,7 +1,7 @@
 ---
 title: "How to Take a Good Passport Photo (Look Your Best Within the Rules)"
-meta_title: "Good Passport Photo: How to Look Your Best by the Rules"
-meta_description: "How to take a good passport photo you will not mind showing for ten years: why passport photos look bad, what to wear, how to pose, and the light and distance that help."
+meta_title: "Good Passport Photo: How to Look Good in One"
+meta_description: "How to look good in a passport photo within the rules: why passport photos look bad, what to wear, how to pose, and the light and camera distance that help."
 primary_keyword: "good passport photo"
 supporting_keywords:
   - "bad passport photo"
@@ -124,7 +124,7 @@ A US passport photo stays in your passport for up to ten years, and you cannot s
 
 ## Frequently Asked Questions
 
-### How do I not look bad in my passport photo?
+### How do I look good in my passport photo?
 
 Stand 4 to 5 feet from the camera, face a window or two soft lights, wear a plain darker top, and relax with a slight closed-mouth smile. Most bad photos come from a camera that is too close and light from directly above.
 

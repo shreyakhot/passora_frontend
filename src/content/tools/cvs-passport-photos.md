@@ -1,6 +1,6 @@
 ---
 title: "CVS Passport Photos: Cost, Locations, Digital Copy & What to Know"
-meta_title: "CVS Passport Photo: Price, Digital Copy & How It Works"
+meta_title: "CVS Passport Photo: Price, Digital Copy & Steps"
 meta_description: "How the CVS passport photo service works: which stores offer it, whether you need an appointment, the digital copy option, and visa and ID photos."
 primary_keyword: "cvs passport photo"
 supporting_keywords:

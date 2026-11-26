@@ -1,7 +1,7 @@
 ---
 title: "FedEx Passport Photo at FedEx Office (Kinko's): Cost, Locations & Renewal Info"
-meta_title: "FedEx Passport Photo: FedEx Office Cost, Hours & Renewal"
-meta_description: "How the FedEx passport photo service works at FedEx Office: the price, prints or a USB copy, no appointment, visa photos, and what FedEx can and cannot do for renewals."
+meta_title: "FedEx Passport Photo: $15.95 at FedEx Office"
+meta_description: "Does FedEx do passport photos? Yes, at any FedEx Office (formerly Kinko's), with no appointment: $15.95 for two 2 × 2 prints or a USB copy on November 26, 2026."
 primary_keyword: "fedex passport photo"
 supporting_keywords:
   - "fedex office passport photo"
@@ -21,7 +21,7 @@ hub: false
 country_code: US
 intro: "A FedEx passport photo is taken at a FedEx Office store, the print and copy shops that used to be called Kinko's. There is no appointment, the photo takes a few minutes, and for one price you choose two printed 2 × 2 inch photos or a digital copy on a USB drive. This guide covers the price, what you get, how to find a store, and what FedEx can and cannot do if you are renewing a passport."
 published: 2026-11-11
-last_verified: 2026-11-11
+last_verified: 2026-11-26
 sources:
   - name: "FedEx Office: Passport photos (store page)"
     url: "https://local.fedex.com/en-us/tx/houston/office-0924/passport-photos"
@@ -48,11 +48,13 @@ FedEx Office also takes photos for other countries' passports and visas. Tell th
 
 ## FedEx passport photo cost
 
-On **November 11, 2026**, a FedEx Office store page listed passport photos at **$15.95**: "choose between two 2" x 2" printed photos or a digital copy provided on a convenient USB drive." FedEx's passport services page lists visa photos from the same price.
+On **November 26, 2026**, a FedEx Office store page listed passport photos at **$15.95**: "choose between two 2" x 2" printed photos or a digital copy provided on a convenient USB drive." FedEx's passport services page lists visa photos from the same price.
 
 Note the "or": the price covers prints **or** a USB copy, not both. Prices can vary by store, so check with your local store. For other stores' prices, see our [guide to what passport photos cost](/tool/passport-photo-cost).
 
-## FedEx vs FedEx Office vs Kinko's
+## Does FedEx Kinko's do passport photos?
+
+Yes. FedEx Kinko's is the old name of FedEx Office, the stores that take passport photos:
 
 - **Kinko's** was a chain of copy and print shops. FedEx bought it in 2004.
 - **FedEx Kinko's** was the stores' name after the purchase.
@@ -100,7 +102,7 @@ Every option near you is compared in our guide to [nearby places that take passp
 
 ### How much is a passport photo at FedEx?
 
-A FedEx Office store page listed $15.95 on November 11, 2026, for two 2 × 2 inch prints or a digital copy on a USB drive. Check with your local store.
+A FedEx Office store page listed $15.95 on November 26, 2026, for two 2 × 2 inch prints or a digital copy on a USB drive. Check with your local store.
 
 ### Do I need an appointment at FedEx Office?
 

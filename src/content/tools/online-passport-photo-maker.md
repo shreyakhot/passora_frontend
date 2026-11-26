@@ -1,6 +1,6 @@
 ---
 title: "AI Passport Photo Maker: Make Your Passport Photo Online"
-meta_title: "AI Passport Photo Maker Online for 50+ Countries"
+meta_title: "AI Passport Photo Maker Online: 50+ Countries"
 meta_description: "Make a passport or visa photo online. The AI passport photo maker crops and sizes your picture for your country, and you preview it before you pay."
 primary_keyword: "ai passport photo"
 supporting_keywords:

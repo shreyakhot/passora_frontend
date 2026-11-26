@@ -1,7 +1,7 @@
 ---
 title: "Passport Photo: Size, Rules and Where to Get One"
-meta_title: "Passport Photo Guide: Size, Rules & Where to Get One"
-meta_description: "Everything about getting a passport photo right: the size for your country, the rules it must meet, where to get one taken and how to make it yourself."
+meta_title: "Passport Photo: Size, Rules & Where to Get One"
+meta_description: "A passport photo is 2 × 2 in (51 × 51 mm) in the US and 35 × 45 mm in the UK, Europe and India. The rules, where to get one taken and how to make your own."
 primary_keyword: "passport photo"
 supporting_keywords:
   - "passport photos"

@@ -1,7 +1,7 @@
 ---
 title: "Passport Photos Near Me: How to Find the Right Place"
-meta_title: "Passport Photos Near Me: Where to Go & What to Check"
-meta_description: "Find passport photos near you: which pharmacies, post offices and print shops take them, how to use the official locator, and what to check before you go."
+meta_title: "Passport Photos Near Me: Where to Get One Taken"
+meta_description: "Where to get a passport photo taken near you: pharmacies, post offices, shipping stores and studios, how to use the official locator, and what to check first."
 primary_keyword: "passport photos near me"
 supporting_keywords:
   - "passport photo near me"
@@ -36,7 +36,7 @@ related:
   - passport-photo-cost
 ---
 
-## Where you can get passport photos taken
+## Where to get a passport photo taken near you
 
 In the US, the State Department says you can get a passport photo from an acceptance facility that takes photos, "any company that offers photo services," or a friend or family member. In practice, most people use one of these:
 
